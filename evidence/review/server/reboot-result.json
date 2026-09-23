@@ -1,0 +1,23 @@
+{
+  "passed": true,
+  "boot_id_changed": true,
+  "old_boot_id": "2005252f-85c3-49fb-a888-b93d35b62cf5",
+  "new_boot_id": "17a8fe4e-59bc-498b-8bba-00ee2c81ede7",
+  "containers": [
+    {
+      "name": "codeaudit-server-octobus",
+      "running": true,
+      "restart_policy": "unless-stopped"
+    },
+    {
+      "name": "codeaudit-server-agent-compose",
+      "running": true,
+      "restart_policy": "unless-stopped"
+    },
+    {
+      "name": "codeaudit-server-demo",
+      "running": true,
+      "restart_policy": "unless-stopped"
+    }
+  ]
+}

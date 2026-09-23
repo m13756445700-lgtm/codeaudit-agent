@@ -1,0 +1,4 @@
+- rule_id: KB-BOUNDED-JAVA
+  category: SQL_INJECTION
+  description: Unsupported syntax, ambiguous calls and unknown controls require review.
+  decision: FAIL_CLOSED

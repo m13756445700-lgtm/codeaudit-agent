@@ -1,0 +1,154 @@
+{
+  "finding": {
+    "finding_id": "ssrf-TC-08-src-main-java-lab-FetchController.java-18",
+    "category": "SSRF",
+    "status": "REJECTED",
+    "repository": {
+      "name": "ssrf",
+      "branch": "main",
+      "commit": "d73d821234d6c0b4038a9adac61b5d2d9b0a113f"
+    },
+    "source": {
+      "file": "src/main/java/lab/FetchController.java",
+      "line": 16,
+      "end_line": 16,
+      "snippet_hash": "075507c76b2d1be312f21608b5ef8c4c8935e344f20da243b91c954778b31c1b",
+      "file_sha256": "e38e37fb7d8139c104123194ef4e3b2cfcb0917d9bbf4dc69dc206585785aefe",
+      "symbol": "serviceId",
+      "type": "HTTP_REQUEST_PARAM"
+    },
+    "sink": {
+      "file": "src/main/java/lab/FetchController.java",
+      "line": 18,
+      "end_line": 18,
+      "snippet_hash": "5629db792f774f8cb516b170545636c40d15231b65591f2e49438d513cd99a75",
+      "file_sha256": "e38e37fb7d8139c104123194ef4e3b2cfcb0917d9bbf4dc69dc206585785aefe",
+      "symbol": "client.getForObject",
+      "type": "HTTP_CLIENT_URL"
+    },
+    "dataflow": [
+      {
+        "file": "src/main/java/lab/FetchController.java",
+        "line": 16,
+        "end_line": 16,
+        "snippet_hash": "075507c76b2d1be312f21608b5ef8c4c8935e344f20da243b91c954778b31c1b",
+        "file_sha256": "e38e37fb7d8139c104123194ef4e3b2cfcb0917d9bbf4dc69dc206585785aefe",
+        "symbol": "serviceId",
+        "type": "HTTP_REQUEST_PARAM"
+      },
+      {
+        "file": "src/main/java/lab/FetchController.java",
+        "line": 10,
+        "end_line": 10,
+        "snippet_hash": "3a0aa7d278a8089c9bf82155e0e6001545a6b9cc0c25c2938fe0bcf7f0ca8df3",
+        "file_sha256": "e38e37fb7d8139c104123194ef4e3b2cfcb0917d9bbf4dc69dc206585785aefe",
+        "symbol": "SERVICES",
+        "type": "IMMUTABLE_SCHEME_HOST_MAPPING"
+      },
+      {
+        "file": "src/main/java/lab/FetchController.java",
+        "line": 17,
+        "end_line": 17,
+        "snippet_hash": "3acd6a5aecb5638709a36bbbc22414d5959199a30aec8d9355424fcb3ea9ff1f",
+        "file_sha256": "e38e37fb7d8139c104123194ef4e3b2cfcb0917d9bbf4dc69dc206585785aefe",
+        "symbol": "url",
+        "type": "LOCAL_ASSIGNMENT"
+      },
+      {
+        "file": "src/main/java/lab/FetchController.java",
+        "line": 18,
+        "end_line": 18,
+        "snippet_hash": "5629db792f774f8cb516b170545636c40d15231b65591f2e49438d513cd99a75",
+        "file_sha256": "e38e37fb7d8139c104123194ef4e3b2cfcb0917d9bbf4dc69dc206585785aefe",
+        "symbol": "url",
+        "type": "HTTP_URL_ARGUMENT"
+      },
+      {
+        "file": "src/main/java/lab/FetchController.java",
+        "line": 18,
+        "end_line": 18,
+        "snippet_hash": "5629db792f774f8cb516b170545636c40d15231b65591f2e49438d513cd99a75",
+        "file_sha256": "e38e37fb7d8139c104123194ef4e3b2cfcb0917d9bbf4dc69dc206585785aefe",
+        "symbol": "client.getForObject",
+        "type": "HTTP_CLIENT_URL"
+      }
+    ],
+    "protection": {
+      "status": "VALID",
+      "evidence": [
+        {
+          "file": "src/main/java/lab/FetchController.java",
+          "line": 9,
+          "end_line": 9,
+          "snippet_hash": "32caddebbf68b3e3ce65c654d4b18c797f79e0ca47026a6dbfe8bc00d9b6213c",
+          "file_sha256": "e38e37fb7d8139c104123194ef4e3b2cfcb0917d9bbf4dc69dc206585785aefe",
+          "symbol": "client",
+          "type": "DEFAULT_HTTP_CLIENT"
+        },
+        {
+          "file": "src/main/java/lab/FetchController.java",
+          "line": 16,
+          "end_line": 16,
+          "snippet_hash": "075507c76b2d1be312f21608b5ef8c4c8935e344f20da243b91c954778b31c1b",
+          "file_sha256": "e38e37fb7d8139c104123194ef4e3b2cfcb0917d9bbf4dc69dc206585785aefe",
+          "symbol": "serviceId",
+          "type": "HTTP_REQUEST_PARAM"
+        },
+        {
+          "file": "src/main/java/lab/FetchController.java",
+          "line": 10,
+          "end_line": 10,
+          "snippet_hash": "3a0aa7d278a8089c9bf82155e0e6001545a6b9cc0c25c2938fe0bcf7f0ca8df3",
+          "file_sha256": "e38e37fb7d8139c104123194ef4e3b2cfcb0917d9bbf4dc69dc206585785aefe",
+          "symbol": "SERVICES",
+          "type": "IMMUTABLE_SCHEME_HOST_MAPPING"
+        },
+        {
+          "file": "src/main/java/lab/FetchController.java",
+          "line": 17,
+          "end_line": 17,
+          "snippet_hash": "3acd6a5aecb5638709a36bbbc22414d5959199a30aec8d9355424fcb3ea9ff1f",
+          "file_sha256": "e38e37fb7d8139c104123194ef4e3b2cfcb0917d9bbf4dc69dc206585785aefe",
+          "symbol": "url",
+          "type": "LOCAL_ASSIGNMENT"
+        },
+        {
+          "file": "src/main/java/lab/FetchController.java",
+          "line": 18,
+          "end_line": 18,
+          "snippet_hash": "5629db792f774f8cb516b170545636c40d15231b65591f2e49438d513cd99a75",
+          "file_sha256": "e38e37fb7d8139c104123194ef4e3b2cfcb0917d9bbf4dc69dc206585785aefe",
+          "symbol": "url",
+          "type": "HTTP_URL_ARGUMENT"
+        },
+        {
+          "file": "src/main/java/lab/FetchController.java",
+          "line": 18,
+          "end_line": 18,
+          "snippet_hash": "5629db792f774f8cb516b170545636c40d15231b65591f2e49438d513cd99a75",
+          "file_sha256": "e38e37fb7d8139c104123194ef4e3b2cfcb0917d9bbf4dc69dc206585785aefe",
+          "symbol": "client.getForObject",
+          "type": "HTTP_CLIENT_URL"
+        }
+      ]
+    },
+    "reachability": "PRODUCTION_REACHABLE",
+    "rules_applied": [
+      "KB-SPRING-REQUEST-PARAM",
+      "KB-SPRING-SSRF-URL",
+      "KB-SPRING-SSRF-FIXED-MAPPING"
+    ],
+    "decision_trace": [
+      "EFFECTIVE_PROTECTION"
+    ],
+    "evidence_integrity": {
+      "commit": "d73d821234d6c0b4038a9adac61b5d2d9b0a113f",
+      "status": "PASS",
+      "evidence_sha256": "fdda649c1ad0a83f6397e70eec13d3793977aaaeeb12ad3efb66d6ff30664211"
+    },
+    "recommendation": "Use immutable serviceId-to-URL mapping; review DNS, redirects and egress policy separately.",
+    "agent_version": "1.0.0",
+    "rule_version": "1.0.0",
+    "knowledge_version": "1.0.0+7542f99ab38b"
+  }
+}

@@ -1,0 +1,11 @@
+syntax = "proto3";
+package codeaudit.v1;
+message AuditRequest { string request_json = 1; }
+message AuditResponse { string result_json = 1; }
+service CodeAuditService {
+ rpc InventoryRepository(AuditRequest) returns (AuditResponse);
+ rpc ScanCandidates(AuditRequest) returns (AuditResponse);
+ rpc ReadCodeSlice(AuditRequest) returns (AuditResponse);
+ rpc HashEvidence(AuditRequest) returns (AuditResponse);
+ rpc RunValidation(AuditRequest) returns (AuditResponse);
+}

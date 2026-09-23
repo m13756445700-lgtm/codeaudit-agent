@@ -1,0 +1,28 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "pythonPath",
+    "applicationRoot",
+    "repositoryRoot",
+    "outputRoot"
+  ],
+  "properties": {
+    "pythonPath": {
+      "type": "string",
+      "pattern": "^/"
+    },
+    "applicationRoot": {
+      "type": "string",
+      "pattern": "^/"
+    },
+    "repositoryRoot": {
+      "type": "string",
+      "pattern": "^/"
+    },
+    "outputRoot": {
+      "type": "string",
+      "pattern": "^/"
+    }
+  }
+}

@@ -1,0 +1,3 @@
+/codeaudit-server-octobus image=sha256:90c67fd9987e6e24956ede5a4e3e77f5f2a0ea63f300e99ae5b0ab5421470b34 network=agent-poc-net restart=unless-stopped ports={"9000/tcp":[{"HostIp":"127.0.0.1","HostPort":"19000"}]}
+/codeaudit-server-agent-compose image=sha256:3117226250256b03d25815bd1bb584ade5ac225b83f55d527be122b8b75a61e8 network=agent-poc-net restart=unless-stopped ports={}
+/codeaudit-server-demo image=sha256:308c95ed0a4e6f07a1efa355c8aed025a167887e036fc432f38c0c37a6d18713 network=none restart=unless-stopped ports={}

@@ -1,0 +1,36 @@
+- rule_id: KB-MYBATIS-SQL-001
+  category: SQL_INJECTION
+  framework: [Spring Boot, MyBatis]
+  description: Raw substitution requires a complete user-controlled production call chain.
+  required_evidence: [source, dataflow, sink, protection, reachability, evidence_integrity]
+  decision: REQUIRE_INDEPENDENT_RAW_FLOW
+- rule_id: KB-JAVA-COMMAND-ARGV
+  category: COMMAND_INJECTION
+  framework: [Spring Boot, Java]
+  description: Explicit shell argv with proven tainted command text; fixed immutable host mapping and fixed ping argv are separate safe proof. Single-string exec is inconclusive.
+  required_evidence: [source, dataflow, sink, protection, reachability, evidence_integrity]
+  decision: REQUIRE_INDEPENDENT_ARGV_FLOW
+- rule_id: KB-SPRING-SSRF-URL
+  category: SSRF
+  framework: [Spring Boot, Java]
+  description: A request parameter reaches the complete URL of an unmodified default RestTemplate.
+  required_evidence: [source, dataflow, sink, protection, reachability, evidence_integrity]
+  decision: REQUIRE_INDEPENDENT_HTTP_URL_FLOW
+- rule_id: KB-SPRING-SSRF-FIXED-MAPPING
+  category: SSRF
+  framework: [Spring Boot, Java]
+  description: Immutable serviceId to literal scheme and host mapping prevents input from choosing the URL. Does not attest remote DNS or redirect behavior.
+  required_evidence: [source, dataflow, sink, protection, reachability, evidence_integrity]
+  decision: REQUIRE_IMMUTABLE_URL_MAPPING
+- rule_id: KB-JAVA-PATH-READ
+  category: PATH_TRAVERSAL
+  framework: [Spring Boot, Java]
+  description: Request parameter reaches Files.readString via unconstrained path construction.
+  required_evidence: [source, dataflow, sink, protection, reachability, evidence_integrity]
+  decision: REQUIRE_INDEPENDENT_PATH_FLOW
+- rule_id: KB-JAVA-PATH-REAL-BOUNDARY
+  category: PATH_TRAVERSAL
+  framework: [Spring Boot, Java]
+  description: Both base and target resolve to real paths; rejection throws before reading that same target. Assumes no attacker-controlled concurrent filesystem mutation; not a TOCTOU attestation.
+  required_evidence: [source, dataflow, sink, protection, reachability, evidence_integrity]
+  decision: REQUIRE_REAL_TARGET_BOUNDARY

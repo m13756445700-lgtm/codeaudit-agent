@@ -1,0 +1,23 @@
+rules:
+  - id: mybatis-raw-substitution
+    languages: [generic]
+    message: Raw substitution candidate; requires source-to-sink evidence
+    severity: WARNING
+    paths:
+      include: ["*.xml", "*.java"]
+    pattern-regex: '\$\{[A-Za-z_][A-Za-z0-9_.]*\}'
+  - id: mybatis-parameter-binding
+    languages: [generic]
+    message: Parameter binding control candidate
+    severity: INFO
+    paths:
+      include: ["*.xml", "*.java"]
+    pattern-regex: '#\{[A-Za-z_][A-Za-z0-9_.]*\}'
+  - id: jdbc-query-candidate
+    languages: [java]
+    message: JDBC query candidate; requires contextual verification
+    severity: WARNING
+    pattern-either:
+      - pattern: $S.executeQuery($SQL)
+      - pattern: $S.execute($SQL)
+      - pattern: $J.query($SQL, ...)

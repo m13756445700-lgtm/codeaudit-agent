@@ -1,0 +1,57 @@
+{
+  "status": "PASS",
+  "scope": "Local publication package validation; not a fresh server/model execution or comprehensive security audit",
+  "checks": {
+    "excluded_sensitive_paths": "PASS",
+    "common_secret_patterns": "PASS",
+    "bundle_history_common_secret_patterns": "PASS",
+    "case_commits_and_paths": "12/12",
+    "bundles": [
+      {
+        "bundle": "allowlist.bundle",
+        "clone_and_fsck": "PASS",
+        "head": "ad06c138f754eebf3c2e269b5ef2607df28b51a7"
+      },
+      {
+        "bundle": "command.bundle",
+        "clone_and_fsck": "PASS",
+        "head": "c2914454d6f557eb82aa74546ae1ac2410618ae9"
+      },
+      {
+        "bundle": "demo-baseline.bundle",
+        "clone_and_fsck": "PASS",
+        "head": "af482b5a62e1af3b8fae3908328f229852986337"
+      },
+      {
+        "bundle": "path.bundle",
+        "clone_and_fsck": "PASS",
+        "head": "2fa892909bd2fef1106b4af3ceb0fcc7ade9a397"
+      },
+      {
+        "bundle": "sql.bundle",
+        "clone_and_fsck": "PASS",
+        "head": "3ab1b8df4da7a2498a5063b54c10f707302113ac"
+      },
+      {
+        "bundle": "ssrf.bundle",
+        "clone_and_fsck": "PASS",
+        "head": "d73d821234d6c0b4038a9adac61b5d2d9b0a113f"
+      },
+      {
+        "bundle": "test-only.bundle",
+        "clone_and_fsck": "PASS",
+        "head": "2f0bc6a13e395646a429f24e8aee453d3d22ae99"
+      }
+    ]
+  },
+  "scanned_files_and_git_objects": 218,
+  "limitations": [
+    "Pattern scanning cannot prove absence of all secrets.",
+    "121 core regressions and server/model results are retained historical evidence; not rerun for packaging."
+  ],
+  "pending": [
+    "GitHub account login, publication and examiner access",
+    "Examiner SSH public key, scope and expiry if required",
+    "Instance name mapping confirmation"
+  ]
+}

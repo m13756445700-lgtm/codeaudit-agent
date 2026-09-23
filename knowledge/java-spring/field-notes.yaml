@@ -1,0 +1,4 @@
+- rule_id: KB-GENERAL-NOT-PERSONAL-001
+  category: SQL_INJECTION
+  description: Generic audit practice; synthetic fixtures, not personal customer experience. Matching parameter names do not establish dataflow.
+  decision: REQUIRE_RESOLVED_CALLS

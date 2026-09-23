@@ -1,0 +1,50 @@
+MCP tools: ['code-audit-service__code-audit-local__hash_evidence', 'code-audit-service__code-audit-local__inventory_repository', 'code-audit-service__code-audit-local__read_code_slice', 'code-audit-service__code-audit-local__run_validation', 'code-audit-service__code-audit-local__scan_candidates']
+InventoryRepository PASS
+ScanCandidates PASS
+ReadCodeSlice PASS
+HashEvidence PASS
+RunValidation PASS
+RunValidation PASS
+Phase 6 MCP verification PASS
+InventoryRepository PASS
+ScanCandidates PASS
+ReadCodeSlice PASS
+HashEvidence PASS
+RunValidation PASS
+ReadCodeSlice PASS
+HashEvidence PASS
+RunValidation PASS
+ReadCodeSlice PASS
+HashEvidence PASS
+RunValidation PASS
+Command MCP: 3/3 verdicts PASS
+InventoryRepository PASS
+ScanCandidates PASS
+ReadCodeSlice PASS
+HashEvidence PASS
+RunValidation PASS
+Static cross-file Command MCP PASS
+InventoryRepository PASS
+ScanCandidates PASS
+ReadCodeSlice PASS
+HashEvidence PASS
+RunValidation PASS
+ReadCodeSlice PASS
+HashEvidence PASS
+RunValidation PASS
+ReadCodeSlice PASS
+HashEvidence PASS
+RunValidation PASS
+SSRF MCP: 3/3 verdicts PASS
+InventoryRepository PASS
+ScanCandidates PASS
+ReadCodeSlice PASS
+HashEvidence PASS
+RunValidation PASS
+ReadCodeSlice PASS
+HashEvidence PASS
+RunValidation PASS
+ReadCodeSlice PASS
+HashEvidence PASS
+RunValidation PASS
+Path MCP: 3/3 verdicts PASS; four-category MCP regression PASS

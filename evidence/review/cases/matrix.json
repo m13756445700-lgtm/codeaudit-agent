@@ -1,0 +1,150 @@
+{
+  "passed": true,
+  "cases": [
+    {
+      "id": "TC-01",
+      "pass": true,
+      "repository": "sql",
+      "commit": "3ab1b8df4da7a2498a5063b54c10f707302113ac",
+      "file": "src/main/resources/mapper/UserMapper.xml",
+      "line": 5,
+      "expected": "VERIFIED",
+      "actual": "VERIFIED",
+      "evidence": "TC-01.json",
+      "erratum": false
+    },
+    {
+      "id": "TC-02",
+      "pass": true,
+      "repository": "sql",
+      "commit": "3ab1b8df4da7a2498a5063b54c10f707302113ac",
+      "file": "src/main/resources/mapper/UserMapper.xml",
+      "line": 8,
+      "expected": "REJECTED",
+      "actual": "REJECTED",
+      "evidence": "TC-02.json",
+      "erratum": false
+    },
+    {
+      "id": "TC-03",
+      "pass": true,
+      "repository": "allowlist",
+      "commit": "ad06c138f754eebf3c2e269b5ef2607df28b51a7",
+      "file": "src/main/resources/mapper/UserMapper.xml",
+      "line": 5,
+      "expected": "REJECTED",
+      "actual": "REJECTED",
+      "evidence": "TC-03.json",
+      "erratum": false
+    },
+    {
+      "id": "TC-04",
+      "pass": true,
+      "repository": "sql",
+      "commit": "3ab1b8df4da7a2498a5063b54c10f707302113ac",
+      "file": "src/main/resources/mapper/UserMapper.xml",
+      "line": 5,
+      "expected": "VERIFIED",
+      "actual": "VERIFIED",
+      "evidence": "TC-04.json",
+      "erratum": false
+    },
+    {
+      "id": "TC-05",
+      "pass": true,
+      "repository": "command",
+      "commit": "c2914454d6f557eb82aa74546ae1ac2410618ae9",
+      "file": "src/main/java/lab/CommandController.java",
+      "line": 12,
+      "expected": "VERIFIED",
+      "actual": "VERIFIED",
+      "evidence": "TC-05.json",
+      "erratum": true
+    },
+    {
+      "id": "TC-06",
+      "pass": true,
+      "repository": "command",
+      "commit": "c2914454d6f557eb82aa74546ae1ac2410618ae9",
+      "file": "src/main/java/lab/CommandController.java",
+      "line": 22,
+      "expected": "REJECTED",
+      "actual": "REJECTED",
+      "evidence": "TC-06.json",
+      "erratum": false
+    },
+    {
+      "id": "TC-07",
+      "pass": true,
+      "repository": "ssrf",
+      "commit": "d73d821234d6c0b4038a9adac61b5d2d9b0a113f",
+      "file": "src/main/java/lab/FetchController.java",
+      "line": 13,
+      "expected": "VERIFIED",
+      "actual": "VERIFIED",
+      "evidence": "TC-07.json",
+      "erratum": false
+    },
+    {
+      "id": "TC-08",
+      "pass": true,
+      "repository": "ssrf",
+      "commit": "d73d821234d6c0b4038a9adac61b5d2d9b0a113f",
+      "file": "src/main/java/lab/FetchController.java",
+      "line": 18,
+      "expected": "REJECTED",
+      "actual": "REJECTED",
+      "evidence": "TC-08.json",
+      "erratum": false
+    },
+    {
+      "id": "TC-09",
+      "pass": true,
+      "repository": "path",
+      "commit": "2fa892909bd2fef1106b4af3ceb0fcc7ade9a397",
+      "file": "src/main/java/lab/ReadController.java",
+      "line": 14,
+      "expected": "VERIFIED",
+      "actual": "VERIFIED",
+      "evidence": "TC-09.json",
+      "erratum": false
+    },
+    {
+      "id": "TC-10",
+      "pass": true,
+      "repository": "path",
+      "commit": "2fa892909bd2fef1106b4af3ceb0fcc7ade9a397",
+      "file": "src/main/java/lab/ReadController.java",
+      "line": 28,
+      "expected": "REJECTED",
+      "actual": "REJECTED",
+      "evidence": "TC-10.json",
+      "erratum": true
+    },
+    {
+      "id": "TC-11",
+      "pass": true,
+      "repository": "test-only",
+      "commit": "2f0bc6a13e395646a429f24e8aee453d3d22ae99",
+      "file": "src/main/resources/mapper/UserMapper.xml",
+      "line": 5,
+      "expected": "REJECTED",
+      "actual": "REJECTED",
+      "evidence": "TC-11.json",
+      "erratum": false
+    },
+    {
+      "id": "TC-12",
+      "pass": true,
+      "repository": "allowlist",
+      "commit": "ad06c138f754eebf3c2e269b5ef2607df28b51a7",
+      "file": "src/main/resources/mapper/UserMapper.xml",
+      "line": 5,
+      "expected": "REJECTED",
+      "actual": "REJECTED",
+      "evidence": "TC-12.json",
+      "erratum": false
+    }
+  ],
+  "scope": "Static fixtures + real Semgrep + independent Gate; not Java execution or deployment acceptance"
+}

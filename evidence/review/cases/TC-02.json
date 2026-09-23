@@ -1,0 +1,162 @@
+{
+  "finding": {
+    "finding_id": "sql_injection-TC-02-src-main-resources-mapper-UserMapper.xml-8",
+    "category": "SQL_INJECTION",
+    "status": "REJECTED",
+    "repository": {
+      "name": "sql",
+      "branch": "main",
+      "commit": "3ab1b8df4da7a2498a5063b54c10f707302113ac"
+    },
+    "source": {
+      "file": "src/main/java/lab/UserController.java",
+      "line": 13,
+      "end_line": 13,
+      "snippet_hash": "0c7af69ee07e96eaf03528ffb83d4212a95d7d33def54088b7b03276dc3e2430",
+      "file_sha256": "8077da28df2603be5cf204df5cd845a5d52ed3a650ba945cb6e9a98e4f39a28a",
+      "symbol": "username",
+      "type": "HTTP_REQUEST_PARAM"
+    },
+    "sink": {
+      "file": "src/main/resources/mapper/UserMapper.xml",
+      "line": 8,
+      "end_line": 8,
+      "snippet_hash": "39e19d8d2a52c3cbe70ee988c90a97e4a3b7274e65ee055b7e4b5dcfd2537723",
+      "file_sha256": "42fc1708387d87e134501e977a714271e8cd32ff9f9aebcff40dbb009ea34978",
+      "symbol": "username",
+      "type": "PARAMETER_BINDING"
+    },
+    "dataflow": [
+      {
+        "file": "src/main/java/lab/UserController.java",
+        "line": 13,
+        "end_line": 13,
+        "snippet_hash": "0c7af69ee07e96eaf03528ffb83d4212a95d7d33def54088b7b03276dc3e2430",
+        "file_sha256": "8077da28df2603be5cf204df5cd845a5d52ed3a650ba945cb6e9a98e4f39a28a",
+        "symbol": "username",
+        "type": "HTTP_REQUEST_PARAM"
+      },
+      {
+        "file": "src/main/java/lab/UserController.java",
+        "line": 14,
+        "end_line": 14,
+        "snippet_hash": "36aa970bfe3b0de2c0a39883cca613077fe4e71c965b4a8015848eae04407510",
+        "file_sha256": "8077da28df2603be5cf204df5cd845a5d52ed3a650ba945cb6e9a98e4f39a28a",
+        "symbol": "username",
+        "type": "CALL_ARGUMENT"
+      },
+      {
+        "file": "src/main/java/lab/UserService.java",
+        "line": 11,
+        "end_line": 11,
+        "snippet_hash": "26b712b9b0707334ad6f9c73ddaa66c7be6d7bfb83fbb9328ab0709bb629a54f",
+        "file_sha256": "539a258dda151275c471a2fe9f9a099f9802c0d94dc7860415eacbfe2f269ae3",
+        "symbol": "username",
+        "type": "METHOD_PARAMETER"
+      },
+      {
+        "file": "src/main/java/lab/UserService.java",
+        "line": 12,
+        "end_line": 12,
+        "snippet_hash": "fff7f057028ab2a0ffd4fb4a5dc2f1caad9cc6a433bdfcad8d92d54c917b0fda",
+        "file_sha256": "539a258dda151275c471a2fe9f9a099f9802c0d94dc7860415eacbfe2f269ae3",
+        "symbol": "username",
+        "type": "CALL_ARGUMENT"
+      },
+      {
+        "file": "src/main/java/lab/UserMapper.java",
+        "line": 7,
+        "end_line": 7,
+        "snippet_hash": "70fdb219872b24a4b05b3750bc6e30cdf1886106cfae5baad31e14f4dc92d4bc",
+        "file_sha256": "6b47600ea24071289cc6a928db32b9dbaea8254cc748256647529c67477069f1",
+        "symbol": "username",
+        "type": "MAPPER_PARAMETER"
+      },
+      {
+        "file": "src/main/resources/mapper/UserMapper.xml",
+        "line": 8,
+        "end_line": 8,
+        "snippet_hash": "39e19d8d2a52c3cbe70ee988c90a97e4a3b7274e65ee055b7e4b5dcfd2537723",
+        "file_sha256": "42fc1708387d87e134501e977a714271e8cd32ff9f9aebcff40dbb009ea34978",
+        "symbol": "username",
+        "type": "PARAMETER_BINDING"
+      }
+    ],
+    "protection": {
+      "status": "VALID",
+      "evidence": [
+        {
+          "file": "src/main/java/lab/UserController.java",
+          "line": 13,
+          "end_line": 13,
+          "snippet_hash": "0c7af69ee07e96eaf03528ffb83d4212a95d7d33def54088b7b03276dc3e2430",
+          "file_sha256": "8077da28df2603be5cf204df5cd845a5d52ed3a650ba945cb6e9a98e4f39a28a",
+          "symbol": "username",
+          "type": "HTTP_REQUEST_PARAM"
+        },
+        {
+          "file": "src/main/java/lab/UserController.java",
+          "line": 14,
+          "end_line": 14,
+          "snippet_hash": "36aa970bfe3b0de2c0a39883cca613077fe4e71c965b4a8015848eae04407510",
+          "file_sha256": "8077da28df2603be5cf204df5cd845a5d52ed3a650ba945cb6e9a98e4f39a28a",
+          "symbol": "username",
+          "type": "CALL_ARGUMENT"
+        },
+        {
+          "file": "src/main/java/lab/UserService.java",
+          "line": 11,
+          "end_line": 11,
+          "snippet_hash": "26b712b9b0707334ad6f9c73ddaa66c7be6d7bfb83fbb9328ab0709bb629a54f",
+          "file_sha256": "539a258dda151275c471a2fe9f9a099f9802c0d94dc7860415eacbfe2f269ae3",
+          "symbol": "username",
+          "type": "METHOD_PARAMETER"
+        },
+        {
+          "file": "src/main/java/lab/UserService.java",
+          "line": 12,
+          "end_line": 12,
+          "snippet_hash": "fff7f057028ab2a0ffd4fb4a5dc2f1caad9cc6a433bdfcad8d92d54c917b0fda",
+          "file_sha256": "539a258dda151275c471a2fe9f9a099f9802c0d94dc7860415eacbfe2f269ae3",
+          "symbol": "username",
+          "type": "CALL_ARGUMENT"
+        },
+        {
+          "file": "src/main/java/lab/UserMapper.java",
+          "line": 7,
+          "end_line": 7,
+          "snippet_hash": "70fdb219872b24a4b05b3750bc6e30cdf1886106cfae5baad31e14f4dc92d4bc",
+          "file_sha256": "6b47600ea24071289cc6a928db32b9dbaea8254cc748256647529c67477069f1",
+          "symbol": "username",
+          "type": "MAPPER_PARAMETER"
+        },
+        {
+          "file": "src/main/resources/mapper/UserMapper.xml",
+          "line": 8,
+          "end_line": 8,
+          "snippet_hash": "39e19d8d2a52c3cbe70ee988c90a97e4a3b7274e65ee055b7e4b5dcfd2537723",
+          "file_sha256": "42fc1708387d87e134501e977a714271e8cd32ff9f9aebcff40dbb009ea34978",
+          "symbol": "username",
+          "type": "PARAMETER_BINDING"
+        }
+      ]
+    },
+    "reachability": "PRODUCTION_REACHABLE",
+    "rules_applied": [
+      "KB-SPRING-REQUEST-PARAM",
+      "KB-MYBATIS-SQL-BINDING"
+    ],
+    "decision_trace": [
+      "EFFECTIVE_PROTECTION"
+    ],
+    "evidence_integrity": {
+      "commit": "3ab1b8df4da7a2498a5063b54c10f707302113ac",
+      "status": "PASS",
+      "evidence_sha256": "124f756dd2bc4995b228f8f1a147ee039a7b1255d323f3fad57c9bd491626c4d"
+    },
+    "recommendation": "Use parameterized binding or a finite server-side allowlist mapping.",
+    "agent_version": "1.0.0",
+    "rule_version": "1.0.0",
+    "knowledge_version": "1.0.0+7542f99ab38b"
+  }
+}

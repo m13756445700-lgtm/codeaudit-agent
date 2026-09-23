@@ -1,0 +1,8 @@
+rules:
+  - id: java-file-read
+    languages: [java]
+    severity: WARNING
+    message: File read candidate requires independent path-boundary proof.
+    metadata:
+      category: PATH_TRAVERSAL
+    pattern: Files.readString(...)

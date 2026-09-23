@@ -1,0 +1,15 @@
+{
+  "schema": "chaitin.octobus.service.v1",
+  "name": "code-audit-service",
+  "displayName": "CodeAudit controlled service",
+  "proto": {
+    "roots": [
+      "proto"
+    ],
+    "files": [
+      "proto/codeaudit.proto"
+    ]
+  },
+  "configSchema": "config.schema.json",
+  "secretSchema": "secret.schema.json"
+}

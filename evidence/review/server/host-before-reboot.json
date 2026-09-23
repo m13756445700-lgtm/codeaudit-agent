@@ -1,0 +1,12 @@
+{
+  "cpu_count": 4,
+  "machine": "x86_64",
+  "boot_id": "2005252f-85c3-49fb-a888-b93d35b62cf5",
+  "meminfo": "MemTotal:        7703188 kB",
+  "disk": {
+    "total": 41882943488,
+    "used": 13672984576,
+    "free": 26274222080
+  },
+  "docker_enabled": "enabled"
+}

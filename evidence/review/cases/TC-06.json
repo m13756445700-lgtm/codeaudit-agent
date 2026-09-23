@@ -1,0 +1,144 @@
+{
+  "finding": {
+    "finding_id": "command_injection-TC-06-src-main-java-lab-CommandController.java-22",
+    "category": "COMMAND_INJECTION",
+    "status": "REJECTED",
+    "repository": {
+      "name": "command",
+      "branch": "main",
+      "commit": "c2914454d6f557eb82aa74546ae1ac2410618ae9"
+    },
+    "source": {
+      "file": "src/main/java/lab/CommandController.java",
+      "line": 20,
+      "end_line": 20,
+      "snippet_hash": "e7c89090a984331239a17c1007938b6d3ad93f0d1aa2673f0bccab8e71796e33",
+      "file_sha256": "fb7bc44ec63d29c5593a8d8ff489d873efa829f2f5e268b4cfa9a07c40a5c18e",
+      "symbol": "input",
+      "type": "HTTP_REQUEST_PARAM"
+    },
+    "sink": {
+      "file": "src/main/java/lab/CommandController.java",
+      "line": 22,
+      "end_line": 22,
+      "snippet_hash": "a14d9b875d61c4a38a564a13eaa18b31b0b28b4ab31360cbbd14d70d131a4ed4",
+      "file_sha256": "fb7bc44ec63d29c5593a8d8ff489d873efa829f2f5e268b4cfa9a07c40a5c18e",
+      "symbol": "/usr/bin/ping",
+      "type": "FIXED_EXECUTABLE_ARGV"
+    },
+    "dataflow": [
+      {
+        "file": "src/main/java/lab/CommandController.java",
+        "line": 20,
+        "end_line": 20,
+        "snippet_hash": "e7c89090a984331239a17c1007938b6d3ad93f0d1aa2673f0bccab8e71796e33",
+        "file_sha256": "fb7bc44ec63d29c5593a8d8ff489d873efa829f2f5e268b4cfa9a07c40a5c18e",
+        "symbol": "input",
+        "type": "HTTP_REQUEST_PARAM"
+      },
+      {
+        "file": "src/main/java/lab/CommandController.java",
+        "line": 8,
+        "end_line": 8,
+        "snippet_hash": "cd00644c45a9e1d6c8933ca6946bfa77a63f17a3b0e9249b5dab332809dfb5ad",
+        "file_sha256": "fb7bc44ec63d29c5593a8d8ff489d873efa829f2f5e268b4cfa9a07c40a5c18e",
+        "symbol": "HOST_MAP",
+        "type": "IMMUTABLE_FINITE_MAPPING"
+      },
+      {
+        "file": "src/main/java/lab/CommandController.java",
+        "line": 21,
+        "end_line": 21,
+        "snippet_hash": "8c98a3ff35b58460fa570ceac315184478afd23f904ccc8b1c1066458a9c83e3",
+        "file_sha256": "fb7bc44ec63d29c5593a8d8ff489d873efa829f2f5e268b4cfa9a07c40a5c18e",
+        "symbol": "mapped",
+        "type": "LOCAL_ASSIGNMENT"
+      },
+      {
+        "file": "src/main/java/lab/CommandController.java",
+        "line": 22,
+        "end_line": 22,
+        "snippet_hash": "a14d9b875d61c4a38a564a13eaa18b31b0b28b4ab31360cbbd14d70d131a4ed4",
+        "file_sha256": "fb7bc44ec63d29c5593a8d8ff489d873efa829f2f5e268b4cfa9a07c40a5c18e",
+        "symbol": "argv",
+        "type": "COMMAND_ARGUMENT"
+      },
+      {
+        "file": "src/main/java/lab/CommandController.java",
+        "line": 22,
+        "end_line": 22,
+        "snippet_hash": "a14d9b875d61c4a38a564a13eaa18b31b0b28b4ab31360cbbd14d70d131a4ed4",
+        "file_sha256": "fb7bc44ec63d29c5593a8d8ff489d873efa829f2f5e268b4cfa9a07c40a5c18e",
+        "symbol": "/usr/bin/ping",
+        "type": "FIXED_EXECUTABLE_ARGV"
+      }
+    ],
+    "protection": {
+      "status": "VALID",
+      "evidence": [
+        {
+          "file": "src/main/java/lab/CommandController.java",
+          "line": 20,
+          "end_line": 20,
+          "snippet_hash": "e7c89090a984331239a17c1007938b6d3ad93f0d1aa2673f0bccab8e71796e33",
+          "file_sha256": "fb7bc44ec63d29c5593a8d8ff489d873efa829f2f5e268b4cfa9a07c40a5c18e",
+          "symbol": "input",
+          "type": "HTTP_REQUEST_PARAM"
+        },
+        {
+          "file": "src/main/java/lab/CommandController.java",
+          "line": 8,
+          "end_line": 8,
+          "snippet_hash": "cd00644c45a9e1d6c8933ca6946bfa77a63f17a3b0e9249b5dab332809dfb5ad",
+          "file_sha256": "fb7bc44ec63d29c5593a8d8ff489d873efa829f2f5e268b4cfa9a07c40a5c18e",
+          "symbol": "HOST_MAP",
+          "type": "IMMUTABLE_FINITE_MAPPING"
+        },
+        {
+          "file": "src/main/java/lab/CommandController.java",
+          "line": 21,
+          "end_line": 21,
+          "snippet_hash": "8c98a3ff35b58460fa570ceac315184478afd23f904ccc8b1c1066458a9c83e3",
+          "file_sha256": "fb7bc44ec63d29c5593a8d8ff489d873efa829f2f5e268b4cfa9a07c40a5c18e",
+          "symbol": "mapped",
+          "type": "LOCAL_ASSIGNMENT"
+        },
+        {
+          "file": "src/main/java/lab/CommandController.java",
+          "line": 22,
+          "end_line": 22,
+          "snippet_hash": "a14d9b875d61c4a38a564a13eaa18b31b0b28b4ab31360cbbd14d70d131a4ed4",
+          "file_sha256": "fb7bc44ec63d29c5593a8d8ff489d873efa829f2f5e268b4cfa9a07c40a5c18e",
+          "symbol": "argv",
+          "type": "COMMAND_ARGUMENT"
+        },
+        {
+          "file": "src/main/java/lab/CommandController.java",
+          "line": 22,
+          "end_line": 22,
+          "snippet_hash": "a14d9b875d61c4a38a564a13eaa18b31b0b28b4ab31360cbbd14d70d131a4ed4",
+          "file_sha256": "fb7bc44ec63d29c5593a8d8ff489d873efa829f2f5e268b4cfa9a07c40a5c18e",
+          "symbol": "/usr/bin/ping",
+          "type": "FIXED_EXECUTABLE_ARGV"
+        }
+      ]
+    },
+    "reachability": "PRODUCTION_REACHABLE",
+    "rules_applied": [
+      "KB-SPRING-REQUEST-PARAM",
+      "KB-JAVA-COMMAND-ARGV"
+    ],
+    "decision_trace": [
+      "EFFECTIVE_PROTECTION"
+    ],
+    "evidence_integrity": {
+      "commit": "c2914454d6f557eb82aa74546ae1ac2410618ae9",
+      "status": "PASS",
+      "evidence_sha256": "74957290662eab7c0d322b97db468c45324aad1d08ce2dfad703deafbcbb130e"
+    },
+    "recommendation": "Avoid shell command text; use fixed executable and immutable finite argument mapping.",
+    "agent_version": "1.0.0",
+    "rule_version": "1.0.0",
+    "knowledge_version": "1.0.0+7542f99ab38b"
+  }
+}

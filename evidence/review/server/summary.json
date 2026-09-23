@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "brd_cases_passed": 12,
+  "mcp_four_categories_before_and_after_reboot": true,
+  "demo_http_checks_before_and_after_reboot": 3,
+  "ssh_reconnected_after_host_reboot": true,
+  "model_before_reboot_run": "eb756a8c982093a0865e4d7a86e5754ff96b11ce8cf475972da02a29c4adecca",
+  "model_after_reboot_run": "cb1b878c2ea7efb28e0829d7fcf52d3c8b7af45ac96d7d7d3ee2e75f6b0e87ba",
+  "model_actual_mcp_calls_each": 8
+}

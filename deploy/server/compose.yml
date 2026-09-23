@@ -1,0 +1,40 @@
+# Recovery definition for the verified server deployment.
+# Place at /opt/codeaudit-agent/compose.yml; daemon.env is private (0600).
+name: codeaudit-server
+services:
+  octobus:
+    image: codeaudit-octobus:phase10
+    container_name: codeaudit-server-octobus
+    restart: unless-stopped
+    environment:
+      NPM_CONFIG_CACHE: /var/lib/octobus/.npm
+    ports:
+      - 127.0.0.1:19000:9000
+    volumes:
+      - audit-data:/var/lib/octobus
+    networks: [runtime]
+  agent-compose:
+    image: ghcr.io/chaitin/agent-compose@sha256:3117226250256b03d25815bd1bb584ade5ac225b83f55d527be122b8b75a61e8
+    container_name: codeaudit-server-agent-compose
+    command: [daemon]
+    restart: unless-stopped
+    env_file: [./daemon.env]
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /opt/codeaudit-agent/data:/data
+    networks: [runtime]
+  demo:
+    image: codeaudit-demo:verified
+    container_name: codeaudit-server-demo
+    restart: unless-stopped
+    network_mode: none
+    read_only: true
+    tmpfs: [/tmp:rw,nosuid,size=128m]
+volumes:
+  audit-data:
+    external: true
+    name: codeaudit-server-data
+networks:
+  runtime:
+    external: true
+    name: agent-poc-net

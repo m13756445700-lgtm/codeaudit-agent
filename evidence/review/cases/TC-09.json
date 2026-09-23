@@ -1,0 +1,144 @@
+{
+  "finding": {
+    "finding_id": "path_traversal-TC-09-src-main-java-lab-ReadController.java-14",
+    "category": "PATH_TRAVERSAL",
+    "status": "VERIFIED",
+    "repository": {
+      "name": "path",
+      "branch": "main",
+      "commit": "2fa892909bd2fef1106b4af3ceb0fcc7ade9a397"
+    },
+    "source": {
+      "file": "src/main/java/lab/ReadController.java",
+      "line": 12,
+      "end_line": 12,
+      "snippet_hash": "6dfff9539ec096e5ee3bffe4ce0bf46fd6578e469b3a4df8763643afbd53351c",
+      "file_sha256": "098a637f55f80a756421d0c64691a15fe37cc04a6860404d30f0b36389e25dbf",
+      "symbol": "filename",
+      "type": "HTTP_REQUEST_PARAM"
+    },
+    "sink": {
+      "file": "src/main/java/lab/ReadController.java",
+      "line": 14,
+      "end_line": 14,
+      "snippet_hash": "a416d5fd4fc105fc76d46688b013d183d78f13d23d398cc70a510cfe01eaa0fc",
+      "file_sha256": "098a637f55f80a756421d0c64691a15fe37cc04a6860404d30f0b36389e25dbf",
+      "symbol": "Files.readString",
+      "type": "FILE_READ_PATH"
+    },
+    "dataflow": [
+      {
+        "file": "src/main/java/lab/ReadController.java",
+        "line": 10,
+        "end_line": 10,
+        "snippet_hash": "3cb48261644fa5e5d8916c6712ebc1b1647f8d1c780049362705d20ee332dfbb",
+        "file_sha256": "098a637f55f80a756421d0c64691a15fe37cc04a6860404d30f0b36389e25dbf",
+        "symbol": "BASE_DIR",
+        "type": "FIXED_BASE_STRING"
+      },
+      {
+        "file": "src/main/java/lab/ReadController.java",
+        "line": 12,
+        "end_line": 12,
+        "snippet_hash": "6dfff9539ec096e5ee3bffe4ce0bf46fd6578e469b3a4df8763643afbd53351c",
+        "file_sha256": "098a637f55f80a756421d0c64691a15fe37cc04a6860404d30f0b36389e25dbf",
+        "symbol": "filename",
+        "type": "HTTP_REQUEST_PARAM"
+      },
+      {
+        "file": "src/main/java/lab/ReadController.java",
+        "line": 13,
+        "end_line": 13,
+        "snippet_hash": "e72b42c90ed03836d73f23862206c1a68ff1e805682042fa3f7f7b0806aaf6de",
+        "file_sha256": "098a637f55f80a756421d0c64691a15fe37cc04a6860404d30f0b36389e25dbf",
+        "symbol": "path",
+        "type": "LOCAL_ASSIGNMENT"
+      },
+      {
+        "file": "src/main/java/lab/ReadController.java",
+        "line": 14,
+        "end_line": 14,
+        "snippet_hash": "a416d5fd4fc105fc76d46688b013d183d78f13d23d398cc70a510cfe01eaa0fc",
+        "file_sha256": "098a637f55f80a756421d0c64691a15fe37cc04a6860404d30f0b36389e25dbf",
+        "symbol": "path",
+        "type": "FILE_PATH_ARGUMENT"
+      },
+      {
+        "file": "src/main/java/lab/ReadController.java",
+        "line": 14,
+        "end_line": 14,
+        "snippet_hash": "a416d5fd4fc105fc76d46688b013d183d78f13d23d398cc70a510cfe01eaa0fc",
+        "file_sha256": "098a637f55f80a756421d0c64691a15fe37cc04a6860404d30f0b36389e25dbf",
+        "symbol": "Files.readString",
+        "type": "FILE_READ_PATH"
+      }
+    ],
+    "protection": {
+      "status": "ABSENT",
+      "evidence": [
+        {
+          "file": "src/main/java/lab/ReadController.java",
+          "line": 10,
+          "end_line": 10,
+          "snippet_hash": "3cb48261644fa5e5d8916c6712ebc1b1647f8d1c780049362705d20ee332dfbb",
+          "file_sha256": "098a637f55f80a756421d0c64691a15fe37cc04a6860404d30f0b36389e25dbf",
+          "symbol": "BASE_DIR",
+          "type": "FIXED_BASE_STRING"
+        },
+        {
+          "file": "src/main/java/lab/ReadController.java",
+          "line": 12,
+          "end_line": 12,
+          "snippet_hash": "6dfff9539ec096e5ee3bffe4ce0bf46fd6578e469b3a4df8763643afbd53351c",
+          "file_sha256": "098a637f55f80a756421d0c64691a15fe37cc04a6860404d30f0b36389e25dbf",
+          "symbol": "filename",
+          "type": "HTTP_REQUEST_PARAM"
+        },
+        {
+          "file": "src/main/java/lab/ReadController.java",
+          "line": 13,
+          "end_line": 13,
+          "snippet_hash": "e72b42c90ed03836d73f23862206c1a68ff1e805682042fa3f7f7b0806aaf6de",
+          "file_sha256": "098a637f55f80a756421d0c64691a15fe37cc04a6860404d30f0b36389e25dbf",
+          "symbol": "path",
+          "type": "LOCAL_ASSIGNMENT"
+        },
+        {
+          "file": "src/main/java/lab/ReadController.java",
+          "line": 14,
+          "end_line": 14,
+          "snippet_hash": "a416d5fd4fc105fc76d46688b013d183d78f13d23d398cc70a510cfe01eaa0fc",
+          "file_sha256": "098a637f55f80a756421d0c64691a15fe37cc04a6860404d30f0b36389e25dbf",
+          "symbol": "path",
+          "type": "FILE_PATH_ARGUMENT"
+        },
+        {
+          "file": "src/main/java/lab/ReadController.java",
+          "line": 14,
+          "end_line": 14,
+          "snippet_hash": "a416d5fd4fc105fc76d46688b013d183d78f13d23d398cc70a510cfe01eaa0fc",
+          "file_sha256": "098a637f55f80a756421d0c64691a15fe37cc04a6860404d30f0b36389e25dbf",
+          "symbol": "Files.readString",
+          "type": "FILE_READ_PATH"
+        }
+      ]
+    },
+    "reachability": "PRODUCTION_REACHABLE",
+    "rules_applied": [
+      "KB-SPRING-REQUEST-PARAM",
+      "KB-JAVA-PATH-READ"
+    ],
+    "decision_trace": [
+      "INDEPENDENT_SOURCE_TO_SINK_PROOF"
+    ],
+    "evidence_integrity": {
+      "commit": "2fa892909bd2fef1106b4af3ceb0fcc7ade9a397",
+      "status": "PASS",
+      "evidence_sha256": "15ab92fd0da791b554031692254b566ed7581c296a15054ddb183e8bb6310b0a"
+    },
+    "recommendation": "Resolve real target and base paths, enforce directory boundary, and prevent concurrent filesystem mutation.",
+    "agent_version": "1.0.0",
+    "rule_version": "1.0.0",
+    "knowledge_version": "1.0.0+7542f99ab38b"
+  }
+}

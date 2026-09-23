@@ -1,0 +1,4 @@
+- rule_id: KB-MYBATIS-SQL-BINDING
+  category: SQL_INJECTION
+  description: Parameter binding protects the bound value, not unrelated raw fragments.
+  decision: REJECT_PARAMETER_BINDING

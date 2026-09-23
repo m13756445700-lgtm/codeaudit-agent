@@ -1,0 +1,4 @@
+- rule_id: KB-MYBATIS-SQL-FP-ALLOWLIST
+  category: SQL_INJECTION
+  description: Every switch branch including default must map input to a static identifier and terminate.
+  decision: REJECT_FINITE_MAPPING

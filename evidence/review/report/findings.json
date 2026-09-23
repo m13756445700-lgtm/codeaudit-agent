@@ -1,0 +1,1809 @@
+[
+  {
+    "finding_id": "sql_injection-TC-01-src-main-resources-mapper-UserMapper.xml-5",
+    "category": "SQL_INJECTION",
+    "status": "VERIFIED",
+    "repository": {
+      "name": "sql",
+      "branch": "main",
+      "commit": "3ab1b8df4da7a2498a5063b54c10f707302113ac"
+    },
+    "source": {
+      "file": "src/main/java/lab/UserController.java",
+      "line": 9,
+      "end_line": 9,
+      "snippet_hash": "aa7913f228e1dd205969877fb0dce95e8fd5bb62bc2a112cb75e53a0ddfe9d54",
+      "file_sha256": "8077da28df2603be5cf204df5cd845a5d52ed3a650ba945cb6e9a98e4f39a28a",
+      "symbol": "order",
+      "type": "HTTP_REQUEST_PARAM"
+    },
+    "sink": {
+      "file": "src/main/resources/mapper/UserMapper.xml",
+      "line": 5,
+      "end_line": 5,
+      "snippet_hash": "80eeb7ff74ebfe5809236ad67a361b6f213515032707f51b60a5e1864f67b82e",
+      "file_sha256": "42fc1708387d87e134501e977a714271e8cd32ff9f9aebcff40dbb009ea34978",
+      "symbol": "order",
+      "type": "MYBATIS_RAW_SUBSTITUTION"
+    },
+    "dataflow": [
+      {
+        "file": "src/main/java/lab/UserController.java",
+        "line": 9,
+        "end_line": 9,
+        "snippet_hash": "aa7913f228e1dd205969877fb0dce95e8fd5bb62bc2a112cb75e53a0ddfe9d54",
+        "file_sha256": "8077da28df2603be5cf204df5cd845a5d52ed3a650ba945cb6e9a98e4f39a28a",
+        "symbol": "order",
+        "type": "HTTP_REQUEST_PARAM"
+      },
+      {
+        "file": "src/main/java/lab/UserController.java",
+        "line": 10,
+        "end_line": 10,
+        "snippet_hash": "bd5d8c1f6abadb0c825e76a6d8b988c0618bf4fdaa33e2d95095c973198d5dea",
+        "file_sha256": "8077da28df2603be5cf204df5cd845a5d52ed3a650ba945cb6e9a98e4f39a28a",
+        "symbol": "order",
+        "type": "CALL_ARGUMENT"
+      },
+      {
+        "file": "src/main/java/lab/UserService.java",
+        "line": 8,
+        "end_line": 8,
+        "snippet_hash": "ab6f9709bdcdeb0bc1722e621c4907422c4bfe5261f3aa55d008bfcb55da8e24",
+        "file_sha256": "539a258dda151275c471a2fe9f9a099f9802c0d94dc7860415eacbfe2f269ae3",
+        "symbol": "order",
+        "type": "METHOD_PARAMETER"
+      },
+      {
+        "file": "src/main/java/lab/UserService.java",
+        "line": 9,
+        "end_line": 9,
+        "snippet_hash": "f4e2b7b9ec2d7aa2280632b6d1c9b48da7e797573a921d9c712babe7f56d5e0b",
+        "file_sha256": "539a258dda151275c471a2fe9f9a099f9802c0d94dc7860415eacbfe2f269ae3",
+        "symbol": "order",
+        "type": "CALL_ARGUMENT"
+      },
+      {
+        "file": "src/main/java/lab/UserMapper.java",
+        "line": 6,
+        "end_line": 6,
+        "snippet_hash": "810de1eef3d0c7b396baab1a27043879849ca47347cd50d07bf8aaeb247b8fc1",
+        "file_sha256": "6b47600ea24071289cc6a928db32b9dbaea8254cc748256647529c67477069f1",
+        "symbol": "order",
+        "type": "MAPPER_PARAMETER"
+      },
+      {
+        "file": "src/main/resources/mapper/UserMapper.xml",
+        "line": 5,
+        "end_line": 5,
+        "snippet_hash": "80eeb7ff74ebfe5809236ad67a361b6f213515032707f51b60a5e1864f67b82e",
+        "file_sha256": "42fc1708387d87e134501e977a714271e8cd32ff9f9aebcff40dbb009ea34978",
+        "symbol": "order",
+        "type": "MYBATIS_RAW_SUBSTITUTION"
+      }
+    ],
+    "protection": {
+      "status": "ABSENT",
+      "evidence": [
+        {
+          "file": "src/main/java/lab/UserController.java",
+          "line": 9,
+          "end_line": 9,
+          "snippet_hash": "aa7913f228e1dd205969877fb0dce95e8fd5bb62bc2a112cb75e53a0ddfe9d54",
+          "file_sha256": "8077da28df2603be5cf204df5cd845a5d52ed3a650ba945cb6e9a98e4f39a28a",
+          "symbol": "order",
+          "type": "HTTP_REQUEST_PARAM"
+        },
+        {
+          "file": "src/main/java/lab/UserController.java",
+          "line": 10,
+          "end_line": 10,
+          "snippet_hash": "bd5d8c1f6abadb0c825e76a6d8b988c0618bf4fdaa33e2d95095c973198d5dea",
+          "file_sha256": "8077da28df2603be5cf204df5cd845a5d52ed3a650ba945cb6e9a98e4f39a28a",
+          "symbol": "order",
+          "type": "CALL_ARGUMENT"
+        },
+        {
+          "file": "src/main/java/lab/UserService.java",
+          "line": 8,
+          "end_line": 8,
+          "snippet_hash": "ab6f9709bdcdeb0bc1722e621c4907422c4bfe5261f3aa55d008bfcb55da8e24",
+          "file_sha256": "539a258dda151275c471a2fe9f9a099f9802c0d94dc7860415eacbfe2f269ae3",
+          "symbol": "order",
+          "type": "METHOD_PARAMETER"
+        },
+        {
+          "file": "src/main/java/lab/UserService.java",
+          "line": 9,
+          "end_line": 9,
+          "snippet_hash": "f4e2b7b9ec2d7aa2280632b6d1c9b48da7e797573a921d9c712babe7f56d5e0b",
+          "file_sha256": "539a258dda151275c471a2fe9f9a099f9802c0d94dc7860415eacbfe2f269ae3",
+          "symbol": "order",
+          "type": "CALL_ARGUMENT"
+        },
+        {
+          "file": "src/main/java/lab/UserMapper.java",
+          "line": 6,
+          "end_line": 6,
+          "snippet_hash": "810de1eef3d0c7b396baab1a27043879849ca47347cd50d07bf8aaeb247b8fc1",
+          "file_sha256": "6b47600ea24071289cc6a928db32b9dbaea8254cc748256647529c67477069f1",
+          "symbol": "order",
+          "type": "MAPPER_PARAMETER"
+        },
+        {
+          "file": "src/main/resources/mapper/UserMapper.xml",
+          "line": 5,
+          "end_line": 5,
+          "snippet_hash": "80eeb7ff74ebfe5809236ad67a361b6f213515032707f51b60a5e1864f67b82e",
+          "file_sha256": "42fc1708387d87e134501e977a714271e8cd32ff9f9aebcff40dbb009ea34978",
+          "symbol": "order",
+          "type": "MYBATIS_RAW_SUBSTITUTION"
+        }
+      ]
+    },
+    "reachability": "PRODUCTION_REACHABLE",
+    "rules_applied": [
+      "KB-SPRING-REQUEST-PARAM",
+      "KB-MYBATIS-SQL-001"
+    ],
+    "decision_trace": [
+      "INDEPENDENT_SOURCE_TO_SINK_PROOF"
+    ],
+    "evidence_integrity": {
+      "commit": "3ab1b8df4da7a2498a5063b54c10f707302113ac",
+      "status": "PASS",
+      "evidence_sha256": "af6a7be616fc671e0ca3e63f3001203a7b21c177026559e95391738708f0b708"
+    },
+    "recommendation": "Use parameterized binding or a finite server-side allowlist mapping.",
+    "agent_version": "1.0.0",
+    "rule_version": "1.0.0",
+    "knowledge_version": "1.0.0+7542f99ab38b"
+  },
+  {
+    "finding_id": "sql_injection-TC-02-src-main-resources-mapper-UserMapper.xml-8",
+    "category": "SQL_INJECTION",
+    "status": "REJECTED",
+    "repository": {
+      "name": "sql",
+      "branch": "main",
+      "commit": "3ab1b8df4da7a2498a5063b54c10f707302113ac"
+    },
+    "source": {
+      "file": "src/main/java/lab/UserController.java",
+      "line": 13,
+      "end_line": 13,
+      "snippet_hash": "0c7af69ee07e96eaf03528ffb83d4212a95d7d33def54088b7b03276dc3e2430",
+      "file_sha256": "8077da28df2603be5cf204df5cd845a5d52ed3a650ba945cb6e9a98e4f39a28a",
+      "symbol": "username",
+      "type": "HTTP_REQUEST_PARAM"
+    },
+    "sink": {
+      "file": "src/main/resources/mapper/UserMapper.xml",
+      "line": 8,
+      "end_line": 8,
+      "snippet_hash": "39e19d8d2a52c3cbe70ee988c90a97e4a3b7274e65ee055b7e4b5dcfd2537723",
+      "file_sha256": "42fc1708387d87e134501e977a714271e8cd32ff9f9aebcff40dbb009ea34978",
+      "symbol": "username",
+      "type": "PARAMETER_BINDING"
+    },
+    "dataflow": [
+      {
+        "file": "src/main/java/lab/UserController.java",
+        "line": 13,
+        "end_line": 13,
+        "snippet_hash": "0c7af69ee07e96eaf03528ffb83d4212a95d7d33def54088b7b03276dc3e2430",
+        "file_sha256": "8077da28df2603be5cf204df5cd845a5d52ed3a650ba945cb6e9a98e4f39a28a",
+        "symbol": "username",
+        "type": "HTTP_REQUEST_PARAM"
+      },
+      {
+        "file": "src/main/java/lab/UserController.java",
+        "line": 14,
+        "end_line": 14,
+        "snippet_hash": "36aa970bfe3b0de2c0a39883cca613077fe4e71c965b4a8015848eae04407510",
+        "file_sha256": "8077da28df2603be5cf204df5cd845a5d52ed3a650ba945cb6e9a98e4f39a28a",
+        "symbol": "username",
+        "type": "CALL_ARGUMENT"
+      },
+      {
+        "file": "src/main/java/lab/UserService.java",
+        "line": 11,
+        "end_line": 11,
+        "snippet_hash": "26b712b9b0707334ad6f9c73ddaa66c7be6d7bfb83fbb9328ab0709bb629a54f",
+        "file_sha256": "539a258dda151275c471a2fe9f9a099f9802c0d94dc7860415eacbfe2f269ae3",
+        "symbol": "username",
+        "type": "METHOD_PARAMETER"
+      },
+      {
+        "file": "src/main/java/lab/UserService.java",
+        "line": 12,
+        "end_line": 12,
+        "snippet_hash": "fff7f057028ab2a0ffd4fb4a5dc2f1caad9cc6a433bdfcad8d92d54c917b0fda",
+        "file_sha256": "539a258dda151275c471a2fe9f9a099f9802c0d94dc7860415eacbfe2f269ae3",
+        "symbol": "username",
+        "type": "CALL_ARGUMENT"
+      },
+      {
+        "file": "src/main/java/lab/UserMapper.java",
+        "line": 7,
+        "end_line": 7,
+        "snippet_hash": "70fdb219872b24a4b05b3750bc6e30cdf1886106cfae5baad31e14f4dc92d4bc",
+        "file_sha256": "6b47600ea24071289cc6a928db32b9dbaea8254cc748256647529c67477069f1",
+        "symbol": "username",
+        "type": "MAPPER_PARAMETER"
+      },
+      {
+        "file": "src/main/resources/mapper/UserMapper.xml",
+        "line": 8,
+        "end_line": 8,
+        "snippet_hash": "39e19d8d2a52c3cbe70ee988c90a97e4a3b7274e65ee055b7e4b5dcfd2537723",
+        "file_sha256": "42fc1708387d87e134501e977a714271e8cd32ff9f9aebcff40dbb009ea34978",
+        "symbol": "username",
+        "type": "PARAMETER_BINDING"
+      }
+    ],
+    "protection": {
+      "status": "VALID",
+      "evidence": [
+        {
+          "file": "src/main/java/lab/UserController.java",
+          "line": 13,
+          "end_line": 13,
+          "snippet_hash": "0c7af69ee07e96eaf03528ffb83d4212a95d7d33def54088b7b03276dc3e2430",
+          "file_sha256": "8077da28df2603be5cf204df5cd845a5d52ed3a650ba945cb6e9a98e4f39a28a",
+          "symbol": "username",
+          "type": "HTTP_REQUEST_PARAM"
+        },
+        {
+          "file": "src/main/java/lab/UserController.java",
+          "line": 14,
+          "end_line": 14,
+          "snippet_hash": "36aa970bfe3b0de2c0a39883cca613077fe4e71c965b4a8015848eae04407510",
+          "file_sha256": "8077da28df2603be5cf204df5cd845a5d52ed3a650ba945cb6e9a98e4f39a28a",
+          "symbol": "username",
+          "type": "CALL_ARGUMENT"
+        },
+        {
+          "file": "src/main/java/lab/UserService.java",
+          "line": 11,
+          "end_line": 11,
+          "snippet_hash": "26b712b9b0707334ad6f9c73ddaa66c7be6d7bfb83fbb9328ab0709bb629a54f",
+          "file_sha256": "539a258dda151275c471a2fe9f9a099f9802c0d94dc7860415eacbfe2f269ae3",
+          "symbol": "username",
+          "type": "METHOD_PARAMETER"
+        },
+        {
+          "file": "src/main/java/lab/UserService.java",
+          "line": 12,
+          "end_line": 12,
+          "snippet_hash": "fff7f057028ab2a0ffd4fb4a5dc2f1caad9cc6a433bdfcad8d92d54c917b0fda",
+          "file_sha256": "539a258dda151275c471a2fe9f9a099f9802c0d94dc7860415eacbfe2f269ae3",
+          "symbol": "username",
+          "type": "CALL_ARGUMENT"
+        },
+        {
+          "file": "src/main/java/lab/UserMapper.java",
+          "line": 7,
+          "end_line": 7,
+          "snippet_hash": "70fdb219872b24a4b05b3750bc6e30cdf1886106cfae5baad31e14f4dc92d4bc",
+          "file_sha256": "6b47600ea24071289cc6a928db32b9dbaea8254cc748256647529c67477069f1",
+          "symbol": "username",
+          "type": "MAPPER_PARAMETER"
+        },
+        {
+          "file": "src/main/resources/mapper/UserMapper.xml",
+          "line": 8,
+          "end_line": 8,
+          "snippet_hash": "39e19d8d2a52c3cbe70ee988c90a97e4a3b7274e65ee055b7e4b5dcfd2537723",
+          "file_sha256": "42fc1708387d87e134501e977a714271e8cd32ff9f9aebcff40dbb009ea34978",
+          "symbol": "username",
+          "type": "PARAMETER_BINDING"
+        }
+      ]
+    },
+    "reachability": "PRODUCTION_REACHABLE",
+    "rules_applied": [
+      "KB-SPRING-REQUEST-PARAM",
+      "KB-MYBATIS-SQL-BINDING"
+    ],
+    "decision_trace": [
+      "EFFECTIVE_PROTECTION"
+    ],
+    "evidence_integrity": {
+      "commit": "3ab1b8df4da7a2498a5063b54c10f707302113ac",
+      "status": "PASS",
+      "evidence_sha256": "124f756dd2bc4995b228f8f1a147ee039a7b1255d323f3fad57c9bd491626c4d"
+    },
+    "recommendation": "Use parameterized binding or a finite server-side allowlist mapping.",
+    "agent_version": "1.0.0",
+    "rule_version": "1.0.0",
+    "knowledge_version": "1.0.0+7542f99ab38b"
+  },
+  {
+    "finding_id": "sql_injection-TC-03-src-main-resources-mapper-UserMapper.xml-5",
+    "category": "SQL_INJECTION",
+    "status": "REJECTED",
+    "repository": {
+      "name": "allowlist",
+      "branch": "main",
+      "commit": "ad06c138f754eebf3c2e269b5ef2607df28b51a7"
+    },
+    "source": {
+      "file": "src/main/java/lab/UserController.java",
+      "line": 9,
+      "end_line": 9,
+      "snippet_hash": "aa7913f228e1dd205969877fb0dce95e8fd5bb62bc2a112cb75e53a0ddfe9d54",
+      "file_sha256": "8077da28df2603be5cf204df5cd845a5d52ed3a650ba945cb6e9a98e4f39a28a",
+      "symbol": "order",
+      "type": "HTTP_REQUEST_PARAM"
+    },
+    "sink": {
+      "file": "src/main/resources/mapper/UserMapper.xml",
+      "line": 5,
+      "end_line": 5,
+      "snippet_hash": "80eeb7ff74ebfe5809236ad67a361b6f213515032707f51b60a5e1864f67b82e",
+      "file_sha256": "42fc1708387d87e134501e977a714271e8cd32ff9f9aebcff40dbb009ea34978",
+      "symbol": "order",
+      "type": "MYBATIS_RAW_SUBSTITUTION"
+    },
+    "dataflow": [
+      {
+        "file": "src/main/java/lab/UserController.java",
+        "line": 9,
+        "end_line": 9,
+        "snippet_hash": "aa7913f228e1dd205969877fb0dce95e8fd5bb62bc2a112cb75e53a0ddfe9d54",
+        "file_sha256": "8077da28df2603be5cf204df5cd845a5d52ed3a650ba945cb6e9a98e4f39a28a",
+        "symbol": "order",
+        "type": "HTTP_REQUEST_PARAM"
+      },
+      {
+        "file": "src/main/java/lab/UserController.java",
+        "line": 10,
+        "end_line": 10,
+        "snippet_hash": "bd5d8c1f6abadb0c825e76a6d8b988c0618bf4fdaa33e2d95095c973198d5dea",
+        "file_sha256": "8077da28df2603be5cf204df5cd845a5d52ed3a650ba945cb6e9a98e4f39a28a",
+        "symbol": "order",
+        "type": "CALL_ARGUMENT"
+      },
+      {
+        "file": "src/main/java/lab/UserService.java",
+        "line": 8,
+        "end_line": 8,
+        "snippet_hash": "ab6f9709bdcdeb0bc1722e621c4907422c4bfe5261f3aa55d008bfcb55da8e24",
+        "file_sha256": "cdf615075c1b13c8dd10b8959c0d4e641209c63a1c9e529985ac12d2ad3f524b",
+        "symbol": "order",
+        "type": "METHOD_PARAMETER"
+      },
+      {
+        "file": "src/main/java/lab/UserService.java",
+        "line": 15,
+        "end_line": 15,
+        "snippet_hash": "b06bbd0fd3a66aab5c376fdd0c229951d957ae365ccfc9120a39508ad429f10b",
+        "file_sha256": "cdf615075c1b13c8dd10b8959c0d4e641209c63a1c9e529985ac12d2ad3f524b",
+        "symbol": "field",
+        "type": "CALL_ARGUMENT"
+      },
+      {
+        "file": "src/main/java/lab/UserMapper.java",
+        "line": 6,
+        "end_line": 6,
+        "snippet_hash": "810de1eef3d0c7b396baab1a27043879849ca47347cd50d07bf8aaeb247b8fc1",
+        "file_sha256": "6b47600ea24071289cc6a928db32b9dbaea8254cc748256647529c67477069f1",
+        "symbol": "order",
+        "type": "MAPPER_PARAMETER"
+      },
+      {
+        "file": "src/main/resources/mapper/UserMapper.xml",
+        "line": 5,
+        "end_line": 5,
+        "snippet_hash": "80eeb7ff74ebfe5809236ad67a361b6f213515032707f51b60a5e1864f67b82e",
+        "file_sha256": "42fc1708387d87e134501e977a714271e8cd32ff9f9aebcff40dbb009ea34978",
+        "symbol": "order",
+        "type": "MYBATIS_RAW_SUBSTITUTION"
+      }
+    ],
+    "protection": {
+      "status": "VALID",
+      "evidence": [
+        {
+          "file": "src/main/java/lab/UserController.java",
+          "line": 9,
+          "end_line": 9,
+          "snippet_hash": "aa7913f228e1dd205969877fb0dce95e8fd5bb62bc2a112cb75e53a0ddfe9d54",
+          "file_sha256": "8077da28df2603be5cf204df5cd845a5d52ed3a650ba945cb6e9a98e4f39a28a",
+          "symbol": "order",
+          "type": "HTTP_REQUEST_PARAM"
+        },
+        {
+          "file": "src/main/java/lab/UserService.java",
+          "line": 9,
+          "end_line": 15,
+          "snippet_hash": "da0ee0bdb4ebdb68bbab0732cd34f66cba340e946ea622a5754224579e28a9f6",
+          "file_sha256": "cdf615075c1b13c8dd10b8959c0d4e641209c63a1c9e529985ac12d2ad3f524b",
+          "symbol": "field",
+          "type": "FINITE_MAPPING"
+        },
+        {
+          "file": "src/main/java/lab/UserController.java",
+          "line": 10,
+          "end_line": 10,
+          "snippet_hash": "bd5d8c1f6abadb0c825e76a6d8b988c0618bf4fdaa33e2d95095c973198d5dea",
+          "file_sha256": "8077da28df2603be5cf204df5cd845a5d52ed3a650ba945cb6e9a98e4f39a28a",
+          "symbol": "order",
+          "type": "CALL_ARGUMENT"
+        },
+        {
+          "file": "src/main/java/lab/UserService.java",
+          "line": 8,
+          "end_line": 8,
+          "snippet_hash": "ab6f9709bdcdeb0bc1722e621c4907422c4bfe5261f3aa55d008bfcb55da8e24",
+          "file_sha256": "cdf615075c1b13c8dd10b8959c0d4e641209c63a1c9e529985ac12d2ad3f524b",
+          "symbol": "order",
+          "type": "METHOD_PARAMETER"
+        },
+        {
+          "file": "src/main/java/lab/UserService.java",
+          "line": 15,
+          "end_line": 15,
+          "snippet_hash": "b06bbd0fd3a66aab5c376fdd0c229951d957ae365ccfc9120a39508ad429f10b",
+          "file_sha256": "cdf615075c1b13c8dd10b8959c0d4e641209c63a1c9e529985ac12d2ad3f524b",
+          "symbol": "field",
+          "type": "CALL_ARGUMENT"
+        },
+        {
+          "file": "src/main/java/lab/UserMapper.java",
+          "line": 6,
+          "end_line": 6,
+          "snippet_hash": "810de1eef3d0c7b396baab1a27043879849ca47347cd50d07bf8aaeb247b8fc1",
+          "file_sha256": "6b47600ea24071289cc6a928db32b9dbaea8254cc748256647529c67477069f1",
+          "symbol": "order",
+          "type": "MAPPER_PARAMETER"
+        },
+        {
+          "file": "src/main/resources/mapper/UserMapper.xml",
+          "line": 5,
+          "end_line": 5,
+          "snippet_hash": "80eeb7ff74ebfe5809236ad67a361b6f213515032707f51b60a5e1864f67b82e",
+          "file_sha256": "42fc1708387d87e134501e977a714271e8cd32ff9f9aebcff40dbb009ea34978",
+          "symbol": "order",
+          "type": "MYBATIS_RAW_SUBSTITUTION"
+        }
+      ]
+    },
+    "reachability": "PRODUCTION_REACHABLE",
+    "rules_applied": [
+      "KB-SPRING-REQUEST-PARAM",
+      "KB-MYBATIS-SQL-001",
+      "KB-MYBATIS-SQL-FP-ALLOWLIST"
+    ],
+    "decision_trace": [
+      "EFFECTIVE_PROTECTION"
+    ],
+    "evidence_integrity": {
+      "commit": "ad06c138f754eebf3c2e269b5ef2607df28b51a7",
+      "status": "PASS",
+      "evidence_sha256": "c191e8605269aea3ff3378e6a587321ac5b56e614c16967b6fc1cffe3341fc1b"
+    },
+    "recommendation": "Use parameterized binding or a finite server-side allowlist mapping.",
+    "agent_version": "1.0.0",
+    "rule_version": "1.0.0",
+    "knowledge_version": "1.0.0+7542f99ab38b"
+  },
+  {
+    "finding_id": "sql_injection-TC-04-src-main-resources-mapper-UserMapper.xml-5",
+    "category": "SQL_INJECTION",
+    "status": "VERIFIED",
+    "repository": {
+      "name": "sql",
+      "branch": "main",
+      "commit": "3ab1b8df4da7a2498a5063b54c10f707302113ac"
+    },
+    "source": {
+      "file": "src/main/java/lab/UserController.java",
+      "line": 9,
+      "end_line": 9,
+      "snippet_hash": "aa7913f228e1dd205969877fb0dce95e8fd5bb62bc2a112cb75e53a0ddfe9d54",
+      "file_sha256": "8077da28df2603be5cf204df5cd845a5d52ed3a650ba945cb6e9a98e4f39a28a",
+      "symbol": "order",
+      "type": "HTTP_REQUEST_PARAM"
+    },
+    "sink": {
+      "file": "src/main/resources/mapper/UserMapper.xml",
+      "line": 5,
+      "end_line": 5,
+      "snippet_hash": "80eeb7ff74ebfe5809236ad67a361b6f213515032707f51b60a5e1864f67b82e",
+      "file_sha256": "42fc1708387d87e134501e977a714271e8cd32ff9f9aebcff40dbb009ea34978",
+      "symbol": "order",
+      "type": "MYBATIS_RAW_SUBSTITUTION"
+    },
+    "dataflow": [
+      {
+        "file": "src/main/java/lab/UserController.java",
+        "line": 9,
+        "end_line": 9,
+        "snippet_hash": "aa7913f228e1dd205969877fb0dce95e8fd5bb62bc2a112cb75e53a0ddfe9d54",
+        "file_sha256": "8077da28df2603be5cf204df5cd845a5d52ed3a650ba945cb6e9a98e4f39a28a",
+        "symbol": "order",
+        "type": "HTTP_REQUEST_PARAM"
+      },
+      {
+        "file": "src/main/java/lab/UserController.java",
+        "line": 10,
+        "end_line": 10,
+        "snippet_hash": "bd5d8c1f6abadb0c825e76a6d8b988c0618bf4fdaa33e2d95095c973198d5dea",
+        "file_sha256": "8077da28df2603be5cf204df5cd845a5d52ed3a650ba945cb6e9a98e4f39a28a",
+        "symbol": "order",
+        "type": "CALL_ARGUMENT"
+      },
+      {
+        "file": "src/main/java/lab/UserService.java",
+        "line": 8,
+        "end_line": 8,
+        "snippet_hash": "ab6f9709bdcdeb0bc1722e621c4907422c4bfe5261f3aa55d008bfcb55da8e24",
+        "file_sha256": "539a258dda151275c471a2fe9f9a099f9802c0d94dc7860415eacbfe2f269ae3",
+        "symbol": "order",
+        "type": "METHOD_PARAMETER"
+      },
+      {
+        "file": "src/main/java/lab/UserService.java",
+        "line": 9,
+        "end_line": 9,
+        "snippet_hash": "f4e2b7b9ec2d7aa2280632b6d1c9b48da7e797573a921d9c712babe7f56d5e0b",
+        "file_sha256": "539a258dda151275c471a2fe9f9a099f9802c0d94dc7860415eacbfe2f269ae3",
+        "symbol": "order",
+        "type": "CALL_ARGUMENT"
+      },
+      {
+        "file": "src/main/java/lab/UserMapper.java",
+        "line": 6,
+        "end_line": 6,
+        "snippet_hash": "810de1eef3d0c7b396baab1a27043879849ca47347cd50d07bf8aaeb247b8fc1",
+        "file_sha256": "6b47600ea24071289cc6a928db32b9dbaea8254cc748256647529c67477069f1",
+        "symbol": "order",
+        "type": "MAPPER_PARAMETER"
+      },
+      {
+        "file": "src/main/resources/mapper/UserMapper.xml",
+        "line": 5,
+        "end_line": 5,
+        "snippet_hash": "80eeb7ff74ebfe5809236ad67a361b6f213515032707f51b60a5e1864f67b82e",
+        "file_sha256": "42fc1708387d87e134501e977a714271e8cd32ff9f9aebcff40dbb009ea34978",
+        "symbol": "order",
+        "type": "MYBATIS_RAW_SUBSTITUTION"
+      }
+    ],
+    "protection": {
+      "status": "ABSENT",
+      "evidence": [
+        {
+          "file": "src/main/java/lab/UserController.java",
+          "line": 9,
+          "end_line": 9,
+          "snippet_hash": "aa7913f228e1dd205969877fb0dce95e8fd5bb62bc2a112cb75e53a0ddfe9d54",
+          "file_sha256": "8077da28df2603be5cf204df5cd845a5d52ed3a650ba945cb6e9a98e4f39a28a",
+          "symbol": "order",
+          "type": "HTTP_REQUEST_PARAM"
+        },
+        {
+          "file": "src/main/java/lab/UserController.java",
+          "line": 10,
+          "end_line": 10,
+          "snippet_hash": "bd5d8c1f6abadb0c825e76a6d8b988c0618bf4fdaa33e2d95095c973198d5dea",
+          "file_sha256": "8077da28df2603be5cf204df5cd845a5d52ed3a650ba945cb6e9a98e4f39a28a",
+          "symbol": "order",
+          "type": "CALL_ARGUMENT"
+        },
+        {
+          "file": "src/main/java/lab/UserService.java",
+          "line": 8,
+          "end_line": 8,
+          "snippet_hash": "ab6f9709bdcdeb0bc1722e621c4907422c4bfe5261f3aa55d008bfcb55da8e24",
+          "file_sha256": "539a258dda151275c471a2fe9f9a099f9802c0d94dc7860415eacbfe2f269ae3",
+          "symbol": "order",
+          "type": "METHOD_PARAMETER"
+        },
+        {
+          "file": "src/main/java/lab/UserService.java",
+          "line": 9,
+          "end_line": 9,
+          "snippet_hash": "f4e2b7b9ec2d7aa2280632b6d1c9b48da7e797573a921d9c712babe7f56d5e0b",
+          "file_sha256": "539a258dda151275c471a2fe9f9a099f9802c0d94dc7860415eacbfe2f269ae3",
+          "symbol": "order",
+          "type": "CALL_ARGUMENT"
+        },
+        {
+          "file": "src/main/java/lab/UserMapper.java",
+          "line": 6,
+          "end_line": 6,
+          "snippet_hash": "810de1eef3d0c7b396baab1a27043879849ca47347cd50d07bf8aaeb247b8fc1",
+          "file_sha256": "6b47600ea24071289cc6a928db32b9dbaea8254cc748256647529c67477069f1",
+          "symbol": "order",
+          "type": "MAPPER_PARAMETER"
+        },
+        {
+          "file": "src/main/resources/mapper/UserMapper.xml",
+          "line": 5,
+          "end_line": 5,
+          "snippet_hash": "80eeb7ff74ebfe5809236ad67a361b6f213515032707f51b60a5e1864f67b82e",
+          "file_sha256": "42fc1708387d87e134501e977a714271e8cd32ff9f9aebcff40dbb009ea34978",
+          "symbol": "order",
+          "type": "MYBATIS_RAW_SUBSTITUTION"
+        }
+      ]
+    },
+    "reachability": "PRODUCTION_REACHABLE",
+    "rules_applied": [
+      "KB-SPRING-REQUEST-PARAM",
+      "KB-MYBATIS-SQL-001"
+    ],
+    "decision_trace": [
+      "INDEPENDENT_SOURCE_TO_SINK_PROOF"
+    ],
+    "evidence_integrity": {
+      "commit": "3ab1b8df4da7a2498a5063b54c10f707302113ac",
+      "status": "PASS",
+      "evidence_sha256": "af6a7be616fc671e0ca3e63f3001203a7b21c177026559e95391738708f0b708"
+    },
+    "recommendation": "Use parameterized binding or a finite server-side allowlist mapping.",
+    "agent_version": "1.0.0",
+    "rule_version": "1.0.0",
+    "knowledge_version": "1.0.0+7542f99ab38b"
+  },
+  {
+    "finding_id": "command_injection-TC-05-src-main-java-lab-CommandController.java-12",
+    "category": "COMMAND_INJECTION",
+    "status": "VERIFIED",
+    "repository": {
+      "name": "command",
+      "branch": "main",
+      "commit": "c2914454d6f557eb82aa74546ae1ac2410618ae9"
+    },
+    "source": {
+      "file": "src/main/java/lab/CommandController.java",
+      "line": 10,
+      "end_line": 10,
+      "snippet_hash": "a4da7be9f1d1a01116875f92ae1668a087c3fb7f3932687a1024ef2536f837c8",
+      "file_sha256": "fb7bc44ec63d29c5593a8d8ff489d873efa829f2f5e268b4cfa9a07c40a5c18e",
+      "symbol": "host",
+      "type": "HTTP_REQUEST_PARAM"
+    },
+    "sink": {
+      "file": "src/main/java/lab/CommandController.java",
+      "line": 12,
+      "end_line": 12,
+      "snippet_hash": "f58d55b0bb046d7f295e2a053ad934a723b2956218fe5e5a155f114dff54a9f5",
+      "file_sha256": "fb7bc44ec63d29c5593a8d8ff489d873efa829f2f5e268b4cfa9a07c40a5c18e",
+      "symbol": "/bin/sh",
+      "type": "EXPLICIT_SHELL_COMMAND"
+    },
+    "dataflow": [
+      {
+        "file": "src/main/java/lab/CommandController.java",
+        "line": 10,
+        "end_line": 10,
+        "snippet_hash": "a4da7be9f1d1a01116875f92ae1668a087c3fb7f3932687a1024ef2536f837c8",
+        "file_sha256": "fb7bc44ec63d29c5593a8d8ff489d873efa829f2f5e268b4cfa9a07c40a5c18e",
+        "symbol": "host",
+        "type": "HTTP_REQUEST_PARAM"
+      },
+      {
+        "file": "src/main/java/lab/CommandController.java",
+        "line": 11,
+        "end_line": 11,
+        "snippet_hash": "d36f69b11267fb9717a1ab2831c4528e4ed9f69a267539b5dd8170eac9535ca4",
+        "file_sha256": "fb7bc44ec63d29c5593a8d8ff489d873efa829f2f5e268b4cfa9a07c40a5c18e",
+        "symbol": "cmd",
+        "type": "LOCAL_ASSIGNMENT"
+      },
+      {
+        "file": "src/main/java/lab/CommandController.java",
+        "line": 12,
+        "end_line": 12,
+        "snippet_hash": "f58d55b0bb046d7f295e2a053ad934a723b2956218fe5e5a155f114dff54a9f5",
+        "file_sha256": "fb7bc44ec63d29c5593a8d8ff489d873efa829f2f5e268b4cfa9a07c40a5c18e",
+        "symbol": "argv",
+        "type": "COMMAND_ARGUMENT"
+      },
+      {
+        "file": "src/main/java/lab/CommandController.java",
+        "line": 12,
+        "end_line": 12,
+        "snippet_hash": "f58d55b0bb046d7f295e2a053ad934a723b2956218fe5e5a155f114dff54a9f5",
+        "file_sha256": "fb7bc44ec63d29c5593a8d8ff489d873efa829f2f5e268b4cfa9a07c40a5c18e",
+        "symbol": "/bin/sh",
+        "type": "EXPLICIT_SHELL_COMMAND"
+      }
+    ],
+    "protection": {
+      "status": "ABSENT",
+      "evidence": [
+        {
+          "file": "src/main/java/lab/CommandController.java",
+          "line": 10,
+          "end_line": 10,
+          "snippet_hash": "a4da7be9f1d1a01116875f92ae1668a087c3fb7f3932687a1024ef2536f837c8",
+          "file_sha256": "fb7bc44ec63d29c5593a8d8ff489d873efa829f2f5e268b4cfa9a07c40a5c18e",
+          "symbol": "host",
+          "type": "HTTP_REQUEST_PARAM"
+        },
+        {
+          "file": "src/main/java/lab/CommandController.java",
+          "line": 11,
+          "end_line": 11,
+          "snippet_hash": "d36f69b11267fb9717a1ab2831c4528e4ed9f69a267539b5dd8170eac9535ca4",
+          "file_sha256": "fb7bc44ec63d29c5593a8d8ff489d873efa829f2f5e268b4cfa9a07c40a5c18e",
+          "symbol": "cmd",
+          "type": "LOCAL_ASSIGNMENT"
+        },
+        {
+          "file": "src/main/java/lab/CommandController.java",
+          "line": 12,
+          "end_line": 12,
+          "snippet_hash": "f58d55b0bb046d7f295e2a053ad934a723b2956218fe5e5a155f114dff54a9f5",
+          "file_sha256": "fb7bc44ec63d29c5593a8d8ff489d873efa829f2f5e268b4cfa9a07c40a5c18e",
+          "symbol": "argv",
+          "type": "COMMAND_ARGUMENT"
+        },
+        {
+          "file": "src/main/java/lab/CommandController.java",
+          "line": 12,
+          "end_line": 12,
+          "snippet_hash": "f58d55b0bb046d7f295e2a053ad934a723b2956218fe5e5a155f114dff54a9f5",
+          "file_sha256": "fb7bc44ec63d29c5593a8d8ff489d873efa829f2f5e268b4cfa9a07c40a5c18e",
+          "symbol": "/bin/sh",
+          "type": "EXPLICIT_SHELL_COMMAND"
+        }
+      ]
+    },
+    "reachability": "PRODUCTION_REACHABLE",
+    "rules_applied": [
+      "KB-SPRING-REQUEST-PARAM",
+      "KB-JAVA-COMMAND-ARGV"
+    ],
+    "decision_trace": [
+      "INDEPENDENT_SOURCE_TO_SINK_PROOF"
+    ],
+    "evidence_integrity": {
+      "commit": "c2914454d6f557eb82aa74546ae1ac2410618ae9",
+      "status": "PASS",
+      "evidence_sha256": "bc0209b939dcbf24be081e0057cc1946f055495285cf206de25b0fc6e7f60de3"
+    },
+    "recommendation": "Avoid shell command text; use fixed executable and immutable finite argument mapping.",
+    "agent_version": "1.0.0",
+    "rule_version": "1.0.0",
+    "knowledge_version": "1.0.0+7542f99ab38b"
+  },
+  {
+    "finding_id": "command_injection-TC-06-src-main-java-lab-CommandController.java-22",
+    "category": "COMMAND_INJECTION",
+    "status": "REJECTED",
+    "repository": {
+      "name": "command",
+      "branch": "main",
+      "commit": "c2914454d6f557eb82aa74546ae1ac2410618ae9"
+    },
+    "source": {
+      "file": "src/main/java/lab/CommandController.java",
+      "line": 20,
+      "end_line": 20,
+      "snippet_hash": "e7c89090a984331239a17c1007938b6d3ad93f0d1aa2673f0bccab8e71796e33",
+      "file_sha256": "fb7bc44ec63d29c5593a8d8ff489d873efa829f2f5e268b4cfa9a07c40a5c18e",
+      "symbol": "input",
+      "type": "HTTP_REQUEST_PARAM"
+    },
+    "sink": {
+      "file": "src/main/java/lab/CommandController.java",
+      "line": 22,
+      "end_line": 22,
+      "snippet_hash": "a14d9b875d61c4a38a564a13eaa18b31b0b28b4ab31360cbbd14d70d131a4ed4",
+      "file_sha256": "fb7bc44ec63d29c5593a8d8ff489d873efa829f2f5e268b4cfa9a07c40a5c18e",
+      "symbol": "/usr/bin/ping",
+      "type": "FIXED_EXECUTABLE_ARGV"
+    },
+    "dataflow": [
+      {
+        "file": "src/main/java/lab/CommandController.java",
+        "line": 20,
+        "end_line": 20,
+        "snippet_hash": "e7c89090a984331239a17c1007938b6d3ad93f0d1aa2673f0bccab8e71796e33",
+        "file_sha256": "fb7bc44ec63d29c5593a8d8ff489d873efa829f2f5e268b4cfa9a07c40a5c18e",
+        "symbol": "input",
+        "type": "HTTP_REQUEST_PARAM"
+      },
+      {
+        "file": "src/main/java/lab/CommandController.java",
+        "line": 8,
+        "end_line": 8,
+        "snippet_hash": "cd00644c45a9e1d6c8933ca6946bfa77a63f17a3b0e9249b5dab332809dfb5ad",
+        "file_sha256": "fb7bc44ec63d29c5593a8d8ff489d873efa829f2f5e268b4cfa9a07c40a5c18e",
+        "symbol": "HOST_MAP",
+        "type": "IMMUTABLE_FINITE_MAPPING"
+      },
+      {
+        "file": "src/main/java/lab/CommandController.java",
+        "line": 21,
+        "end_line": 21,
+        "snippet_hash": "8c98a3ff35b58460fa570ceac315184478afd23f904ccc8b1c1066458a9c83e3",
+        "file_sha256": "fb7bc44ec63d29c5593a8d8ff489d873efa829f2f5e268b4cfa9a07c40a5c18e",
+        "symbol": "mapped",
+        "type": "LOCAL_ASSIGNMENT"
+      },
+      {
+        "file": "src/main/java/lab/CommandController.java",
+        "line": 22,
+        "end_line": 22,
+        "snippet_hash": "a14d9b875d61c4a38a564a13eaa18b31b0b28b4ab31360cbbd14d70d131a4ed4",
+        "file_sha256": "fb7bc44ec63d29c5593a8d8ff489d873efa829f2f5e268b4cfa9a07c40a5c18e",
+        "symbol": "argv",
+        "type": "COMMAND_ARGUMENT"
+      },
+      {
+        "file": "src/main/java/lab/CommandController.java",
+        "line": 22,
+        "end_line": 22,
+        "snippet_hash": "a14d9b875d61c4a38a564a13eaa18b31b0b28b4ab31360cbbd14d70d131a4ed4",
+        "file_sha256": "fb7bc44ec63d29c5593a8d8ff489d873efa829f2f5e268b4cfa9a07c40a5c18e",
+        "symbol": "/usr/bin/ping",
+        "type": "FIXED_EXECUTABLE_ARGV"
+      }
+    ],
+    "protection": {
+      "status": "VALID",
+      "evidence": [
+        {
+          "file": "src/main/java/lab/CommandController.java",
+          "line": 20,
+          "end_line": 20,
+          "snippet_hash": "e7c89090a984331239a17c1007938b6d3ad93f0d1aa2673f0bccab8e71796e33",
+          "file_sha256": "fb7bc44ec63d29c5593a8d8ff489d873efa829f2f5e268b4cfa9a07c40a5c18e",
+          "symbol": "input",
+          "type": "HTTP_REQUEST_PARAM"
+        },
+        {
+          "file": "src/main/java/lab/CommandController.java",
+          "line": 8,
+          "end_line": 8,
+          "snippet_hash": "cd00644c45a9e1d6c8933ca6946bfa77a63f17a3b0e9249b5dab332809dfb5ad",
+          "file_sha256": "fb7bc44ec63d29c5593a8d8ff489d873efa829f2f5e268b4cfa9a07c40a5c18e",
+          "symbol": "HOST_MAP",
+          "type": "IMMUTABLE_FINITE_MAPPING"
+        },
+        {
+          "file": "src/main/java/lab/CommandController.java",
+          "line": 21,
+          "end_line": 21,
+          "snippet_hash": "8c98a3ff35b58460fa570ceac315184478afd23f904ccc8b1c1066458a9c83e3",
+          "file_sha256": "fb7bc44ec63d29c5593a8d8ff489d873efa829f2f5e268b4cfa9a07c40a5c18e",
+          "symbol": "mapped",
+          "type": "LOCAL_ASSIGNMENT"
+        },
+        {
+          "file": "src/main/java/lab/CommandController.java",
+          "line": 22,
+          "end_line": 22,
+          "snippet_hash": "a14d9b875d61c4a38a564a13eaa18b31b0b28b4ab31360cbbd14d70d131a4ed4",
+          "file_sha256": "fb7bc44ec63d29c5593a8d8ff489d873efa829f2f5e268b4cfa9a07c40a5c18e",
+          "symbol": "argv",
+          "type": "COMMAND_ARGUMENT"
+        },
+        {
+          "file": "src/main/java/lab/CommandController.java",
+          "line": 22,
+          "end_line": 22,
+          "snippet_hash": "a14d9b875d61c4a38a564a13eaa18b31b0b28b4ab31360cbbd14d70d131a4ed4",
+          "file_sha256": "fb7bc44ec63d29c5593a8d8ff489d873efa829f2f5e268b4cfa9a07c40a5c18e",
+          "symbol": "/usr/bin/ping",
+          "type": "FIXED_EXECUTABLE_ARGV"
+        }
+      ]
+    },
+    "reachability": "PRODUCTION_REACHABLE",
+    "rules_applied": [
+      "KB-SPRING-REQUEST-PARAM",
+      "KB-JAVA-COMMAND-ARGV"
+    ],
+    "decision_trace": [
+      "EFFECTIVE_PROTECTION"
+    ],
+    "evidence_integrity": {
+      "commit": "c2914454d6f557eb82aa74546ae1ac2410618ae9",
+      "status": "PASS",
+      "evidence_sha256": "74957290662eab7c0d322b97db468c45324aad1d08ce2dfad703deafbcbb130e"
+    },
+    "recommendation": "Avoid shell command text; use fixed executable and immutable finite argument mapping.",
+    "agent_version": "1.0.0",
+    "rule_version": "1.0.0",
+    "knowledge_version": "1.0.0+7542f99ab38b"
+  },
+  {
+    "finding_id": "ssrf-TC-07-src-main-java-lab-FetchController.java-13",
+    "category": "SSRF",
+    "status": "VERIFIED",
+    "repository": {
+      "name": "ssrf",
+      "branch": "main",
+      "commit": "d73d821234d6c0b4038a9adac61b5d2d9b0a113f"
+    },
+    "source": {
+      "file": "src/main/java/lab/FetchController.java",
+      "line": 12,
+      "end_line": 12,
+      "snippet_hash": "074e1f24b446283b62cceac7d3a70df0632ae27565dad274d76afb7c4fa074f9",
+      "file_sha256": "e38e37fb7d8139c104123194ef4e3b2cfcb0917d9bbf4dc69dc206585785aefe",
+      "symbol": "url",
+      "type": "HTTP_REQUEST_PARAM"
+    },
+    "sink": {
+      "file": "src/main/java/lab/FetchController.java",
+      "line": 13,
+      "end_line": 13,
+      "snippet_hash": "5629db792f774f8cb516b170545636c40d15231b65591f2e49438d513cd99a75",
+      "file_sha256": "e38e37fb7d8139c104123194ef4e3b2cfcb0917d9bbf4dc69dc206585785aefe",
+      "symbol": "client.getForObject",
+      "type": "HTTP_CLIENT_URL"
+    },
+    "dataflow": [
+      {
+        "file": "src/main/java/lab/FetchController.java",
+        "line": 12,
+        "end_line": 12,
+        "snippet_hash": "074e1f24b446283b62cceac7d3a70df0632ae27565dad274d76afb7c4fa074f9",
+        "file_sha256": "e38e37fb7d8139c104123194ef4e3b2cfcb0917d9bbf4dc69dc206585785aefe",
+        "symbol": "url",
+        "type": "HTTP_REQUEST_PARAM"
+      },
+      {
+        "file": "src/main/java/lab/FetchController.java",
+        "line": 12,
+        "end_line": 12,
+        "snippet_hash": "074e1f24b446283b62cceac7d3a70df0632ae27565dad274d76afb7c4fa074f9",
+        "file_sha256": "e38e37fb7d8139c104123194ef4e3b2cfcb0917d9bbf4dc69dc206585785aefe",
+        "symbol": "url",
+        "type": "METHOD_PARAMETER"
+      },
+      {
+        "file": "src/main/java/lab/FetchController.java",
+        "line": 13,
+        "end_line": 13,
+        "snippet_hash": "5629db792f774f8cb516b170545636c40d15231b65591f2e49438d513cd99a75",
+        "file_sha256": "e38e37fb7d8139c104123194ef4e3b2cfcb0917d9bbf4dc69dc206585785aefe",
+        "symbol": "url",
+        "type": "HTTP_URL_ARGUMENT"
+      },
+      {
+        "file": "src/main/java/lab/FetchController.java",
+        "line": 13,
+        "end_line": 13,
+        "snippet_hash": "5629db792f774f8cb516b170545636c40d15231b65591f2e49438d513cd99a75",
+        "file_sha256": "e38e37fb7d8139c104123194ef4e3b2cfcb0917d9bbf4dc69dc206585785aefe",
+        "symbol": "client.getForObject",
+        "type": "HTTP_CLIENT_URL"
+      }
+    ],
+    "protection": {
+      "status": "ABSENT",
+      "evidence": [
+        {
+          "file": "src/main/java/lab/FetchController.java",
+          "line": 9,
+          "end_line": 9,
+          "snippet_hash": "32caddebbf68b3e3ce65c654d4b18c797f79e0ca47026a6dbfe8bc00d9b6213c",
+          "file_sha256": "e38e37fb7d8139c104123194ef4e3b2cfcb0917d9bbf4dc69dc206585785aefe",
+          "symbol": "client",
+          "type": "DEFAULT_HTTP_CLIENT"
+        },
+        {
+          "file": "src/main/java/lab/FetchController.java",
+          "line": 12,
+          "end_line": 12,
+          "snippet_hash": "074e1f24b446283b62cceac7d3a70df0632ae27565dad274d76afb7c4fa074f9",
+          "file_sha256": "e38e37fb7d8139c104123194ef4e3b2cfcb0917d9bbf4dc69dc206585785aefe",
+          "symbol": "url",
+          "type": "HTTP_REQUEST_PARAM"
+        },
+        {
+          "file": "src/main/java/lab/FetchController.java",
+          "line": 12,
+          "end_line": 12,
+          "snippet_hash": "074e1f24b446283b62cceac7d3a70df0632ae27565dad274d76afb7c4fa074f9",
+          "file_sha256": "e38e37fb7d8139c104123194ef4e3b2cfcb0917d9bbf4dc69dc206585785aefe",
+          "symbol": "url",
+          "type": "METHOD_PARAMETER"
+        },
+        {
+          "file": "src/main/java/lab/FetchController.java",
+          "line": 13,
+          "end_line": 13,
+          "snippet_hash": "5629db792f774f8cb516b170545636c40d15231b65591f2e49438d513cd99a75",
+          "file_sha256": "e38e37fb7d8139c104123194ef4e3b2cfcb0917d9bbf4dc69dc206585785aefe",
+          "symbol": "url",
+          "type": "HTTP_URL_ARGUMENT"
+        },
+        {
+          "file": "src/main/java/lab/FetchController.java",
+          "line": 13,
+          "end_line": 13,
+          "snippet_hash": "5629db792f774f8cb516b170545636c40d15231b65591f2e49438d513cd99a75",
+          "file_sha256": "e38e37fb7d8139c104123194ef4e3b2cfcb0917d9bbf4dc69dc206585785aefe",
+          "symbol": "client.getForObject",
+          "type": "HTTP_CLIENT_URL"
+        }
+      ]
+    },
+    "reachability": "PRODUCTION_REACHABLE",
+    "rules_applied": [
+      "KB-SPRING-REQUEST-PARAM",
+      "KB-SPRING-SSRF-URL"
+    ],
+    "decision_trace": [
+      "INDEPENDENT_SOURCE_TO_SINK_PROOF"
+    ],
+    "evidence_integrity": {
+      "commit": "d73d821234d6c0b4038a9adac61b5d2d9b0a113f",
+      "status": "PASS",
+      "evidence_sha256": "e802a45641fc9e4724e818021b242395ddc5b45a7741b5da1c797815d2fee8f7"
+    },
+    "recommendation": "Use immutable serviceId-to-URL mapping; review DNS, redirects and egress policy separately.",
+    "agent_version": "1.0.0",
+    "rule_version": "1.0.0",
+    "knowledge_version": "1.0.0+7542f99ab38b"
+  },
+  {
+    "finding_id": "ssrf-TC-08-src-main-java-lab-FetchController.java-18",
+    "category": "SSRF",
+    "status": "REJECTED",
+    "repository": {
+      "name": "ssrf",
+      "branch": "main",
+      "commit": "d73d821234d6c0b4038a9adac61b5d2d9b0a113f"
+    },
+    "source": {
+      "file": "src/main/java/lab/FetchController.java",
+      "line": 16,
+      "end_line": 16,
+      "snippet_hash": "075507c76b2d1be312f21608b5ef8c4c8935e344f20da243b91c954778b31c1b",
+      "file_sha256": "e38e37fb7d8139c104123194ef4e3b2cfcb0917d9bbf4dc69dc206585785aefe",
+      "symbol": "serviceId",
+      "type": "HTTP_REQUEST_PARAM"
+    },
+    "sink": {
+      "file": "src/main/java/lab/FetchController.java",
+      "line": 18,
+      "end_line": 18,
+      "snippet_hash": "5629db792f774f8cb516b170545636c40d15231b65591f2e49438d513cd99a75",
+      "file_sha256": "e38e37fb7d8139c104123194ef4e3b2cfcb0917d9bbf4dc69dc206585785aefe",
+      "symbol": "client.getForObject",
+      "type": "HTTP_CLIENT_URL"
+    },
+    "dataflow": [
+      {
+        "file": "src/main/java/lab/FetchController.java",
+        "line": 16,
+        "end_line": 16,
+        "snippet_hash": "075507c76b2d1be312f21608b5ef8c4c8935e344f20da243b91c954778b31c1b",
+        "file_sha256": "e38e37fb7d8139c104123194ef4e3b2cfcb0917d9bbf4dc69dc206585785aefe",
+        "symbol": "serviceId",
+        "type": "HTTP_REQUEST_PARAM"
+      },
+      {
+        "file": "src/main/java/lab/FetchController.java",
+        "line": 10,
+        "end_line": 10,
+        "snippet_hash": "3a0aa7d278a8089c9bf82155e0e6001545a6b9cc0c25c2938fe0bcf7f0ca8df3",
+        "file_sha256": "e38e37fb7d8139c104123194ef4e3b2cfcb0917d9bbf4dc69dc206585785aefe",
+        "symbol": "SERVICES",
+        "type": "IMMUTABLE_SCHEME_HOST_MAPPING"
+      },
+      {
+        "file": "src/main/java/lab/FetchController.java",
+        "line": 17,
+        "end_line": 17,
+        "snippet_hash": "3acd6a5aecb5638709a36bbbc22414d5959199a30aec8d9355424fcb3ea9ff1f",
+        "file_sha256": "e38e37fb7d8139c104123194ef4e3b2cfcb0917d9bbf4dc69dc206585785aefe",
+        "symbol": "url",
+        "type": "LOCAL_ASSIGNMENT"
+      },
+      {
+        "file": "src/main/java/lab/FetchController.java",
+        "line": 18,
+        "end_line": 18,
+        "snippet_hash": "5629db792f774f8cb516b170545636c40d15231b65591f2e49438d513cd99a75",
+        "file_sha256": "e38e37fb7d8139c104123194ef4e3b2cfcb0917d9bbf4dc69dc206585785aefe",
+        "symbol": "url",
+        "type": "HTTP_URL_ARGUMENT"
+      },
+      {
+        "file": "src/main/java/lab/FetchController.java",
+        "line": 18,
+        "end_line": 18,
+        "snippet_hash": "5629db792f774f8cb516b170545636c40d15231b65591f2e49438d513cd99a75",
+        "file_sha256": "e38e37fb7d8139c104123194ef4e3b2cfcb0917d9bbf4dc69dc206585785aefe",
+        "symbol": "client.getForObject",
+        "type": "HTTP_CLIENT_URL"
+      }
+    ],
+    "protection": {
+      "status": "VALID",
+      "evidence": [
+        {
+          "file": "src/main/java/lab/FetchController.java",
+          "line": 9,
+          "end_line": 9,
+          "snippet_hash": "32caddebbf68b3e3ce65c654d4b18c797f79e0ca47026a6dbfe8bc00d9b6213c",
+          "file_sha256": "e38e37fb7d8139c104123194ef4e3b2cfcb0917d9bbf4dc69dc206585785aefe",
+          "symbol": "client",
+          "type": "DEFAULT_HTTP_CLIENT"
+        },
+        {
+          "file": "src/main/java/lab/FetchController.java",
+          "line": 16,
+          "end_line": 16,
+          "snippet_hash": "075507c76b2d1be312f21608b5ef8c4c8935e344f20da243b91c954778b31c1b",
+          "file_sha256": "e38e37fb7d8139c104123194ef4e3b2cfcb0917d9bbf4dc69dc206585785aefe",
+          "symbol": "serviceId",
+          "type": "HTTP_REQUEST_PARAM"
+        },
+        {
+          "file": "src/main/java/lab/FetchController.java",
+          "line": 10,
+          "end_line": 10,
+          "snippet_hash": "3a0aa7d278a8089c9bf82155e0e6001545a6b9cc0c25c2938fe0bcf7f0ca8df3",
+          "file_sha256": "e38e37fb7d8139c104123194ef4e3b2cfcb0917d9bbf4dc69dc206585785aefe",
+          "symbol": "SERVICES",
+          "type": "IMMUTABLE_SCHEME_HOST_MAPPING"
+        },
+        {
+          "file": "src/main/java/lab/FetchController.java",
+          "line": 17,
+          "end_line": 17,
+          "snippet_hash": "3acd6a5aecb5638709a36bbbc22414d5959199a30aec8d9355424fcb3ea9ff1f",
+          "file_sha256": "e38e37fb7d8139c104123194ef4e3b2cfcb0917d9bbf4dc69dc206585785aefe",
+          "symbol": "url",
+          "type": "LOCAL_ASSIGNMENT"
+        },
+        {
+          "file": "src/main/java/lab/FetchController.java",
+          "line": 18,
+          "end_line": 18,
+          "snippet_hash": "5629db792f774f8cb516b170545636c40d15231b65591f2e49438d513cd99a75",
+          "file_sha256": "e38e37fb7d8139c104123194ef4e3b2cfcb0917d9bbf4dc69dc206585785aefe",
+          "symbol": "url",
+          "type": "HTTP_URL_ARGUMENT"
+        },
+        {
+          "file": "src/main/java/lab/FetchController.java",
+          "line": 18,
+          "end_line": 18,
+          "snippet_hash": "5629db792f774f8cb516b170545636c40d15231b65591f2e49438d513cd99a75",
+          "file_sha256": "e38e37fb7d8139c104123194ef4e3b2cfcb0917d9bbf4dc69dc206585785aefe",
+          "symbol": "client.getForObject",
+          "type": "HTTP_CLIENT_URL"
+        }
+      ]
+    },
+    "reachability": "PRODUCTION_REACHABLE",
+    "rules_applied": [
+      "KB-SPRING-REQUEST-PARAM",
+      "KB-SPRING-SSRF-URL",
+      "KB-SPRING-SSRF-FIXED-MAPPING"
+    ],
+    "decision_trace": [
+      "EFFECTIVE_PROTECTION"
+    ],
+    "evidence_integrity": {
+      "commit": "d73d821234d6c0b4038a9adac61b5d2d9b0a113f",
+      "status": "PASS",
+      "evidence_sha256": "fdda649c1ad0a83f6397e70eec13d3793977aaaeeb12ad3efb66d6ff30664211"
+    },
+    "recommendation": "Use immutable serviceId-to-URL mapping; review DNS, redirects and egress policy separately.",
+    "agent_version": "1.0.0",
+    "rule_version": "1.0.0",
+    "knowledge_version": "1.0.0+7542f99ab38b"
+  },
+  {
+    "finding_id": "path_traversal-TC-09-src-main-java-lab-ReadController.java-14",
+    "category": "PATH_TRAVERSAL",
+    "status": "VERIFIED",
+    "repository": {
+      "name": "path",
+      "branch": "main",
+      "commit": "2fa892909bd2fef1106b4af3ceb0fcc7ade9a397"
+    },
+    "source": {
+      "file": "src/main/java/lab/ReadController.java",
+      "line": 12,
+      "end_line": 12,
+      "snippet_hash": "6dfff9539ec096e5ee3bffe4ce0bf46fd6578e469b3a4df8763643afbd53351c",
+      "file_sha256": "098a637f55f80a756421d0c64691a15fe37cc04a6860404d30f0b36389e25dbf",
+      "symbol": "filename",
+      "type": "HTTP_REQUEST_PARAM"
+    },
+    "sink": {
+      "file": "src/main/java/lab/ReadController.java",
+      "line": 14,
+      "end_line": 14,
+      "snippet_hash": "a416d5fd4fc105fc76d46688b013d183d78f13d23d398cc70a510cfe01eaa0fc",
+      "file_sha256": "098a637f55f80a756421d0c64691a15fe37cc04a6860404d30f0b36389e25dbf",
+      "symbol": "Files.readString",
+      "type": "FILE_READ_PATH"
+    },
+    "dataflow": [
+      {
+        "file": "src/main/java/lab/ReadController.java",
+        "line": 10,
+        "end_line": 10,
+        "snippet_hash": "3cb48261644fa5e5d8916c6712ebc1b1647f8d1c780049362705d20ee332dfbb",
+        "file_sha256": "098a637f55f80a756421d0c64691a15fe37cc04a6860404d30f0b36389e25dbf",
+        "symbol": "BASE_DIR",
+        "type": "FIXED_BASE_STRING"
+      },
+      {
+        "file": "src/main/java/lab/ReadController.java",
+        "line": 12,
+        "end_line": 12,
+        "snippet_hash": "6dfff9539ec096e5ee3bffe4ce0bf46fd6578e469b3a4df8763643afbd53351c",
+        "file_sha256": "098a637f55f80a756421d0c64691a15fe37cc04a6860404d30f0b36389e25dbf",
+        "symbol": "filename",
+        "type": "HTTP_REQUEST_PARAM"
+      },
+      {
+        "file": "src/main/java/lab/ReadController.java",
+        "line": 13,
+        "end_line": 13,
+        "snippet_hash": "e72b42c90ed03836d73f23862206c1a68ff1e805682042fa3f7f7b0806aaf6de",
+        "file_sha256": "098a637f55f80a756421d0c64691a15fe37cc04a6860404d30f0b36389e25dbf",
+        "symbol": "path",
+        "type": "LOCAL_ASSIGNMENT"
+      },
+      {
+        "file": "src/main/java/lab/ReadController.java",
+        "line": 14,
+        "end_line": 14,
+        "snippet_hash": "a416d5fd4fc105fc76d46688b013d183d78f13d23d398cc70a510cfe01eaa0fc",
+        "file_sha256": "098a637f55f80a756421d0c64691a15fe37cc04a6860404d30f0b36389e25dbf",
+        "symbol": "path",
+        "type": "FILE_PATH_ARGUMENT"
+      },
+      {
+        "file": "src/main/java/lab/ReadController.java",
+        "line": 14,
+        "end_line": 14,
+        "snippet_hash": "a416d5fd4fc105fc76d46688b013d183d78f13d23d398cc70a510cfe01eaa0fc",
+        "file_sha256": "098a637f55f80a756421d0c64691a15fe37cc04a6860404d30f0b36389e25dbf",
+        "symbol": "Files.readString",
+        "type": "FILE_READ_PATH"
+      }
+    ],
+    "protection": {
+      "status": "ABSENT",
+      "evidence": [
+        {
+          "file": "src/main/java/lab/ReadController.java",
+          "line": 10,
+          "end_line": 10,
+          "snippet_hash": "3cb48261644fa5e5d8916c6712ebc1b1647f8d1c780049362705d20ee332dfbb",
+          "file_sha256": "098a637f55f80a756421d0c64691a15fe37cc04a6860404d30f0b36389e25dbf",
+          "symbol": "BASE_DIR",
+          "type": "FIXED_BASE_STRING"
+        },
+        {
+          "file": "src/main/java/lab/ReadController.java",
+          "line": 12,
+          "end_line": 12,
+          "snippet_hash": "6dfff9539ec096e5ee3bffe4ce0bf46fd6578e469b3a4df8763643afbd53351c",
+          "file_sha256": "098a637f55f80a756421d0c64691a15fe37cc04a6860404d30f0b36389e25dbf",
+          "symbol": "filename",
+          "type": "HTTP_REQUEST_PARAM"
+        },
+        {
+          "file": "src/main/java/lab/ReadController.java",
+          "line": 13,
+          "end_line": 13,
+          "snippet_hash": "e72b42c90ed03836d73f23862206c1a68ff1e805682042fa3f7f7b0806aaf6de",
+          "file_sha256": "098a637f55f80a756421d0c64691a15fe37cc04a6860404d30f0b36389e25dbf",
+          "symbol": "path",
+          "type": "LOCAL_ASSIGNMENT"
+        },
+        {
+          "file": "src/main/java/lab/ReadController.java",
+          "line": 14,
+          "end_line": 14,
+          "snippet_hash": "a416d5fd4fc105fc76d46688b013d183d78f13d23d398cc70a510cfe01eaa0fc",
+          "file_sha256": "098a637f55f80a756421d0c64691a15fe37cc04a6860404d30f0b36389e25dbf",
+          "symbol": "path",
+          "type": "FILE_PATH_ARGUMENT"
+        },
+        {
+          "file": "src/main/java/lab/ReadController.java",
+          "line": 14,
+          "end_line": 14,
+          "snippet_hash": "a416d5fd4fc105fc76d46688b013d183d78f13d23d398cc70a510cfe01eaa0fc",
+          "file_sha256": "098a637f55f80a756421d0c64691a15fe37cc04a6860404d30f0b36389e25dbf",
+          "symbol": "Files.readString",
+          "type": "FILE_READ_PATH"
+        }
+      ]
+    },
+    "reachability": "PRODUCTION_REACHABLE",
+    "rules_applied": [
+      "KB-SPRING-REQUEST-PARAM",
+      "KB-JAVA-PATH-READ"
+    ],
+    "decision_trace": [
+      "INDEPENDENT_SOURCE_TO_SINK_PROOF"
+    ],
+    "evidence_integrity": {
+      "commit": "2fa892909bd2fef1106b4af3ceb0fcc7ade9a397",
+      "status": "PASS",
+      "evidence_sha256": "15ab92fd0da791b554031692254b566ed7581c296a15054ddb183e8bb6310b0a"
+    },
+    "recommendation": "Resolve real target and base paths, enforce directory boundary, and prevent concurrent filesystem mutation.",
+    "agent_version": "1.0.0",
+    "rule_version": "1.0.0",
+    "knowledge_version": "1.0.0+7542f99ab38b"
+  },
+  {
+    "finding_id": "path_traversal-TC-10-src-main-java-lab-ReadController.java-28",
+    "category": "PATH_TRAVERSAL",
+    "status": "REJECTED",
+    "repository": {
+      "name": "path",
+      "branch": "main",
+      "commit": "2fa892909bd2fef1106b4af3ceb0fcc7ade9a397"
+    },
+    "source": {
+      "file": "src/main/java/lab/ReadController.java",
+      "line": 24,
+      "end_line": 24,
+      "snippet_hash": "be798ce2f405c96e5c779d5e9a6fddd7793f571b37b73d3cc96d0f2370d59485",
+      "file_sha256": "098a637f55f80a756421d0c64691a15fe37cc04a6860404d30f0b36389e25dbf",
+      "symbol": "filename",
+      "type": "HTTP_REQUEST_PARAM"
+    },
+    "sink": {
+      "file": "src/main/java/lab/ReadController.java",
+      "line": 28,
+      "end_line": 28,
+      "snippet_hash": "abe37aa8f940a5e082953573d11083eec371f8568a9299b0182712cefcbe1c62",
+      "file_sha256": "098a637f55f80a756421d0c64691a15fe37cc04a6860404d30f0b36389e25dbf",
+      "symbol": "Files.readString",
+      "type": "FILE_READ_PATH"
+    },
+    "dataflow": [
+      {
+        "file": "src/main/java/lab/ReadController.java",
+        "line": 24,
+        "end_line": 24,
+        "snippet_hash": "be798ce2f405c96e5c779d5e9a6fddd7793f571b37b73d3cc96d0f2370d59485",
+        "file_sha256": "098a637f55f80a756421d0c64691a15fe37cc04a6860404d30f0b36389e25dbf",
+        "symbol": "filename",
+        "type": "HTTP_REQUEST_PARAM"
+      },
+      {
+        "file": "src/main/java/lab/ReadController.java",
+        "line": 26,
+        "end_line": 26,
+        "snippet_hash": "55dcd47a2a47f3e3e67a7aecf34803552c191b4969165f9997fca505ac092a99",
+        "file_sha256": "098a637f55f80a756421d0c64691a15fe37cc04a6860404d30f0b36389e25dbf",
+        "symbol": "target",
+        "type": "REAL_TARGET_PATH"
+      },
+      {
+        "file": "src/main/java/lab/ReadController.java",
+        "line": 28,
+        "end_line": 28,
+        "snippet_hash": "abe37aa8f940a5e082953573d11083eec371f8568a9299b0182712cefcbe1c62",
+        "file_sha256": "098a637f55f80a756421d0c64691a15fe37cc04a6860404d30f0b36389e25dbf",
+        "symbol": "target",
+        "type": "FILE_PATH_ARGUMENT"
+      },
+      {
+        "file": "src/main/java/lab/ReadController.java",
+        "line": 28,
+        "end_line": 28,
+        "snippet_hash": "abe37aa8f940a5e082953573d11083eec371f8568a9299b0182712cefcbe1c62",
+        "file_sha256": "098a637f55f80a756421d0c64691a15fe37cc04a6860404d30f0b36389e25dbf",
+        "symbol": "Files.readString",
+        "type": "FILE_READ_PATH"
+      }
+    ],
+    "protection": {
+      "status": "VALID",
+      "evidence": [
+        {
+          "file": "src/main/java/lab/ReadController.java",
+          "line": 10,
+          "end_line": 10,
+          "snippet_hash": "3cb48261644fa5e5d8916c6712ebc1b1647f8d1c780049362705d20ee332dfbb",
+          "file_sha256": "098a637f55f80a756421d0c64691a15fe37cc04a6860404d30f0b36389e25dbf",
+          "symbol": "BASE_DIR",
+          "type": "FIXED_BASE_STRING"
+        },
+        {
+          "file": "src/main/java/lab/ReadController.java",
+          "line": 25,
+          "end_line": 25,
+          "snippet_hash": "62837758b501ecb4245eab84ecfd0aaca2ca3a2bc6abc6da2d443e1fe076a2fa",
+          "file_sha256": "098a637f55f80a756421d0c64691a15fe37cc04a6860404d30f0b36389e25dbf",
+          "symbol": "base",
+          "type": "REAL_BASE_PATH"
+        },
+        {
+          "file": "src/main/java/lab/ReadController.java",
+          "line": 26,
+          "end_line": 26,
+          "snippet_hash": "55dcd47a2a47f3e3e67a7aecf34803552c191b4969165f9997fca505ac092a99",
+          "file_sha256": "098a637f55f80a756421d0c64691a15fe37cc04a6860404d30f0b36389e25dbf",
+          "symbol": "target",
+          "type": "REAL_TARGET_PATH"
+        },
+        {
+          "file": "src/main/java/lab/ReadController.java",
+          "line": 27,
+          "end_line": 27,
+          "snippet_hash": "b0f186d48302fc3e7e0410b9977ca03734df6255ca075035daaf1034115c2096",
+          "file_sha256": "098a637f55f80a756421d0c64691a15fe37cc04a6860404d30f0b36389e25dbf",
+          "symbol": "target",
+          "type": "REAL_PATH_BOUNDARY_THROW"
+        },
+        {
+          "file": "src/main/java/lab/ReadController.java",
+          "line": 28,
+          "end_line": 28,
+          "snippet_hash": "abe37aa8f940a5e082953573d11083eec371f8568a9299b0182712cefcbe1c62",
+          "file_sha256": "098a637f55f80a756421d0c64691a15fe37cc04a6860404d30f0b36389e25dbf",
+          "symbol": "Files.readString",
+          "type": "FILE_READ_PATH"
+        }
+      ]
+    },
+    "reachability": "PRODUCTION_REACHABLE",
+    "rules_applied": [
+      "KB-SPRING-REQUEST-PARAM",
+      "KB-JAVA-PATH-READ",
+      "KB-JAVA-PATH-REAL-BOUNDARY"
+    ],
+    "decision_trace": [
+      "EFFECTIVE_PROTECTION"
+    ],
+    "evidence_integrity": {
+      "commit": "2fa892909bd2fef1106b4af3ceb0fcc7ade9a397",
+      "status": "PASS",
+      "evidence_sha256": "52f92617ef8d953b7f7ca1382bcf8bbafc2a4caad43b9c6f973291e1bf2d7ed6"
+    },
+    "recommendation": "Resolve real target and base paths, enforce directory boundary, and prevent concurrent filesystem mutation.",
+    "agent_version": "1.0.0",
+    "rule_version": "1.0.0",
+    "knowledge_version": "1.0.0+7542f99ab38b"
+  },
+  {
+    "finding_id": "sql_injection-TC-11-src-main-resources-mapper-UserMapper.xml-5",
+    "category": "SQL_INJECTION",
+    "status": "REJECTED",
+    "repository": {
+      "name": "test-only",
+      "branch": "main",
+      "commit": "2f0bc6a13e395646a429f24e8aee453d3d22ae99"
+    },
+    "source": {
+      "file": "src/test/java/lab/UserController.java",
+      "line": 9,
+      "end_line": 9,
+      "snippet_hash": "aa7913f228e1dd205969877fb0dce95e8fd5bb62bc2a112cb75e53a0ddfe9d54",
+      "file_sha256": "8077da28df2603be5cf204df5cd845a5d52ed3a650ba945cb6e9a98e4f39a28a",
+      "symbol": "order",
+      "type": "HTTP_REQUEST_PARAM"
+    },
+    "sink": {
+      "file": "src/main/resources/mapper/UserMapper.xml",
+      "line": 5,
+      "end_line": 5,
+      "snippet_hash": "80eeb7ff74ebfe5809236ad67a361b6f213515032707f51b60a5e1864f67b82e",
+      "file_sha256": "42fc1708387d87e134501e977a714271e8cd32ff9f9aebcff40dbb009ea34978",
+      "symbol": "order",
+      "type": "MYBATIS_RAW_SUBSTITUTION"
+    },
+    "dataflow": [
+      {
+        "file": "src/test/java/lab/UserController.java",
+        "line": 9,
+        "end_line": 9,
+        "snippet_hash": "aa7913f228e1dd205969877fb0dce95e8fd5bb62bc2a112cb75e53a0ddfe9d54",
+        "file_sha256": "8077da28df2603be5cf204df5cd845a5d52ed3a650ba945cb6e9a98e4f39a28a",
+        "symbol": "order",
+        "type": "HTTP_REQUEST_PARAM"
+      },
+      {
+        "file": "src/test/java/lab/UserController.java",
+        "line": 10,
+        "end_line": 10,
+        "snippet_hash": "bd5d8c1f6abadb0c825e76a6d8b988c0618bf4fdaa33e2d95095c973198d5dea",
+        "file_sha256": "8077da28df2603be5cf204df5cd845a5d52ed3a650ba945cb6e9a98e4f39a28a",
+        "symbol": "order",
+        "type": "CALL_ARGUMENT"
+      },
+      {
+        "file": "src/main/java/lab/UserService.java",
+        "line": 8,
+        "end_line": 8,
+        "snippet_hash": "ab6f9709bdcdeb0bc1722e621c4907422c4bfe5261f3aa55d008bfcb55da8e24",
+        "file_sha256": "539a258dda151275c471a2fe9f9a099f9802c0d94dc7860415eacbfe2f269ae3",
+        "symbol": "order",
+        "type": "METHOD_PARAMETER"
+      },
+      {
+        "file": "src/main/java/lab/UserService.java",
+        "line": 9,
+        "end_line": 9,
+        "snippet_hash": "f4e2b7b9ec2d7aa2280632b6d1c9b48da7e797573a921d9c712babe7f56d5e0b",
+        "file_sha256": "539a258dda151275c471a2fe9f9a099f9802c0d94dc7860415eacbfe2f269ae3",
+        "symbol": "order",
+        "type": "CALL_ARGUMENT"
+      },
+      {
+        "file": "src/main/java/lab/UserMapper.java",
+        "line": 6,
+        "end_line": 6,
+        "snippet_hash": "810de1eef3d0c7b396baab1a27043879849ca47347cd50d07bf8aaeb247b8fc1",
+        "file_sha256": "6b47600ea24071289cc6a928db32b9dbaea8254cc748256647529c67477069f1",
+        "symbol": "order",
+        "type": "MAPPER_PARAMETER"
+      },
+      {
+        "file": "src/main/resources/mapper/UserMapper.xml",
+        "line": 5,
+        "end_line": 5,
+        "snippet_hash": "80eeb7ff74ebfe5809236ad67a361b6f213515032707f51b60a5e1864f67b82e",
+        "file_sha256": "42fc1708387d87e134501e977a714271e8cd32ff9f9aebcff40dbb009ea34978",
+        "symbol": "order",
+        "type": "MYBATIS_RAW_SUBSTITUTION"
+      }
+    ],
+    "protection": {
+      "status": "ABSENT",
+      "evidence": [
+        {
+          "file": "src/test/java/lab/UserController.java",
+          "line": 9,
+          "end_line": 9,
+          "snippet_hash": "aa7913f228e1dd205969877fb0dce95e8fd5bb62bc2a112cb75e53a0ddfe9d54",
+          "file_sha256": "8077da28df2603be5cf204df5cd845a5d52ed3a650ba945cb6e9a98e4f39a28a",
+          "symbol": "order",
+          "type": "HTTP_REQUEST_PARAM"
+        },
+        {
+          "file": "src/test/java/lab/UserController.java",
+          "line": 10,
+          "end_line": 10,
+          "snippet_hash": "bd5d8c1f6abadb0c825e76a6d8b988c0618bf4fdaa33e2d95095c973198d5dea",
+          "file_sha256": "8077da28df2603be5cf204df5cd845a5d52ed3a650ba945cb6e9a98e4f39a28a",
+          "symbol": "order",
+          "type": "CALL_ARGUMENT"
+        },
+        {
+          "file": "src/main/java/lab/UserService.java",
+          "line": 8,
+          "end_line": 8,
+          "snippet_hash": "ab6f9709bdcdeb0bc1722e621c4907422c4bfe5261f3aa55d008bfcb55da8e24",
+          "file_sha256": "539a258dda151275c471a2fe9f9a099f9802c0d94dc7860415eacbfe2f269ae3",
+          "symbol": "order",
+          "type": "METHOD_PARAMETER"
+        },
+        {
+          "file": "src/main/java/lab/UserService.java",
+          "line": 9,
+          "end_line": 9,
+          "snippet_hash": "f4e2b7b9ec2d7aa2280632b6d1c9b48da7e797573a921d9c712babe7f56d5e0b",
+          "file_sha256": "539a258dda151275c471a2fe9f9a099f9802c0d94dc7860415eacbfe2f269ae3",
+          "symbol": "order",
+          "type": "CALL_ARGUMENT"
+        },
+        {
+          "file": "src/main/java/lab/UserMapper.java",
+          "line": 6,
+          "end_line": 6,
+          "snippet_hash": "810de1eef3d0c7b396baab1a27043879849ca47347cd50d07bf8aaeb247b8fc1",
+          "file_sha256": "6b47600ea24071289cc6a928db32b9dbaea8254cc748256647529c67477069f1",
+          "symbol": "order",
+          "type": "MAPPER_PARAMETER"
+        },
+        {
+          "file": "src/main/resources/mapper/UserMapper.xml",
+          "line": 5,
+          "end_line": 5,
+          "snippet_hash": "80eeb7ff74ebfe5809236ad67a361b6f213515032707f51b60a5e1864f67b82e",
+          "file_sha256": "42fc1708387d87e134501e977a714271e8cd32ff9f9aebcff40dbb009ea34978",
+          "symbol": "order",
+          "type": "MYBATIS_RAW_SUBSTITUTION"
+        }
+      ]
+    },
+    "reachability": "TEST_ONLY",
+    "rules_applied": [
+      "KB-SPRING-REQUEST-PARAM",
+      "KB-MYBATIS-SQL-001"
+    ],
+    "decision_trace": [
+      "NON_PRODUCTION_PATH"
+    ],
+    "evidence_integrity": {
+      "commit": "2f0bc6a13e395646a429f24e8aee453d3d22ae99",
+      "status": "PASS",
+      "evidence_sha256": "d3527dd499073772ffc25589362a3c88274d35b35110a45d3d83a750ea8dba8b"
+    },
+    "recommendation": "Use parameterized binding or a finite server-side allowlist mapping.",
+    "agent_version": "1.0.0",
+    "rule_version": "1.0.0",
+    "knowledge_version": "1.0.0+7542f99ab38b"
+  },
+  {
+    "finding_id": "sql_injection-TC-12-src-main-resources-mapper-UserMapper.xml-5",
+    "category": "SQL_INJECTION",
+    "status": "REJECTED",
+    "repository": {
+      "name": "allowlist",
+      "branch": "main",
+      "commit": "ad06c138f754eebf3c2e269b5ef2607df28b51a7"
+    },
+    "source": {
+      "file": "src/main/java/lab/UserController.java",
+      "line": 9,
+      "end_line": 9,
+      "snippet_hash": "aa7913f228e1dd205969877fb0dce95e8fd5bb62bc2a112cb75e53a0ddfe9d54",
+      "file_sha256": "8077da28df2603be5cf204df5cd845a5d52ed3a650ba945cb6e9a98e4f39a28a",
+      "symbol": "order",
+      "type": "HTTP_REQUEST_PARAM"
+    },
+    "sink": {
+      "file": "src/main/resources/mapper/UserMapper.xml",
+      "line": 5,
+      "end_line": 5,
+      "snippet_hash": "80eeb7ff74ebfe5809236ad67a361b6f213515032707f51b60a5e1864f67b82e",
+      "file_sha256": "42fc1708387d87e134501e977a714271e8cd32ff9f9aebcff40dbb009ea34978",
+      "symbol": "order",
+      "type": "MYBATIS_RAW_SUBSTITUTION"
+    },
+    "dataflow": [
+      {
+        "file": "src/main/java/lab/UserController.java",
+        "line": 9,
+        "end_line": 9,
+        "snippet_hash": "aa7913f228e1dd205969877fb0dce95e8fd5bb62bc2a112cb75e53a0ddfe9d54",
+        "file_sha256": "8077da28df2603be5cf204df5cd845a5d52ed3a650ba945cb6e9a98e4f39a28a",
+        "symbol": "order",
+        "type": "HTTP_REQUEST_PARAM"
+      },
+      {
+        "file": "src/main/java/lab/UserController.java",
+        "line": 10,
+        "end_line": 10,
+        "snippet_hash": "bd5d8c1f6abadb0c825e76a6d8b988c0618bf4fdaa33e2d95095c973198d5dea",
+        "file_sha256": "8077da28df2603be5cf204df5cd845a5d52ed3a650ba945cb6e9a98e4f39a28a",
+        "symbol": "order",
+        "type": "CALL_ARGUMENT"
+      },
+      {
+        "file": "src/main/java/lab/UserService.java",
+        "line": 8,
+        "end_line": 8,
+        "snippet_hash": "ab6f9709bdcdeb0bc1722e621c4907422c4bfe5261f3aa55d008bfcb55da8e24",
+        "file_sha256": "cdf615075c1b13c8dd10b8959c0d4e641209c63a1c9e529985ac12d2ad3f524b",
+        "symbol": "order",
+        "type": "METHOD_PARAMETER"
+      },
+      {
+        "file": "src/main/java/lab/UserService.java",
+        "line": 15,
+        "end_line": 15,
+        "snippet_hash": "b06bbd0fd3a66aab5c376fdd0c229951d957ae365ccfc9120a39508ad429f10b",
+        "file_sha256": "cdf615075c1b13c8dd10b8959c0d4e641209c63a1c9e529985ac12d2ad3f524b",
+        "symbol": "field",
+        "type": "CALL_ARGUMENT"
+      },
+      {
+        "file": "src/main/java/lab/UserMapper.java",
+        "line": 6,
+        "end_line": 6,
+        "snippet_hash": "810de1eef3d0c7b396baab1a27043879849ca47347cd50d07bf8aaeb247b8fc1",
+        "file_sha256": "6b47600ea24071289cc6a928db32b9dbaea8254cc748256647529c67477069f1",
+        "symbol": "order",
+        "type": "MAPPER_PARAMETER"
+      },
+      {
+        "file": "src/main/resources/mapper/UserMapper.xml",
+        "line": 5,
+        "end_line": 5,
+        "snippet_hash": "80eeb7ff74ebfe5809236ad67a361b6f213515032707f51b60a5e1864f67b82e",
+        "file_sha256": "42fc1708387d87e134501e977a714271e8cd32ff9f9aebcff40dbb009ea34978",
+        "symbol": "order",
+        "type": "MYBATIS_RAW_SUBSTITUTION"
+      }
+    ],
+    "protection": {
+      "status": "VALID",
+      "evidence": [
+        {
+          "file": "src/main/java/lab/UserController.java",
+          "line": 9,
+          "end_line": 9,
+          "snippet_hash": "aa7913f228e1dd205969877fb0dce95e8fd5bb62bc2a112cb75e53a0ddfe9d54",
+          "file_sha256": "8077da28df2603be5cf204df5cd845a5d52ed3a650ba945cb6e9a98e4f39a28a",
+          "symbol": "order",
+          "type": "HTTP_REQUEST_PARAM"
+        },
+        {
+          "file": "src/main/java/lab/UserService.java",
+          "line": 9,
+          "end_line": 15,
+          "snippet_hash": "da0ee0bdb4ebdb68bbab0732cd34f66cba340e946ea622a5754224579e28a9f6",
+          "file_sha256": "cdf615075c1b13c8dd10b8959c0d4e641209c63a1c9e529985ac12d2ad3f524b",
+          "symbol": "field",
+          "type": "FINITE_MAPPING"
+        },
+        {
+          "file": "src/main/java/lab/UserController.java",
+          "line": 10,
+          "end_line": 10,
+          "snippet_hash": "bd5d8c1f6abadb0c825e76a6d8b988c0618bf4fdaa33e2d95095c973198d5dea",
+          "file_sha256": "8077da28df2603be5cf204df5cd845a5d52ed3a650ba945cb6e9a98e4f39a28a",
+          "symbol": "order",
+          "type": "CALL_ARGUMENT"
+        },
+        {
+          "file": "src/main/java/lab/UserService.java",
+          "line": 8,
+          "end_line": 8,
+          "snippet_hash": "ab6f9709bdcdeb0bc1722e621c4907422c4bfe5261f3aa55d008bfcb55da8e24",
+          "file_sha256": "cdf615075c1b13c8dd10b8959c0d4e641209c63a1c9e529985ac12d2ad3f524b",
+          "symbol": "order",
+          "type": "METHOD_PARAMETER"
+        },
+        {
+          "file": "src/main/java/lab/UserService.java",
+          "line": 15,
+          "end_line": 15,
+          "snippet_hash": "b06bbd0fd3a66aab5c376fdd0c229951d957ae365ccfc9120a39508ad429f10b",
+          "file_sha256": "cdf615075c1b13c8dd10b8959c0d4e641209c63a1c9e529985ac12d2ad3f524b",
+          "symbol": "field",
+          "type": "CALL_ARGUMENT"
+        },
+        {
+          "file": "src/main/java/lab/UserMapper.java",
+          "line": 6,
+          "end_line": 6,
+          "snippet_hash": "810de1eef3d0c7b396baab1a27043879849ca47347cd50d07bf8aaeb247b8fc1",
+          "file_sha256": "6b47600ea24071289cc6a928db32b9dbaea8254cc748256647529c67477069f1",
+          "symbol": "order",
+          "type": "MAPPER_PARAMETER"
+        },
+        {
+          "file": "src/main/resources/mapper/UserMapper.xml",
+          "line": 5,
+          "end_line": 5,
+          "snippet_hash": "80eeb7ff74ebfe5809236ad67a361b6f213515032707f51b60a5e1864f67b82e",
+          "file_sha256": "42fc1708387d87e134501e977a714271e8cd32ff9f9aebcff40dbb009ea34978",
+          "symbol": "order",
+          "type": "MYBATIS_RAW_SUBSTITUTION"
+        }
+      ]
+    },
+    "reachability": "PRODUCTION_REACHABLE",
+    "rules_applied": [
+      "KB-SPRING-REQUEST-PARAM",
+      "KB-MYBATIS-SQL-001",
+      "KB-MYBATIS-SQL-FP-ALLOWLIST"
+    ],
+    "decision_trace": [
+      "EFFECTIVE_PROTECTION"
+    ],
+    "evidence_integrity": {
+      "commit": "ad06c138f754eebf3c2e269b5ef2607df28b51a7",
+      "status": "PASS",
+      "evidence_sha256": "c191e8605269aea3ff3378e6a587321ac5b56e614c16967b6fc1cffe3341fc1b"
+    },
+    "recommendation": "Use parameterized binding or a finite server-side allowlist mapping.",
+    "agent_version": "1.0.0",
+    "rule_version": "1.0.0",
+    "knowledge_version": "1.0.0+7542f99ab38b"
+  }
+]
