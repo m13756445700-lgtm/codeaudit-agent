@@ -14,7 +14,55 @@
 
 ## 3. Architecture
 
-Codex/DeepSeek规划 → OctoBus五个受控方法 → Semgrep候选 → 专项分析与知识规则 → 独立Evidence Gate → JSON/Markdown → 真实会话一致性验证。模块职责见[架构说明](docs/ARCHITECTURE.md)。
+大模型负责工具编排与解释，确定性程序负责分析和证据裁决。完整运行时序、开发验收流程与代码入口见[架构图与面试讲解](docs/ARCHITECTURE-WALKTHROUGH.md)；模块责任见[架构说明](docs/ARCHITECTURE.md)。
+
+### 业务架构：从可疑代码到可复核结论
+
+```mermaid
+flowchart TB
+    A["开发者 / 安全审计人员"] --> B["受控仓库 + 固定 Git Commit"]
+    B --> C["Java Spring Boot + MyBatis<br/>SQL 注入 / 命令注入 / SSRF / 路径穿越"]
+    C --> D["发现候选 → 分析来源与数据流<br/>检查危险操作、保护措施与可达性"]
+    D --> E["绑定证据<br/>代码位置 + Commit + 内容哈希"]
+    E --> F{"Evidence Gate 裁决"}
+    F --> G["VERIFIED<br/>满足当前规则确认条件"]
+    F --> H["REJECTED<br/>当前候选不满足漏洞判据"]
+    F --> I["NEEDS_REVIEW<br/>证据不足，人工复核"]
+    G --> J["结构化 Finding / 报告 / 核验材料"]
+    H --> J
+    I --> J
+    J --> K["减少重复检查，让结论可追溯、可复核"]
+```
+
+支持范围是四类风险的有限静态模式；拒绝某个候选或没有扫描结果，都不代表整个项目安全。
+
+### 技术架构：模型编排与证据裁决分工
+
+```mermaid
+flowchart TB
+    T["人工任务 / 原生定时触发"] --> AC
+    subgraph HOST["Ubuntu 服务器 · Docker"]
+        AC["agent-compose daemon<br/>项目 / 调度 / 运行管理"] --> R["Agent 运行环境<br/>Codex provider + 系统提示词"]
+        R -->|"HTTP MCP + Capset Token"| O["OctoBus<br/>五个受控方法"]
+        O --> N["Node.js + OctoBus SDK<br/>超时 / 输出限制 / 单请求执行"]
+        N -->|"标准输入输出 JSON"| P["Python 审计服务"]
+        P --> S["Semgrep 候选扫描"]
+        P --> A["专项分析器<br/>Java 解析 / 有界数据流"]
+        K["版本化知识与规则"] --> A
+        Q["固定 Commit 的受控仓库"] --> S
+        Q --> A
+        A --> G["Evidence Gate<br/>独立复核六类证据"]
+        Q --> G
+        G --> F["可信 Finding + Schema 校验"]
+        F --> E["可信结果 / 服务事件<br/>本地持久化"]
+        R --> L["真实模型会话记录"]
+        E -.-> V["独立验收步骤<br/>会话与可信结果一致性核验"]
+        L -.-> V
+    end
+    R <-->|"模型 API · Responses 接口协议"| M["DeepSeek 模型服务"]
+```
+
+虚线表示验收时读取材料，不表示定时任务结束后已自动执行验收。JSON/Markdown 报告由报告模块及 CLI/验收流程生成，模型最终响应按契约输出 JSON。模型品牌与 Codex provider 是两个不同概念。
 
 ## 4. Supported vulnerabilities
 
