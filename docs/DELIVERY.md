@@ -1,3 +1,5 @@
+> 2026-09-24更新：本页保留此前阶段记录。当前HR交付、公钥登录、原题触发器等状态统一以[原题核对表](EXAM-COMPLIANCE.md)和README为准；“待发布/可选SSH/私有仓库优先”等旧建议已撤销。
+
 # CodeAudit V1.0交付资源总表
 
 版本1.0；日期2026-09-23；交付对象：面试评审人员。
@@ -10,7 +12,7 @@
 
 | 交付物 | 位置/状态 | 交付标准 |
 |---|---|---|
-| GitHub Repository | 待注册账号及首次发布 | 考官可访问，固定Commit可克隆 |
+| GitHub Repository | 已发布并设为Public，见README | 考官可访问，固定Commit可克隆 |
 | README | 根目录README.md | 15个必需章节齐全 |
 | BRD/PRD | docs/BRD-PRD.md | 原文保留，勘误单列 |
 | Architecture | docs/ARCHITECTURE.md | 模型与Gate边界明确 |
@@ -24,7 +26,7 @@
 | 十二测试案例 | scripts/run_acceptance_matrix.py、tests/ | 服务器12/12通过 |
 | Acceptance Matrix | docs/ACCEPTANCE-MATRIX.md、REQUIREMENTS-DELIVERY-MATRIX.md | 案例与作业要求分别覆盖 |
 | Troubleshooting | docs/TROUBLESHOOTING.md | 故障、处理、验证及边界 |
-| SSH信息 | 所有者私有交接说明 | 评审账号/公钥待配置；不共享root私钥 |
+| SSH信息 | README与专用评审账号 | 公钥已配置；考官实际登录待确认 |
 
 ## 三类交付资料
 

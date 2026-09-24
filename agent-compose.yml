@@ -61,3 +61,9 @@ agents:
       最终回复必须是单个原始JSON对象，不加Markdown代码围栏、不加前言后记。工具失败即报告失败，不猜测成功。
 
       '
+    scheduler:
+      enabled: true
+      triggers:
+      - name: daily-fixed-commit-audit
+        cron: 46 5 * * *
+        prompt: 审计 repository=lab commit=af482b5a62e1af3b8fae3908328f229852986337。严格按系统参数契约逐候选完成五个方法。ReadCodeSlice和HashEvidence必须逐候选使用ScanCandidates返回的file和line，只读该行，不传end_line，不合并候选，不猜测文件长度。只返回原始JSON，不使用代码围栏。每个finding完整复制RunValidation的result，禁止改写或省略。

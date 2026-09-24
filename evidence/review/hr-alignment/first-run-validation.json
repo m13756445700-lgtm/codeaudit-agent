@@ -1,0 +1,73 @@
+{
+  "date": "2026-09-24",
+  "trigger_kind": "cron",
+  "trigger_source": "cron:35 5 * * *@UTC",
+  "scheduler_run_id": "36acc5736ebd7be6efba5e8bb5e0ca5119f617aba61a8dc40010e0b31ec9ad33",
+  "sandbox_id": "3c45c774eea47c9c5d4815189ff8e633e737277221cca2ce440cbdf5f0a09ac1",
+  "started_at": "2026-09-24T05:35:00.003Z",
+  "completed_at": "2026-09-24T05:35:39.624Z",
+  "session_sha256": "197c57025c9c042ba59a023eef9ab4b9da4c7c95ae1f83c69e573bb52322a846",
+  "strict_session_validation": "FAIL",
+  "strict_error": "SESSION_EVIDENCE_CHECK_FAILED",
+  "final_matches_trusted_results": true,
+  "statuses": [
+    "VERIFIED",
+    "REJECTED"
+  ],
+  "actual_mcp_calls": [
+    {
+      "tool": "code-audit-service__code-audit-local__inventory_repository",
+      "result_keys": [
+        "Ok"
+      ]
+    },
+    {
+      "tool": "code-audit-service__code-audit-local__scan_candidates",
+      "result_keys": [
+        "Ok"
+      ]
+    },
+    {
+      "tool": "code-audit-service__code-audit-local__read_code_slice",
+      "result_keys": [
+        "Ok"
+      ]
+    },
+    {
+      "tool": "code-audit-service__code-audit-local__read_code_slice",
+      "result_keys": [
+        "Ok"
+      ]
+    },
+    {
+      "tool": "code-audit-service__code-audit-local__read_code_slice",
+      "result_keys": [
+        "Ok"
+      ]
+    },
+    {
+      "tool": "code-audit-service__code-audit-local__hash_evidence",
+      "result_keys": [
+        "Ok"
+      ]
+    },
+    {
+      "tool": "code-audit-service__code-audit-local__hash_evidence",
+      "result_keys": [
+        "Ok"
+      ]
+    },
+    {
+      "tool": "code-audit-service__code-audit-local__run_validation",
+      "result_keys": [
+        "Ok"
+      ]
+    },
+    {
+      "tool": "code-audit-service__code-audit-local__run_validation",
+      "result_keys": [
+        "Ok"
+      ]
+    }
+  ]
+}

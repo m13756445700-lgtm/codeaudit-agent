@@ -5,7 +5,7 @@ services:
   octobus:
     image: codeaudit-octobus:phase10
     container_name: codeaudit-server-octobus
-    restart: unless-stopped
+    restart: always
     environment:
       NPM_CONFIG_CACHE: /var/lib/octobus/.npm
     ports:
@@ -17,7 +17,7 @@ services:
     image: ghcr.io/chaitin/agent-compose@sha256:3117226250256b03d25815bd1bb584ade5ac225b83f55d527be122b8b75a61e8
     container_name: codeaudit-server-agent-compose
     command: [daemon]
-    restart: unless-stopped
+    restart: always
     env_file: [./daemon.env]
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -26,7 +26,7 @@ services:
   demo:
     image: codeaudit-demo:verified
     container_name: codeaudit-server-demo
-    restart: unless-stopped
+    restart: always
     network_mode: none
     read_only: true
     tmpfs: [/tmp:rw,nosuid,size=128m]

@@ -1,0 +1,19 @@
+#!/usr/bin/python3 -I
+"""Read-only examiner entry point. Install root-owned; allow only this path via sudo."""
+import os,subprocess,sys
+os.chdir('/')
+env={'PATH':'/usr/sbin:/usr/bin:/sbin:/bin','HOME':'/root','LANG':'C.UTF-8'}
+ac=['/usr/bin/docker','exec','codeaudit-server-agent-compose','agent-compose','--host','http://127.0.0.1:7410','-f','/data/work/codeaudit-server/agent-compose.yml']
+octo=['/usr/bin/docker','exec','codeaudit-server-octobus','octobus']
+commands={
+ 'status':[['/usr/bin/docker','ps','--filter','name=codeaudit-server','--format','{{.Names}}\t{{.Status}}\t{{.Ports}}'],['/usr/bin/docker','inspect','--format','{{.Name}} restart={{.HostConfig.RestartPolicy.Name}}','codeaudit-server-agent-compose','codeaudit-server-octobus','codeaudit-server-demo'],ac+['version'],octo+['status']],
+ 'projects':[ac+['project','ls']],
+ 'triggers':[ac+['scheduler','ls']],
+ 'runs':[ac+['scheduler','runs','--limit','10']],
+ 'methods':[octo+['capset','list-methods','code-audit-agent']],
+}
+if len(sys.argv)!=2 or sys.argv[1] not in commands:
+ print('Usage: sudo codeaudit-review {status|projects|triggers|runs|methods}',file=sys.stderr);sys.exit(2)
+for cmd in commands[sys.argv[1]]:
+ p=subprocess.run(cmd,env=env,timeout=35)
+ if p.returncode:sys.exit(p.returncode)

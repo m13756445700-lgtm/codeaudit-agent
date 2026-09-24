@@ -1,0 +1,46 @@
+[
+  {
+    "run_id": "e036032b3fafe32476b9e048b6ef7d9f30b5ed323f6b23fde2745dbef8ed10ef",
+    "trigger_kind": null,
+    "trigger_source": null,
+    "status": "succeeded",
+    "started_at": "2026-09-24T05:46:00.456Z",
+    "completed_at": "2026-09-24T05:46:35.477Z",
+    "sandbox_ids": [
+      "66663dbdf139013d3bdf6e36b304f78c5977f4efbc979fe0a1fef826e967fe73"
+    ]
+  },
+  {
+    "run_id": "dd1580db888a247ba42c460efff65ac1c7ce1c33530c4afef45f26864bff3908",
+    "trigger_kind": "cron",
+    "trigger_source": "cron:46 5 * * *@UTC",
+    "status": "succeeded",
+    "started_at": "2026-09-24T05:46:00.003Z",
+    "completed_at": "2026-09-24T05:46:35.722Z",
+    "sandbox_ids": [
+      "66663dbdf139013d3bdf6e36b304f78c5977f4efbc979fe0a1fef826e967fe73"
+    ]
+  },
+  {
+    "run_id": "a72488287162e529021f09bc57a653839bff6fdd216f7580ef8699103e97494b",
+    "trigger_kind": null,
+    "trigger_source": null,
+    "status": "succeeded",
+    "started_at": "2026-09-24T05:35:01.9Z",
+    "completed_at": "2026-09-24T05:35:39.387Z",
+    "sandbox_ids": [
+      "3c45c774eea47c9c5d4815189ff8e633e737277221cca2ce440cbdf5f0a09ac1"
+    ]
+  },
+  {
+    "run_id": "36acc5736ebd7be6efba5e8bb5e0ca5119f617aba61a8dc40010e0b31ec9ad33",
+    "trigger_kind": "cron",
+    "trigger_source": "cron:35 5 * * *@UTC",
+    "status": "succeeded",
+    "started_at": "2026-09-24T05:35:00.003Z",
+    "completed_at": "2026-09-24T05:35:39.624Z",
+    "sandbox_ids": [
+      "3c45c774eea47c9c5d4815189ff8e633e737277221cca2ce440cbdf5f0a09ac1"
+    ]
+  }
+]

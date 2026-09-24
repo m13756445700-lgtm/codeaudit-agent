@@ -1,0 +1,26 @@
+{
+  "date": "2026-09-24",
+  "github_visibility": "public",
+  "ssh_user": "codeaudit-reviewer",
+  "ssh_host": "8.130.121.3",
+  "ssh_port": 22,
+  "examiner_key_fingerprint": "SHA256:w59gf6u379xQnpdNqYMxtb/MNs4+gvKeG02A1o1B0m4",
+  "authorized_keys_configured": true,
+  "ssh_permissions": {
+    "directory": "0700",
+    "authorized_keys": "0600"
+  },
+  "sshd_config_check": "PASS",
+  "read_only_queries": "PASS",
+  "arbitrary_sudo_denied": true,
+  "private_model_config_read_denied": true,
+  "examiner_private_key_login": "PENDING_EXAMINER_CONFIRMATION",
+  "ssh_source_ip_restriction": "PENDING_EXAMINER_IP",
+  "restart_policy": {
+    "codeaudit-server-agent-compose": "always",
+    "codeaudit-server-octobus": "always",
+    "codeaudit-server-demo": "always"
+  },
+  "targeted_regression": "13 passed in 8.02s",
+  "business_code_changed": false
+}

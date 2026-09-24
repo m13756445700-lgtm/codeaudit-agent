@@ -1,6 +1,6 @@
 # CodeAudit Agent V1.0
 
-**交付状态（2026-09-23）：技术验收通过；GitHub首次发布、考官访问确认待完成。**
+**交付状态（2026-09-24）：已发布仓库，按HR反馈对齐公开访问、公钥登录与原题验收细节。最终状态见[原题逐项核对](docs/EXAM-COMPLIANCE.md)。限定场景技术测试通过不等于考核已通过。**
 
 入口：[资源清单](docs/DELIVERY.md) · [27项要求映射](docs/REQUIREMENTS-DELIVERY-MATRIX.md) · [演示流程](docs/EXAMINER-DEMO.md) · [GitHub上传与协作](docs/GITHUB-HANDOFF.md)。
 
@@ -36,7 +36,7 @@ python -m pip install -e .
 python -m pytest -q
 ```
 
-核心回归历史结果121项通过。本次交付整理未改核心分析代码，未重复运行该全套测试。服务器另有12项案例与真实调用证据。
+2026-09-23对发布版本重新执行核心回归：121项通过。服务器另有12项案例与真实调用证据。当前四个边界问题未修复，见本页Known Limitations。
 
 ## 7. Configuration
 
@@ -66,7 +66,7 @@ python -m agent.cli audit --repository /approved/repo \
 
 ## 9. Demo
 
-fixtures/spring-security-lab为隔离演示工程。独立Demo GitHub仓库待发布；评审包提供历史提交的Git bundle，支持离线克隆。
+fixtures/spring-security-lab为隔离演示工程。Demo以本仓库目录及历史提交Git bundle交付，可离线克隆；不依赖另一个尚未发布的仓库。
 
 ```bash
 cd fixtures/spring-security-lab
@@ -98,10 +98,38 @@ tests/functional/为测试入口，12案例见docs/ACCEPTANCE-MATRIX.md。精选
 
 ## 15. Known Limitations
 
-- 非通用Java全程序分析器，复杂动态调用、未知过滤保持待复核。
+- 非通用Java全程序分析器，复杂动态调用、未知过滤保持待复核；未覆盖的API可能不产生候选，零结果不等于证明项目无漏洞。
+- 已知未修复：零候选Agent会话校验拒绝；额外上下文读取可能被拒绝；JDBC候选可能被错分为命令类；无关Java record语法可能使分析退化。固定SQL演示不代表这些边界已解决。
 - Path真实路径边界依赖可信目录及无并发文件系统篡改，不宣称消除TOCTOU。
 - SSRF映射不替代DNS、重定向与出口网络检查。
 - 工具限制不等于容器逃逸安全证明。
 - BRD示例Instance为java-audit-instance，实际验收ID为code-audit-local；五方法功能已验证，名称差异需在评审中确认。
 
-下一步：发布私有仓库、记录发布Commit，完成考官访问确认。
+## 考官登录与现场核验
+
+仓库：https://github.com/m13756445700-lgtm/codeaudit-agent
+
+| 项目 | 值 |
+|---|---|
+| 服务器地址 | `8.130.121.3` |
+| SSH用户名 | `codeaudit-reviewer` |
+| SSH端口 | `22` |
+| 认证方式 | HR提供的ED25519公钥已写入该账号authorized_keys；私钥由考官自行保管 |
+| 公钥指纹 | `SHA256:w59gf6u379xQnpdNqYMxtb/MNs4+gvKeG02A1o1B0m4` |
+| 评审资料 | `/srv/codeaudit-review/codeaudit-agent` |
+
+```sh
+ssh -p 22 codeaudit-reviewer@8.130.121.3
+sudo codeaudit-review status
+sudo codeaudit-review projects
+sudo codeaudit-review triggers
+sudo codeaudit-review runs
+sudo codeaudit-review methods
+cd /srv/codeaudit-review/codeaudit-agent
+```
+
+公钥只配置到服务器，不作为GitHub密钥上传。评审账号无通用sudo及Docker组权限，以上固定入口用于查看实时状态；运行新模型审计由所有者操作。原生调度每天北京时间13:46（UTC 05:46）审计固定Demo提交，使用现有模型额度，评审后由所有者关闭。2026-09-24第二次自动运行严格会话校验通过，首次失败摘要保留。命令实测和自动触发记录见[验收核对](docs/EXAM-COMPLIANCE.md)。
+
+待考官确认：使用自身私钥登录成功、出口公网IP/网段、面试时间。来源IP未提供，因此“仅考官来源开放SSH”尚未完成核验，不能标为通过。服务器需保持在线至面试结束。
+
+原始考题是工程交付与评定依据；BRD为本项目自拟功能规格，不能替代原题。答辩按原题约30分钟，见[答辩提纲](docs/DEFENSE-30MIN.md)。
