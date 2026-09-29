@@ -1,0 +1,2 @@
+# Authentication and authorization
+Distinguish identity verification from permission to each object/action. Trace route middleware, principal construction, tenant ownership checks and actual query/update. An object ID alone is not proof of IDOR; inspect global middleware/service policy before confirming missing authorization. A login check alone is not object authorization. Require reachability and attacker identity/role assumptions; unavailable middleware source means insufficient evidence. Cite checks when rejecting, rather than assuming framework defaults.

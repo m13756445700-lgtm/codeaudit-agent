@@ -1,0 +1,2 @@
+# Template injection
+Separate template source from template data. Passing untrusted data into escaped variables is not equivalent to compiling untrusted template syntax. Follow wrappers to compile/render_string and determine sandbox capabilities, escaping scope and template engine. HTML escaping addresses output context, not server template evaluation. Cite attacker influence on template source. Unknown engine configuration warrants limited confidence or insufficient evidence, not invented command execution.

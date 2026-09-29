@@ -1,0 +1,43 @@
+import argparse
+import json
+import os
+import shutil
+import sys
+from pathlib import Path
+from agent.v2.repository import snapshot, profile
+from agent.v2.tools import ToolLayer
+from agent.v2.transport import Local, OctoBus
+from agent.v2.model import Model
+from agent.v2.engine import Engine
+
+
+def main(argv=None):
+    parser = argparse.ArgumentParser(description='AI-driven code audit V2')
+    parser.add_argument('source', help='Git URL, ZIP, or local source directory')
+    parser.add_argument('--workspaces', type=Path, default=Path(os.environ.get('CODEAUDIT_WORKSPACES', '/tmp/codeaudit-v2/workspaces')))
+    parser.add_argument('--local-tools', action='store_true', help='Development adapter; not OctoBus acceptance')
+    parser.add_argument('--keep-source', action='store_true', help='Retain snapshot for audit replay (otherwise cleaned after run)')
+    parser.add_argument('--no-knowledge', action='store_true', help='Knowledge ablation only')
+    parser.add_argument('--quiet', action='store_true', help='Suppress progress events on stderr')
+    args = parser.parse_args(argv)
+    def progress(event):
+        if not args.quiet:
+            print(json.dumps(event, ensure_ascii=False), file=sys.stderr, flush=True)
+    progress({'event': 'repository_intake'})
+    model = Model()  # Fail before acquiring repo if credentials missing.
+    audit, metadata = snapshot(args.source, args.workspaces)
+    try:
+        transport = Local(ToolLayer(audit)) if args.local_tools else OctoBus(
+            os.environ['CODEAUDIT_MCP_URL'], os.environ['CODEAUDIT_OCTOBUS_TOKEN'], audit.name)
+        repo_profile = profile(audit / 'repo')
+        progress({'event': 'repository_understanding', 'languages': repo_profile['languages'], 'files': metadata['file_count']})
+        result = Engine(model, transport, audit, metadata, repo_profile, knowledge=not args.no_knowledge, progress=progress).run()
+        print(json.dumps({**result, 'report': str(audit / 'report.md')}, ensure_ascii=False))
+        return 0 if result['status'] == 'COMPLETE' else 2
+    finally:
+        if not args.keep_source:
+            shutil.rmtree(audit / 'repo', ignore_errors=True)
+
+
+if __name__ == '__main__':
+    raise SystemExit(main())

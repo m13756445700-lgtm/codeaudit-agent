@@ -1,0 +1,264 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "CodeAudit Finding V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "finding_id",
+    "category",
+    "status",
+    "repository",
+    "source",
+    "sink",
+    "dataflow",
+    "protection",
+    "reachability",
+    "rules_applied",
+    "decision_trace",
+    "evidence_integrity",
+    "recommendation",
+    "agent_version",
+    "rule_version",
+    "knowledge_version"
+  ],
+  "properties": {
+    "finding_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "category": {
+      "enum": [
+        "SQL_INJECTION",
+        "COMMAND_INJECTION",
+        "SSRF",
+        "PATH_TRAVERSAL"
+      ]
+    },
+    "status": {
+      "enum": [
+        "VERIFIED",
+        "NEEDS_REVIEW",
+        "REJECTED"
+      ]
+    },
+    "repository": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "branch",
+        "commit"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "branch": {
+          "type": "string",
+          "minLength": 1
+        },
+        "commit": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}([0-9a-f]{24})?$"
+        }
+      }
+    },
+    "source": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/reference"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "sink": {
+      "$ref": "#/$defs/reference"
+    },
+    "dataflow": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/reference"
+      }
+    },
+    "protection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "evidence"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "ABSENT",
+            "INEFFECTIVE",
+            "VALID",
+            "UNKNOWN"
+          ]
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/reference"
+          }
+        }
+      }
+    },
+    "reachability": {
+      "enum": [
+        "PRODUCTION_REACHABLE",
+        "TEST_ONLY",
+        "DEAD_CODE",
+        "UNKNOWN"
+      ]
+    },
+    "rules_applied": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "decision_trace": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "evidence_integrity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "commit",
+        "status",
+        "evidence_sha256"
+      ],
+      "properties": {
+        "commit": {
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "PASS",
+            "FAIL",
+            "UNCHECKED"
+          ]
+        },
+        "evidence_sha256": {
+          "$ref": "#/$defs/hash"
+        }
+      }
+    },
+    "recommendation": {
+      "type": "string"
+    },
+    "agent_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "rule_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "knowledge_version": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "$defs": {
+    "hash": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "file",
+        "line",
+        "end_line",
+        "snippet_hash",
+        "file_sha256",
+        "symbol"
+      ],
+      "properties": {
+        "file": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$)).+$"
+        },
+        "line": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "end_line": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "snippet_hash": {
+          "$ref": "#/$defs/hash"
+        },
+        "file_sha256": {
+          "$ref": "#/$defs/hash"
+        },
+        "symbol": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "VERIFIED"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "source": {
+            "$ref": "#/$defs/reference"
+          },
+          "dataflow": {
+            "minItems": 2
+          },
+          "protection": {
+            "properties": {
+              "status": {
+                "enum": [
+                  "ABSENT",
+                  "INEFFECTIVE"
+                ]
+              },
+              "evidence": {
+                "minItems": 1
+              }
+            }
+          },
+          "reachability": {
+            "const": "PRODUCTION_REACHABLE"
+          },
+          "rules_applied": {
+            "minItems": 1
+          },
+          "evidence_integrity": {
+            "properties": {
+              "status": {
+                "const": "PASS"
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

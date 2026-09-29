@@ -1,0 +1,39 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "pythonPath",
+    "applicationRoot",
+    "workspaces"
+  ],
+  "properties": {
+    "pythonPath": {
+      "type": "string",
+      "pattern": "^/"
+    },
+    "applicationRoot": {
+      "type": "string",
+      "pattern": "^/"
+    },
+    "workspaces": {
+      "type": "string",
+      "pattern": "^/"
+    },
+    "repoEndpoint": {
+      "type": "string",
+      "pattern": "^http://[a-z][a-z0-9-]*:[0-9]+$"
+    },
+    "staticEndpoint": {
+      "type": "string",
+      "pattern": "^http://[a-z][a-z0-9-]*:[0-9]+$"
+    }
+  },
+  "dependentRequired": {
+    "repoEndpoint": [
+      "staticEndpoint"
+    ],
+    "staticEndpoint": [
+      "repoEndpoint"
+    ]
+  }
+}

@@ -1,0 +1,4 @@
+- rule_id: KB-SPRING-REQUEST-PARAM
+  category: SQL_INJECTION
+  description: A RequestParam on a mapped Controller method is an input candidate.
+  decision: REQUIRE_MAPPED_CONTROLLER

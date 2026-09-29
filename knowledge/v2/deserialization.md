@@ -1,0 +1,2 @@
+# Unsafe deserialization
+Trace attacker bytes into an object-capable decoder; JSON parsing alone does not establish code execution. Check pickle, Java ObjectInputStream and type-enabled serializers for allowed classes, signature verification BEFORE decoding, source authenticity and reachable gadget/environment assumptions. Distinguish an unsafe primitive from a demonstrated arbitrary-code exploit. Unknown gadget availability limits impact confidence; lack of dependency code limits conclusions. Reject only with cited effective restrictions on the actual decoding path.

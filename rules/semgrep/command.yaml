@@ -1,0 +1,10 @@
+rules:
+  - id: java-command-execution
+    languages: [java]
+    severity: WARNING
+    message: Command execution candidate; independent argv and source proof required.
+    metadata:
+      category: COMMAND_INJECTION
+    pattern-either:
+      - pattern: Runtime.getRuntime().exec(...)
+      - pattern: new ProcessBuilder(...).start()

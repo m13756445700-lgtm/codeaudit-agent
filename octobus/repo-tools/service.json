@@ -1,0 +1,15 @@
+{
+  "schema": "chaitin.octobus.service.v1",
+  "name": "codeaudit-repo-tools",
+  "displayName": "V2 bounded repository capabilities",
+  "proto": {
+    "roots": [
+      "proto"
+    ],
+    "files": [
+      "proto/tools.proto"
+    ]
+  },
+  "configSchema": "config.schema.json",
+  "secretSchema": "secret.schema.json"
+}

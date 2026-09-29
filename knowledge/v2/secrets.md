@@ -1,0 +1,2 @@
+# Secrets and exposure
+Distinguish examples/placeholders from credentials used by live configuration. Never print complete suspected credentials in report prose. Cite location and redacted value; if evidence cannot be safely exported retain it in private source snapshot. Trace actual use and exposure/response/log boundary. Entropy alone is a candidate signal, not proof of active credentials. Revocation status cannot be learned by testing third-party services; advise owner review and rotation without claiming verified compromise.

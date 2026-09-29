@@ -1,0 +1,214 @@
+services:
+  octobus:
+    image: codeaudit-final:2.0
+    entrypoint:
+    - octobus
+    command:
+    - serve
+    restart: unless-stopped
+    init: true
+    cap_drop:
+    - ALL
+    security_opt:
+    - no-new-privileges:true
+    mem_limit: 512m
+    cpus: 0.5
+    environment:
+      HOME: /var/lib/octobus
+      NPM_CONFIG_CACHE: /var/lib/octobus/.npm
+      OCTOBUS_ADDR: 0.0.0.0:9000
+      OCTOBUS_DATA_DIR: /var/lib/octobus
+    ports:
+    - ${CODEAUDIT_BIND_ADDRESS:-127.0.0.1}:${CODEAUDIT_MCP_PORT:-19013}:9000
+    networks:
+    - default
+    - capabilities
+    depends_on:
+      repo-tools:
+        condition: service_healthy
+      static-analysis:
+        condition: service_healthy
+      workspace-init:
+        condition: service_completed_successfully
+    volumes:
+    - octobus-data:/var/lib/octobus
+    - type: volume
+      source: agent-data
+      target: /workspaces
+      volume:
+        subpath: sandboxes/codeaudit-v2-workspaces
+    healthcheck:
+      test:
+      - CMD
+      - octobus
+      - status
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 10s
+    build:
+      context: .
+  repo-tools:
+    image: codeaudit-final:2.0
+    entrypoint:
+    - /opt/codeaudit-venv/bin/python
+    - -m
+    - agent.v2.capability_server
+    - repo-tools
+    restart: unless-stopped
+    init: true
+    networks:
+    - capabilities
+    cap_drop:
+    - ALL
+    security_opt:
+    - no-new-privileges:true
+    read_only: true
+    tmpfs:
+    - /tmp:size=64m
+    mem_limit: 512m
+    cpus: 0.5
+    environment:
+      CODEAUDIT_WORKSPACES: /workspaces
+      PYTHONDONTWRITEBYTECODE: 1
+    volumes:
+    - type: volume
+      source: agent-data
+      target: /workspaces
+      read_only: true
+      volume:
+        subpath: sandboxes/codeaudit-v2-workspaces
+    healthcheck:
+      test:
+      - CMD
+      - /opt/codeaudit-venv/bin/python
+      - -c
+      - import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/health',
+        timeout=3)
+      interval: 10s
+      timeout: 5s
+      retries: 6
+    depends_on:
+      workspace-init:
+        condition: service_completed_successfully
+  static-analysis:
+    image: codeaudit-final:2.0
+    entrypoint:
+    - /opt/codeaudit-venv/bin/python
+    - -m
+    - agent.v2.capability_server
+    - static-analysis
+    restart: unless-stopped
+    init: true
+    networks:
+    - capabilities
+    cap_drop:
+    - ALL
+    security_opt:
+    - no-new-privileges:true
+    read_only: true
+    tmpfs:
+    - /tmp:size=128m
+    mem_limit: 2048m
+    cpus: 2
+    environment:
+      CODEAUDIT_WORKSPACES: /workspaces
+      PYTHONDONTWRITEBYTECODE: 1
+      HOME: /tmp
+    volumes:
+    - type: volume
+      source: agent-data
+      target: /workspaces
+      volume:
+        subpath: sandboxes/codeaudit-v2-workspaces
+    healthcheck:
+      test:
+      - CMD
+      - /opt/codeaudit-venv/bin/python
+      - -c
+      - import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/health',
+        timeout=3)
+      interval: 10s
+      timeout: 5s
+      retries: 6
+    depends_on:
+      workspace-init:
+        condition: service_completed_successfully
+  codeaudit-agent:
+    image: codeaudit-final:2.0
+    profiles:
+    - audit
+    env_file:
+    - .env
+    - .runtime.env
+    environment:
+      CODEAUDIT_MCP_URL: http://octobus:9000/capsets/codeaudit-v2/mcp
+      CODEAUDIT_WORKSPACES: /workspaces
+    volumes:
+    - type: volume
+      source: agent-data
+      target: /workspaces
+      volume:
+        subpath: sandboxes/codeaudit-v2-workspaces
+    cap_drop:
+    - ALL
+    security_opt:
+    - no-new-privileges:true
+    mem_limit: 1024m
+    cpus: 1
+    depends_on:
+      octobus:
+        condition: service_healthy
+      workspace-init:
+        condition: service_completed_successfully
+    entrypoint:
+    - codeaudit
+  workspace-init:
+    image: codeaudit-final:2.0
+    entrypoint:
+    - mkdir
+    - -p
+    - /data/sandboxes/codeaudit-v2-workspaces
+    volumes:
+    - agent-data:/data
+    network_mode: none
+    restart: 'no'
+  agent-compose:
+    image: ghcr.io/chaitin/agent-compose@sha256:3117226250256b03d25815bd1bb584ade5ac225b83f55d527be122b8b75a61e8
+    command:
+    - daemon
+    restart: unless-stopped
+    environment:
+      HTTP_LISTEN: 0.0.0.0:7410
+      DATA_ROOT: /data
+      DOCKER_HOST_SANDBOX_ROOT: ${CODEAUDIT_SANDBOX_ROOT:?Run scripts/start.sh first}
+      AGENT_COMPOSE_RUNTIME_BASE_URL: ${CODEAUDIT_RUNTIME_URL}
+      AGENT_COMPOSE_AUTH_TOKEN: ${CODEAUDIT_DAEMON_TOKEN}
+      DEFAULT_IMAGE: codeaudit-final:2.0
+      RUNTIME_DRIVER: docker
+      AGENT_TIMEOUT: 900s
+    ports:
+    - ${CODEAUDIT_BIND_ADDRESS:-127.0.0.1}:${CODEAUDIT_DAEMON_PORT:-17420}:7410
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - agent-data:/data
+    depends_on:
+      workspace-init:
+        condition: service_completed_successfully
+    healthcheck:
+      test:
+      - CMD
+      - agent-compose
+      - status
+      interval: 10s
+      timeout: 5s
+      retries: 6
+    mem_limit: 1024m
+    cpus: 1
+volumes:
+  octobus-data: null
+  agent-data:
+    name: ${COMPOSE_PROJECT_NAME:-codeaudit-final}-agent-data
+networks:
+  capabilities:
+    internal: true

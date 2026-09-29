@@ -1,0 +1,8 @@
+rules:
+  - id: java-http-url
+    languages: [java]
+    severity: WARNING
+    message: HTTP URL candidate requires independent source and protection proof.
+    metadata:
+      category: SSRF
+    pattern: $CLIENT.getForObject(...)

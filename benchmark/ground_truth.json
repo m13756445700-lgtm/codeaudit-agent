@@ -1,0 +1,144 @@
+[
+  {
+    "id": "cross-file-flow",
+    "category": "command_injection",
+    "status": "CONFIRMED",
+    "file": "worker.py",
+    "sink": "subprocess.check_output",
+    "cross_file": true
+  },
+  {
+    "id": "false-positive",
+    "category": "sql_injection",
+    "status": "SAFE",
+    "file": "UserMapper.xml",
+    "sink": "${column}",
+    "static_false_positive": true
+  },
+  {
+    "id": "python-sql-raw",
+    "category": "sql_injection",
+    "status": "CONFIRMED",
+    "file": "app.py",
+    "sink": "con.execute"
+  },
+  {
+    "id": "python-sql-bound",
+    "category": "sql_injection",
+    "status": "SAFE",
+    "file": "app.py",
+    "sink": "con.execute"
+  },
+  {
+    "id": "python-argv",
+    "category": "command_injection",
+    "status": "SAFE",
+    "file": "app.py",
+    "sink": "subprocess.check_output"
+  },
+  {
+    "id": "python-url",
+    "category": "ssrf",
+    "status": "CONFIRMED",
+    "file": "app.py",
+    "sink": "requests.get"
+  },
+  {
+    "id": "python-fixed-url",
+    "category": "ssrf",
+    "status": "SAFE",
+    "file": "app.py",
+    "sink": "requests.get"
+  },
+  {
+    "id": "python-file",
+    "category": "path_traversal",
+    "status": "CONFIRMED",
+    "file": "app.py",
+    "sink": "read_text"
+  },
+  {
+    "id": "python-fixed-file",
+    "category": "path_traversal",
+    "status": "SAFE",
+    "file": "app.py",
+    "sink": "read_text"
+  },
+  {
+    "id": "node-shell",
+    "category": "command_injection",
+    "status": "CONFIRMED",
+    "file": "app.js",
+    "sink": "cp.exec"
+  },
+  {
+    "id": "node-argv",
+    "category": "command_injection",
+    "status": "SAFE",
+    "file": "app.js",
+    "sink": "cp.execFile"
+  },
+  {
+    "id": "node-sql-raw",
+    "category": "sql_injection",
+    "status": "CONFIRMED",
+    "file": "app.js",
+    "sink": "db.prepare"
+  },
+  {
+    "id": "node-sql-bound",
+    "category": "sql_injection",
+    "status": "SAFE",
+    "file": "app.js",
+    "sink": "db.prepare"
+  },
+  {
+    "id": "go-shell",
+    "category": "command_injection",
+    "status": "CONFIRMED",
+    "file": "main.go",
+    "sink": "exec.Command"
+  },
+  {
+    "id": "go-argv",
+    "category": "command_injection",
+    "status": "SAFE",
+    "file": "main.go",
+    "sink": "exec.Command"
+  },
+  {
+    "id": "go-url",
+    "category": "ssrf",
+    "status": "CONFIRMED",
+    "file": "main.go",
+    "sink": "http.Get"
+  },
+  {
+    "id": "go-fixed-url",
+    "category": "ssrf",
+    "status": "SAFE",
+    "file": "main.go",
+    "sink": "client.Get"
+  },
+  {
+    "id": "java-runtime-string",
+    "category": "command_injection",
+    "status": "SAFE",
+    "file": "EchoController.java",
+    "sink": "Runtime.getRuntime().exec"
+  },
+  {
+    "id": "java-shell-array",
+    "category": "command_injection",
+    "status": "CONFIRMED",
+    "file": "EchoController.java",
+    "sink": "Runtime.getRuntime().exec"
+  },
+  {
+    "id": "python-template",
+    "category": "template_injection",
+    "status": "CONFIRMED",
+    "file": "app.py",
+    "sink": "render_template_string"
+  }
+]

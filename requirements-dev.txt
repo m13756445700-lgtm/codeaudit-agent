@@ -1,0 +1,7 @@
+jsonschema==4.23.0
+PyYAML==6.0.2
+pytest==8.3.5
+semgrep==1.99.0
+opentelemetry-instrumentation-requests==0.46b0
+javalang==0.13.0
+defusedxml==0.7.1

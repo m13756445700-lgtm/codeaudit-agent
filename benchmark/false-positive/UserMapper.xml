@@ -1,0 +1,5 @@
+<mapper namespace="UserMapper">
+  <select id="users" resultType="map">
+    SELECT id, name FROM users ORDER BY ${column}
+  </select>
+</mapper>

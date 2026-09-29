@@ -1,0 +1,15 @@
+.git
+.internal
+.env
+.env.*
+.runtime.env
+**/__pycache__
+**/*.pyc
+**/.pytest_cache
+**/node_modules
+runs
+workspaces
+reports
+*.pem
+*.key
+.DS_Store

@@ -1,0 +1,26 @@
+name: codeaudit-final
+env_file:
+- .env
+- .runtime.env
+agents:
+  auditor:
+    provider: codex
+    image: codeaudit-final:2.0
+    driver:
+      docker: {}
+    env:
+      PYTHONPATH: /opt/codeaudit
+      CODEAUDIT_WORKSPACES: /workspaces
+      CODEAUDIT_MCP_URL: ${CODEAUDIT_MCP_URL}
+      CODEAUDIT_OCTOBUS_TOKEN:
+        value: ${CODEAUDIT_OCTOBUS_TOKEN}
+        secret: true
+      CODEAUDIT_LLM_API_ENDPOINT: ${LLM_API_ENDPOINT}
+      CODEAUDIT_LLM_MODEL: ${LLM_MODEL}
+      CODEAUDIT_LLM_API_KEY:
+        value: ${LLM_API_KEY}
+        secret: true
+    volumes:
+    - type: bind
+      source: /data/sandboxes/codeaudit-v2-workspaces
+      target: /workspaces

@@ -1,0 +1,2 @@
+# Upload boundary
+Trace filename and content separately, decode order, generated storage names, root confinement, size and extension/content validation. Content-Type is client-controlled. An arbitrary stored file is not automatically executable: inspect serving routes, interpreter mappings and permissions. Cross-reference path traversal and authz. Cite storage and retrieval when claiming exposure. A random server filename outside webroot may reject execution while leaving quota/content risks; do not collapse categories.

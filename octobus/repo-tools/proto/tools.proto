@@ -1,0 +1,5 @@
+syntax = "proto3";
+package codeaudit.v2;
+message ToolRequest { string request_json = 1; }
+message ToolResponse { string result_json = 1; }
+service RepositoryTools { rpc ExecuteTool(ToolRequest) returns (ToolResponse); }
