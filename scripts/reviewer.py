@@ -22,7 +22,7 @@ def run(argv, capture=False):
 def main():
     args = sys.argv[1:]
     if not args:
-        raise SystemExit('Usage: sudo codeaudit-review status|projects|triggers|runs|methods|trigger|audit HTTPS_URL|report [AUDIT_ID]')
+        raise SystemExit('Usage: sudo codeaudit-review status|projects|triggers|runs|methods|trigger|audit HTTPS_URL|report [AUDIT_ID]|trace AUDIT_ID')
     action = args[0]
     commands = {'status': COMPOSE + ['ps'], 'projects': AGENT + ['project', 'ls'],
                 'triggers': AGENT + ['scheduler', 'ls'], 'runs': AGENT + ['scheduler', 'runs', '--limit', '10'],
@@ -37,7 +37,7 @@ def main():
             raise SystemExit('Use a public https://github.com/owner/repository URL; other inputs require the documented operator CLI.')
         import shlex
         run(AGENT + ['run', 'auditor', '--command', shlex.join(['/opt/codeaudit-venv/bin/python', '/opt/codeaudit/scripts/run-agent.py', args[1], '--keep-source'])]); return
-    if action == 'report' and len(args) in (1, 2):
+    if (action == 'report' and len(args) in (1, 2)) or (action == 'trace' and len(args) == 2):
         volume = json.loads(run(COMPOSE + ['config', '--format', 'json'], True).stdout)['volumes']['agent-data']['name']
         mount = Path(run(['/usr/bin/docker', 'volume', 'inspect', volume, '--format', '{{.Mountpoint}}'], True).stdout.strip())
         base = mount/'sandboxes/codeaudit-v2-workspaces'
@@ -47,7 +47,7 @@ def main():
         if not candidates:
             raise SystemExit('No matching completed/partial audit output')
         audit = max(candidates, key=lambda p: (p/'run_summary.json').stat().st_mtime)
-        for name in ['run_summary.json', 'report.md', 'audit_plan.json', 'surface_reviews.json']:
+        for name in (['tool_calls.jsonl', 'knowledge_used.json'] if action == 'trace' else ['run_summary.json', 'report.md', 'audit_plan.json', 'surface_reviews.json']):
             path = audit/name
             if path.is_file() and not path.is_symlink():
                 print('\n--- ' + audit.name + '/' + name + ' ---\n' + path.read_text()[:60000])

@@ -40,7 +40,7 @@ sudo codeaudit-review trigger
 sudo codeaudit-review audit https://github.com/OWNER/REPO.git
 ```
 
-`trigger` 启动同一个 V2 Engine；每日北京时间 09:00 的定时任务审计随镜像固定的跨文件回归仓库。报告含真实 MCP 调用、模型判断、覆盖与限制；没有完成记录时明确报错。`report AUDIT_ID` 可选取历史记录。服务器当前部署目录 `/opt/codeaudit-v2`；私密配置不可供考官读取。
+`trigger` 启动同一个 V2 Engine；每日北京时间 09:00 的定时任务审计随镜像固定的跨文件回归仓库。报告含真实 MCP 调用、模型判断、覆盖与限制；没有完成记录时明确报错。`report AUDIT_ID` 可选取历史记录，`trace AUDIT_ID` 查看工具与知识记录（输出有长度上限）。服务器当前部署目录 `/opt/codeaudit-v2`；私密配置不可供考官读取。
 
 ## Quick Start
 
