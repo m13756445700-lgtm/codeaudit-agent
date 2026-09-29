@@ -29,7 +29,11 @@ def test_coverage_uses_reads_not_completion_claim(tmp_path):
     engine.dispatch('submit_plan', {'plan': {'attack_surfaces': ['input'], 'next_actions': ['read']}})
     engine.dispatch('use_tool', {'tool': 'repo.read_range', 'arguments': {'path': 'a.py', 'start': 1, 'end': 1}, 'purpose': 'read'})
     with pytest.raises(ValueError): engine.dispatch('finish', {'summary': 'all safe'})
-    engine.dispatch('finish', {'summary': 'all safe', 'limitations': []})
+    with pytest.raises(ValueError, match='surface_reviews'):
+        engine.dispatch('finish', {'summary': 'all safe', 'limitations': []})
+    engine.dispatch('finish', {'summary': 'Limited investigation', 'limitations': ['Input surface not investigated'],
+        'surface_reviews': [{'surface': 'input', 'status': 'deferred', 'files': [], 'reason': 'Budget ended before b.py'}]})
+    assert engine.status == 'PARTIAL'
     coverage = engine.coverage()
     assert coverage['files_read'] == 1 and coverage['files_total'] == 2
     assert coverage['distinct_lines_read'] == 1
@@ -82,3 +86,34 @@ def test_static_snapshot_adapter_retains_real_v1_verified_and_detects_tamper(tmp
     changed = evaluate(repo, metadata, [signal])
     assert changed['findings'][0]['status'] == 'NEEDS_REVIEW'
     assert changed['findings'][0]['evidence_integrity']['status'] == 'FAIL'
+
+
+def test_completion_cannot_drop_surfaces_or_cite_unread_files(tmp_path):
+    src = tmp_path / 'src'; src.mkdir()
+    (src / 'a.py').write_text('x = 1\n')
+    (src / 'b.py').write_text('eval(input())\n')
+    audit, metadata = snapshot(src, tmp_path / 'ws')
+    engine = Engine(None, Local(ToolLayer(audit)), audit, metadata, profile(audit/'repo'))
+    for surfaces in (['entry', 'execution'], ['entry']):
+        engine.dispatch('submit_plan', {'plan': {'attack_surfaces': surfaces, 'next_actions': ['read']}})
+    engine.dispatch('use_tool', {'tool': 'repo.read_file', 'arguments': {'path': 'a.py'}, 'purpose': 'inspect'})
+    reviews = [{'surface': 'entry', 'status': 'reviewed', 'files': ['a.py'], 'reason': 'Read entry'}]
+    with pytest.raises(ValueError, match='Unsettled'):
+        engine.dispatch('finish', {'summary': 'done', 'limitations': [], 'surface_reviews': reviews})
+    reviews.append({'surface': 'execution', 'status': 'reviewed', 'files': ['b.py'], 'reason': 'claimed'})
+    with pytest.raises(ValueError, match='actually read'):
+        engine.dispatch('finish', {'summary': 'done', 'limitations': [], 'surface_reviews': reviews})
+    assert not engine.finished
+
+
+def test_decision_requires_knowledge_application_before_gate(tmp_path):
+    src = tmp_path / 'src'; src.mkdir()
+    (src / 'a.py').write_text('x = 1\n')
+    audit, metadata = snapshot(src, tmp_path / 'ws')
+    engine = Engine(None, Local(ToolLayer(audit)), audit, metadata, profile(audit/'repo'))
+    engine.dispatch('submit_plan', {'plan': {'attack_surfaces': ['entry'], 'next_actions': ['read']}})
+    engine.dispatch('hypothesis', {'hypothesis': {'id': 'h1', 'statement': 'check', 'status': 'NEW'}})
+    with pytest.raises(ValueError, match='Explain how knowledge'):
+        engine.dispatch('submit_decision', {'finding': {'id': 'h1'}})
+    with pytest.raises(ValueError, match='Retrieve relevant knowledge'):
+        engine.dispatch('submit_decision', {'finding': {'id': 'h1', 'knowledge_application': 'not consulted'}})

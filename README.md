@@ -16,6 +16,32 @@ flowchart LR
 
 模型负责调查方向和安全语义；确定性工具负责获取事实和校验。即使 Semgrep 无候选，模型也可提出跨文件假设；工具不会替模型确认漏洞。Gate 只能拒绝或降级证据不完整的判断，不能把未知提升为确认。
 
+## 考官连接与提交信息
+
+公开仓库：[CodeAudit Agent V2](https://github.com/m13756445700-lgtm/codeaudit-agent)，提交分支 `main`。
+
+服务器：`8.130.121.3`；用户名：`codeaudit-reviewer`；SSH 端口：`22`。考官提供的公钥已安装在该账户的 `authorized_keys`，请使用对应私钥登录：
+
+```bash
+ssh -p 22 -i /path/to/examiner_private_key codeaudit-reviewer@8.130.121.3
+```
+
+私钥由考官自行保管，不需要上传到 GitHub 或服务器。模型密钥与内部服务令牌仅留在服务器私密配置中。登录后使用以下受限入口，无需 root 或 Docker 权限：
+
+```bash
+sudo codeaudit-review status
+sudo codeaudit-review projects
+sudo codeaudit-review triggers
+sudo codeaudit-review methods
+sudo codeaudit-review runs
+sudo codeaudit-review report
+sudo codeaudit-review trigger
+# 也可审计新的公开仓库
+sudo codeaudit-review audit https://github.com/OWNER/REPO.git
+```
+
+`trigger` 启动同一个 V2 Engine；每日北京时间 09:00 的定时任务审计随镜像固定的跨文件回归仓库。报告含真实 MCP 调用、模型判断、覆盖与限制；没有完成记录时明确报错。`report AUDIT_ID` 可选取历史记录。服务器当前部署目录 `/opt/codeaudit-v2`；私密配置不可供考官读取。
+
 ## Quick Start
 
 需要 Docker Engine/Desktop、Docker Compose v2（支持 `volume.subpath`）、Python 3.9+、Git，以及支持 tools/function calling 的 OpenAI-compatible Chat Completions 模型。建议 4 CPU、8 GiB RAM，预留 15 GiB Docker 磁盘空间；首次构建需要访问 GHCR、Debian、PyPI 和 npm。
@@ -59,7 +85,7 @@ docker compose --env-file .env --env-file .runtime.env run --rm \
 5. Gate 核对实际读记录、文件哈希、行号和字面证据；模型继续补证或完成调查。
 6. 输出 `report.md`、`findings.json`、`coverage.json`、计划、模型调用及工具 Trace。
 
-`COMPLETE` 仅表示有界调查结束。必须同时查看未读文件和未知事实，不能解释成整个仓库安全。
+`COMPLETE` 仅表示计划攻击面已逐项结算的有界调查结束；明确延期的攻击面产生 `PARTIAL`，预算或执行失败产生 `INCOMPLETE`。必须同时查看未读文件和未知事实，不能解释成整个仓库安全。
 
 agent-compose 真正创建 Docker 沙箱并执行 Python Engine；`provider: codex` 是运行配置，不意味着另一个 Codex 模型替 Engine 裁决。Engine 使用 `.env` 中指定的模型。OctoBus 通过真实 MCP 鉴权/能力路由调用两个内部 HTTP worker；不是空配置或截图占位。[架构详解](docs/ARCHITECTURE.md)。
 
@@ -98,3 +124,5 @@ docs/                 架构、部署、演示、安全
 ## Known Limitations
 
 这是可信单操作者的辅助审计系统，不是多租户平台。多语言词法导航不等于完整调用图；模型可误判、漏判，部署和第三方依赖事实可能未知。固定规则主要覆盖 Java/Spring/MyBatis 及有限模式；Python/JS/Go 的样例通过不等于完整语言语义支持。20 个人工样例、单次知识 ON/OFF 和公共示例不足以证明普遍准确率。超限可能失败或 `INCOMPLETE`；不执行漏洞利用。报告和原始证据可能包含私有源码，应按敏感数据保存。[安全边界](docs/SECURITY.md)。
+
+整改过程、实际遇到的问题与验证边界见 [提交整改记录](docs/REMEDIATION.md)。

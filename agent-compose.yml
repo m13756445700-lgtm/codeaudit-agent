@@ -24,3 +24,20 @@ agents:
     - type: bind
       source: /data/sandboxes/codeaudit-v2-workspaces
       target: /workspaces
+    scheduler:
+      enabled: true
+      script: |
+        function audit() {
+          const result = scheduler.exec({
+            command: "/opt/codeaudit-venv/bin/python",
+            args: ["/opt/codeaudit/scripts/run-agent.py", "/opt/codeaudit/benchmark/cross-file-flow", "--keep-source"],
+            timeoutMs: 960000,
+            maxOutputBytes: 16384,
+            sandboxPolicy: "new"
+          });
+          scheduler.log("CodeAudit V2 Engine completed", result);
+          if (!result.success) throw new Error("V2 audit failed; inspect scheduler logs");
+          return result;
+        }
+        function main(payload) { return audit(); }
+        scheduler.cron("daily-v2-audit", "0 9 * * *", audit, {timezone: "Asia/Shanghai"});

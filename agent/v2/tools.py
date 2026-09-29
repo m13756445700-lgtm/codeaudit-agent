@@ -4,6 +4,7 @@ import re
 from pathlib import Path
 from agent.v2.repository import safe_path, files, digest
 from agent.scanner.semgrep import scan
+from agent.v2.navigation import navigate
 
 NAMES = ['repo.list_files', 'repo.tree', 'repo.read_file', 'repo.read_range', 'repo.search',
          'repo.find_symbol', 'repo.find_references', 'repo.find_callers', 'repo.find_callees',
@@ -79,6 +80,10 @@ class ToolLayer:
             if not isinstance(query, str) or not 1 <= len(query) <= 120:
                 raise ValueError('Literal query required (1–120 chars)')
             queries = [query]
+        if name in ('repo.find_symbol', 'repo.find_callers', 'repo.find_callees', 'code.call_graph'):
+            result = navigate(self.repo, self.metadata, name, query)
+            if result['matches'] or any(p.endswith('.py') for p in paths):
+                return result
         hits = []
         for path in paths:
             raw = safe_path(self.repo, path).read_bytes()

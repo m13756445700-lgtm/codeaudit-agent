@@ -13,3 +13,5 @@ reports
 *.pem
 *.key
 .DS_Store
+
+**/._*

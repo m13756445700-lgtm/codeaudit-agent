@@ -22,7 +22,7 @@ Decision statuses: CONFIRMED, LIKELY, REJECTED, INSUFFICIENT_EVIDENCE. Explicitl
 Every decision MUST contain: id (matching hypothesis), title, category, status, source, data_flow (nonempty array),
 sink, sanitizer_analysis, exploit_preconditions (array), reachability, reasoning_summary, false_positive_analysis,
 remediation, confidence, severity, knowledge_used (array of returned document IDs), controllability,
-security_boundary, confidence_rationale, unknowns (array of missing facts), counter_evidence (array of code references).
+security_boundary, confidence_rationale, knowledge_application (specific effect on this decision or explicit unavailable/not-applicable reason), unknowns (array of missing facts), counter_evidence (array of code references).
 Counter evidence cites protections or contradictory code you actually read; empty only if none was found, explain why.
 Never base a confirmed impact on hypothetical future code changes.
 For configuration-only claims retrieve vulnerability_judgement knowledge and verify deployment reachability and concrete impact; unknown exposure is not confirmed compromise.
@@ -30,6 +30,7 @@ Source, sink AND EACH data_flow item: {file,line,symbol,evidence,operation}. Evi
 at the SINGLE cited line, symbol must literally occur in file. Cite only lines YOU READ, not guessed search snippets.
 Explain absence or effectiveness of sanitizer in sanitizer_analysis. Gate validates references, not your judgment.
 Use submit_decision for both confirmed and rejected hypotheses. Correct rejected evidence references if Gate fails.
+At finish, settle EVERY planned attack surface in surface_reviews: surface (exact planned name), status reviewed or deferred, files (actually read paths), and reason. Deferred surfaces require limitations and yield PARTIAL. Reviewed surfaces require read evidence. Never silently drop surfaces when revising a plan.
 Review uncovered attack surfaces then finish with scope and limitations; don't claim entire repo safe from sample reads.
 Batch independent reads if useful. Budget is finite; use focused reads, stop unnecessary exploration once evidence complete.
 '''
@@ -46,7 +47,7 @@ REFERENCE = {'type': 'object', 'properties': {'file': STRING, 'line': {'type': '
     'required': ['file', 'line', 'symbol', 'evidence'], 'additionalProperties': False}
 DECISION_FIELDS = {key: STRING for key in ('id', 'title', 'category', 'sanitizer_analysis',
     'reachability', 'reasoning_summary', 'false_positive_analysis', 'remediation', 'confidence',
-    'severity', 'controllability', 'security_boundary', 'confidence_rationale')}
+    'severity', 'controllability', 'security_boundary', 'confidence_rationale', 'knowledge_application')}
 DECISION_FIELDS.update(status={'type': 'string', 'enum': ['CONFIRMED', 'LIKELY', 'REJECTED', 'INSUFFICIENT_EVIDENCE']},
     source=REFERENCE, sink=REFERENCE, data_flow={'type': 'array', 'items': REFERENCE},
     counter_evidence={'type': 'array', 'items': REFERENCE})
@@ -69,7 +70,12 @@ TOOLS = [
     function('submit_decision', 'AI security judgment with complete code references. Gate cannot invent a verdict.',
              {'finding': DECISION}, ['finding']),
     function('finish', 'Finish after investigating hypotheses; explicitly state coverage limitations.',
-             {'summary': STRING, 'limitations': {'type': 'array', 'items': STRING}}, ['summary', 'limitations'])
+             {'summary': STRING, 'limitations': {'type': 'array', 'items': STRING},
+              'surface_reviews': {'type': 'array', 'items': {'type': 'object', 'properties': {
+                  'surface': STRING, 'status': {'type': 'string', 'enum': ['reviewed', 'deferred']},
+                  'files': {'type': 'array', 'items': STRING}, 'reason': STRING},
+                  'required': ['surface', 'status', 'files', 'reason'], 'additionalProperties': False}}},
+             ['summary', 'limitations', 'surface_reviews'])
 ]
 
 
@@ -83,6 +89,7 @@ class Engine:
         self.progress = progress
         self.receipts, self.knowledge, self.hypotheses, self.findings = [], {}, {}, {}
         self.plan = None
+        self.planned_surfaces = set()
         self.calls = 0
         self.finished = False
         self.status = 'RUNNING'
@@ -113,6 +120,10 @@ class Engine:
             plan = args['plan']
             if not isinstance(plan, dict) or not plan.get('attack_surfaces') or not plan.get('next_actions'):
                 raise ValueError('Plan needs repository-specific attack_surfaces and next_actions')
+            surfaces = plan['attack_surfaces']
+            if not isinstance(surfaces, list) or any(not isinstance(v, str) or not v.strip() for v in surfaces):
+                raise ValueError('Attack surfaces must be nonempty strings')
+            self.planned_surfaces.update(surfaces)
             self.plan = plan
             self.save('audit_plan.json', plan)
             self.event({'tool': name, 'arguments': args, 'purpose': 'AI audit planning', 'result_summary': {'accepted': True}})
@@ -143,6 +154,11 @@ class Engine:
             f = args['finding']
             if f.get('id') not in self.hypotheses:
                 raise ValueError('Create hypothesis before decision')
+            application = f.get('knowledge_application')
+            if not isinstance(application, str) or not application.strip():
+                raise ValueError('Explain how knowledge affected this judgment, or why it is unavailable/not applicable')
+            if self.use_knowledge and not f.get('knowledge_used'):
+                raise ValueError('Retrieve relevant knowledge and cite its returned ID before judgment; explain any applicability boundary')
             checked = validate(f, self.audit / 'repo', self.metadata, self.receipts, self.knowledge)
             previous = self.findings.get(f['id'])
             if previous and previous['evidence_gate']['passed'] and not checked['evidence_gate']['passed']:
@@ -167,8 +183,37 @@ class Engine:
             unresolved = [h['id'] for h in self.hypotheses.values() if h['status'] in ('NEW', 'INVESTIGATING')]
             if unresolved:
                 raise ValueError('Unresolved hypotheses: ' + ','.join(unresolved))
+            reviews = args.get('surface_reviews')
+            if not isinstance(reviews, list):
+                raise ValueError('Settle every planned surface in surface_reviews')
+            seen, read_files, deferred = set(), {r['file'] for r in self.receipts}, False
+            for review in reviews:
+                if not isinstance(review, dict):
+                    raise ValueError('Invalid surface review')
+                surface = review.get('surface')
+                if not isinstance(surface, str) or surface not in self.planned_surfaces or surface in seen:
+                    raise ValueError('Surface must uniquely match a planned attack surface')
+                seen.add(surface)
+                if not isinstance(review.get('reason'), str) or not review['reason'].strip():
+                    raise ValueError('Surface settlement requires an evidence summary or deferral reason')
+                files = review.get('files')
+                if not isinstance(files, list) or any(not isinstance(f, str) or f not in read_files for f in files):
+                    raise ValueError('Surface evidence must reference actually read files')
+                if review.get('status') == 'reviewed':
+                    if not files:
+                        raise ValueError('Reviewed surface requires read evidence')
+                elif review.get('status') == 'deferred':
+                    deferred = True
+                else:
+                    raise ValueError('Surface status must be reviewed or deferred')
+            if seen != self.planned_surfaces:
+                raise ValueError('Unsettled attack surfaces: ' + ', '.join(sorted(self.planned_surfaces - seen)))
+            if deferred and not any(v.strip() for v in args['limitations']):
+                raise ValueError('Deferred surfaces require explicit limitations')
             self.finished = True
             self.completion = args
+            self.status = 'PARTIAL' if deferred else 'COMPLETE'
+            self.save('surface_reviews.json', reviews)
             return {'accepted': True}
         raise ValueError('Unknown action')
 
@@ -202,7 +247,6 @@ class Engine:
                     if self.finished:
                         break
                 if self.finished:
-                    self.status = 'COMPLETE'
                     break
             if not self.finished:
                 raise RuntimeError('Iteration budget exceeded')
