@@ -81,7 +81,7 @@ TOOLS = [
 
 class Engine:
     def __init__(self, model, transport, audit, metadata, profile, max_iterations=48, max_calls=100,
-                 timeout=1200, knowledge=True, progress=None):
+                 timeout=1200, knowledge=True, progress=None, focus=None):
         self.model, self.transport = model, transport
         self.audit, self.metadata, self.profile = Path(audit), metadata, profile
         self.max_iterations, self.max_calls, self.timeout = max_iterations, max_calls, timeout
@@ -100,6 +100,7 @@ class Engine:
         model_profile['navigation_truncated'] = len(profile['files']) > 100
         self.messages = [{'role': 'system', 'content': SYSTEM}, {'role': 'user', 'content': json.dumps({
             'goal': 'Audit this repository. Find real code vulnerabilities and reject false positives.',
+            'operator_scope': focus or 'Prioritize a bounded set of repository-specific risks within budget; clearly state unexamined scope.',
             'profile': model_profile, 'budget': {'iterations': max_iterations, 'calls': max_calls}}, ensure_ascii=False)}]
 
     def save(self, filename, data):
@@ -255,6 +256,11 @@ class Engine:
                 self.compact_context()
                 if len(json.dumps(self.messages)) > 110000:
                     raise RuntimeError('Context budget exceeded; partial findings only')
+                remaining = {'iterations': self.max_iterations - iteration, 'tool_calls': self.max_calls - self.calls}
+                if remaining['iterations'] <= 6 or remaining['tool_calls'] <= 12:
+                    self.messages.append({'role': 'user', 'content': json.dumps({
+                        'execution_budget_remaining': remaining,
+                        'instruction': 'Investigation budget is almost exhausted. Stop broad discovery. Resolve existing hypotheses using read evidence, with INSUFFICIENT_EVIDENCE for missing links. Then finish, deferring unexamined planned surfaces with explicit reasons. Do not claim unread scope is safe.'})})
                 response = self.model.complete(self.messages, TOOLS)
                 self.messages.append(response)
                 calls = response.get('tool_calls') or []

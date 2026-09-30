@@ -1,0 +1,170 @@
+[
+  {
+    "case_mode_repeat": [
+      "3.0.5",
+      true,
+      0
+    ],
+    "audit_id": "3a2d40f0cd944b3393bc32f4f1dee045",
+    "snapshot_sha256": "ca6f54ce58072c67da814d84814be555be978b90013cc12cb96a41a69dc4d0f6",
+    "status": "INCOMPLETE",
+    "failure": "RuntimeError: Iteration budget exceeded",
+    "coverage": {
+      "files_total": 311,
+      "files_read": 10,
+      "distinct_lines_read": 2119,
+      "scope": "tool-observed reads; not semantic audit completeness"
+    },
+    "tool_calls": 95,
+    "elapsed_seconds": 62.27,
+    "tokens": 922146,
+    "findings_count": 0
+  },
+  {
+    "case_mode_repeat": [
+      "3.0.5",
+      true,
+      1
+    ],
+    "audit_id": "ccb28c8d15c740029788126d7884c5d7",
+    "snapshot_sha256": "ca6f54ce58072c67da814d84814be555be978b90013cc12cb96a41a69dc4d0f6",
+    "status": "INCOMPLETE",
+    "failure": "RuntimeError: Iteration budget exceeded",
+    "coverage": {
+      "files_total": 311,
+      "files_read": 8,
+      "distinct_lines_read": 1675,
+      "scope": "tool-observed reads; not semantic audit completeness"
+    },
+    "tool_calls": 70,
+    "elapsed_seconds": 56.44,
+    "tokens": 775827,
+    "findings_count": 0
+  },
+  {
+    "case_mode_repeat": [
+      "3.0.5",
+      false,
+      0
+    ],
+    "audit_id": "127a262e8a204677a1adb734268061de",
+    "snapshot_sha256": "ca6f54ce58072c67da814d84814be555be978b90013cc12cb96a41a69dc4d0f6",
+    "status": "INCOMPLETE",
+    "failure": "RuntimeError: Iteration budget exceeded",
+    "coverage": {
+      "files_total": 311,
+      "files_read": 13,
+      "distinct_lines_read": 2640,
+      "scope": "tool-observed reads; not semantic audit completeness"
+    },
+    "tool_calls": 91,
+    "elapsed_seconds": 61.99,
+    "tokens": 883008,
+    "findings_count": 0
+  },
+  {
+    "case_mode_repeat": [
+      "3.0.5",
+      false,
+      1
+    ],
+    "audit_id": "3f06a3a38f904d69b1fe02e4e0b80e8f",
+    "snapshot_sha256": "ca6f54ce58072c67da814d84814be555be978b90013cc12cb96a41a69dc4d0f6",
+    "status": "INCOMPLETE",
+    "failure": "RuntimeError: Iteration budget exceeded",
+    "coverage": {
+      "files_total": 311,
+      "files_read": 11,
+      "distinct_lines_read": 2637,
+      "scope": "tool-observed reads; not semantic audit completeness"
+    },
+    "tool_calls": 87,
+    "elapsed_seconds": 66.93,
+    "tokens": 907358,
+    "findings_count": 0
+  },
+  {
+    "case_mode_repeat": [
+      "3.0.6",
+      true,
+      0
+    ],
+    "audit_id": "d6bb958fd78e4086b14e1cf8dde43ac5",
+    "snapshot_sha256": "86ef1873bdf393f3f49afb5d9646f4ea77df5a8071dc81e47f909525387c61d6",
+    "status": "INCOMPLETE",
+    "failure": "RuntimeError: Iteration budget exceeded",
+    "coverage": {
+      "files_total": 311,
+      "files_read": 7,
+      "distinct_lines_read": 2259,
+      "scope": "tool-observed reads; not semantic audit completeness"
+    },
+    "tool_calls": 65,
+    "elapsed_seconds": 55.16,
+    "tokens": 829049,
+    "findings_count": 0
+  },
+  {
+    "case_mode_repeat": [
+      "3.0.6",
+      true,
+      1
+    ],
+    "audit_id": "575fead98c164f5a883f9d93eca8fdc9",
+    "snapshot_sha256": "86ef1873bdf393f3f49afb5d9646f4ea77df5a8071dc81e47f909525387c61d6",
+    "status": "INCOMPLETE",
+    "failure": "RuntimeError: Iteration budget exceeded",
+    "coverage": {
+      "files_total": 311,
+      "files_read": 6,
+      "distinct_lines_read": 1712,
+      "scope": "tool-observed reads; not semantic audit completeness"
+    },
+    "tool_calls": 87,
+    "elapsed_seconds": 60.57,
+    "tokens": 860949,
+    "findings_count": 0
+  },
+  {
+    "case_mode_repeat": [
+      "3.0.6",
+      false,
+      0
+    ],
+    "audit_id": "13dcf952997841fba2f42a5991cf0c91",
+    "snapshot_sha256": "86ef1873bdf393f3f49afb5d9646f4ea77df5a8071dc81e47f909525387c61d6",
+    "status": "INCOMPLETE",
+    "failure": "RuntimeError: Iteration budget exceeded",
+    "coverage": {
+      "files_total": 311,
+      "files_read": 4,
+      "distinct_lines_read": 1599,
+      "scope": "tool-observed reads; not semantic audit completeness"
+    },
+    "tool_calls": 62,
+    "elapsed_seconds": 57.16,
+    "tokens": 743738,
+    "findings_count": 0
+  },
+  {
+    "case_mode_repeat": [
+      "3.0.6",
+      false,
+      1
+    ],
+    "audit_id": "0fe7d164f5e7442fa6dc524c2698bf52",
+    "snapshot_sha256": "86ef1873bdf393f3f49afb5d9646f4ea77df5a8071dc81e47f909525387c61d6",
+    "status": "INCOMPLETE",
+    "failure": "RuntimeError: Iteration budget exceeded",
+    "coverage": {
+      "files_total": 311,
+      "files_read": 10,
+      "distinct_lines_read": 2709,
+      "scope": "tool-observed reads; not semantic audit completeness"
+    },
+    "tool_calls": 94,
+    "elapsed_seconds": 61.08,
+    "tokens": 906096,
+    "findings_count": 0
+  }
+]

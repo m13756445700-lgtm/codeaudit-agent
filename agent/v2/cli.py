@@ -19,10 +19,13 @@ def main(argv=None):
     parser.add_argument('--keep-source', action='store_true', help='Retain snapshot for audit replay (otherwise cleaned after run)')
     parser.add_argument('--no-knowledge', action='store_true', help='Knowledge ablation only')
     parser.add_argument('--quiet', action='store_true', help='Suppress progress events on stderr')
+    parser.add_argument('--focus', help='Optional operator-defined audit scope; not evidence or an expected verdict')
     parser.add_argument('--max-iterations', type=int, default=48)
     parser.add_argument('--max-calls', type=int, default=100)
     parser.add_argument('--timeout', type=int, default=1200, help='Audit budget in seconds; a pending model request may add up to its request timeout')
     args = parser.parse_args(argv)
+    if args.focus and len(args.focus) > 1000:
+        parser.error('Focus must be at most 1000 characters')
     if not 1 <= args.max_iterations <= 200 or not 1 <= args.max_calls <= 500 or not 30 <= args.timeout <= 3600:
         parser.error('Budget bounds: iterations 1..200, calls 1..500, timeout 30..3600 seconds')
     def progress(event):
@@ -36,7 +39,7 @@ def main(argv=None):
             os.environ['CODEAUDIT_MCP_URL'], os.environ['CODEAUDIT_OCTOBUS_TOKEN'], audit.name)
         repo_profile = profile(audit / 'repo')
         progress({'event': 'repository_understanding', 'languages': repo_profile['languages'], 'files': metadata['file_count']})
-        result = Engine(model, transport, audit, metadata, repo_profile, knowledge=not args.no_knowledge, progress=progress, max_iterations=args.max_iterations, max_calls=args.max_calls, timeout=args.timeout).run()
+        result = Engine(model, transport, audit, metadata, repo_profile, knowledge=not args.no_knowledge, progress=progress, max_iterations=args.max_iterations, max_calls=args.max_calls, timeout=args.timeout, focus=args.focus).run()
         print(json.dumps({**result, 'report': str(audit / 'report.md')}, ensure_ascii=False))
         return 0 if result['status'] == 'COMPLETE' else 2
     finally:

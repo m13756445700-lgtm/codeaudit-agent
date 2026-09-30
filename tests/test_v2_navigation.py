@@ -26,3 +26,14 @@ def test_dynamic_call_is_explicitly_unresolved(tmp_path):
     result = ToolLayer(audit).call('repo.find_callees', {'query': 'route'})
     assert result['matches'][0]['callee'] is None
     assert result['matches'][0]['resolution'] == 'unresolved'
+
+
+def test_tree_limits_navigation_to_requested_directory(tmp_path):
+    src = tmp_path/'src'; src.mkdir()
+    (src/'pkg').mkdir()
+    (src/'pkg/a.py').write_text('x=1\n')
+    (src/'README.md').write_text('unrelated\n')
+    audit, _ = snapshot(src, tmp_path/'ws')
+    result = ToolLayer(audit).call('repo.tree', {'path': 'pkg'})
+    assert result['files'] == ['pkg/a.py']
+    assert result['total'] == 1

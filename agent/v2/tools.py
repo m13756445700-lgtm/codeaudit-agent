@@ -43,6 +43,11 @@ class ToolLayer:
             raise ValueError('Unknown tool argument')
         paths = sorted(self.metadata['files'])
         if name in ('repo.list_files', 'repo.tree'):
+            if arguments.get('path'):
+                directory = safe_path(self.repo, arguments['path'])
+                prefix = directory.relative_to(self.repo).as_posix()
+                if prefix != '.':
+                    paths = [p for p in paths if p == prefix or p.startswith(prefix.rstrip('/') + '/')]
             offset = arguments.get('offset', 0)
             if type(offset) is not int or offset < 0:
                 raise ValueError('Invalid offset')

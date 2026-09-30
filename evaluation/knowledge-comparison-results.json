@@ -1,0 +1,297 @@
+{
+  "records": [
+    {
+      "case_repeat_arm": [
+        "java-runtime-string",
+        0,
+        "on"
+      ],
+      "audit_id": "5373d4ec54514f099ef1afbf9ea47e7e",
+      "snapshot_sha256": "36947ba086bb7da8e3231ff01d881efda43caf843a7871c81a060aa2c3d1240d",
+      "status": "COMPLETE",
+      "target_judgment_correct": true,
+      "finding_statuses": [
+        "REJECTED"
+      ],
+      "elapsed_seconds": 18.89,
+      "tokens": 46473
+    },
+    {
+      "case_repeat_arm": [
+        "java-runtime-string",
+        0,
+        "off"
+      ],
+      "audit_id": "0477fe32d3814cbaa71bd1fd1411308d",
+      "snapshot_sha256": "36947ba086bb7da8e3231ff01d881efda43caf843a7871c81a060aa2c3d1240d",
+      "status": "COMPLETE",
+      "target_judgment_correct": false,
+      "finding_statuses": [
+        "CONFIRMED"
+      ],
+      "elapsed_seconds": 17.37,
+      "tokens": 36168
+    },
+    {
+      "case_repeat_arm": [
+        "java-runtime-string",
+        0,
+        "generic"
+      ],
+      "audit_id": "86db32100171404f8f86e6cf01b42575",
+      "snapshot_sha256": "36947ba086bb7da8e3231ff01d881efda43caf843a7871c81a060aa2c3d1240d",
+      "status": "COMPLETE",
+      "target_judgment_correct": true,
+      "finding_statuses": [
+        "REJECTED"
+      ],
+      "elapsed_seconds": 17.98,
+      "tokens": 32174
+    },
+    {
+      "case_repeat_arm": [
+        "java-runtime-string",
+        1,
+        "on"
+      ],
+      "audit_id": "b7ebbe704be24b1eb8cee46f7b883a10",
+      "snapshot_sha256": "36947ba086bb7da8e3231ff01d881efda43caf843a7871c81a060aa2c3d1240d",
+      "status": "COMPLETE",
+      "target_judgment_correct": true,
+      "finding_statuses": [
+        "REJECTED",
+        "REJECTED"
+      ],
+      "elapsed_seconds": 17.86,
+      "tokens": 35526
+    },
+    {
+      "case_repeat_arm": [
+        "java-runtime-string",
+        1,
+        "off"
+      ],
+      "audit_id": "6dad06ebd8434b3b95cf1a7e54bc3c0f",
+      "snapshot_sha256": "36947ba086bb7da8e3231ff01d881efda43caf843a7871c81a060aa2c3d1240d",
+      "status": "COMPLETE",
+      "target_judgment_correct": false,
+      "finding_statuses": [
+        "CONFIRMED"
+      ],
+      "elapsed_seconds": 16.47,
+      "tokens": 30208
+    },
+    {
+      "case_repeat_arm": [
+        "java-runtime-string",
+        1,
+        "generic"
+      ],
+      "audit_id": "74db8eda2ddc481db24c8f98457cbfc7",
+      "snapshot_sha256": "36947ba086bb7da8e3231ff01d881efda43caf843a7871c81a060aa2c3d1240d",
+      "status": "COMPLETE",
+      "target_judgment_correct": true,
+      "finding_statuses": [
+        "REJECTED"
+      ],
+      "elapsed_seconds": 17.04,
+      "tokens": 25796
+    },
+    {
+      "case_repeat_arm": [
+        "false-positive",
+        0,
+        "on"
+      ],
+      "audit_id": "f96ca7e4849640c8b676beaa2b23c27f",
+      "snapshot_sha256": "d2900109e7ab021b8a78113702de2e5be466c2000a23fbf6e8c917cbbe66222d",
+      "status": "COMPLETE",
+      "target_judgment_correct": true,
+      "finding_statuses": [
+        "REJECTED",
+        "INSUFFICIENT_EVIDENCE"
+      ],
+      "elapsed_seconds": 20.28,
+      "tokens": 41583
+    },
+    {
+      "case_repeat_arm": [
+        "false-positive",
+        0,
+        "off"
+      ],
+      "audit_id": "72fb9927f4f543539062abf99e6c664f",
+      "snapshot_sha256": "d2900109e7ab021b8a78113702de2e5be466c2000a23fbf6e8c917cbbe66222d",
+      "status": "COMPLETE",
+      "target_judgment_correct": true,
+      "finding_statuses": [
+        "REJECTED",
+        "INSUFFICIENT_EVIDENCE"
+      ],
+      "elapsed_seconds": 26.0,
+      "tokens": 76632
+    },
+    {
+      "case_repeat_arm": [
+        "false-positive",
+        0,
+        "generic"
+      ],
+      "audit_id": "edc794938b9040bd854811533638eaf9",
+      "snapshot_sha256": "d2900109e7ab021b8a78113702de2e5be466c2000a23fbf6e8c917cbbe66222d",
+      "status": "COMPLETE",
+      "target_judgment_correct": true,
+      "finding_statuses": [
+        "REJECTED",
+        "INSUFFICIENT_EVIDENCE"
+      ],
+      "elapsed_seconds": 22.95,
+      "tokens": 42256
+    },
+    {
+      "case_repeat_arm": [
+        "false-positive",
+        1,
+        "on"
+      ],
+      "audit_id": "6d5a0fcb405644c69ed98825a8ea66f9",
+      "snapshot_sha256": "d2900109e7ab021b8a78113702de2e5be466c2000a23fbf6e8c917cbbe66222d",
+      "status": "PARTIAL",
+      "target_judgment_correct": true,
+      "finding_statuses": [
+        "REJECTED"
+      ],
+      "elapsed_seconds": 23.28,
+      "tokens": 59335
+    },
+    {
+      "case_repeat_arm": [
+        "false-positive",
+        1,
+        "off"
+      ],
+      "audit_id": "3af139d43fa8452cbed1663b85df4d51",
+      "snapshot_sha256": "d2900109e7ab021b8a78113702de2e5be466c2000a23fbf6e8c917cbbe66222d",
+      "status": "COMPLETE",
+      "target_judgment_correct": true,
+      "finding_statuses": [
+        "REJECTED"
+      ],
+      "elapsed_seconds": 18.15,
+      "tokens": 41902
+    },
+    {
+      "case_repeat_arm": [
+        "false-positive",
+        1,
+        "generic"
+      ],
+      "audit_id": "0dd8491a29ae49aca6e8ea41e153f51c",
+      "snapshot_sha256": "d2900109e7ab021b8a78113702de2e5be466c2000a23fbf6e8c917cbbe66222d",
+      "status": "COMPLETE",
+      "target_judgment_correct": true,
+      "finding_statuses": [
+        "REJECTED"
+      ],
+      "elapsed_seconds": 15.33,
+      "tokens": 30829
+    },
+    {
+      "case_repeat_arm": [
+        "cross-file-flow",
+        0,
+        "on"
+      ],
+      "audit_id": "17bb020b0b7b43dc806b756d445af17c",
+      "snapshot_sha256": "be387b33cf3d22a1d314bdb553de1a0bab336cff0a942430940809f537c4a777",
+      "status": "COMPLETE",
+      "target_judgment_correct": true,
+      "finding_statuses": [
+        "CONFIRMED"
+      ],
+      "elapsed_seconds": 11.42,
+      "tokens": 26754
+    },
+    {
+      "case_repeat_arm": [
+        "cross-file-flow",
+        0,
+        "off"
+      ],
+      "audit_id": "d3351a73482e413a83bbd3d6cfcc73e4",
+      "snapshot_sha256": "be387b33cf3d22a1d314bdb553de1a0bab336cff0a942430940809f537c4a777",
+      "status": "COMPLETE",
+      "target_judgment_correct": true,
+      "finding_statuses": [
+        "CONFIRMED"
+      ],
+      "elapsed_seconds": 17.13,
+      "tokens": 33665
+    },
+    {
+      "case_repeat_arm": [
+        "cross-file-flow",
+        0,
+        "generic"
+      ],
+      "audit_id": "9060d887b57543b7994a011a30d018eb",
+      "snapshot_sha256": "be387b33cf3d22a1d314bdb553de1a0bab336cff0a942430940809f537c4a777",
+      "status": "COMPLETE",
+      "target_judgment_correct": true,
+      "finding_statuses": [
+        "CONFIRMED"
+      ],
+      "elapsed_seconds": 16.76,
+      "tokens": 33965
+    },
+    {
+      "case_repeat_arm": [
+        "cross-file-flow",
+        1,
+        "on"
+      ],
+      "audit_id": "c23a2d4f32fc4a579026198dcfab9a42",
+      "snapshot_sha256": "be387b33cf3d22a1d314bdb553de1a0bab336cff0a942430940809f537c4a777",
+      "status": "COMPLETE",
+      "target_judgment_correct": true,
+      "finding_statuses": [
+        "CONFIRMED"
+      ],
+      "elapsed_seconds": 14.38,
+      "tokens": 34250
+    },
+    {
+      "case_repeat_arm": [
+        "cross-file-flow",
+        1,
+        "off"
+      ],
+      "audit_id": "d5e41cc48a55467fbd528f0445d78a2b",
+      "snapshot_sha256": "be387b33cf3d22a1d314bdb553de1a0bab336cff0a942430940809f537c4a777",
+      "status": "COMPLETE",
+      "target_judgment_correct": true,
+      "finding_statuses": [
+        "CONFIRMED"
+      ],
+      "elapsed_seconds": 16.4,
+      "tokens": 38028
+    },
+    {
+      "case_repeat_arm": [
+        "cross-file-flow",
+        1,
+        "generic"
+      ],
+      "audit_id": "59f4de7629224691aca2915c18c2441c",
+      "snapshot_sha256": "be387b33cf3d22a1d314bdb553de1a0bab336cff0a942430940809f537c4a777",
+      "status": "COMPLETE",
+      "target_judgment_correct": true,
+      "finding_statuses": [
+        "CONFIRMED"
+      ],
+      "elapsed_seconds": 13.42,
+      "tokens": 25500
+    }
+  ],
+  "interpretation": "Known small regression fixtures. Project knowledge avoids two false confirmations seen with knowledge off; generic text also avoids them. No unique superiority demonstrated. One project-knowledge run is PARTIAL. Two repeats do not establish statistical significance."
+}
