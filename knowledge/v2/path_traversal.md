@@ -1,2 +1,12 @@
 # Path traversal — boundary proof
 Trace input decoding, joins and file operation. normalize() collapses components but does not enforce a root. Verify canonical/real path confinement using path-component-aware comparison, not string prefix (root versus root-evil). Check ../, absolute path override, URL/double decoding order and symlinks. Validation must apply to the same path used by the sink; symlink changes between check and use can matter. State filesystem permissions and attacker control preconditions. Missing helper/dependency source requires insufficient evidence. Fixed finite filename mapping may reject traversal, but does not prove authorization to the chosen file.
+
+## Practice card CA-K04 — platform-dependent containment (revision 2026-09-30)
+
+Observed failure: this project's serial real-repository audit `9da9c748029848ef8174a91f53c0cae7` rejected traversal in Werkzeug 3.0.5 and called safe_join robust across platforms. That was an overbroad claim: [the maintainer advisory](https://github.com/pallets/werkzeug/security/advisories/GHSA-f9vj-2wh5-fj8j) documents UNC paths escaping the intended safety check on Windows with Python below 3.11. This card was added AFTER observing that failure; subsequent tests on the same versions are regression tests, not independent validation.
+
+Procedure: identify the path flavor used for normalization and the OS/runtime used for absolute-path detection. A check named isabs is not sufficient proof for every platform/version. Preserve leading double slashes as a distinct case; check whether code independently rejects leading slash paths before joining. Werkzeug 3.0.6 adds that explicit check. Cite the actual code and state the vulnerable platform/runtime preconditions; do not claim a Linux deployment is affected by a Windows-only path.
+
+Counterexample: an explicit rejection of all leading slash paths defeats this specific UNC route. It does not establish safety against every traversal, device-name or symlink behavior. Unknown dependency semantics must be an unknown requiring runtime documentation or manual verification, not a confident rejection. Missing deployment information limits claims about deployed exposure, but does not erase a demonstrated conditional library flaw.
+
+Scope: public maintainer facts plus a documented local misjudgment; no private customer experience is claimed. This case does not prove knowledge usefulness on unseen repositories.

@@ -88,6 +88,7 @@ class Engine:
         self.use_knowledge = knowledge
         self.progress = progress
         self.receipts, self.knowledge, self.hypotheses, self.findings = [], {}, {}, {}
+        self.read_cache = {}
         self.plan = None
         self.planned_surfaces = set()
         self.calls = 0
@@ -142,6 +143,9 @@ class Engine:
             result = self.transport.call(tool, arguments)
             if tool in ('repo.read_file', 'repo.read_range') and 'sha256' in result:
                 self.receipts.append({k: result[k] for k in ('file', 'sha256', 'start', 'end')})
+                cache = self.read_cache.setdefault(result['file'], {})
+                for line in result.get('lines', []):
+                    cache[line['line']] = line['code']
             if tool == 'knowledge.retrieve' and 'id' in result:
                 self.knowledge[result['id']] = result['sha256']
             self.event({'tool': tool, 'arguments': arguments, 'purpose': args['purpose'],
@@ -234,12 +238,31 @@ class Engine:
                 message['content'] = json.dumps({'context_truncated': True,
                     'notice': 'Result retained in tool_calls.jsonl; reread targeted code before quoting.',
                     'excerpt': message['content'][:8000]})
+        # Keep deduplicated literal evidence, not only receipts. Receipt-only compaction
+        # caused repeated rereading and lost the security facts needed for judgment.
+        excerpts, excerpt_chars = {}, 0
+        pending = {path: iter(sorted(lines.items())) for path, lines in self.read_cache.items()}
+        while pending and excerpt_chars < 45000:
+            for path in list(pending):
+                try:
+                    number, code = next(pending[path])
+                except StopIteration:
+                    del pending[path]
+                    continue
+                line = str(number) + ': ' + code[:800] + '\n'
+                if excerpt_chars + len(line) > 45000:
+                    pending.clear()
+                    break
+                excerpts[path] = excerpts.get(path, '') + line
+                excerpt_chars += len(line)
         memory = {'context_compacted': True, 'notice': 'Earlier tool outputs remain in the audit trace. This state is not new evidence. Reread exact lines if needed; do not invent quotes.',
                   'plan': self.plan, 'all_planned_surfaces': sorted(self.planned_surfaces),
                   'hypotheses': list(self.hypotheses.values()),
                   'decisions': [{'id': f['id'], 'status': f['status'], 'title': f.get('title'),
                                  'gate_passed': f['evidence_gate']['passed']} for f in self.findings.values()],
-                  'read_receipts': self.receipts[-40:], 'retrieved_knowledge': self.knowledge,
+                  'read_receipts': self.receipts[-40:], 'literal_read_excerpts': excerpts,
+                  'excerpt_notice': 'Only actually read lines; excerpt budget 45000 characters, each line at most800 chars. Missing lines are omitted, not proven safe. Reread only when needed; use retained exact lines for decisions.',
+                  'retrieved_knowledge': self.knowledge,
                   'remaining_tool_calls': self.max_calls - self.calls}
         self.messages = self.messages[:2] + [{'role': 'user', 'content': json.dumps(memory, ensure_ascii=False)}] + recent
         self.event({'tool': 'context.compact', 'purpose': 'Bound model context while preserving full disk trace',

@@ -143,3 +143,18 @@ def test_oversized_model_read_gets_actionable_feedback_before_transport(tmp_path
     engine.dispatch('submit_plan', {'plan': {'attack_surfaces': ['input'], 'next_actions': ['read']}})
     with pytest.raises(ValueError, match='120 existing lines'):
         engine.dispatch('use_tool', {'tool': 'repo.read_range', 'arguments': {'path': 'a.py', 'start': 1, 'end': 300}, 'purpose': 'inspect'})
+
+
+def test_compaction_retains_deduplicated_literal_read_evidence(tmp_path):
+    src = tmp_path/'src'; src.mkdir()
+    (src/'a.py').write_text('danger = input()\neval(danger)\n')
+    audit, metadata = snapshot(src, tmp_path/'ws')
+    engine = Engine(None, Local(ToolLayer(audit)), audit, metadata, profile(audit/'repo'))
+    engine.dispatch('submit_plan', {'plan': {'attack_surfaces': ['input'], 'next_actions': ['read']}})
+    for _ in range(2):
+        engine.dispatch('use_tool', {'tool':'repo.read_file','arguments':{'path':'a.py'},'purpose':'inspect'})
+    engine.messages.append({'role':'user','content':'x'*90000})
+    engine.compact_context()
+    memory = json.loads(engine.messages[2]['content'])
+    assert memory['literal_read_excerpts']['a.py'] == '1: danger = input()\n2: eval(danger)\n'
+    assert len(engine.receipts) == 2

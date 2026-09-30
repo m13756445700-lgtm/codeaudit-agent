@@ -1,0 +1,23 @@
+{
+  "date": "2026-09-30",
+  "round": 6,
+  "purpose": "Diagnostic regression after three failed broad-repository rounds; not blind validation or evidence of general accuracy",
+  "versions": [
+    "3.0.5",
+    "3.0.6"
+  ],
+  "arms": [
+    "broad",
+    "focused"
+  ],
+  "repeats": 1,
+  "knowledge": true,
+  "budget": {
+    "iterations": 48,
+    "tool_calls": 100,
+    "seconds": 1200
+  },
+  "changes": "Deduplicated literal read excerpts retained during context compaction, fixing receipt-only reread loops. Added CA-K04 after round5 incorrectly rejected vulnerable Werkzeug3.0.5; therefore same-version tests are explicitly trained regression, not held-out validation. Serial execution, same budget, model and target labels.",
+  "focused_prompt": "Review file-serving path construction and containment across src/werkzeug/security.py and src/werkzeug/utils.py, including platform-dependent checks. Inspect the implementation and defenses; do not assume a vulnerability exists.",
+  "expected_labels": "Unchanged from real-repository-plan.json. Focused arm is explicitly target-guided and cannot substitute for broad audit success."
+}

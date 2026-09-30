@@ -1,0 +1,108 @@
+{
+  "records": [
+    {
+      "case_arm": [
+        "3.0.5",
+        "broad"
+      ],
+      "audit_id": "fbaf159be97540d5994a1781b0953183",
+      "snapshot_sha256": "ca6f54ce58072c67da814d84814be555be978b90013cc12cb96a41a69dc4d0f6",
+      "status": "INCOMPLETE",
+      "failure": "RuntimeError: Iteration budget exceeded",
+      "coverage": {
+        "files_total": 311,
+        "files_read": 8,
+        "distinct_lines_read": 1791,
+        "scope": "tool-observed reads; not semantic audit completeness"
+      },
+      "tool_calls": 70,
+      "elapsed_seconds": 55.95,
+      "tokens": 878149,
+      "findings": []
+    },
+    {
+      "case_arm": [
+        "3.0.5",
+        "focused"
+      ],
+      "audit_id": "9da9c748029848ef8174a91f53c0cae7",
+      "snapshot_sha256": "ca6f54ce58072c67da814d84814be555be978b90013cc12cb96a41a69dc4d0f6",
+      "status": "PARTIAL",
+      "failure": null,
+      "coverage": {
+        "files_total": 311,
+        "files_read": 4,
+        "distinct_lines_read": 569,
+        "scope": "tool-observed reads; not semantic audit completeness"
+      },
+      "tool_calls": 54,
+      "elapsed_seconds": 56.43,
+      "tokens": 896932,
+      "findings": [
+        {
+          "title": "safe_join path containment is robust across platforms (no traversal)",
+          "status": "REJECTED"
+        },
+        {
+          "title": "send_from_directory/send_file do not permit traversal via user path",
+          "status": "REJECTED"
+        }
+      ]
+    },
+    {
+      "case_arm": [
+        "3.0.6",
+        "broad"
+      ],
+      "audit_id": "425dafb011124b14a8011ba1e32aa99b",
+      "snapshot_sha256": "86ef1873bdf393f3f49afb5d9646f4ea77df5a8071dc81e47f909525387c61d6",
+      "status": "INCOMPLETE",
+      "failure": "RuntimeError: Tool call budget exceeded",
+      "coverage": {
+        "files_total": 311,
+        "files_read": 13,
+        "distinct_lines_read": 2810,
+        "scope": "tool-observed reads; not semantic audit completeness"
+      },
+      "tool_calls": 100,
+      "elapsed_seconds": 83.62,
+      "tokens": 896782,
+      "findings": [
+        {
+          "title": "Debug console eval is gated by PIN trust and host trust (no bypass found)",
+          "status": "REJECTED"
+        }
+      ]
+    },
+    {
+      "case_arm": [
+        "3.0.6",
+        "focused"
+      ],
+      "audit_id": "05acc98e6e6a4a46baedd2bcb8122c24",
+      "snapshot_sha256": "86ef1873bdf393f3f49afb5d9646f4ea77df5a8071dc81e47f909525387c61d6",
+      "status": "INCOMPLETE",
+      "failure": "RuntimeError: Iteration budget exceeded",
+      "coverage": {
+        "files_total": 311,
+        "files_read": 7,
+        "distinct_lines_read": 902,
+        "scope": "tool-observed reads; not semantic audit completeness"
+      },
+      "tool_calls": 73,
+      "elapsed_seconds": 103.43,
+      "tokens": 803916,
+      "findings": [
+        {
+          "title": "safe_join path containment bypass (path traversal)",
+          "status": "REJECTED"
+        },
+        {
+          "title": "send_file / send_from_directory path traversal",
+          "status": "REJECTED"
+        }
+      ]
+    }
+  ],
+  "interpretation": "After recharge and serial execution, broad runs remain incomplete. Vulnerable3.0.5 focused run incorrectly rejects containment flaw; known false negative. This failure motivated CA-K04, so subsequent same-version results are trained regression."
+}
