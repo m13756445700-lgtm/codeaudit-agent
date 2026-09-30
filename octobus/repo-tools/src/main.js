@@ -6,7 +6,7 @@ const methods = ['ExecuteTool'];
 let busy = false;
 function handler(method) {
   return async (ctx) => {
-    if (busy) throw new Error('SERVICE_BUSY');
+    if (busy) return { resultJson: JSON.stringify({error: 'SERVICE_BUSY'}) };
     const request = JSON.parse(ctx.request.requestJson);
     busy = true;
     try {
@@ -54,6 +54,10 @@ function handler(method) {
         p.stdin.on('error', () => {});
         p.stdin.end(JSON.stringify(request));
       });
+    } catch (error) {
+      const code = String(error?.message || 'CAPABILITY_FAILED');
+      const safe = /^(CAPABILITY_HTTP_[0-9]{3}|OUTPUT_LIMIT|VALIDATION_TIMEOUT|WORKER_START_FAILED|CONTROLLED_METHOD_FAILED|INVALID_WORKER_RESPONSE)$/.test(code) ? code : 'CAPABILITY_FAILED';
+      return { resultJson: JSON.stringify({error: safe}) };
     } finally { busy = false; }
   };
 }

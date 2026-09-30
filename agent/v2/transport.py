@@ -1,5 +1,6 @@
 """Real OctoBus MCP transport; local adapter is explicitly marked for unit runs."""
 import json
+import time
 import urllib.request
 
 
@@ -43,6 +44,20 @@ class OctoBus:
         return payload['result']
 
     def call(self, name, arguments):
+        for attempt in range(4):
+            result = self._call(name, arguments)
+            error = result.get('error') if isinstance(result, dict) else 'INVALID_RESULT'
+            if not error:
+                return result
+            if error in ('SERVICE_BUSY', 'CAPABILITY_HTTP_503') and attempt < 3:
+                time.sleep(0.5 * (attempt + 1))
+                continue
+            allowed = {'SERVICE_BUSY', 'CAPABILITY_HTTP_503', 'CAPABILITY_HTTP_400', 'CAPABILITY_HTTP_502',
+                       'OUTPUT_LIMIT', 'VALIDATION_TIMEOUT', 'WORKER_START_FAILED', 'CONTROLLED_METHOD_FAILED',
+                       'INVALID_WORKER_RESPONSE', 'CAPABILITY_FAILED'}
+            raise ValueError('Capability error: ' + (error if error in allowed else 'INVALID_RESULT'))
+
+    def _call(self, name, arguments):
         properties = self.tool['inputSchema']['properties']
         field = 'requestJson' if 'requestJson' in properties else 'request_json'
         response = self.rpc('tools/call', {'name': self.tool['name'], 'arguments': {field: json.dumps(

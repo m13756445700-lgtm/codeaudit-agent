@@ -1,0 +1,85 @@
+{
+  "records": [
+    {
+      "case_arm": [
+        "3.0.5",
+        "broad"
+      ],
+      "audit_id": "c33d003f9f9f4d49944c0b33281570b3",
+      "snapshot_sha256": "ca6f54ce58072c67da814d84814be555be978b90013cc12cb96a41a69dc4d0f6",
+      "status": "INCOMPLETE",
+      "failure": "RuntimeError: Iteration budget exceeded",
+      "coverage": {
+        "files_total": 311,
+        "files_read": 6,
+        "distinct_lines_read": 1714,
+        "scope": "tool-observed reads; not semantic audit completeness"
+      },
+      "tool_calls": 63,
+      "elapsed_seconds": 64.73,
+      "tokens": 870507,
+      "findings_count": 0
+    },
+    {
+      "case_arm": [
+        "3.0.5",
+        "focused"
+      ],
+      "audit_id": "8b01110e29e54c1da2612cfde88458c0",
+      "snapshot_sha256": "ca6f54ce58072c67da814d84814be555be978b90013cc12cb96a41a69dc4d0f6",
+      "status": "INCOMPLETE",
+      "failure": "RuntimeError: Model HTTP error 402",
+      "coverage": {
+        "files_total": 311,
+        "files_read": 3,
+        "distinct_lines_read": 506,
+        "scope": "tool-observed reads; not semantic audit completeness"
+      },
+      "tool_calls": 16,
+      "elapsed_seconds": 12.75,
+      "tokens": 101184,
+      "findings_count": 0
+    },
+    {
+      "case_arm": [
+        "3.0.6",
+        "broad"
+      ],
+      "audit_id": "63b9ed6508ea498baa64238b17c116e6",
+      "snapshot_sha256": "86ef1873bdf393f3f49afb5d9646f4ea77df5a8071dc81e47f909525387c61d6",
+      "status": "INCOMPLETE",
+      "failure": "RuntimeError: Model HTTP error 402",
+      "coverage": {
+        "files_total": 311,
+        "files_read": 0,
+        "distinct_lines_read": 0,
+        "scope": "tool-observed reads; not semantic audit completeness"
+      },
+      "tool_calls": 0,
+      "elapsed_seconds": 0.46,
+      "tokens": 0,
+      "findings_count": 0
+    },
+    {
+      "case_arm": [
+        "3.0.6",
+        "focused"
+      ],
+      "audit_id": "35dbd38d4695472d83570f170cd6529a",
+      "snapshot_sha256": "86ef1873bdf393f3f49afb5d9646f4ea77df5a8071dc81e47f909525387c61d6",
+      "status": "INCOMPLETE",
+      "failure": "RuntimeError: Model HTTP error 402",
+      "coverage": {
+        "files_total": 311,
+        "files_read": 0,
+        "distinct_lines_read": 0,
+        "scope": "tool-observed reads; not semantic audit completeness"
+      },
+      "tool_calls": 0,
+      "elapsed_seconds": 0.5,
+      "tokens": 0,
+      "findings_count": 0
+    }
+  ],
+  "interpretation": "One broad run exhausted iteration budget. Remaining three runs interrupted/refused by model HTTP402. No successful broad or focused target judgment. Do not score API refusal as measured semantic model accuracy."
+}

@@ -1,0 +1,129 @@
+{
+  "passed": false,
+  "checks": {
+    "runs_complete": false,
+    "no_false_positives": true,
+    "all_expected_detected": false,
+    "ground_truth_count": true,
+    "real_cross_file": true,
+    "ai_added_unruled": true,
+    "ai_rejected_static_fp": true,
+    "static_analysis_executed": true,
+    "different_plans": true
+  },
+  "raw_metrics": {
+    "true_positive": 2,
+    "false_positive": 0,
+    "false_negative": 8,
+    "precision": 1.0,
+    "recall": 0.2,
+    "f1": 0.33333333333333337,
+    "evidence_completeness": 1.0,
+    "cross_file_detection": 1,
+    "ai_only_detection": 2,
+    "ai_fp_rejection": 1
+  },
+  "interpretation": "Raw harness counts include unavailable model calls after HTTP402. This is a failed end-to-end attempt, not an estimate of model recall. Previous complete-call benchmark retained separately.",
+  "cases": [
+    {
+      "case": "cross-file-flow",
+      "audit_id": "4c59220b37a74bdf91479bd6ebcc1227",
+      "run_status": "COMPLETE"
+    },
+    {
+      "case": "false-positive",
+      "audit_id": "2d71c9871c674d7599e823efd49b17c0",
+      "run_status": "PARTIAL"
+    },
+    {
+      "case": "python-sql-raw",
+      "audit_id": "d9345ad7dee8492eb520156ca31e5b13",
+      "run_status": "COMPLETE"
+    },
+    {
+      "case": "python-sql-bound",
+      "audit_id": "c5265dd306ec4f7e993b36cd12663336",
+      "run_status": "COMPLETE"
+    },
+    {
+      "case": "python-argv",
+      "audit_id": "4774cffb82b24b9da8660dc787882f5a",
+      "run_status": "INCOMPLETE"
+    },
+    {
+      "case": "python-url",
+      "audit_id": "92872b0e3c7541a2ae0fa220b89ee490",
+      "run_status": "INCOMPLETE"
+    },
+    {
+      "case": "python-fixed-url",
+      "audit_id": "90d3dea3299a40f594d9b6da36778fcb",
+      "run_status": "INCOMPLETE"
+    },
+    {
+      "case": "python-file",
+      "audit_id": "de49e12b09004e939508f4c0e6cfbb2f",
+      "run_status": "INCOMPLETE"
+    },
+    {
+      "case": "python-fixed-file",
+      "audit_id": "384c17d635064151b09986f4aee7e909",
+      "run_status": "INCOMPLETE"
+    },
+    {
+      "case": "node-shell",
+      "audit_id": "66e9aba8733c4a0d94298d7ba9127c9a",
+      "run_status": "INCOMPLETE"
+    },
+    {
+      "case": "node-argv",
+      "audit_id": "f855d12fdd51447fbb168da40fd47006",
+      "run_status": "INCOMPLETE"
+    },
+    {
+      "case": "node-sql-raw",
+      "audit_id": "a372d048410a4ac883b91ed89f6a8faa",
+      "run_status": "INCOMPLETE"
+    },
+    {
+      "case": "node-sql-bound",
+      "audit_id": "fb3253a78fc64e53a15bdc01334a958d",
+      "run_status": "INCOMPLETE"
+    },
+    {
+      "case": "go-shell",
+      "audit_id": "02a72f9159d5455b8b771af8419f1ae8",
+      "run_status": "INCOMPLETE"
+    },
+    {
+      "case": "go-argv",
+      "audit_id": "d3214d7f34f94ea7af7fe35cd01354d0",
+      "run_status": "INCOMPLETE"
+    },
+    {
+      "case": "go-url",
+      "audit_id": "404aee8b38194dd8a60dbbc6e53ca4cd",
+      "run_status": "INCOMPLETE"
+    },
+    {
+      "case": "go-fixed-url",
+      "audit_id": "6ba5dcc325054265b564983001489157",
+      "run_status": "INCOMPLETE"
+    },
+    {
+      "case": "java-runtime-string",
+      "audit_id": "9e0d81406edd4a319812ee1df09e71d1",
+      "run_status": "INCOMPLETE"
+    },
+    {
+      "case": "java-shell-array",
+      "audit_id": "296ccf871b754de1a65e46b2a449818d",
+      "run_status": "INCOMPLETE"
+    },
+    {
+      "case": "python-template",
+      "audit_id": "95bb26e1e97040d08294402d9f0d1208",
+      "run_status": "INCOMPLETE"
+    }
+  ]
+}

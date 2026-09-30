@@ -1,5 +1,7 @@
 # CodeAudit Agent V2
 
+当前提交前状态与尚未通过项见 [验收状态](docs/SUBMISSION_STATUS.md)。真实规模评估仍有未通过项；小型回归测试通过不等于完整审计任意仓库。
+
 Evidence-driven Agentic Code Security Audit System：从 Git、ZIP 或本地代码快照出发，由模型理解攻击面、制定计划、动态调用工具、调查假设并作出有证据的安全判断。它帮助审计人员把可疑代码追溯到输入、传播、保护条件和安全边界，而不是仅对扫描器结果生成摘要。
 
 ```mermaid

@@ -1,0 +1,23 @@
+{
+  "date": "2026-09-30",
+  "round": 5,
+  "purpose": "Diagnostic regression after three failed broad-repository rounds; not blind validation or evidence of general accuracy",
+  "versions": [
+    "3.0.5",
+    "3.0.6"
+  ],
+  "arms": [
+    "broad",
+    "focused"
+  ],
+  "repeats": 1,
+  "knowledge": true,
+  "budget": {
+    "iterations": 48,
+    "tool_calls": 100,
+    "seconds": 1200
+  },
+  "changes": "Post-recharge serial repeat after fixing structured SERVICE_BUSY errors and bounded retry. Same labels/budgets and broad versus guided distinction. Earlier rounds were confounded by concurrent single-flight capability use; retained as failed end-to-end attempts.",
+  "focused_prompt": "Review file-serving path construction and containment across src/werkzeug/security.py and src/werkzeug/utils.py, including platform-dependent checks. Inspect the implementation and defenses; do not assume a vulnerability exists.",
+  "expected_labels": "Unchanged from real-repository-plan.json. Focused arm is explicitly target-guided and cannot substitute for broad audit success."
+}

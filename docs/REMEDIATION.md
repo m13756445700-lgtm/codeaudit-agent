@@ -29,7 +29,7 @@ Linux 固定依赖镜像：139 项通过（18.87 秒）。此前本机缺少 Sem
 2. **模型配置被运行器代理覆盖**：agent-compose provider 环境可能覆盖通用模型变量。专用 `CODEAUDIT_LLM_*` 经 `scripts/run-agent.py` 映射给 Engine；缺配置明确失败，避免另一条模型路径悄悄替代审计。
 3. **完成状态过宽**：旧版允许读取一个无关文件后结束。现在显式结算所有计划攻击面，禁止引用未读文件、禁止改计划丢失待查项，未查项产生 PARTIAL。仍然需要人工判断证据与攻击面的语义关联。
 
-## 尚待最终证据闭环
+## 2026-09-29 当时待验收项（历史）
 
 实际 scheduler 定时运行、考官账户 V2 入口、服务器旧栈清理、整机重启恢复、公开 main-only 与 fresh clone，以及扩大的真实仓库/重复知识对照评估。以上不得仅凭配置文件或旧版历史结果标记通过。
 
@@ -37,7 +37,7 @@ Linux 固定依赖镜像：139 项通过（18.87 秒）。此前本机缺少 Sem
 
 已将考官 sudo 包装器切换到 `/opt/codeaudit-v2`。考官权限下 projects 显示唯一项目 codeaudit-final、一个 auditor 和一个 scheduler；methods 返回 `codeaudit.v2.RepositoryTools/ExecuteTool`。手动调用 daily-v2-audit 的 scheduler run `db04677c4360d8b2e65e7547b64d8cb5c3ce4425a65914376006fc849f0d949c` 成功，Engine audit `c3674fce88e94bff87b1f009112a91f5` 为 COMPLETE / octobus-mcp / 16 calls。首次失败原因是 scheduler 重设 PATH 后找不到虚拟环境 python，改为绝对路径解决。
 
-该次镜像仍带有打包元数据文件，正在干净重建；此记录不能替代最终干净版本验收。旧 V1 和重复 V2 服务已停止，删除与整机恢复验证尚未完成。
+当时该次镜像仍带有打包元数据文件；随后已干净重建。旧V1/重复V2删除和整机恢复验证已在9月30日完成，详见本页顶部更新。历史运行不替代当前版本验收。
 
 ## 2026-09-30：扩大评估暴露的问题
 

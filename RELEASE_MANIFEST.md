@@ -2,11 +2,11 @@
 
 ## 当前整改状态（2026-09-30）
 
-以下 2026-09-29 记录属于历史发布基线，不能替代当前整改验收。当前源码已增加攻击面结算、知识应用记录、Python AST 导航、上下文压缩、读取范围反馈及可配置预算。最新 Linux 全量测试 141 项通过（18.31 秒）。
+以下2026-09-29记录属于历史发布基线，不能替代当前整改验收。当前源码已增加攻击面结算、知识应用记录、Python AST导航、上下文压缩、读取范围反馈及可配置预算。各阶段测试结果和当前状态见下文。
 
 服务器已只保留当前 V2 栈，考官入口已切换；每日自动任务及整机重启后自动恢复均实测成功。GitHub 仅保留公开 main。SSH 与考官命令见 README。
 
-当前 20 例复测 TP10/FP0/FN0，但有两例 PARTIAL，整体验收检查未通过。真实 311 文件仓库前两轮均未完成，第三轮正在评估。不得据此宣传普遍准确率或已达到某个分数。详见 [整改记录](docs/REMEDIATION.md) 和 `evaluation/` 中的预注册协议、成功与失败数据。
+当前首轮20例复测TP10/FP0/FN0，但有两例PARTIAL；最新尝试受模型HTTP402影响失败。真实311文件仓库前三轮均未完成；第四轮一例超限，三例被HTTP402中断。最新Linux测试与GitHub fresh clone均142项通过。不得据此宣传普遍准确率或已达到某个分数。详见 [提交状态](docs/SUBMISSION_STATUS.md)、[整改记录](docs/REMEDIATION.md) 和 `evaluation/` 中的预注册协议、成功与失败数据。
 
 正式白名单：`README.md`、本清单、`.gitignore`、`.dockerignore`、`.env.example`、`pyproject.toml`、`requirements-dev.txt`、`Makefile`、`Dockerfile`、`docker-compose.yml`、`agent-compose.yml`，以及以下目录。
 
