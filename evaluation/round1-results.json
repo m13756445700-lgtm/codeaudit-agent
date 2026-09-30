@@ -1,0 +1,170 @@
+[
+  {
+    "case_mode_repeat": [
+      "3.0.5",
+      true,
+      0
+    ],
+    "audit_id": "3ea7adfa297c4bb1ba0f490e0ed455da",
+    "snapshot_sha256": "ca6f54ce58072c67da814d84814be555be978b90013cc12cb96a41a69dc4d0f6",
+    "status": "INCOMPLETE",
+    "failure": "RuntimeError: Context budget exceeded; partial findings only",
+    "coverage": {
+      "files_total": 311,
+      "files_read": 5,
+      "distinct_lines_read": 1295,
+      "scope": "tool-observed reads; not semantic audit completeness"
+    },
+    "tool_calls": 30,
+    "elapsed_seconds": 25.14,
+    "tokens": 477899,
+    "target_result": "not adjudicated; no findings produced"
+  },
+  {
+    "case_mode_repeat": [
+      "3.0.5",
+      true,
+      1
+    ],
+    "audit_id": "4de6317975a742ec801240d0d6d54749",
+    "snapshot_sha256": "ca6f54ce58072c67da814d84814be555be978b90013cc12cb96a41a69dc4d0f6",
+    "status": "INCOMPLETE",
+    "failure": "RuntimeError: Context budget exceeded; partial findings only",
+    "coverage": {
+      "files_total": 311,
+      "files_read": 6,
+      "distinct_lines_read": 1269,
+      "scope": "tool-observed reads; not semantic audit completeness"
+    },
+    "tool_calls": 35,
+    "elapsed_seconds": 29.44,
+    "tokens": 558744,
+    "target_result": "not adjudicated; no findings produced"
+  },
+  {
+    "case_mode_repeat": [
+      "3.0.5",
+      false,
+      0
+    ],
+    "audit_id": "b6381962e2c04a1aa731e771c573129b",
+    "snapshot_sha256": "ca6f54ce58072c67da814d84814be555be978b90013cc12cb96a41a69dc4d0f6",
+    "status": "INCOMPLETE",
+    "failure": "RuntimeError: Context budget exceeded; partial findings only",
+    "coverage": {
+      "files_total": 311,
+      "files_read": 5,
+      "distinct_lines_read": 1307,
+      "scope": "tool-observed reads; not semantic audit completeness"
+    },
+    "tool_calls": 25,
+    "elapsed_seconds": 21.95,
+    "tokens": 359905,
+    "target_result": "not adjudicated; no findings produced"
+  },
+  {
+    "case_mode_repeat": [
+      "3.0.5",
+      false,
+      1
+    ],
+    "audit_id": "64a714070e764703b3a7a1ef66e4b707",
+    "snapshot_sha256": "ca6f54ce58072c67da814d84814be555be978b90013cc12cb96a41a69dc4d0f6",
+    "status": "INCOMPLETE",
+    "failure": "RuntimeError: Context budget exceeded; partial findings only",
+    "coverage": {
+      "files_total": 311,
+      "files_read": 5,
+      "distinct_lines_read": 1164,
+      "scope": "tool-observed reads; not semantic audit completeness"
+    },
+    "tool_calls": 32,
+    "elapsed_seconds": 23.87,
+    "tokens": 344856,
+    "target_result": "not adjudicated; no findings produced"
+  },
+  {
+    "case_mode_repeat": [
+      "3.0.6",
+      true,
+      0
+    ],
+    "audit_id": "cf098bfe8c014f17a4328ec9c82543a5",
+    "snapshot_sha256": "86ef1873bdf393f3f49afb5d9646f4ea77df5a8071dc81e47f909525387c61d6",
+    "status": "INCOMPLETE",
+    "failure": "RuntimeError: Context budget exceeded; partial findings only",
+    "coverage": {
+      "files_total": 311,
+      "files_read": 4,
+      "distinct_lines_read": 1196,
+      "scope": "tool-observed reads; not semantic audit completeness"
+    },
+    "tool_calls": 27,
+    "elapsed_seconds": 24.92,
+    "tokens": 426111,
+    "target_result": "not adjudicated; no findings produced"
+  },
+  {
+    "case_mode_repeat": [
+      "3.0.6",
+      true,
+      1
+    ],
+    "audit_id": "4d32fc3530734c2e9441aa366bc2abff",
+    "snapshot_sha256": "86ef1873bdf393f3f49afb5d9646f4ea77df5a8071dc81e47f909525387c61d6",
+    "status": "INCOMPLETE",
+    "failure": "RuntimeError: Context budget exceeded; partial findings only",
+    "coverage": {
+      "files_total": 311,
+      "files_read": 5,
+      "distinct_lines_read": 1176,
+      "scope": "tool-observed reads; not semantic audit completeness"
+    },
+    "tool_calls": 26,
+    "elapsed_seconds": 23.1,
+    "tokens": 401160,
+    "target_result": "not adjudicated; no findings produced"
+  },
+  {
+    "case_mode_repeat": [
+      "3.0.6",
+      false,
+      0
+    ],
+    "audit_id": "4b538229782646e9aa2b7e92ad963198",
+    "snapshot_sha256": "86ef1873bdf393f3f49afb5d9646f4ea77df5a8071dc81e47f909525387c61d6",
+    "status": "INCOMPLETE",
+    "failure": "RuntimeError: Context budget exceeded; partial findings only",
+    "coverage": {
+      "files_total": 311,
+      "files_read": 5,
+      "distinct_lines_read": 1269,
+      "scope": "tool-observed reads; not semantic audit completeness"
+    },
+    "tool_calls": 28,
+    "elapsed_seconds": 21.99,
+    "tokens": 402865,
+    "target_result": "not adjudicated; no findings produced"
+  },
+  {
+    "case_mode_repeat": [
+      "3.0.6",
+      false,
+      1
+    ],
+    "audit_id": "ffef6e528a3e44feab427bba3c4cfd85",
+    "snapshot_sha256": "86ef1873bdf393f3f49afb5d9646f4ea77df5a8071dc81e47f909525387c61d6",
+    "status": "INCOMPLETE",
+    "failure": "RuntimeError: Context budget exceeded; partial findings only",
+    "coverage": {
+      "files_total": 311,
+      "files_read": 3,
+      "distinct_lines_read": 1067,
+      "scope": "tool-observed reads; not semantic audit completeness"
+    },
+    "tool_calls": 30,
+    "elapsed_seconds": 28.31,
+    "tokens": 461767,
+    "target_result": "not adjudicated; no findings produced"
+  }
+]

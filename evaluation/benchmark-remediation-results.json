@@ -1,0 +1,168 @@
+{
+  "passed": false,
+  "checks": {
+    "runs_complete": false,
+    "no_false_positives": true,
+    "all_expected_detected": true,
+    "ground_truth_count": true,
+    "real_cross_file": true,
+    "ai_added_unruled": true,
+    "ai_rejected_static_fp": true,
+    "static_analysis_executed": true,
+    "different_plans": true
+  },
+  "metrics": {
+    "true_positive": 10,
+    "false_positive": 0,
+    "false_negative": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "evidence_completeness": 1.0,
+    "cross_file_detection": 1,
+    "ai_only_detection": 9,
+    "ai_fp_rejection": 2
+  },
+  "static_only": {
+    "llm_calls": 0,
+    "security_verdicts": 3,
+    "findings": [
+      {
+        "finding_id": "sql_injection-mybatis-raw-substitution-UserMapper.xml-3",
+        "category": "SQL_INJECTION",
+        "status": "NEEDS_REVIEW",
+        "repository": {
+          "name": "repo",
+          "branch": "SNAPSHOT",
+          "commit": "snapshot:d2900109e7ab021b8a78113702de2e5be466c2000a23fbf6e8c917cbbe66222d"
+        },
+        "source": null,
+        "sink": {
+          "file": "UserMapper.xml",
+          "line": 3,
+          "end_line": 3,
+          "snippet_hash": "0ec1ceade37a18d4e4544ce2a2936c304ae63c4d70c6aa71ea83cdb2ceff9fa9",
+          "file_sha256": "9bd4cf591d64a610b9ee0c036546c2a04773996b6906a678f6c8bcc111916c0e",
+          "symbol": "",
+          "type": "SQL_SINK"
+        },
+        "dataflow": [],
+        "protection": {
+          "status": "UNKNOWN",
+          "evidence": []
+        },
+        "reachability": "UNKNOWN",
+        "rules_applied": [
+          "mybatis-raw-substitution"
+        ],
+        "decision_trace": [
+          "INCOMPLETE_DATAFLOW_OR_UNKNOWN_PROTECTION"
+        ],
+        "evidence_integrity": {
+          "commit": "snapshot:d2900109e7ab021b8a78113702de2e5be466c2000a23fbf6e8c917cbbe66222d",
+          "status": "PASS",
+          "evidence_sha256": "1c667e8ce5bcaed54169e4aaa15d0c8d2b484fda195b3d208f261f63e7450ca9"
+        },
+        "recommendation": "Use parameterized binding or a finite server-side allowlist mapping.",
+        "agent_version": "1.0.0",
+        "rule_version": "1.0.0",
+        "knowledge_version": "1.0.0"
+      },
+      {
+        "finding_id": "command_injection-java-command-execution-EchoController.java-6",
+        "category": "COMMAND_INJECTION",
+        "status": "NEEDS_REVIEW",
+        "repository": {
+          "name": "repo",
+          "branch": "SNAPSHOT",
+          "commit": "snapshot:36947ba086bb7da8e3231ff01d881efda43caf843a7871c81a060aa2c3d1240d"
+        },
+        "source": null,
+        "sink": {
+          "file": "EchoController.java",
+          "line": 6,
+          "end_line": 6,
+          "snippet_hash": "0e543e51ef8c1a617b6437aaa3143653dcc0672790ed4db64d5627cf01978a2d",
+          "file_sha256": "18839718b0a2f7eef3379bcb29859bde8b4c598c320d4bb583f3a542cfdbdc23",
+          "symbol": "",
+          "type": "COMMAND_SINK"
+        },
+        "dataflow": [],
+        "protection": {
+          "status": "UNKNOWN",
+          "evidence": []
+        },
+        "reachability": "UNKNOWN",
+        "rules_applied": [
+          "java-command-execution"
+        ],
+        "decision_trace": [
+          "INCOMPLETE_DATAFLOW_OR_UNKNOWN_PROTECTION"
+        ],
+        "evidence_integrity": {
+          "commit": "snapshot:36947ba086bb7da8e3231ff01d881efda43caf843a7871c81a060aa2c3d1240d",
+          "status": "PASS",
+          "evidence_sha256": "1e5d6d4fa568fa875214c441328a716a860a314da1eb7f5cc1e8e6070f31fc68"
+        },
+        "recommendation": "Avoid shell command text; use fixed executable and immutable finite argument mapping.",
+        "agent_version": "1.0.0",
+        "rule_version": "1.0.0",
+        "knowledge_version": "1.0.0"
+      },
+      {
+        "finding_id": "command_injection-java-command-execution-EchoController.java-6",
+        "category": "COMMAND_INJECTION",
+        "status": "NEEDS_REVIEW",
+        "repository": {
+          "name": "repo",
+          "branch": "SNAPSHOT",
+          "commit": "snapshot:947cf3870b594a05080f2b5d06ec86ea3e23d7c98bae439579c795f9b5e479eb"
+        },
+        "source": null,
+        "sink": {
+          "file": "EchoController.java",
+          "line": 6,
+          "end_line": 6,
+          "snippet_hash": "b18bec92723135c491d9cd86c64c1c1c691e53b338e1cc429f0820a748fbf3b0",
+          "file_sha256": "b2791f3778d126eac4302b0542a6894919fc50bf7f23bdb7d0322786d70a7a6e",
+          "symbol": "",
+          "type": "COMMAND_SINK"
+        },
+        "dataflow": [],
+        "protection": {
+          "status": "UNKNOWN",
+          "evidence": []
+        },
+        "reachability": "UNKNOWN",
+        "rules_applied": [
+          "java-command-execution"
+        ],
+        "decision_trace": [
+          "INCOMPLETE_DATAFLOW_OR_UNKNOWN_PROTECTION"
+        ],
+        "evidence_integrity": {
+          "commit": "snapshot:947cf3870b594a05080f2b5d06ec86ea3e23d7c98bae439579c795f9b5e479eb",
+          "status": "PASS",
+          "evidence_sha256": "9a7ce0832caf8a5b36f340ae5466a07f4f795e6e311c1192057f45c10fb3bff8"
+        },
+        "recommendation": "Avoid shell command text; use fixed executable and immutable finite argument mapping.",
+        "agent_version": "1.0.0",
+        "rule_version": "1.0.0",
+        "knowledge_version": "1.0.0"
+      }
+    ],
+    "candidate_count": 3,
+    "verified_findings": 0,
+    "evaluation_errors": 0,
+    "verdict_comparison_available": true,
+    "candidate_positive_cases": 1,
+    "candidate_safe_cases": 2,
+    "unmatched_vulnerable_cases": 9
+  },
+  "rules_sha256": {
+    "rules/semgrep/path.yaml": "2636d04e4c22e446d7e5954e1a3ac7ff38c1c714bb2b1dccfe4f4baba63bf20a",
+    "rules/semgrep/ssrf.yaml": "c325d7ef7f43176301fe987085209f979f47a56ef22866540a45187ea1cec79e",
+    "rules/semgrep/sql.yaml": "7a221bcc4025733dc383d6a51f919b88b4e5a803484c572b190be1132e07b1d8",
+    "rules/semgrep/command.yaml": "8be4763e088aa387d879ef152f504008308290d173edb52a6f27918868e76d30"
+  }
+}
