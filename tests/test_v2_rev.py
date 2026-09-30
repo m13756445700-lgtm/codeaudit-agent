@@ -173,3 +173,36 @@ def test_known_eof_feedback_survives_compaction(tmp_path):
     engine.transport = None  # Bad range must not reach the remote capability.
     with pytest.raises(ValueError, match='has 2 lines'):
         engine.dispatch('use_tool', {'tool': 'repo.read_range', 'arguments': {'path': 'a.py', 'start': 2, 'end': 4}, 'purpose': 'inspect'})
+
+
+def test_checkpoint_replaces_stale_state_and_preserves_model_authority(tmp_path):
+    src = tmp_path/'src'; src.mkdir()
+    (src/'a.py').write_text('x = 1\n')
+    audit, metadata = snapshot(src, tmp_path/'ws')
+    engine = Engine(None, Local(ToolLayer(audit)), audit, metadata, profile(audit/'repo'))
+    engine.dispatch('submit_plan', {'plan': {'attack_surfaces': ['input'], 'next_actions': ['read']}})
+    engine.dispatch('hypothesis', {'hypothesis': {'id': 'H1', 'statement': 'Check input', 'status': 'NEW'}})
+    assert engine.investigation_checkpoint(0)['priority'] == 'investigate'
+    engine.hypotheses['H1']['status'] = 'REJECTED'
+    engine.findings['H1'] = {'id': 'H1', 'status': 'REJECTED', 'evidence_gate': {'passed': True, 'problems': []}}
+    state = engine.investigation_checkpoint(32)
+    assert state['priority'] == 'settle'
+    assert state['hypotheses'] == {'H1': 'REJECTED'}
+    assert state['decisions']['H1']['gate_passed']
+    assert len([m for m in engine.messages if m.get('content', '').startswith('CODEAUDIT_EXECUTION_STATE\n')]) == 1
+    assert not engine.finished
+    assert engine.findings['H1']['status'] == 'REJECTED'
+    engine.messages.append({'role': 'user', 'content': 'x'*90000})
+    engine.compact_context()
+    assert engine.investigation_checkpoint(33)['hypotheses'] == {'H1': 'REJECTED'}
+
+
+def test_unregistered_decision_feedback_keeps_hypothesis_requirement(tmp_path):
+    src = tmp_path/'src'; src.mkdir()
+    (src/'a.py').write_text('x = 1\n')
+    audit, metadata = snapshot(src, tmp_path/'ws')
+    engine = Engine(None, Local(ToolLayer(audit)), audit, metadata, profile(audit/'repo'))
+    engine.dispatch('submit_plan', {'plan': {'attack_surfaces': ['input'], 'next_actions': ['read']}})
+    with pytest.raises(ValueError, match='exact id'):
+        engine.dispatch('submit_decision', {'finding': {'id': 'missing-id'}})
+    assert not engine.hypotheses and not engine.findings

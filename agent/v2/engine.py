@@ -69,7 +69,7 @@ TOOLS = [
                'required': ['id', 'statement', 'status']}}, ['hypothesis']),
     function('submit_decision', 'AI security judgment with complete code references. Gate cannot invent a verdict.',
              {'finding': DECISION}, ['finding']),
-    function('finish', 'Finish after investigating hypotheses; explicitly state coverage limitations.',
+    function('finish', 'Finish after investigating hypotheses. reviewed includes features proven absent by source reads; deferred means not examined or blocked. Never defer merely because a feature is absent. State coverage limitations.',
              {'summary': STRING, 'limitations': {'type': 'array', 'items': STRING},
               'surface_reviews': {'type': 'array', 'items': {'type': 'object', 'properties': {
                   'surface': STRING, 'status': {'type': 'string', 'enum': ['reviewed', 'deferred']},
@@ -168,7 +168,7 @@ class Engine:
         if name == 'submit_decision':
             f = args['finding']
             if f.get('id') not in self.hypotheses:
-                raise ValueError('Create hypothesis before decision')
+                raise ValueError(f'Create hypothesis before decision: id={f.get("id")!r} is not registered. Call hypothesis with this exact id, statement and status INVESTIGATING, then resubmit the decision. Registered IDs: {list(self.hypotheses)}')
             application = f.get('knowledge_application')
             if not isinstance(application, str) or not application.strip():
                 raise ValueError('Explain how knowledge affected this judgment, or why it is unavailable/not applicable')
@@ -274,6 +274,34 @@ class Engine:
         self.event({'tool': 'context.compact', 'purpose': 'Bound model context while preserving full disk trace',
                     'result_summary': {'retained_messages': len(recent), 'read_receipts': len(self.receipts)}})
 
+    def investigation_checkpoint(self, iteration):
+        """Refresh operational state without making or changing a security judgment."""
+        remaining = {'iterations': self.max_iterations - iteration,
+                     'tool_calls': self.max_calls - self.calls}
+        settling = (remaining['iterations'] <= max(6, self.max_iterations // 3)
+                    or remaining['tool_calls'] <= max(12, self.max_calls // 3))
+        state = {'execution_state': True, 'remaining': remaining,
+                 'priority': 'settle' if settling else 'investigate',
+                 'planned_surfaces': sorted(self.planned_surfaces),
+                 'hypotheses': {key: value['status'] for key, value in self.hypotheses.items()},
+                 'decisions': {key: {'status': value['status'],
+                                     'gate_passed': value['evidence_gate']['passed'],
+                                     'problems': value['evidence_gate']['problems']}
+                               for key, value in self.findings.items()},
+                 'instruction': ('Prioritize decisions and finish now; enough budget must remain for evidence corrections. '
+                     'Register a hypothesis before its decision, using the exact same ID. Resolve open hypotheses '
+                     'using actual evidence; missing links require INSUFFICIENT_EVIDENCE. Defer genuinely unexamined '
+                     'surfaces with limitations; source-verified absent features are reviewed. Never claim unread code safe.'
+                     if settling else 'Investigate one concrete risk at a time, register its hypothesis and settle it '
+                     'before expanding. Use exact registered IDs. Passed decisions need no unchanged resubmission.')}
+        # Engine-created checkpoints alone use this prefix; preserve user/repository data.
+        prefix = 'CODEAUDIT_EXECUTION_STATE\n'
+        self.messages = [m for m in self.messages if not
+                         (m['role'] == 'user' and isinstance(m.get('content'), str)
+                          and m['content'].startswith(prefix))]
+        self.messages.append({'role': 'user', 'content': prefix + json.dumps(state, ensure_ascii=False)})
+        return state
+
     def run(self):
         started = time.monotonic()
         self.save('repo_profile.json', self.profile)
@@ -285,11 +313,7 @@ class Engine:
                 self.compact_context()
                 if len(json.dumps(self.messages)) > 110000:
                     raise RuntimeError('Context budget exceeded; partial findings only')
-                remaining = {'iterations': self.max_iterations - iteration, 'tool_calls': self.max_calls - self.calls}
-                if remaining['iterations'] <= 6 or remaining['tool_calls'] <= 12:
-                    self.messages.append({'role': 'user', 'content': json.dumps({
-                        'execution_budget_remaining': remaining,
-                        'instruction': 'Investigation budget is almost exhausted. Stop broad discovery. Resolve existing hypotheses using read evidence, with INSUFFICIENT_EVIDENCE for missing links. Then finish, deferring unexamined planned surfaces with explicit reasons. Do not claim unread scope is safe.'})})
+                self.investigation_checkpoint(iteration)
                 response = self.model.complete(self.messages, TOOLS)
                 self.messages.append(response)
                 calls = response.get('tool_calls') or []
