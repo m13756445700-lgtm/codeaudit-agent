@@ -1,0 +1,103 @@
+{
+  "records": [
+    {
+      "case_arm": [
+        "3.0.5",
+        "broad"
+      ],
+      "audit_id": "fe3736c8df5849b589751cf6b497a10d",
+      "snapshot_sha256": "ca6f54ce58072c67da814d84814be555be978b90013cc12cb96a41a69dc4d0f6",
+      "status": "INCOMPLETE",
+      "failure": "RuntimeError: Iteration budget exceeded",
+      "coverage": {
+        "files_total": 311,
+        "files_read": 9,
+        "distinct_lines_read": 2625,
+        "scope": "tool-observed reads; not semantic audit completeness"
+      },
+      "tool_calls": 81,
+      "elapsed_seconds": 62.22,
+      "tokens": 1122239,
+      "findings": []
+    },
+    {
+      "case_arm": [
+        "3.0.5",
+        "focused"
+      ],
+      "audit_id": "83bee029c56f41c48f0f3f2ae0ec682c",
+      "snapshot_sha256": "ca6f54ce58072c67da814d84814be555be978b90013cc12cb96a41a69dc4d0f6",
+      "status": "PARTIAL",
+      "failure": null,
+      "coverage": {
+        "files_total": 311,
+        "files_read": 5,
+        "distinct_lines_read": 649,
+        "scope": "tool-observed reads; not semantic audit completeness"
+      },
+      "tool_calls": 19,
+      "elapsed_seconds": 28.1,
+      "tokens": 206595,
+      "findings": [
+        {
+          "title": "safe_join does not reject leading-slash/UNC paths on Windows (Python < 3.11)",
+          "status": "LIKELY"
+        }
+      ]
+    },
+    {
+      "case_arm": [
+        "3.0.6",
+        "broad"
+      ],
+      "audit_id": "cd66063d2be14a80aa47b2420034baf1",
+      "snapshot_sha256": "86ef1873bdf393f3f49afb5d9646f4ea77df5a8071dc81e47f909525387c61d6",
+      "status": "INCOMPLETE",
+      "failure": "RuntimeError: Iteration budget exceeded",
+      "coverage": {
+        "files_total": 311,
+        "files_read": 9,
+        "distinct_lines_read": 2708,
+        "scope": "tool-observed reads; not semantic audit completeness"
+      },
+      "tool_calls": 90,
+      "elapsed_seconds": 73.31,
+      "tokens": 1280398,
+      "findings": []
+    },
+    {
+      "case_arm": [
+        "3.0.6",
+        "focused"
+      ],
+      "audit_id": "dce93b38a42f4808bcab7fb74007c878",
+      "snapshot_sha256": "86ef1873bdf393f3f49afb5d9646f4ea77df5a8071dc81e47f909525387c61d6",
+      "status": "COMPLETE",
+      "failure": null,
+      "coverage": {
+        "files_total": 311,
+        "files_read": 9,
+        "distinct_lines_read": 1240,
+        "scope": "tool-observed reads; not semantic audit completeness"
+      },
+      "tool_calls": 40,
+      "elapsed_seconds": 51.12,
+      "tokens": 460658,
+      "findings": [
+        {
+          "title": "safe_join path containment is robust; no traversal bypass found",
+          "status": "REJECTED"
+        },
+        {
+          "title": "send_file/send_from_directory do not expose client-controlled traversal",
+          "status": "REJECTED"
+        },
+        {
+          "title": "debug get_resource neutralizes traversal via basename",
+          "status": "REJECTED"
+        }
+      ]
+    }
+  ],
+  "interpretation": "Trained regression after literal-read memory and CA-K04. Vulnerable focused run identifies platform-conditional issue as LIKELY/PARTIAL; fixed focused run COMPLETE with rejection. Both broad runs still INCOMPLETE. No independent or full-repository acceptance claim."
+}

@@ -6,7 +6,7 @@
 
 服务器已只保留当前 V2 栈，考官入口已切换；每日自动任务及整机重启后自动恢复均实测成功。GitHub 仅保留公开 main。SSH 与考官命令见 README。
 
-当前首轮20例复测TP10/FP0/FN0，但有两例PARTIAL；最新尝试受模型HTTP402影响失败。真实311文件仓库前三轮均未完成；第四轮一例超限，三例被HTTP402中断。最新Linux测试与GitHub fresh clone均142项通过。不得据此宣传普遍准确率或已达到某个分数。详见 [提交状态](docs/SUBMISSION_STATUS.md)、[整改记录](docs/REMEDIATION.md) 和 `evaluation/` 中的预注册协议、成功与失败数据。
+当前首轮20例复测TP10/FP0/FN0，但有两例PARTIAL；最新尝试受模型HTTP402影响失败。真实311文件仓库前三轮均未完成；第四轮一例超限，三例被HTTP402中断。截至代码0cd8d15，GitHub fresh clone145项通过；EOF反馈修复源码在Linux146项通过（17.52秒）。第六轮定向回归有改善但全库仍未完成，见round6结果。不得据此宣传普遍准确率或已达到某个分数。详见 [提交状态](docs/SUBMISSION_STATUS.md)、[整改记录](docs/REMEDIATION.md) 和 `evaluation/` 中的预注册协议、成功与失败数据。
 
 正式白名单：`README.md`、本清单、`.gitignore`、`.dockerignore`、`.env.example`、`pyproject.toml`、`requirements-dev.txt`、`Makefile`、`Dockerfile`、`docker-compose.yml`、`agent-compose.yml`，以及以下目录。
 

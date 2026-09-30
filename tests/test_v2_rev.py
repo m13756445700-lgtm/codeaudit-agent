@@ -158,3 +158,18 @@ def test_compaction_retains_deduplicated_literal_read_evidence(tmp_path):
     memory = json.loads(engine.messages[2]['content'])
     assert memory['literal_read_excerpts']['a.py'] == '1: danger = input()\n2: eval(danger)\n'
     assert len(engine.receipts) == 2
+
+
+def test_known_eof_feedback_survives_compaction(tmp_path):
+    src = tmp_path/'src'; src.mkdir()
+    (src/'a.py').write_text('x = 1\nx = 2\n')
+    audit, metadata = snapshot(src, tmp_path/'ws')
+    engine = Engine(None, Local(ToolLayer(audit)), audit, metadata, profile(audit/'repo'))
+    engine.dispatch('submit_plan', {'plan': {'attack_surfaces': ['input'], 'next_actions': ['read']}})
+    engine.dispatch('use_tool', {'tool': 'repo.read_file', 'arguments': {'path': 'a.py'}, 'purpose': 'inspect'})
+    engine.messages.append({'role': 'user', 'content': 'x'*90000})
+    engine.compact_context()
+    assert json.loads(engine.messages[2]['content'])['file_lengths']['a.py'] == 2
+    engine.transport = None  # Bad range must not reach the remote capability.
+    with pytest.raises(ValueError, match='has 2 lines'):
+        engine.dispatch('use_tool', {'tool': 'repo.read_range', 'arguments': {'path': 'a.py', 'start': 2, 'end': 4}, 'purpose': 'inspect'})

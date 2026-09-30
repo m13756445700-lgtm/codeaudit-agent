@@ -89,6 +89,7 @@ class Engine:
         self.progress = progress
         self.receipts, self.knowledge, self.hypotheses, self.findings = [], {}, {}, {}
         self.read_cache = {}
+        self.file_lengths = {}
         self.plan = None
         self.planned_surfaces = set()
         self.calls = 0
@@ -138,11 +139,16 @@ class Engine:
                 start, end = arguments.get('start', 1), arguments.get('end')
                 if type(start) is not int or start < 1 or (end is not None and (type(end) is not int or end < start or end - start >= 120)):
                     raise ValueError('Read at most 120 existing lines inclusive: end-start<=119. Split requests, e.g. 1..120 then 121..240; use prior total_lines to avoid reading beyond EOF.')
+                total = self.file_lengths.get(arguments.get('path'))
+                if total is not None and (start > total or (end is not None and end > total)):
+                    raise ValueError(f'Read exceeds EOF: {arguments.get("path")} has {total} lines; request within 1..{total}, at most120 lines. Do not repeat an out-of-range request.')
             if tool == 'knowledge.retrieve' and not self.use_knowledge:
                 return {'available': False, 'reason': 'Knowledge ablation mode'}
             result = self.transport.call(tool, arguments)
             if tool in ('repo.read_file', 'repo.read_range') and 'sha256' in result:
                 self.receipts.append({k: result[k] for k in ('file', 'sha256', 'start', 'end')})
+                if 'total_lines' in result:
+                    self.file_lengths[result['file']] = result['total_lines']
                 cache = self.read_cache.setdefault(result['file'], {})
                 for line in result.get('lines', []):
                     cache[line['line']] = line['code']
@@ -260,7 +266,7 @@ class Engine:
                   'hypotheses': list(self.hypotheses.values()),
                   'decisions': [{'id': f['id'], 'status': f['status'], 'title': f.get('title'),
                                  'gate_passed': f['evidence_gate']['passed']} for f in self.findings.values()],
-                  'read_receipts': self.receipts[-40:], 'literal_read_excerpts': excerpts,
+                  'read_receipts': self.receipts[-40:], 'file_lengths': self.file_lengths, 'literal_read_excerpts': excerpts,
                   'excerpt_notice': 'Only actually read lines; excerpt budget 45000 characters, each line at most800 chars. Missing lines are omitted, not proven safe. Reread only when needed; use retained exact lines for decisions.',
                   'retrieved_knowledge': self.knowledge,
                   'remaining_tool_calls': self.max_calls - self.calls}
