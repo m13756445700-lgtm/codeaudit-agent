@@ -1,0 +1,43 @@
+{
+  "protocol_version": 1,
+  "frozen_before_model_runs": "2026-09-30",
+  "purpose": "External real-size repository regression; publicly known CVE, not blind or unseen-model-data evaluation",
+  "repository": "https://github.com/pallets/werkzeug",
+  "source": "https://github.com/pallets/werkzeug/security/advisories/GHSA-f9vj-2wh5-fj8j",
+  "cases": [
+    {
+      "ref": "3.0.5",
+      "target": "src/werkzeug/security.py:safe_join",
+      "expected": "Windows Python<3.11 UNC path escape; state both platform and runtime preconditions"
+    },
+    {
+      "ref": "3.0.6",
+      "target": "src/werkzeug/security.py:safe_join",
+      "expected": "Reject this specific UNC bypass because startswith slash protection exists; no claim of all-repo safety"
+    }
+  ],
+  "runs_per_case_per_mode": 2,
+  "modes": [
+    "knowledge_on",
+    "knowledge_off"
+  ],
+  "model_input": "Original generic full repository audit goal; no CVE, target function or labels supplied to Engine",
+  "budget": {
+    "iterations": 48,
+    "tool_calls": 100,
+    "seconds": 1200
+  },
+  "measurements": [
+    "exact snapshot hash",
+    "file count",
+    "files and lines read",
+    "status",
+    "target detected/rejected/missed/undecided",
+    "other findings unadjudicated",
+    "tokens",
+    "seconds"
+  ],
+  "restrictions": "No target execution/exploitation. Freeze labels before model results. Missing target is a miss even if COMPLETE. Do not tune prompt or knowledge after observing results within this experiment. No all-vulnerability precision/recall from one target. Two repeats are descriptive, not significance or causal proof. No monetary cost without verified provider price.",
+  "round": 3,
+  "change_from_round_1": "Round 3 after preserving two failed rounds: explicit read-range limit and actionable pre-dispatch errors; settle hypotheses incrementally; production budget increased to 48 iterations/100 calls/1200 seconds. Not comparable under equal cost to earlier rounds. Labels unchanged."
+}

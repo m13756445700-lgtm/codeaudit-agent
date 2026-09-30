@@ -31,7 +31,7 @@ agents:
           const result = scheduler.exec({
             command: "/opt/codeaudit-venv/bin/python",
             args: ["/opt/codeaudit/scripts/run-agent.py", "/opt/codeaudit/benchmark/cross-file-flow", "--keep-source"],
-            timeoutMs: 960000,
+            timeoutMs: 1320000,
             maxOutputBytes: 16384,
             sandboxPolicy: "new"
           });

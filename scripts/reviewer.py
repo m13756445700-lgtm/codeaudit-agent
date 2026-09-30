@@ -16,7 +16,7 @@ COMPOSE = ['/usr/bin/docker', 'compose', '--env-file', '.env', '--env-file', '.r
 AGENT = COMPOSE + ['exec', '-T', 'agent-compose', 'agent-compose', '-f', '/data/work/codeaudit-final/agent-compose.yml']
 
 def run(argv, capture=False):
-    return subprocess.run(argv, check=True, text=True, capture_output=capture, timeout=1020)
+    return subprocess.run(argv, check=True, text=True, capture_output=capture, timeout=1380)
 
 
 def main():

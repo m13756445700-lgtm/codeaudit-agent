@@ -133,3 +133,13 @@ def test_context_compaction_preserves_tool_pairs_and_audit_state(tmp_path):
     assert 'all_planned_surfaces' in engine.messages[2]['content']
     assert [m['tool_call_id'] for m in engine.messages if m['role'] == 'tool'] == ['6', '7']
     assert 'context.compact' in (audit/'tool_calls.jsonl').read_text()
+
+
+def test_oversized_model_read_gets_actionable_feedback_before_transport(tmp_path):
+    src = tmp_path/'src'; src.mkdir()
+    (src/'a.py').write_text('x = 1\n')
+    audit, metadata = snapshot(src, tmp_path/'ws')
+    engine = Engine(None, None, audit, metadata, profile(audit/'repo'))
+    engine.dispatch('submit_plan', {'plan': {'attack_surfaces': ['input'], 'next_actions': ['read']}})
+    with pytest.raises(ValueError, match='120 existing lines'):
+        engine.dispatch('use_tool', {'tool': 'repo.read_range', 'arguments': {'path': 'a.py', 'start': 1, 'end': 300}, 'purpose': 'inspect'})
