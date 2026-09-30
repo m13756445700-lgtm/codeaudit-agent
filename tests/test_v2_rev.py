@@ -117,3 +117,19 @@ def test_decision_requires_knowledge_application_before_gate(tmp_path):
         engine.dispatch('submit_decision', {'finding': {'id': 'h1'}})
     with pytest.raises(ValueError, match='Retrieve relevant knowledge'):
         engine.dispatch('submit_decision', {'finding': {'id': 'h1', 'knowledge_application': 'not consulted'}})
+
+
+def test_context_compaction_preserves_tool_pairs_and_audit_state(tmp_path):
+    src = tmp_path/'src'; src.mkdir()
+    (src/'a.py').write_text('x = 1\n')
+    audit, metadata = snapshot(src, tmp_path/'ws')
+    engine = Engine(None, Local(ToolLayer(audit)), audit, metadata, profile(audit/'repo'))
+    engine.dispatch('submit_plan', {'plan': {'attack_surfaces': ['input'], 'next_actions': ['read']}})
+    for i in range(8):
+        engine.messages.extend([{'role': 'assistant', 'tool_calls': [{'id': str(i), 'function': {'name': 'use_tool', 'arguments': '{}'}}]},
+                                {'role': 'tool', 'tool_call_id': str(i), 'content': 'a'*18000}])
+    engine.compact_context()
+    assert len(json.dumps(engine.messages)) < 85000
+    assert 'all_planned_surfaces' in engine.messages[2]['content']
+    assert [m['tool_call_id'] for m in engine.messages if m['role'] == 'tool'] == ['6', '7']
+    assert 'context.compact' in (audit/'tool_calls.jsonl').read_text()

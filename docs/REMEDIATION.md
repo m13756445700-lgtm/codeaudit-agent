@@ -26,3 +26,9 @@ Linux 固定依赖镜像：139 项通过（18.87 秒）。此前本机缺少 Sem
 已将考官 sudo 包装器切换到 `/opt/codeaudit-v2`。考官权限下 projects 显示唯一项目 codeaudit-final、一个 auditor 和一个 scheduler；methods 返回 `codeaudit.v2.RepositoryTools/ExecuteTool`。手动调用 daily-v2-audit 的 scheduler run `db04677c4360d8b2e65e7547b64d8cb5c3ce4425a65914376006fc849f0d949c` 成功，Engine audit `c3674fce88e94bff87b1f009112a91f5` 为 COMPLETE / octobus-mcp / 16 calls。首次失败原因是 scheduler 重设 PATH 后找不到虚拟环境 python，改为绝对路径解决。
 
 该次镜像仍带有打包元数据文件，正在干净重建；此记录不能替代最终干净版本验收。旧 V1 和重复 V2 服务已停止，删除与整机恢复验证尚未完成。
+
+## 2026-09-30：扩大评估暴露的问题
+
+真实 Werkzeug 3.0.5/3.0.6 两版本、知识开关、各重复两次，共 8 次。第一轮全部因上下文预算耗尽而 INCOMPLETE，没有形成漏洞判断；不能视为通过。固定 20 例 Benchmark 是 TP10/FP0/FN0，但 false-positive 和 go-argv 因模型延期部分攻击面而 PARTIAL，runs_complete 检查失败；整体结果仍为不通过。
+
+据此修复上下文管理：磁盘工具轨迹保留全文，模型记忆保留计划、假设、判断状态、实际读取回执及近期完整工具调用对；压缩结果明确提示重新读取后再引用。新增协议回归测试；Linux 全量 140 项通过（16.91秒）。第二轮沿用原始标签和预算，单独记录为失败后的回归实验，不替换首轮失败。

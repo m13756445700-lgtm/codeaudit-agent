@@ -217,6 +217,29 @@ class Engine:
             return {'accepted': True}
         raise ValueError('Unknown action')
 
+    def compact_context(self):
+        """Persisted trace remains lossless; model memory is explicitly a navigation aid."""
+        if len(json.dumps(self.messages)) <= 85000:
+            return
+        starts = [i for i, m in enumerate(self.messages) if m['role'] == 'assistant']
+        start = starts[-2] if len(starts) >= 2 else (starts[0] if starts else len(self.messages))
+        recent = [dict(m) for m in self.messages[start:]]
+        for message in recent:
+            if message['role'] == 'tool' and len(message.get('content', '')) > 10000:
+                message['content'] = json.dumps({'context_truncated': True,
+                    'notice': 'Result retained in tool_calls.jsonl; reread targeted code before quoting.',
+                    'excerpt': message['content'][:8000]})
+        memory = {'context_compacted': True, 'notice': 'Earlier tool outputs remain in the audit trace. This state is not new evidence. Reread exact lines if needed; do not invent quotes.',
+                  'plan': self.plan, 'all_planned_surfaces': sorted(self.planned_surfaces),
+                  'hypotheses': list(self.hypotheses.values()),
+                  'decisions': [{'id': f['id'], 'status': f['status'], 'title': f.get('title'),
+                                 'gate_passed': f['evidence_gate']['passed']} for f in self.findings.values()],
+                  'read_receipts': self.receipts[-40:], 'retrieved_knowledge': self.knowledge,
+                  'remaining_tool_calls': self.max_calls - self.calls}
+        self.messages = self.messages[:2] + [{'role': 'user', 'content': json.dumps(memory, ensure_ascii=False)}] + recent
+        self.event({'tool': 'context.compact', 'purpose': 'Bound model context while preserving full disk trace',
+                    'result_summary': {'retained_messages': len(recent), 'read_receipts': len(self.receipts)}})
+
     def run(self):
         started = time.monotonic()
         self.save('repo_profile.json', self.profile)
@@ -225,6 +248,7 @@ class Engine:
             for iteration in range(self.max_iterations):
                 if time.monotonic() - started > self.timeout or self.calls >= self.max_calls:
                     raise RuntimeError('Audit budget exceeded')
+                self.compact_context()
                 if len(json.dumps(self.messages)) > 110000:
                     raise RuntimeError('Context budget exceeded; partial findings only')
                 response = self.model.complete(self.messages, TOOLS)
