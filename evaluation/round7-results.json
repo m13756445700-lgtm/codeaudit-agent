@@ -1,0 +1,112 @@
+{
+  "source_commit": "d1edf1e",
+  "records": [
+    {
+      "case_arm": [
+        "3.0.5",
+        "broad"
+      ],
+      "audit_id": "4056ce7369594b1a81ec35dd08d60bf5",
+      "snapshot_sha256": "ca6f54ce58072c67da814d84814be555be978b90013cc12cb96a41a69dc4d0f6",
+      "status": "INCOMPLETE",
+      "failure": "RuntimeError: Iteration budget exceeded",
+      "coverage": {
+        "files_total": 311,
+        "files_read": 7,
+        "distinct_lines_read": 2010,
+        "scope": "tool-observed reads; not semantic audit completeness"
+      },
+      "tool_calls": 95,
+      "elapsed_seconds": 79.71,
+      "tokens": 1354956,
+      "findings": []
+    },
+    {
+      "case_arm": [
+        "3.0.5",
+        "focused"
+      ],
+      "audit_id": "d09fcfb35a7641d1a7da7cd14d3b9aa8",
+      "snapshot_sha256": "ca6f54ce58072c67da814d84814be555be978b90013cc12cb96a41a69dc4d0f6",
+      "status": "COMPLETE",
+      "failure": null,
+      "coverage": {
+        "files_total": 311,
+        "files_read": 8,
+        "distinct_lines_read": 924,
+        "scope": "tool-observed reads; not semantic audit completeness"
+      },
+      "tool_calls": 38,
+      "elapsed_seconds": 62.73,
+      "tokens": 422877,
+      "findings": [
+        {
+          "title": "safe_join fails to reject leading-slash/UNC paths on Windows with Python < 3.11 (GHSA-f9vj-2wh5-fj8j)",
+          "status": "CONFIRMED"
+        }
+      ]
+    },
+    {
+      "case_arm": [
+        "3.0.6",
+        "broad"
+      ],
+      "audit_id": "2b717cce54a9463fbda3f30487346cb7",
+      "snapshot_sha256": "86ef1873bdf393f3f49afb5d9646f4ea77df5a8071dc81e47f909525387c61d6",
+      "status": "INCOMPLETE",
+      "failure": "RuntimeError: Iteration budget exceeded",
+      "coverage": {
+        "files_total": 311,
+        "files_read": 5,
+        "distinct_lines_read": 1418,
+        "scope": "tool-observed reads; not semantic audit completeness"
+      },
+      "tool_calls": 60,
+      "elapsed_seconds": 59.26,
+      "tokens": 1040495,
+      "findings": []
+    },
+    {
+      "case_arm": [
+        "3.0.6",
+        "focused"
+      ],
+      "audit_id": "1df8dab349d64390aa15cbf0a6adae1c",
+      "snapshot_sha256": "86ef1873bdf393f3f49afb5d9646f4ea77df5a8071dc81e47f909525387c61d6",
+      "status": "PARTIAL",
+      "failure": null,
+      "coverage": {
+        "files_total": 311,
+        "files_read": 6,
+        "distinct_lines_read": 816,
+        "scope": "tool-observed reads; not semantic audit completeness"
+      },
+      "tool_calls": 39,
+      "elapsed_seconds": 46.46,
+      "tokens": 308160,
+      "findings": [
+        {
+          "title": "safe_join path containment is robust in this version (3.0.6)",
+          "status": "REJECTED"
+        },
+        {
+          "title": "send_file/send_from_directory do not permit traversal when used as documented",
+          "status": "REJECTED"
+        },
+        {
+          "title": "SharedDataMiddleware loaders contain request paths via safe_join",
+          "status": "REJECTED"
+        },
+        {
+          "title": "Debugger get_resource confines filename via basename and fixed prefix",
+          "status": "REJECTED"
+        },
+        {
+          "title": "FileStorage.save writes to caller-provided dst (no library traversal)",
+          "status": "REJECTED"
+        }
+      ]
+    }
+  ],
+  "interpretation": "Known-case diagnostic regression. Vulnerable focused run COMPLETE/CONFIRMED; fixed focused run PARTIAL. Both broad runs INCOMPLETE. EOF fix reduces opaque range errors but does not establish autonomous whole-repository completion or held-out accuracy."
+}

@@ -1,0 +1,157 @@
+{
+  "passed": false,
+  "checks": {
+    "runs_complete": false,
+    "no_false_positives": true,
+    "all_expected_detected": true,
+    "ground_truth_count": true,
+    "real_cross_file": true,
+    "ai_added_unruled": true,
+    "ai_rejected_static_fp": true,
+    "static_analysis_executed": true,
+    "different_plans": true
+  },
+  "metrics": {
+    "true_positive": 10,
+    "false_positive": 0,
+    "false_negative": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "evidence_completeness": 1.0,
+    "cross_file_detection": 1,
+    "ai_only_detection": 9,
+    "ai_fp_rejection": 2
+  },
+  "rules_sha256": {
+    "rules/semgrep/path.yaml": "2636d04e4c22e446d7e5954e1a3ac7ff38c1c714bb2b1dccfe4f4baba63bf20a",
+    "rules/semgrep/ssrf.yaml": "c325d7ef7f43176301fe987085209f979f47a56ef22866540a45187ea1cec79e",
+    "rules/semgrep/sql.yaml": "7a221bcc4025733dc383d6a51f919b88b4e5a803484c572b190be1132e07b1d8",
+    "rules/semgrep/command.yaml": "8be4763e088aa387d879ef152f504008308290d173edb52a6f27918868e76d30"
+  },
+  "source_commit": "0cd8d15",
+  "execution": "Fresh serial model and OctoBus calls after recharge; not replay",
+  "interpretation": "20 development fixtures, not held-out accuracy. TP10 FP0 FN0;19COMPLETE and go-shell PARTIAL because model deferred absent surfaces. Overall acceptance fails runs_complete. No HTTP402 in this run.",
+  "records": [
+    {
+      "case": "cross-file-flow",
+      "audit_id": "5a3000155abe42ee988c51eced032570",
+      "snapshot_sha256": "be387b33cf3d22a1d314bdb553de1a0bab336cff0a942430940809f537c4a777",
+      "run_status": "COMPLETE"
+    },
+    {
+      "case": "false-positive",
+      "audit_id": "19987a9f67254195bcd0d851d62a06ef",
+      "snapshot_sha256": "d2900109e7ab021b8a78113702de2e5be466c2000a23fbf6e8c917cbbe66222d",
+      "run_status": "COMPLETE"
+    },
+    {
+      "case": "python-sql-raw",
+      "audit_id": "621ffc91b8ce420797d99d3f0e5c17da",
+      "snapshot_sha256": "89055e7b3ff0e3df3724da650d5cad6c0e0f879a8f297fc5c90e8f57280805f6",
+      "run_status": "COMPLETE"
+    },
+    {
+      "case": "python-sql-bound",
+      "audit_id": "3376e3e4f676430b99e019ebcae8399d",
+      "snapshot_sha256": "036cfa01681144fd53bacfa2d5cb2bc7efddd75cff8dbbdbd3dc222a19d794db",
+      "run_status": "COMPLETE"
+    },
+    {
+      "case": "python-argv",
+      "audit_id": "3d2cd9cef2ec457d91025d1cc4632cf1",
+      "snapshot_sha256": "9873120ea47642392d839b45c8e51472497c61ddd5352a00ec29311584e82acb",
+      "run_status": "COMPLETE"
+    },
+    {
+      "case": "python-url",
+      "audit_id": "afcebf733462487ab6ec0b0a30e7de2b",
+      "snapshot_sha256": "7e33503ac5ab8aef14d0d285650b343e3f0b77a7f338a468ee527808f089b02a",
+      "run_status": "COMPLETE"
+    },
+    {
+      "case": "python-fixed-url",
+      "audit_id": "49c5ed48ab4146bfb987a741f6ff473b",
+      "snapshot_sha256": "f7c7e149efa5781ee51676cc62f834ab17d6ee8ecf38fc278e0a20a20ae066a9",
+      "run_status": "COMPLETE"
+    },
+    {
+      "case": "python-file",
+      "audit_id": "844f177a6e7149d5871a2987b75c8aa9",
+      "snapshot_sha256": "3a4cfabc94cce146eff547e70e7e830d839a695150bbfe1384df97495a0a00ae",
+      "run_status": "COMPLETE"
+    },
+    {
+      "case": "python-fixed-file",
+      "audit_id": "7e31e5a6a94849c0ab11c2d9c71a57a3",
+      "snapshot_sha256": "07520df80bb5541feaa074f156947793ee3fc9f68341ea192138c5ccc0bb7c20",
+      "run_status": "COMPLETE"
+    },
+    {
+      "case": "node-shell",
+      "audit_id": "9f3fdaf149074cd496f7f7657af399e7",
+      "snapshot_sha256": "246bad8b506a716c758ee59b39815f2c5939bfbe26fe7216dc26b061a6f5f7b4",
+      "run_status": "COMPLETE"
+    },
+    {
+      "case": "node-argv",
+      "audit_id": "e26fc98ab0a844ffb2119767e6d91130",
+      "snapshot_sha256": "5365b69accf5861523e1f4ca0d9e1dbb424e57ec90439e117035898c7dd31c52",
+      "run_status": "COMPLETE"
+    },
+    {
+      "case": "node-sql-raw",
+      "audit_id": "f4cf751997614c43a7930f7318683759",
+      "snapshot_sha256": "e621f3f0bfc295f7b53fe6cd4852ad0b3084c7b1895f3b6d2199bdd4ae3b35cb",
+      "run_status": "COMPLETE"
+    },
+    {
+      "case": "node-sql-bound",
+      "audit_id": "43bbb315d55644f2895093d1849e0fd9",
+      "snapshot_sha256": "af28727376bbc2dbbe98754e04c7931fcf097b7a5d87f63db2cd160e5cea170e",
+      "run_status": "COMPLETE"
+    },
+    {
+      "case": "go-shell",
+      "audit_id": "5bb9b4f3e65b481c8cb4ddeb77a09dd4",
+      "snapshot_sha256": "2cc290460496c8cfcce51a188d881239314339bac4bbfdd2243a1e9a4543883d",
+      "run_status": "PARTIAL"
+    },
+    {
+      "case": "go-argv",
+      "audit_id": "4646562c67e04e7d92280f64bc89e2bb",
+      "snapshot_sha256": "647fe192c04fc39a9b89784a3712e4c27aaf1f6b679042c2a3e287acbd248ad3",
+      "run_status": "COMPLETE"
+    },
+    {
+      "case": "go-url",
+      "audit_id": "28c7b1cc499740289babd602dc0e276e",
+      "snapshot_sha256": "6c5e753b9dde611112c8c4e7362bfadf2d3aa03c839787f7b370580cc0fd82a8",
+      "run_status": "COMPLETE"
+    },
+    {
+      "case": "go-fixed-url",
+      "audit_id": "5457801dd523452aab7bb687c35b25a8",
+      "snapshot_sha256": "22b0cace14f23d07ca465abafc495964e3f51a8d311118d337689991a4c84307",
+      "run_status": "COMPLETE"
+    },
+    {
+      "case": "java-runtime-string",
+      "audit_id": "2cc1c0644dbe4e2c9c3be3acb0aa0c10",
+      "snapshot_sha256": "36947ba086bb7da8e3231ff01d881efda43caf843a7871c81a060aa2c3d1240d",
+      "run_status": "COMPLETE"
+    },
+    {
+      "case": "java-shell-array",
+      "audit_id": "a31d2c38295a4fed9572e158e3f37298",
+      "snapshot_sha256": "947cf3870b594a05080f2b5d06ec86ea3e23d7c98bae439579c795f9b5e479eb",
+      "run_status": "COMPLETE"
+    },
+    {
+      "case": "python-template",
+      "audit_id": "5ca82cb0801e4db5b68fa61e8a96448f",
+      "snapshot_sha256": "b944f9e248c6382a03c8ae4d2f8dd268f18b3d151a2b73f8fa3f639c1f5a512a",
+      "run_status": "COMPLETE"
+    }
+  ]
+}
