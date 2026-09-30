@@ -1,0 +1,23 @@
+{
+  "date": "2026-09-30",
+  "round": 9,
+  "purpose": "Diagnostic regression after three failed broad-repository rounds; not blind validation or evidence of general accuracy",
+  "versions": [
+    "3.0.5",
+    "3.0.6"
+  ],
+  "arms": [
+    "broad",
+    "focused"
+  ],
+  "repeats": 1,
+  "knowledge": true,
+  "budget": {
+    "iterations": 48,
+    "tool_calls": 100,
+    "seconds": 1200
+  },
+  "changes": "Return observed file bounds on first EOF overrun without evidence receipt; size compacted context by serialized envelope, trimming only model excerpts, preserving full disk trace. Same model/knowledge/budget; four known repository cases and three go-shell repeats serially.",
+  "focused_prompt": "Review file-serving path construction and containment across src/werkzeug/security.py and src/werkzeug/utils.py, including platform-dependent checks. Inspect the implementation and defenses; do not assume a vulnerability exists.",
+  "expected_labels": "Unchanged from real-repository-plan.json. Focused arm is explicitly target-guided and cannot substitute for broad audit success."
+}

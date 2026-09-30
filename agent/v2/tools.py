@@ -28,9 +28,13 @@ class ToolLayer:
         if b'\0' in raw:
             return {'file': path, 'binary': True}
         lines = raw.decode('utf-8', errors='replace').splitlines()
+        if type(start) is not int or start < 1 or (end is not None and
+                (type(end) is not int or end < start or end - start >= 120)):
+            raise ValueError('Read range must contain at most 120 lines')
         end = min(start + 119, len(lines)) if end is None else end
-        if type(start) is not int or type(end) is not int or start < 1 or end < start or end > len(lines) or end - start >= 120:
-            raise ValueError('Read range must exist and contain at most 120 lines')
+        if start > len(lines) or end > len(lines):
+            return {'file': path, 'total_lines': len(lines), 'read_error': 'RANGE_OUTSIDE_FILE',
+                    'notice': 'No lines read. Request an existing range within total_lines, at most120 lines.'}
         selected = [{'line': i + 1, 'code': lines[i][:2000]} for i in range(start - 1, end)]
         return {'file': path, 'sha256': digest(p), 'start': start, 'end': end, 'total_lines': len(lines),
                 'lines': selected, 'truncated_lines': any(len(lines[i]) > 2000 for i in range(start - 1, end))}

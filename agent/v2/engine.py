@@ -145,10 +145,10 @@ class Engine:
             if tool == 'knowledge.retrieve' and not self.use_knowledge:
                 return {'available': False, 'reason': 'Knowledge ablation mode'}
             result = self.transport.call(tool, arguments)
+            if tool in ('repo.read_file', 'repo.read_range') and 'total_lines' in result:
+                self.file_lengths[result['file']] = result['total_lines']
             if tool in ('repo.read_file', 'repo.read_range') and 'sha256' in result:
                 self.receipts.append({k: result[k] for k in ('file', 'sha256', 'start', 'end')})
-                if 'total_lines' in result:
-                    self.file_lengths[result['file']] = result['total_lines']
                 cache = self.read_cache.setdefault(result['file'], {})
                 for line in result.get('lines', []):
                     cache[line['line']] = line['code']
@@ -270,7 +270,18 @@ class Engine:
                   'excerpt_notice': 'Only actually read lines; excerpt budget 45000 characters, each line at most800 chars. Missing lines are omitted, not proven safe. Reread only when needed; use retained exact lines for decisions.',
                   'retrieved_knowledge': self.knowledge,
                   'remaining_tool_calls': self.max_calls - self.calls}
-        self.messages = self.messages[:2] + [{'role': 'user', 'content': json.dumps(memory, ensure_ascii=False)}] + recent
+        def packed():
+            return self.messages[:2] + [{'role': 'user', 'content': json.dumps(memory, ensure_ascii=False)}] + recent
+        # Measure the same serialized envelope used by the hard limit. Escapes and
+        # long tool-call arguments can exceed a raw-character estimate substantially.
+        while len(json.dumps(packed())) > 85000 and excerpts:
+            largest = max(excerpts, key=lambda key: len(excerpts[key]))
+            lines = excerpts[largest].splitlines(keepends=True)
+            if len(lines) <= 1:
+                del excerpts[largest]
+            else:
+                excerpts[largest] = ''.join(lines[:len(lines)//2])
+        self.messages = packed()
         self.event({'tool': 'context.compact', 'purpose': 'Bound model context while preserving full disk trace',
                     'result_summary': {'retained_messages': len(recent), 'read_receipts': len(self.receipts)}})
 

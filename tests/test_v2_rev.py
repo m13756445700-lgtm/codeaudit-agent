@@ -206,3 +206,29 @@ def test_unregistered_decision_feedback_keeps_hypothesis_requirement(tmp_path):
     with pytest.raises(ValueError, match='exact id'):
         engine.dispatch('submit_decision', {'finding': {'id': 'missing-id'}})
     assert not engine.hypotheses and not engine.findings
+
+
+def test_first_read_over_eof_returns_bounds_without_evidence(tmp_path):
+    src = tmp_path/'src'; src.mkdir()
+    (src/'a.py').write_text('x = 1\n')
+    audit, metadata = snapshot(src, tmp_path/'ws')
+    engine = Engine(None, Local(ToolLayer(audit)), audit, metadata, profile(audit/'repo'))
+    engine.dispatch('submit_plan', {'plan': {'attack_surfaces': ['input'], 'next_actions': ['read']}})
+    result = engine.dispatch('use_tool', {'tool': 'repo.read_range', 'arguments': {'path': 'a.py', 'start': 1, 'end': 120}, 'purpose': 'inspect'})
+    assert result['read_error'] == 'RANGE_OUTSIDE_FILE' and result['total_lines'] == 1
+    assert not engine.receipts and not engine.read_cache
+    assert engine.file_lengths['a.py'] == 1
+    result = engine.dispatch('use_tool', {'tool': 'repo.read_range', 'arguments': {'path': 'a.py', 'start': 1, 'end': 1}, 'purpose': 'corrected read'})
+    assert result['lines'][0]['code'] == 'x = 1'
+
+
+def test_compaction_accounts_for_escaped_literal_evidence(tmp_path):
+    src = tmp_path/'src'; src.mkdir()
+    (src/'a.py').write_text('x = 1\n')
+    audit, metadata = snapshot(src, tmp_path/'ws')
+    engine = Engine(None, Local(ToolLayer(audit)), audit, metadata, profile(audit/'repo'))
+    engine.read_cache = {'a.py': {i: '\\"'*400 for i in range(1, 100)}}
+    engine.messages.append({'role': 'user', 'content': 'x'*90000})
+    engine.compact_context()
+    assert len(json.dumps(engine.messages)) <= 85000
+    assert engine.read_cache['a.py'][99] == '\\"'*400
