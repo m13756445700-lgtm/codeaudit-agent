@@ -32,6 +32,7 @@ Explain absence or effectiveness of sanitizer in sanitizer_analysis. Gate valida
 Use submit_decision for both confirmed and rejected hypotheses. Correct rejected evidence references if Gate fails.
 At finish, settle EVERY planned attack surface in surface_reviews: surface (exact planned name), status reviewed or deferred, files (actually read paths), and reason. Deferred surfaces require limitations and yield PARTIAL. Reviewed surfaces require read evidence. Never silently drop surfaces when revising a plan.
 Review uncovered attack surfaces then finish with scope and limitations; don't claim entire repo safe from sample reads.
+Use investigation_state to retrieve earlier notes after compaction. Use investigation_note to preserve concise evidence summaries and open questions before expanding or rereading. Record each completed surface using settle_surface as you go; finish remains mandatory. Notes are provisional model assessments, not validated security verdicts.
 Batch independent reads if useful. Budget is finite; use focused reads, stop unnecessary exploration once evidence complete.
 '''
 
@@ -69,7 +70,16 @@ TOOLS = [
                'required': ['id', 'statement', 'status']}}, ['hypothesis']),
     function('submit_decision', 'AI security judgment with complete code references. Gate cannot invent a verdict.',
              {'finding': DECISION}, ['finding']),
-    function('finish', 'Finish after investigating hypotheses. reviewed includes features proven absent by source reads; deferred means not examined or blocked. Never defer merely because a feature is absent. State coverage limitations.',
+    function('investigation_state', 'Read persisted provisional note by id after compaction; omit id to list notes and surface progress.', {'id': STRING}, []),
+    function('investigation_note', 'Persist concise provisional facts with actually read line references, open questions and next action. No private reasoning; notes are not verdicts.',
+             {'id': STRING, 'summary': STRING, 'references': {'type': 'array', 'items': REFERENCE},
+              'open_questions': {'type': 'array', 'items': STRING}, 'next_action': STRING},
+             ['id', 'summary', 'references', 'open_questions', 'next_action']),
+    function('settle_surface', 'Record one planned surface now. reviewed includes source-proven absence; deferred means unexamined or blocked. Does not finish the audit.',
+             {'surface': STRING, 'status': {'type': 'string', 'enum': ['reviewed', 'deferred']},
+              'files': {'type': 'array', 'items': STRING}, 'reason': STRING},
+             ['surface', 'status', 'files', 'reason']),
+    function('finish', 'Finish after investigating hypotheses. reviewed includes features proven absent by source reads; deferred means not examined or blocked. Never defer merely because a feature is absent. State coverage limitations. Pass surface_reviews=[] to use all previously recorded settlements.',
              {'summary': STRING, 'limitations': {'type': 'array', 'items': STRING},
               'surface_reviews': {'type': 'array', 'items': {'type': 'object', 'properties': {
                   'surface': STRING, 'status': {'type': 'string', 'enum': ['reviewed', 'deferred']},
@@ -88,6 +98,7 @@ class Engine:
         self.use_knowledge = knowledge
         self.progress = progress
         self.receipts, self.knowledge, self.hypotheses, self.findings = [], {}, {}, {}
+        self.notes, self.surface_settlements = {}, {}
         self.read_cache = {}
         self.file_lengths = {}
         self.plan = None
@@ -188,6 +199,47 @@ class Engine:
             return {'accepted': checked['evidence_gate']['passed'], 'status': checked['status'], 'gate': checked['evidence_gate'],
                     'next_action': 'Decision recorded. Do not resubmit unchanged. Investigate another hypothesis or call finish with limitations.',
                     'unresolved': [key for key, value in self.hypotheses.items() if value['status'] in ('NEW', 'INVESTIGATING')]}
+        if name == 'investigation_state':
+            if 'id' in args:
+                if args['id'] not in self.notes:
+                    raise ValueError('Unknown investigation note')
+                return {'note': self.notes[args['id']], 'notice': 'Provisional model assessment, not a verdict.'}
+            return {'notes': [{'id': key, 'summary': value['summary'][:200]} for key, value in self.notes.items()],
+                    'surface_progress': list(self.surface_settlements.values())}
+        if name == 'investigation_note':
+            if not isinstance(args.get('id'), str) or not 1 <= len(args['id']) <= 80:
+                raise ValueError('Note id must be 1..80 characters')
+            if args['id'] not in self.notes and len(self.notes) >= 24:
+                raise ValueError('At most24 notes; revise an existing note')
+            if not isinstance(args.get('summary'), str) or not 1 <= len(args['summary']) <= 1500:
+                raise ValueError('Note summary must be 1..1500 characters')
+            if not isinstance(args.get('next_action'), str) or len(args['next_action']) > 500:
+                raise ValueError('Note next action must be at most500 characters')
+            questions = args.get('open_questions')
+            if not isinstance(questions, list) or len(questions) > 8 or any(not isinstance(q, str) or len(q) > 300 for q in questions):
+                raise ValueError('At most8 short open questions')
+            if len(json.dumps(args)) > 6000:
+                raise ValueError('Note exceeds6000 serialized characters; keep a concise evidence summary')
+            refs = args.get('references')
+            if not isinstance(refs, list) or len(refs) > 8:
+                raise ValueError('At most8 read references')
+            for ref in refs:
+                if not isinstance(ref, dict) or type(ref.get('line')) is not int:
+                    raise ValueError('Invalid note reference')
+                code = self.read_cache.get(ref.get('file'), {}).get(ref['line'])
+                quote = ref.get('evidence')
+                if code is None or not isinstance(quote, str) or not quote.strip() or quote not in code:
+                    raise ValueError('Note reference must quote an actually read line')
+            self.notes[args['id']] = args
+            self.save('investigation_notes.json', list(self.notes.values()))
+            self.event({'tool': name, 'arguments': args, 'purpose': 'Provisional evidence summary; not a verdict', 'result_summary': {'accepted': True}})
+            return {'accepted': True, 'notice': 'References verified against read text; interpretation remains provisional.'}
+        if name == 'settle_surface':
+            self.validate_surface(args)
+            self.surface_settlements[args['surface']] = args
+            self.save('surface_progress.json', list(self.surface_settlements.values()))
+            self.event({'tool': name, 'arguments': args, 'purpose': 'Incremental surface settlement', 'result_summary': {'accepted': True}})
+            return {'accepted': True, 'remaining': sorted(self.planned_surfaces - self.surface_settlements.keys())}
         if name == 'finish':
             if not isinstance(args.get('summary'), str) or not args['summary'].strip():
                 raise ValueError('Completion requires a summary')
@@ -199,6 +251,9 @@ class Engine:
             if unresolved:
                 raise ValueError('Unresolved hypotheses: ' + ','.join(unresolved))
             reviews = args.get('surface_reviews')
+            if reviews == [] and self.surface_settlements:
+                reviews = list(self.surface_settlements.values())
+                args = dict(args, surface_reviews=reviews)
             if not isinstance(reviews, list):
                 raise ValueError('Settle every planned surface in surface_reviews')
             seen, read_files, deferred = set(), {r['file'] for r in self.receipts}, False
@@ -232,6 +287,20 @@ class Engine:
             return {'accepted': True}
         raise ValueError('Unknown action')
 
+    def validate_surface(self, review):
+        if review.get('surface') not in self.planned_surfaces:
+            raise ValueError('Surface must match the original plan')
+        if review.get('status') not in ('reviewed', 'deferred'):
+            raise ValueError('Invalid surface status')
+        if not isinstance(review.get('reason'), str) or not 1 <= len(review['reason'].strip()) <= 2000:
+            raise ValueError('Surface reason must be 1..2000 characters')
+        read_files = {r['file'] for r in self.receipts}
+        files = review.get('files')
+        if not isinstance(files, list) or any(not isinstance(f, str) or f not in read_files for f in files):
+            raise ValueError('Surface evidence must reference actually read files')
+        if review['status'] == 'reviewed' and not files:
+            raise ValueError('Reviewed surface requires read evidence')
+
     def compact_context(self):
         """Persisted trace remains lossless; model memory is explicitly a navigation aid."""
         if len(json.dumps(self.messages)) <= 85000:
@@ -262,6 +331,9 @@ class Engine:
                 excerpts[path] = excerpts.get(path, '') + line
                 excerpt_chars += len(line)
         memory = {'context_compacted': True, 'notice': 'Earlier tool outputs remain in the audit trace. This state is not new evidence. Reread exact lines if needed; do not invent quotes.',
+                  'investigation_notes': list(self.notes.values())[-6:],
+                  'notes_notice': 'At most6 most recent notes shown; full provisional ledger remains investigation_notes.json. Notes are not verdicts.',
+                  'surface_progress': list(self.surface_settlements.values()),
                   'plan': self.plan, 'all_planned_surfaces': sorted(self.planned_surfaces),
                   'hypotheses': list(self.hypotheses.values()),
                   'decisions': [{'id': f['id'], 'status': f['status'], 'title': f.get('title'),
@@ -294,6 +366,8 @@ class Engine:
         state = {'execution_state': True, 'remaining': remaining,
                  'priority': 'settle' if settling else 'investigate',
                  'planned_surfaces': sorted(self.planned_surfaces),
+                 'surface_progress': {key: value['status'] for key, value in self.surface_settlements.items()},
+                 'notes_available': list(self.notes),
                  'hypotheses': {key: value['status'] for key, value in self.hypotheses.items()},
                  'decisions': {key: {'status': value['status'],
                                      'gate_passed': value['evidence_gate']['passed'],

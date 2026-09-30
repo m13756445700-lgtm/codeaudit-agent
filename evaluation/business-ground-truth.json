@@ -1,0 +1,214 @@
+{
+  "version": 1,
+  "classification": "development-regression",
+  "cases": [
+    {
+      "id": "tenant-read-unscoped",
+      "source": "business-cases/tenant-read-unscoped/source",
+      "provenance": "Project-authored synthetic development regression; not independent blind validation",
+      "target": {
+        "category": "authz",
+        "file": "src/billing/service.py",
+        "sink": "return dict(invoice)",
+        "expected": "CONFIRMED"
+      },
+      "preconditions": [
+        "Authenticated tenant B can submit invoice identifiers",
+        "Invoice belongs to tenant A",
+        "For update, attacker is editor of tenant B",
+        "For cache, tenant A previously populated the shared process cache"
+      ],
+      "rationale": "Login/role/first-element check does not enforce tenant ownership for the protected operation.",
+      "policy": "All invoices are tenant-private. Editor role is local to its tenant. Invoice IDs are globally unique but not secret. Shared cache may contain prior requests from other tenants. No external authorization middleware exists in this fixture.",
+      "files_sha256": {
+        "src/billing/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "src/billing/identity.py": "3c8ab7a8a9fd489964456775a30333f0d7d0b7f17b52ee9ae8123ec90a1a120c",
+        "src/billing/repository.py": "d69bbce2cb33d4785533daf13105fe325e1674c4d851aa76ee76ce057e93d618",
+        "src/billing/routes.py": "629b65dc4ff562e68a10fd64911e5d8bebd8a524d4c7c91efff554b6b9866961",
+        "src/billing/service.py": "336a1b3eaa0ec1a481ac1cdbbff05109b8b29ce3ae77a4c063194eb497ae54ac"
+      }
+    },
+    {
+      "id": "tenant-read-protected",
+      "source": "business-cases/tenant-read-protected/source",
+      "provenance": "Project-authored synthetic development regression; not independent blind validation",
+      "target": {
+        "category": "authz",
+        "file": "src/billing/service.py",
+        "sink": "return dict(invoice)",
+        "expected": "REJECTED"
+      },
+      "preconditions": [
+        "Authenticated tenant B can submit invoice identifiers",
+        "Invoice belongs to tenant A",
+        "For update, attacker is editor of tenant B",
+        "For cache, tenant A previously populated the shared process cache"
+      ],
+      "rationale": "Tenant ownership enforced on every relevant data access, including cache key separation.",
+      "policy": "All invoices are tenant-private. Editor role is local to its tenant. Invoice IDs are globally unique but not secret. Shared cache may contain prior requests from other tenants. No external authorization middleware exists in this fixture.",
+      "files_sha256": {
+        "src/billing/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "src/billing/identity.py": "3c8ab7a8a9fd489964456775a30333f0d7d0b7f17b52ee9ae8123ec90a1a120c",
+        "src/billing/repository.py": "d69bbce2cb33d4785533daf13105fe325e1674c4d851aa76ee76ce057e93d618",
+        "src/billing/routes.py": "629b65dc4ff562e68a10fd64911e5d8bebd8a524d4c7c91efff554b6b9866961",
+        "src/billing/service.py": "3b84b66c1fb82903399df298b456a5a9d1de062ed1b9edc60cc39837d5a6280c"
+      }
+    },
+    {
+      "id": "tenant-update-unscoped",
+      "source": "business-cases/tenant-update-unscoped/source",
+      "provenance": "Project-authored synthetic development regression; not independent blind validation",
+      "target": {
+        "category": "authz",
+        "file": "src/billing/service.py",
+        "sink": "invoice[\"memo\"] = payload[\"memo\"]",
+        "expected": "CONFIRMED"
+      },
+      "preconditions": [
+        "Authenticated tenant B can submit invoice identifiers",
+        "Invoice belongs to tenant A",
+        "For update, attacker is editor of tenant B",
+        "For cache, tenant A previously populated the shared process cache"
+      ],
+      "rationale": "Login/role/first-element check does not enforce tenant ownership for the protected operation.",
+      "policy": "All invoices are tenant-private. Editor role is local to its tenant. Invoice IDs are globally unique but not secret. Shared cache may contain prior requests from other tenants. No external authorization middleware exists in this fixture.",
+      "files_sha256": {
+        "src/billing/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "src/billing/identity.py": "3c8ab7a8a9fd489964456775a30333f0d7d0b7f17b52ee9ae8123ec90a1a120c",
+        "src/billing/repository.py": "d69bbce2cb33d4785533daf13105fe325e1674c4d851aa76ee76ce057e93d618",
+        "src/billing/routes.py": "629b65dc4ff562e68a10fd64911e5d8bebd8a524d4c7c91efff554b6b9866961",
+        "src/billing/service.py": "9473c2edd49e4dea6bbd782d22ee6113447996286602e338ea9016e9d54c020e"
+      }
+    },
+    {
+      "id": "tenant-update-protected",
+      "source": "business-cases/tenant-update-protected/source",
+      "provenance": "Project-authored synthetic development regression; not independent blind validation",
+      "target": {
+        "category": "authz",
+        "file": "src/billing/service.py",
+        "sink": "invoice[\"memo\"] = payload[\"memo\"]",
+        "expected": "REJECTED"
+      },
+      "preconditions": [
+        "Authenticated tenant B can submit invoice identifiers",
+        "Invoice belongs to tenant A",
+        "For update, attacker is editor of tenant B",
+        "For cache, tenant A previously populated the shared process cache"
+      ],
+      "rationale": "Tenant ownership enforced on every relevant data access, including cache key separation.",
+      "policy": "All invoices are tenant-private. Editor role is local to its tenant. Invoice IDs are globally unique but not secret. Shared cache may contain prior requests from other tenants. No external authorization middleware exists in this fixture.",
+      "files_sha256": {
+        "src/billing/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "src/billing/identity.py": "3c8ab7a8a9fd489964456775a30333f0d7d0b7f17b52ee9ae8123ec90a1a120c",
+        "src/billing/repository.py": "d69bbce2cb33d4785533daf13105fe325e1674c4d851aa76ee76ce057e93d618",
+        "src/billing/routes.py": "629b65dc4ff562e68a10fd64911e5d8bebd8a524d4c7c91efff554b6b9866961",
+        "src/billing/service.py": "77fdcfcea26427d61158f24a63a341aedb70273925e0fa7d31ee2ca6d7bc5c55"
+      }
+    },
+    {
+      "id": "tenant-batch-unscoped",
+      "source": "business-cases/tenant-batch-unscoped/source",
+      "provenance": "Project-authored synthetic development regression; not independent blind validation",
+      "target": {
+        "category": "authz",
+        "file": "src/billing/service.py",
+        "sink": "return [dict(invoice) for invoice in selected]",
+        "expected": "CONFIRMED"
+      },
+      "preconditions": [
+        "Authenticated tenant B can submit invoice identifiers",
+        "Invoice belongs to tenant A",
+        "For update, attacker is editor of tenant B",
+        "For cache, tenant A previously populated the shared process cache"
+      ],
+      "rationale": "Login/role/first-element check does not enforce tenant ownership for the protected operation.",
+      "policy": "All invoices are tenant-private. Editor role is local to its tenant. Invoice IDs are globally unique but not secret. Shared cache may contain prior requests from other tenants. No external authorization middleware exists in this fixture.",
+      "files_sha256": {
+        "src/billing/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "src/billing/identity.py": "3c8ab7a8a9fd489964456775a30333f0d7d0b7f17b52ee9ae8123ec90a1a120c",
+        "src/billing/repository.py": "d69bbce2cb33d4785533daf13105fe325e1674c4d851aa76ee76ce057e93d618",
+        "src/billing/routes.py": "629b65dc4ff562e68a10fd64911e5d8bebd8a524d4c7c91efff554b6b9866961",
+        "src/billing/service.py": "60544628e02992953a864a5c4f8b137d59a118c324c44566edef0ed93e16af80"
+      }
+    },
+    {
+      "id": "tenant-batch-protected",
+      "source": "business-cases/tenant-batch-protected/source",
+      "provenance": "Project-authored synthetic development regression; not independent blind validation",
+      "target": {
+        "category": "authz",
+        "file": "src/billing/service.py",
+        "sink": "return [dict(invoice) for invoice in selected]",
+        "expected": "REJECTED"
+      },
+      "preconditions": [
+        "Authenticated tenant B can submit invoice identifiers",
+        "Invoice belongs to tenant A",
+        "For update, attacker is editor of tenant B",
+        "For cache, tenant A previously populated the shared process cache"
+      ],
+      "rationale": "Tenant ownership enforced on every relevant data access, including cache key separation.",
+      "policy": "All invoices are tenant-private. Editor role is local to its tenant. Invoice IDs are globally unique but not secret. Shared cache may contain prior requests from other tenants. No external authorization middleware exists in this fixture.",
+      "files_sha256": {
+        "src/billing/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "src/billing/identity.py": "3c8ab7a8a9fd489964456775a30333f0d7d0b7f17b52ee9ae8123ec90a1a120c",
+        "src/billing/repository.py": "d69bbce2cb33d4785533daf13105fe325e1674c4d851aa76ee76ce057e93d618",
+        "src/billing/routes.py": "629b65dc4ff562e68a10fd64911e5d8bebd8a524d4c7c91efff554b6b9866961",
+        "src/billing/service.py": "9c6c17457ae3f616ed608facf70fb04336b85fdbb9c0ee256db7eb7efef5b46a"
+      }
+    },
+    {
+      "id": "tenant-cache-unscoped",
+      "source": "business-cases/tenant-cache-unscoped/source",
+      "provenance": "Project-authored synthetic development regression; not independent blind validation",
+      "target": {
+        "category": "authz",
+        "file": "src/billing/service.py",
+        "sink": "return dict(cache[key])",
+        "expected": "CONFIRMED"
+      },
+      "preconditions": [
+        "Authenticated tenant B can submit invoice identifiers",
+        "Invoice belongs to tenant A",
+        "For update, attacker is editor of tenant B",
+        "For cache, tenant A previously populated the shared process cache"
+      ],
+      "rationale": "Login/role/first-element check does not enforce tenant ownership for the protected operation.",
+      "policy": "All invoices are tenant-private. Editor role is local to its tenant. Invoice IDs are globally unique but not secret. Shared cache may contain prior requests from other tenants. No external authorization middleware exists in this fixture.",
+      "files_sha256": {
+        "src/billing/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "src/billing/identity.py": "3c8ab7a8a9fd489964456775a30333f0d7d0b7f17b52ee9ae8123ec90a1a120c",
+        "src/billing/repository.py": "d69bbce2cb33d4785533daf13105fe325e1674c4d851aa76ee76ce057e93d618",
+        "src/billing/routes.py": "629b65dc4ff562e68a10fd64911e5d8bebd8a524d4c7c91efff554b6b9866961",
+        "src/billing/service.py": "fba503231f303d32f855c05f6fc39977a804c7bebcdae9a64e7617c145f1aa57"
+      }
+    },
+    {
+      "id": "tenant-cache-protected",
+      "source": "business-cases/tenant-cache-protected/source",
+      "provenance": "Project-authored synthetic development regression; not independent blind validation",
+      "target": {
+        "category": "authz",
+        "file": "src/billing/service.py",
+        "sink": "return dict(cache[key])",
+        "expected": "REJECTED"
+      },
+      "preconditions": [
+        "Authenticated tenant B can submit invoice identifiers",
+        "Invoice belongs to tenant A",
+        "For update, attacker is editor of tenant B",
+        "For cache, tenant A previously populated the shared process cache"
+      ],
+      "rationale": "Tenant ownership enforced on every relevant data access, including cache key separation.",
+      "policy": "All invoices are tenant-private. Editor role is local to its tenant. Invoice IDs are globally unique but not secret. Shared cache may contain prior requests from other tenants. No external authorization middleware exists in this fixture.",
+      "files_sha256": {
+        "src/billing/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "src/billing/identity.py": "3c8ab7a8a9fd489964456775a30333f0d7d0b7f17b52ee9ae8123ec90a1a120c",
+        "src/billing/repository.py": "d69bbce2cb33d4785533daf13105fe325e1674c4d851aa76ee76ce057e93d618",
+        "src/billing/routes.py": "629b65dc4ff562e68a10fd64911e5d8bebd8a524d4c7c91efff554b6b9866961",
+        "src/billing/service.py": "cf909e741227ff577143eca2567d47abaad69d32884d360c4f93c7dd55866e49"
+      }
+    }
+  ]
+}

@@ -17,7 +17,9 @@ def navigate(repo, metadata, operation, query):
         except (SyntaxError, UnicodeError, RecursionError) as exc:
             problems.append({'file': path, 'reason': type(exc).__name__})
             continue
-        module = path[:-3].replace('/', '.')
+        # Conventional src layout: src is a source root unless it is a real package.
+        module_path = path[4:] if path.startswith('src/') and 'src/__init__.py' not in metadata['files'] else path
+        module = module_path[:-3].replace('/', '.')
         if module.endswith('.__init__'):
             module = module[:-9]
         imports = {}
@@ -63,12 +65,13 @@ def navigate(repo, metadata, operation, query):
                               'candidate': target, 'file': path, 'line': node.lineno})
                 self.generic_visit(node)
         Visitor().visit(tree)
-    names = {d['symbol'] for d in definitions}
+    from collections import Counter
+    names = Counter(d['symbol'] for d in definitions)
     for call in calls:
         # Direct names/import aliases only. Dynamic dispatch/monkeypatching remain unproven.
         target = call.pop('candidate')
-        call['callee'] = target if target in names else None
-        call['resolution'] = 'syntactic' if call['callee'] else 'unresolved'
+        call['callee'] = target if names[target] == 1 else None
+        call['resolution'] = 'ambiguous' if names[target] > 1 else ('syntactic' if call['callee'] else 'unresolved')
     def match(value):
         return value and (value == query or value.endswith('.' + query))
     if operation == 'repo.find_symbol':

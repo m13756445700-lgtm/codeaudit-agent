@@ -1,0 +1,42 @@
+import json
+import pytest
+from scripts import consolidated_acceptance as batch
+
+
+def test_prepare_is_offline_and_freeze_detects_source_change(tmp_path, monkeypatch):
+    import agent.v2.model
+    monkeypatch.setattr(agent.v2.model, 'Model', lambda: pytest.fail('Offline preparation must not instantiate model'))
+    output = tmp_path/'campaign'
+    plan = batch.prepare(output, repeats=1)
+    assert len(plan['jobs']) == 44
+    assert batch.load_frozen(output)['implementation_sha256'] == plan['implementation_sha256']
+    with pytest.raises(ValueError, match='exists'): batch.prepare(output)
+    assert not batch.summarize(output)['release_ready']
+    raw = json.loads((output/'plan.json').read_text()); raw['model'] = 'changed'
+    (output/'plan.json').write_text(json.dumps(raw))
+    with pytest.raises(ValueError, match='plan changed'): batch.load_frozen(output)
+
+
+def test_http402_stops_entire_campaign_and_keeps_failed_attempt(tmp_path, monkeypatch):
+    import agent.v2.model
+    import agent.v2.transport
+    class RefusedModel:
+        model = 'deepseek-flash'
+        usage = []
+        def complete(self, *args):
+            raise RuntimeError('Model HTTP error 402')
+    class NoNetwork:
+        kind = 'offline-test-double'
+        def __init__(self, *args): pass
+        def call(self, *args): pytest.fail('No capability expected after immediate model refusal')
+    monkeypatch.setattr(agent.v2.model, 'Model', RefusedModel)
+    monkeypatch.setattr(agent.v2.transport, 'OctoBus', NoNetwork)
+    monkeypatch.setenv('CODEAUDIT_WORKSPACES', str(tmp_path/'ws'))
+    monkeypatch.setenv('CODEAUDIT_MCP_URL', 'http://unused')
+    monkeypatch.setenv('CODEAUDIT_OCTOBUS_TOKEN', 'test-only')
+    output = tmp_path/'campaign'; batch.prepare(output, repeats=1)
+    result = batch.run_live(output, max_runs=44)
+    assert result['attempted_runs'] == 1 and result['complete_runs'] == 0
+    assert json.loads((output/'STOPPED.json').read_text())['reason'].endswith('402')
+    records = (output/'results.jsonl').read_text().splitlines()
+    assert len(records) == 1 and json.loads(records[0])['summary']['status'] == 'INCOMPLETE'

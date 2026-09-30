@@ -1,0 +1,17 @@
+{
+  "source_base": "91c9e7a",
+  "phase": "offline-development-candidate",
+  "paid_model_calls": 0,
+  "pushed": false,
+  "deployed": false,
+  "implementation_sha256": "4efc74b5b891aaf33f029b7b8b9a8bf4e4801ee399b5d7b1c385de75e324c65a",
+  "offline_prepared_runs": 88,
+  "live_status": "NOT_RUN",
+  "independent_validation": "PENDING",
+  "knowledge_unique_gain": "NOT_ESTABLISHED",
+  "offline_tests": {
+    "passed": 166,
+    "seconds": 17.31,
+    "environment": "isolated Linux Docker test container; network none"
+  }
+}
