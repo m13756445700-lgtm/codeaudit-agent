@@ -8,6 +8,8 @@
 
 首轮20例复测TP10/FP0/FN0，但有两例PARTIAL；其后一次受HTTP402影响失败。充值后0cd8d15完整串行重跑TP10/FP0/FN0，19COMPLETE/1PARTIAL，整体完成性检查仍失败。真实311文件仓库前三轮均未完成；第四轮一例超限，三例被HTTP402中断。截至代码0cd8d15，GitHub fresh clone145项通过；EOF反馈修复源码在Linux146项通过（17.52秒）。第六轮定向回归有改善但全库仍未完成，见round6结果。不得据此宣传普遍准确率或已达到某个分数。详见 [提交状态](docs/SUBMISSION_STATUS.md)、[整改记录](docs/REMEDIATION.md) 和 `evaluation/` 中的预注册协议、成功与失败数据。
 
+最新整改：846c881的定向两例及go-shell三次全部COMPLETE，全仓两例仍INCOMPLETE；82d37bb修复首次EOF反馈和JSON序列化预算，GitHub独立checkout150项通过。第九轮模型再次HTTP402，效果验收未完成，详见round8/round9记录。
+
 正式白名单：`README.md`、本清单、`.gitignore`、`.dockerignore`、`.env.example`、`pyproject.toml`、`requirements-dev.txt`、`Makefile`、`Dockerfile`、`docker-compose.yml`、`agent-compose.yml`，以及以下目录。
 
 | 目录 | 发布用途 |

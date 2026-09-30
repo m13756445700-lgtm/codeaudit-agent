@@ -1,0 +1,74 @@
+{
+  "source_commit": "82d37bb",
+  "records": [
+    {
+      "audit_id": "926ffddfb2b644dc8bb8a27457002a81",
+      "status": "INCOMPLETE",
+      "failure": "RuntimeError: Model HTTP error 402",
+      "tool_calls": 27,
+      "elapsed_seconds": 25.94,
+      "snapshot_sha256": "ca6f54ce58072c67da814d84814be555be978b90013cc12cb96a41a69dc4d0f6",
+      "case_arm": [
+        "3.0.5",
+        "broad"
+      ]
+    },
+    {
+      "audit_id": "3473e31a834342cb9e37a999e2f91265",
+      "status": "INCOMPLETE",
+      "failure": "RuntimeError: Model HTTP error 402",
+      "tool_calls": 0,
+      "elapsed_seconds": 0.53,
+      "snapshot_sha256": "ca6f54ce58072c67da814d84814be555be978b90013cc12cb96a41a69dc4d0f6",
+      "case_arm": [
+        "3.0.5",
+        "focused"
+      ]
+    },
+    {
+      "audit_id": "0174085d9a3b40a3a24808f969b34190",
+      "status": "INCOMPLETE",
+      "failure": "RuntimeError: Model HTTP error 402",
+      "tool_calls": 0,
+      "elapsed_seconds": 0.58,
+      "snapshot_sha256": "86ef1873bdf393f3f49afb5d9646f4ea77df5a8071dc81e47f909525387c61d6",
+      "case_arm": [
+        "3.0.6",
+        "broad"
+      ]
+    },
+    {
+      "audit_id": "429aad8283404ad0bb30bd20242651bc",
+      "status": "INCOMPLETE",
+      "failure": "RuntimeError: Model HTTP error 402",
+      "tool_calls": 0,
+      "elapsed_seconds": 0.5,
+      "snapshot_sha256": "86ef1873bdf393f3f49afb5d9646f4ea77df5a8071dc81e47f909525387c61d6",
+      "case_arm": [
+        "3.0.6",
+        "focused"
+      ]
+    }
+  ],
+  "go_shell_repeats": [
+    {
+      "case": "go-shell",
+      "audit_id": "daeb58073c9048d0b6d1db6540cced02",
+      "snapshot_sha256": "2cc290460496c8cfcce51a188d881239314339bac4bbfdd2243a1e9a4543883d",
+      "run_status": "INCOMPLETE"
+    },
+    {
+      "case": "go-shell",
+      "audit_id": "886ec55f3217434e8c26fe84271d3725",
+      "snapshot_sha256": "2cc290460496c8cfcce51a188d881239314339bac4bbfdd2243a1e9a4543883d",
+      "run_status": "INCOMPLETE"
+    },
+    {
+      "case": "go-shell",
+      "audit_id": "bd6b03a9ff744b128dc295bdcc9ca353",
+      "snapshot_sha256": "2cc290460496c8cfcce51a188d881239314339bac4bbfdd2243a1e9a4543883d",
+      "run_status": "INCOMPLETE"
+    }
+  ],
+  "interpretation": "Model HTTP402 recurred: first repository run failed after27tools, other3 at0tools. Three fixture attempts INCOMPLETE. Infrastructure refusal; cannot interpret as model accuracy or efficacy of fixes. No further model calls until provider restored."
+}
