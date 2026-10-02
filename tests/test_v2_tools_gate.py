@@ -27,7 +27,8 @@ def finding():
             'controllability': 'request argument', 'security_boundary': 'HTTP to database',
             'confidence_rationale': 'Read caller and sink', 'unknowns': [], 'counter_evidence': [],
             'remediation': 'Bind parameters', 'confidence': 'high', 'severity': 'high', 'knowledge_used': [],
-            'defense_claims': [], 'environment_assumptions': []}
+            'defense_claims': [], 'environment_assumptions': [],
+            'judgment_scope':'deployment', 'deployment_exposure':'unknown'}
 
 
 def test_gate_does_not_decide_vulnerability(context):
@@ -154,7 +155,7 @@ def test_finish_requires_review_of_exact_decision_revision(context):
     f = finding(); f['knowledge_application'] = 'Disabled for test'
     engine.dispatch('submit_decision', {'finding':f})
     finish = {'summary':'Bounded audit', 'limitations':['Deployment unknown'], 'surface_reviews':[
-        {'surface':'database','status':'reviewed','files':['app.py','db.py'],'reason':'Read caller and query'}]}
+        {'surface':'database','status':'reviewed','files':['app.py','db.py'],'reason':'Read caller and query','assessment':'decision','decision_ids':['H1'],'absence_evidence':[]}]}
     with pytest.raises(ValueError, match='self-review'):
         engine.dispatch('finish', finish)
     review = {'id':'H1','counterexample':'Does wrapper bind parameters?',
@@ -176,3 +177,31 @@ def test_finish_requires_review_of_exact_decision_revision(context):
     assert engine.status == 'COMPLETE'
     saved = json.loads((audit/'decision_reviews.json').read_text())
     assert saved[0]['kind'] == 'model_self_review'
+
+
+def test_conditional_code_flaw_is_not_erased_by_unknown_deployment(context):
+    audit, meta, tools = context
+    f = finding()
+    claim = 'Application exposes this query to untrusted input'
+    f.update(judgment_scope='conditional_code', deployment_exposure='unknown',
+             exploit_preconditions=[claim], environment_assumptions=[{
+                 'claim':claim,'state':'unknown','affects_verdict':True,'references':[]}])
+    receipts = [tools.read('app.py'),tools.read('db.py')]
+    checked = validate(f,audit/'repo',meta,receipts,{})
+    assert checked['status'] == 'CONFIRMED' and checked['deployment_exposure'] == 'unknown'
+    f['judgment_scope'] = 'deployment'
+    assert validate(f,audit/'repo',meta,receipts,{})['status'] == 'INSUFFICIENT_EVIDENCE'
+    f['judgment_scope'] = 'conditional_code'; f['exploit_preconditions'] = []
+    assert validate(f,audit/'repo',meta,receipts,{})['status'] == 'INSUFFICIENT_EVIDENCE'
+    f['exploit_preconditions'] = [claim];f['deployment_exposure'] = 'evidenced'
+    assert validate(f,audit/'repo',meta,receipts,{})['status'] == 'INSUFFICIENT_EVIDENCE'
+
+
+def test_definition_header_cannot_prove_defense(context):
+    audit, meta, tools = context
+    f = finding()
+    f.update(status='REJECTED',counter_evidence=[{'file':'db.py','line':1,
+             'symbol':'wrapper','evidence':'def wrapper(value):'}])
+    checked = validate(f,audit/'repo',meta,[tools.read('app.py'),tools.read('db.py')],{})
+    assert checked['status'] == 'INSUFFICIENT_EVIDENCE'
+    assert any('definition header' in x for x in checked['evidence_gate']['problems'])

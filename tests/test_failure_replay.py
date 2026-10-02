@@ -23,7 +23,7 @@ def test_job91_original_import_based_rejection_is_blocked(tmp_path):
     assert original['status'] == 'REJECTED' and original['evidence_gate']['passed']
     # Empty new fields isolate the import-proof check from schema-version rejection.
     candidate = copy.deepcopy(original)
-    candidate.update(defense_claims=[], environment_assumptions=[])
+    candidate.update(defense_claims=[], environment_assumptions=[], judgment_scope='deployment', deployment_exposure='unknown')
     checked = validate(candidate, audit/'repo', metadata, receipts,
                        {key:'replay-only' for key in candidate['knowledge_used']})
     assert checked['status'] == 'INSUFFICIENT_EVIDENCE'

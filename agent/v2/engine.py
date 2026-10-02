@@ -29,7 +29,7 @@ Every decision also supplies defense_claims and environment_assumptions (arrays,
 Each defense claim has claim, references (actual implementation lines, not imports), and limitations.
 Each environment assumption has claim, state verified or unknown, references, and affects_verdict (boolean).
 Verified assumptions require read repository evidence; the audit host OS is not deployment evidence.
-If an unknown environment assumption affects the verdict, use INSUFFICIENT_EVIDENCE, not REJECTED or CONFIRMED.
+State judgment_scope as conditional_code or deployment and deployment_exposure as unknown, evidenced, or not_evidenced. A conditional_code verdict assesses the code under explicitly listed preconditions, not whether a real deployment is vulnerable. Copy each material unknown environment claim into exploit_preconditions. Unknown deployment does not erase a demonstrated conditional code flaw; unknown implementation behavior still requires INSUFFICIENT_EVIDENCE. A deployment verdict with material unknowns requires INSUFFICIENT_EVIDENCE. Repository version is not deployment evidence.
 REJECTED requires implementation counter_evidence; an imported function name does not prove its behavior.
 Check each claimed guard against the exact snapshot, including platform/version branches. Do not transfer a guard from knowledge into source evidence.
 Never base a confirmed impact on hypothetical future code changes.
@@ -39,6 +39,7 @@ at the SINGLE cited line, symbol must literally occur in file. Cite only lines Y
 Explain absence or effectiveness of sanitizer in sanitizer_analysis. Gate validates references, not your judgment.
 Before finish, use review_decision for each non-INSUFFICIENT_EVIDENCE decision. Challenge it with a concrete counterexample or missing precondition; reread implementation as needed. This is your self-review, not independent verification. If the challenge invalidates the decision, submit a corrected decision and review that revision. Never rubber-stamp a guard from its name.
 Use submit_decision for both confirmed and rejected hypotheses. Correct rejected evidence references if Gate fails.
+Every reviewed surface must specify assessment=decision with decision_ids of recorded judgments, or assessment=feature_absent with actual read absence_evidence references and an absence reason. A working defense is NOT an absent feature: it requires a REJECTED judgment. Deferred surfaces use assessment=unexamined. Never place a new security verdict only in a settlement or summary.
 At finish, settle EVERY planned attack surface in surface_reviews: surface (exact planned name), status reviewed or deferred, files (actually read paths), and reason. Deferred surfaces require limitations and yield PARTIAL. Reviewed surfaces require read evidence. Never silently drop surfaces when revising a plan.
 Review uncovered attack surfaces then finish with scope and limitations; don't claim entire repo safe from sample reads.
 Use investigation_state to retrieve earlier notes after compaction. Use investigation_note to preserve concise evidence summaries and open questions before expanding or rereading. Record each completed surface using settle_surface as you go; finish remains mandatory. Notes are provisional model assessments, not validated security verdicts.
@@ -71,6 +72,13 @@ DECISION_FIELDS['environment_assumptions'] = {'type': 'array', 'items': {'type':
     'claim': STRING, 'state': {'type': 'string', 'enum': ['verified', 'unknown']},
     'references': {'type': 'array', 'items': REFERENCE}, 'affects_verdict': {'type': 'boolean'}},
     'required': ['claim', 'state', 'references', 'affects_verdict'], 'additionalProperties': False}}
+DECISION_FIELDS['judgment_scope'] = {'type': 'string', 'enum': ['conditional_code', 'deployment']}
+DECISION_FIELDS['deployment_exposure'] = {'type': 'string', 'enum': ['unknown', 'evidenced', 'not_evidenced']}
+SURFACE_FIELDS = {'surface': STRING, 'status': {'type': 'string', 'enum': ['reviewed', 'deferred']},
+    'files': {'type': 'array', 'items': STRING}, 'reason': STRING,
+    'assessment': {'type': 'string', 'enum': ['decision', 'feature_absent', 'unexamined']},
+    'decision_ids': {'type': 'array', 'items': STRING},
+    'absence_evidence': {'type': 'array', 'items': REFERENCE}}
 DECISION = {'type': 'object', 'properties': DECISION_FIELDS, 'required': list(DECISION_FIELDS), 'additionalProperties': False}
 
 TOOLS = [
@@ -98,15 +106,11 @@ TOOLS = [
               'open_questions': {'type': 'array', 'items': STRING}, 'next_action': STRING},
              ['id', 'summary', 'references', 'open_questions', 'next_action']),
     function('settle_surface', 'Record one planned surface now. reviewed includes source-proven absence; deferred means unexamined or blocked. Does not finish the audit.',
-             {'surface': STRING, 'status': {'type': 'string', 'enum': ['reviewed', 'deferred']},
-              'files': {'type': 'array', 'items': STRING}, 'reason': STRING},
-             ['surface', 'status', 'files', 'reason']),
+             SURFACE_FIELDS, list(SURFACE_FIELDS)),
     function('finish', 'Finish after investigating hypotheses. reviewed includes features proven absent by source reads; deferred means not examined or blocked. Never defer merely because a feature is absent. State coverage limitations. Pass surface_reviews=[] to use all previously recorded settlements.',
              {'summary': STRING, 'limitations': {'type': 'array', 'items': STRING},
-              'surface_reviews': {'type': 'array', 'items': {'type': 'object', 'properties': {
-                  'surface': STRING, 'status': {'type': 'string', 'enum': ['reviewed', 'deferred']},
-                  'files': {'type': 'array', 'items': STRING}, 'reason': STRING},
-                  'required': ['surface', 'status', 'files', 'reason'], 'additionalProperties': False}}},
+              'surface_reviews': {'type': 'array', 'items': {'type': 'object', 'properties': SURFACE_FIELDS,
+                  'required': list(SURFACE_FIELDS), 'additionalProperties': False}}},
              ['summary', 'limitations', 'surface_reviews'])
 ]
 
@@ -345,6 +349,8 @@ class Engine:
                 raise ValueError('Unsettled attack surfaces: ' + ', '.join(sorted(self.planned_surfaces - seen)))
             if deferred and not any(v.strip() for v in args['limitations']):
                 raise ValueError('Deferred surfaces require explicit limitations')
+            for review in reviews:
+                self.validate_surface(review)
             pending = self.pending_decision_reviews()
             if pending:
                 raise ValueError('Current decisions require counterevidence self-review or correction: ' + ', '.join(pending))
@@ -378,6 +384,29 @@ class Engine:
             raise ValueError('Surface evidence must reference actually read files')
         if review['status'] == 'reviewed' and not files:
             raise ValueError('Reviewed surface requires read evidence')
+        if review['status'] == 'deferred':
+            return
+        ids = review.get('decision_ids', [])
+        if not isinstance(ids, list) or any(not isinstance(key, str) or key not in self.findings for key in ids):
+            raise ValueError('Surface must link existing decision IDs')
+        assessment = review.get('assessment')
+        if assessment == 'decision':
+            if not ids:
+                raise ValueError('Reviewed security surface requires decision_ids; defense effectiveness is a judgment, not coverage')
+        elif assessment == 'feature_absent':
+            refs = review.get('absence_evidence')
+            if ids or not isinstance(refs, list) or not 1 <= len(refs) <= 8:
+                raise ValueError('Feature absence requires1..8 read references and no decision IDs')
+            for ref in refs:
+                if not isinstance(ref, dict) or type(ref.get('line')) is not int:
+                    raise ValueError('Invalid absence reference')
+                code = self.read_cache.get(ref.get('file'), {}).get(ref['line'])
+                quote = ref.get('evidence')
+                if ref.get('file') not in files or code is None or not isinstance(quote, str) or not quote.strip() or quote not in code:
+                    raise ValueError('Absence evidence must quote a read line in the surface files')
+        else:
+            raise ValueError('Reviewed surface requires explicit decision or feature_absent assessment')
+
 
     def compact_context(self):
         """Persisted trace remains lossless; model memory is explicitly a navigation aid."""
@@ -541,7 +570,7 @@ class Engine:
                  json.dumps(self.plan, ensure_ascii=False, indent=2), '', '## Findings']
         for f in self.findings.values():
             lines += ['', '### ' + f.get('title', f['id']), '', '**' + f['status'] + '**']
-            for key in ('severity', 'confidence', 'source', 'data_flow', 'sink', 'sanitizer_analysis',
+            for key in ('judgment_scope', 'deployment_exposure', 'severity', 'confidence', 'source', 'data_flow', 'sink', 'sanitizer_analysis',
                         'exploit_preconditions', 'reachability', 'reasoning_summary', 'false_positive_analysis',
                         'controllability', 'security_boundary', 'confidence_rationale', 'unknowns', 'counter_evidence',
                         'remediation', 'knowledge_used', 'evidence_gate'):

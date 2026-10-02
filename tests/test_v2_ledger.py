@@ -34,7 +34,7 @@ def test_notes_require_actual_read_quote_and_survive_compaction(tmp_path):
 
 def test_incremental_settlement_cannot_skip_unreviewed_surface(tmp_path):
     engine = make_engine(tmp_path)
-    engine.dispatch('settle_surface', {'surface':'input', 'status':'reviewed', 'files':['a.py'], 'reason':'Read input/output path'})
+    engine.dispatch('settle_surface', {'surface':'input', 'status':'reviewed', 'files':['a.py'], 'reason':'No database use in this input/output fixture', 'assessment':'feature_absent', 'decision_ids':[], 'absence_evidence':[{'file':'a.py','line':2,'symbol':'print','evidence':'print(value)'}]})
     assert not engine.finished
     with pytest.raises(ValueError, match='Unsettled'):
         engine.dispatch('finish', {'summary':'Review done', 'limitations':[], 'surface_reviews':[]})
@@ -75,8 +75,30 @@ def test_segment_requires_new_evidence_checkpoint_without_promoting_status(tmp_p
 
 def test_unchanged_settlement_does_not_extend_investigation(tmp_path):
     engine = make_engine(tmp_path)
-    review = {'surface':'input','status':'reviewed','files':['a.py'],'reason':'Input read'}
+    review = {'surface':'input','status':'reviewed','files':['a.py'],'reason':'No database sink in fixture', 'assessment':'feature_absent', 'decision_ids':[], 'absence_evidence':[{'file':'a.py','line':2,'symbol':'print','evidence':'print(value)'}]}
     engine.dispatch('settle_surface', review)
     result = engine.dispatch('settle_surface', review)
     assert result['unchanged'] and result['remaining'] == ['storage']
     assert engine.segment_calls == 1 and not engine.finished
+
+
+def test_surface_only_safety_claim_cannot_finish_or_settle(tmp_path):
+    engine = make_engine(tmp_path)
+    old = {'surface':'input','status':'reviewed','files':['a.py'],'reason':'No vulnerability; all defenses effective'}
+    with pytest.raises(ValueError, match='explicit decision'):
+        engine.dispatch('settle_surface',old)
+    reviews = [old,dict(old,surface='storage')]
+    with pytest.raises(ValueError, match='explicit decision'):
+        engine.dispatch('finish',{'summary':'All safe','limitations':[],'surface_reviews':reviews})
+    with pytest.raises(ValueError, match='existing decision'):
+        engine.dispatch('settle_surface',dict(old,assessment='decision',decision_ids=['invented']))
+    assert not engine.finished and not engine.surface_settlements
+
+
+def test_absence_cannot_be_claimed_with_unread_quote(tmp_path):
+    engine = make_engine(tmp_path)
+    review = {'surface':'storage','status':'reviewed','files':['a.py'],'reason':'No database in tiny fixture',
+              'assessment':'feature_absent','decision_ids':[],
+              'absence_evidence':[{'file':'a.py','line':2,'symbol':'print','evidence':'no database access'}]}
+    with pytest.raises(ValueError,match='Absence evidence'):
+        engine.dispatch('settle_surface',review)

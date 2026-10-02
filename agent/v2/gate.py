@@ -18,6 +18,16 @@ def validate(finding, repo, metadata, receipts, knowledge):
         value = result.get(key)
         if not isinstance(value, list) or any(not isinstance(v, str) for v in value):
             problems.append('invalid:' + key)
+    scope = result.get('judgment_scope')
+    exposure = result.get('deployment_exposure')
+    if scope not in ('conditional_code', 'deployment'):
+        problems.append('invalid:judgment_scope')
+    if exposure not in ('unknown', 'evidenced', 'not_evidenced'):
+        problems.append('invalid:deployment_exposure')
+    if exposure == 'evidenced' and not any(
+            isinstance(a, dict) and a.get('state') == 'verified' and a.get('references')
+            for a in (result.get('environment_assumptions') if isinstance(result.get('environment_assumptions'), list) else [])):
+        problems.append('deployment exposure requires verified environment evidence')
     counter = result.get('counter_evidence')
     if not isinstance(counter, list):
         problems.append('invalid:counter_evidence')
@@ -57,7 +67,12 @@ def validate(finding, repo, metadata, receipts, knowledge):
                 if state == 'verified' and not refs:
                     problems.append('verified assumption requires evidence:' + location)
                 if state == 'unknown' and claim.get('affects_verdict') and result.get('status') != 'INSUFFICIENT_EVIDENCE':
-                    problems.append('unresolved environment affects verdict:' + location)
+                    if scope != 'conditional_code':
+                        problems.append('unresolved environment affects verdict:' + location)
+                    elif not isinstance(result.get('exploit_preconditions'), list) or claim['claim'] not in result['exploit_preconditions']:
+                        problems.append('conditional verdict must retain material unknown as explicit precondition:' + location)
+                    if exposure != 'unknown':
+                        problems.append('unknown material environment cannot establish deployment exposure:' + location)
             for j, ref in enumerate(refs):
                 ref_location = f'{location}.references[{j}]'
                 references.append((ref_location, ref))
@@ -83,6 +98,9 @@ def validate(finding, repo, metadata, receipts, knowledge):
             if location in implementation_locations and re.match(
                     r'^\s*(?:from\s+\S+\s+import\b|import\b|#\s*include\b|using\s+\S+\s*;)', lines[line-1]):
                 raise ValueError('dependency import is not implementation evidence')
+            if location in implementation_locations and re.match(
+                    r'^\s*(?:(?:async\s+)?def\s+|class\s+).*?(?:[:(])\s*$', lines[line-1]):
+                raise ValueError('definition header alone is not implementation behavior evidence')
             if symbol not in '\n'.join(lines):
                 raise ValueError('symbol absent')
             if not any(r['file'] == path and r['sha256'] == current and r['start'] <= line <= r['end'] for r in receipts):

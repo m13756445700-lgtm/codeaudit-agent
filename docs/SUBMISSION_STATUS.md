@@ -2,6 +2,10 @@
 
 **暂不建议作为最终达标作品提交。** 部署与入口问题已修复，通用大仓库审计和独特知识收益仍未闭环。题目没有给出“120分”的量化标准，不能承诺该分数。
 
+## Latest offline remediation: contract03
+
+Surface settlement now requires linked decisions or read evidence for explicit feature absence. Conditional code judgments and deployment exposure are separate. Definition headers alone cannot prove defense behavior. 188 network-isolated Linux tests passed; no new model run. See [implementation and limitations](plans/2026-10-02-contract03.md). Overall acceptance remains FAILED; no push/deployment.
+
 ## Latest live acceptance: FAILED (2026-10-02)
 
 Recharge verified. Six frozen real MCP runs finished: 3 COMPLETE, 3 PARTIAL, no HTTP errors. Both vulnerable full-scope runs missed the target. Focused vulnerable run recognized the flaw but reported INSUFFICIENT_EVIDENCE; focused fixed run rejected the target with implementation evidence. Safety conclusions outside formal decisions and weak self-review evidence remain open. See [full review](EVIDENCE_REMEDIATION_02_RESULT.md). No push/deployment. Earlier provider-blocked entries below are historical.

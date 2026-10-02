@@ -1,0 +1,25 @@
+{
+  "implementation_sha256": "6fb755e9bd3cf47b35cc4ff3204d0cd8542ca03a2e2c299160509fe13e2ad040",
+  "targeted_passed": 54,
+  "linux_passed": 188,
+  "linux_seconds": 18.26,
+  "network": "none",
+  "live_runs": 0,
+  "release_ready": false,
+  "replays": [
+    {
+      "job": 0,
+      "replay": "unchanged completion",
+      "rejected": true,
+      "reason": "Reviewed surface requires explicit decision or feature_absent assessment"
+    },
+    {
+      "job": 4,
+      "replay": "explicit contract-only mutation: propose CONFIRMED conditional_code; copy material assumptions into preconditions",
+      "original_status": "INSUFFICIENT_EVIDENCE",
+      "gate_status": "CONFIRMED",
+      "deployment_exposure": "unknown",
+      "notice": "Not a model rerun or semantic correctness proof; original result remains INSUFFICIENT_EVIDENCE."
+    }
+  ]
+}
