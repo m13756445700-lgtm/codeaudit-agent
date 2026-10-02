@@ -1,0 +1,2220 @@
+{
+  "candidate_commit": "9214a05",
+  "date": "2026-10-02",
+  "implementation_sha256": "6908e101c487acd74e1f3258f762f4dba81983cb250ecb42a8fba4d95d9ebf4f",
+  "planned_runs": 100,
+  "attempted_runs": 99,
+  "pending_runs": 1,
+  "statuses": {
+    "COMPLETE": 92,
+    "PARTIAL": 2,
+    "INCOMPLETE": 5
+  },
+  "tokens_observed": 16465893,
+  "benchmark": {
+    "runs": 40,
+    "complete": 40,
+    "TP": 20,
+    "FP": 0,
+    "FN": 0,
+    "scope": "20 development fixtures repeated twice"
+  },
+  "business": {
+    "runs": 48,
+    "complete": 48,
+    "TP": 24,
+    "TN": 24,
+    "FP": 0,
+    "FN": 0,
+    "unique_knowledge_gain": "NOT_ESTABLISHED; on/off/generic agree",
+    "scope": "8 project-authored pairs/variants across three arms and two repeats; not independent"
+  },
+  "real_repository": {
+    "planned": 12,
+    "attempted": 11,
+    "complete": 4,
+    "partial": 2,
+    "incomplete": 5,
+    "vulnerable_target_confirmed": 0,
+    "vulnerable_attempts": 6,
+    "scope": "Known public vulnerability regression; includes incomplete runs, not blind accuracy"
+  },
+  "passed": false,
+  "github_pushed": false,
+  "production_updated": false,
+  "reviewer": "Codex AI-assisted source/evidence review, not independent human",
+  "blocking_findings": [
+    "Six vulnerable real-repository runs failed to confirm frozen target",
+    "REJECTED defense explanation invents leading-slash check in vulnerable version",
+    "Whole-repository completion unstable; budget exhaustion",
+    "Model HTTP402 at job98; job99 not attempted",
+    "Unique knowledge benefit and independent generalization unproven"
+  ],
+  "records": [
+    {
+      "job_index": 0,
+      "case": "cross-file-flow",
+      "arm": "on",
+      "repeat": 0,
+      "audit_id": "f2ff5fd2c4d3471e927ef54dbcccb0b9",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "be387b33cf3d22a1d314bdb553de1a0bab336cff0a942430940809f537c4a777",
+      "tool_calls": 18,
+      "findings": [
+        {
+          "status": "CONFIRMED",
+          "title": "OS command injection via 'name' query parameter into /bin/sh -c"
+        }
+      ]
+    },
+    {
+      "job_index": 1,
+      "case": "cross-file-flow",
+      "arm": "on",
+      "repeat": 1,
+      "audit_id": "e872a37251f844f1813dd2708e904eb5",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "be387b33cf3d22a1d314bdb553de1a0bab336cff0a942430940809f537c4a777",
+      "tool_calls": 19,
+      "findings": [
+        {
+          "status": "CONFIRMED",
+          "title": "OS command injection via 'name' query parameter through service.report into /bin/sh -c"
+        }
+      ]
+    },
+    {
+      "job_index": 2,
+      "case": "false-positive",
+      "arm": "on",
+      "repeat": 0,
+      "audit_id": "2972e10169774f789c46f2e7eba1e903",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "d2900109e7ab021b8a78113702de2e5be466c2000a23fbf6e8c917cbbe66222d",
+      "tool_calls": 23,
+      "findings": [
+        {
+          "status": "REJECTED",
+          "title": "MyBatis ${column} ORDER BY injection is neutralized by finite server-side allowlist"
+        }
+      ]
+    },
+    {
+      "job_index": 3,
+      "case": "false-positive",
+      "arm": "on",
+      "repeat": 1,
+      "audit_id": "53b76449b6a845fb8b665021216d396e",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "d2900109e7ab021b8a78113702de2e5be466c2000a23fbf6e8c917cbbe66222d",
+      "tool_calls": 25,
+      "findings": [
+        {
+          "status": "REJECTED",
+          "title": "MyBatis ${column} ORDER BY interpolation is protected by a finite server-side allowlist"
+        }
+      ]
+    },
+    {
+      "job_index": 4,
+      "case": "python-sql-raw",
+      "arm": "on",
+      "repeat": 0,
+      "audit_id": "11e980ab99b84a2fa5bcd2570b9a80c1",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "89055e7b3ff0e3df3724da650d5cad6c0e0f879a8f297fc5c90e8f57280805f6",
+      "tool_calls": 19,
+      "findings": [
+        {
+          "status": "CONFIRMED",
+          "title": "SQL injection in /lookup via string concatenation of request parameter"
+        }
+      ]
+    },
+    {
+      "job_index": 5,
+      "case": "python-sql-raw",
+      "arm": "on",
+      "repeat": 1,
+      "audit_id": "359f4551fd654a79b8fdd88aafde3c5d",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "89055e7b3ff0e3df3724da650d5cad6c0e0f879a8f297fc5c90e8f57280805f6",
+      "tool_calls": 19,
+      "findings": [
+        {
+          "status": "CONFIRMED",
+          "title": "SQL Injection in /lookup via string concatenation into sqlite3 query"
+        }
+      ]
+    },
+    {
+      "job_index": 6,
+      "case": "python-sql-bound",
+      "arm": "on",
+      "repeat": 0,
+      "audit_id": "1949ab8b99324e1dab5495f18777403c",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "036cfa01681144fd53bacfa2d5cb2bc7efddd75cff8dbbdbd3dc222a19d794db",
+      "tool_calls": 23,
+      "findings": [
+        {
+          "status": "REJECTED",
+          "title": "SQL injection via request.args['name'] in /lookup"
+        }
+      ]
+    },
+    {
+      "job_index": 7,
+      "case": "python-sql-bound",
+      "arm": "on",
+      "repeat": 1,
+      "audit_id": "c45ce014e71445bf9a35c63e81bc4332",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "036cfa01681144fd53bacfa2d5cb2bc7efddd75cff8dbbdbd3dc222a19d794db",
+      "tool_calls": 21,
+      "findings": [
+        {
+          "status": "REJECTED",
+          "title": "SQL injection via request.args['name'] in /lookup"
+        }
+      ]
+    },
+    {
+      "job_index": 8,
+      "case": "python-argv",
+      "arm": "on",
+      "repeat": 0,
+      "audit_id": "b785e600242b4bfe912c7b90e20af197",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "9873120ea47642392d839b45c8e51472497c61ddd5352a00ec29311584e82acb",
+      "tool_calls": 23,
+      "findings": [
+        {
+          "status": "REJECTED",
+          "title": "Command injection via /echo name parameter"
+        }
+      ]
+    },
+    {
+      "job_index": 9,
+      "case": "python-argv",
+      "arm": "on",
+      "repeat": 1,
+      "audit_id": "1b350dca702b431f8a964c76baa3973c",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "9873120ea47642392d839b45c8e51472497c61ddd5352a00ec29311584e82acb",
+      "tool_calls": 20,
+      "findings": [
+        {
+          "status": "REJECTED",
+          "title": "Command injection via /echo name parameter"
+        }
+      ]
+    },
+    {
+      "job_index": 10,
+      "case": "python-url",
+      "arm": "on",
+      "repeat": 0,
+      "audit_id": "bb096ee38ca64423831a611c0af242ca",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "7e33503ac5ab8aef14d0d285650b343e3f0b77a7f338a468ee527808f089b02a",
+      "tool_calls": 20,
+      "findings": [
+        {
+          "status": "CONFIRMED",
+          "title": "Server-Side Request Forgery (SSRF) via unvalidated 'url' parameter in /fetch route"
+        }
+      ]
+    },
+    {
+      "job_index": 11,
+      "case": "python-url",
+      "arm": "on",
+      "repeat": 1,
+      "audit_id": "4db9cdd8699d4254aaaacc15e2d827b0",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "7e33503ac5ab8aef14d0d285650b343e3f0b77a7f338a468ee527808f089b02a",
+      "tool_calls": 21,
+      "findings": [
+        {
+          "status": "CONFIRMED",
+          "title": "Server-Side Request Forgery (SSRF) in /fetch route via unvalidated user-supplied URL"
+        }
+      ]
+    },
+    {
+      "job_index": 12,
+      "case": "python-fixed-url",
+      "arm": "on",
+      "repeat": 0,
+      "audit_id": "1e531c3b8e8e4e1e8a6b4fec853cd27c",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "f7c7e149efa5781ee51676cc62f834ab17d6ee8ecf38fc278e0a20a20ae066a9",
+      "tool_calls": 20,
+      "findings": [
+        {
+          "status": "REJECTED",
+          "title": "No SSRF in /fetch: target URL is a hardcoded constant selected by equality check"
+        }
+      ]
+    },
+    {
+      "job_index": 13,
+      "case": "python-fixed-url",
+      "arm": "on",
+      "repeat": 1,
+      "audit_id": "9fc86a5f77ac43e88a4f37cf03fc72f2",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "f7c7e149efa5781ee51676cc62f834ab17d6ee8ecf38fc278e0a20a20ae066a9",
+      "tool_calls": 20,
+      "findings": [
+        {
+          "status": "REJECTED",
+          "title": "No SSRF in GET /fetch: outbound URL is selected from hardcoded constants"
+        }
+      ]
+    },
+    {
+      "job_index": 14,
+      "case": "python-file",
+      "arm": "on",
+      "repeat": 0,
+      "audit_id": "984638376a534ec6aca387e9be959e3b",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "3a4cfabc94cce146eff547e70e7e830d839a695150bbfe1384df97495a0a00ae",
+      "tool_calls": 17,
+      "findings": [
+        {
+          "status": "CONFIRMED",
+          "title": "Path traversal in /file route allows arbitrary file read"
+        }
+      ]
+    },
+    {
+      "job_index": 15,
+      "case": "python-file",
+      "arm": "on",
+      "repeat": 1,
+      "audit_id": "8583cbb8984d4ba3b8496788d35efc5a",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "3a4cfabc94cce146eff547e70e7e830d839a695150bbfe1384df97495a0a00ae",
+      "tool_calls": 20,
+      "findings": [
+        {
+          "status": "CONFIRMED",
+          "title": "Path traversal in /file route allows arbitrary file read"
+        }
+      ]
+    },
+    {
+      "job_index": 16,
+      "case": "python-fixed-file",
+      "arm": "on",
+      "repeat": 0,
+      "audit_id": "086d05b1fd1d4583902a716c8e885d6e",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "07520df80bb5541feaa074f156947793ee3fc9f68341ea192138c5ccc0bb7c20",
+      "tool_calls": 19,
+      "findings": [
+        {
+          "status": "REJECTED",
+          "title": "Path traversal in /file route via 'name' query parameter"
+        }
+      ]
+    },
+    {
+      "job_index": 17,
+      "case": "python-fixed-file",
+      "arm": "on",
+      "repeat": 1,
+      "audit_id": "9a6d917e81b9416ea31d91fe6ffaf9a6",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "07520df80bb5541feaa074f156947793ee3fc9f68341ea192138c5ccc0bb7c20",
+      "tool_calls": 20,
+      "findings": [
+        {
+          "status": "REJECTED",
+          "title": "Path traversal in /file route via 'name' query parameter"
+        }
+      ]
+    },
+    {
+      "job_index": 18,
+      "case": "node-shell",
+      "arm": "on",
+      "repeat": 0,
+      "audit_id": "ad13dfc57b6944d0905bb6cbc773679c",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "246bad8b506a716c758ee59b39815f2c5939bfbe26fe7216dc26b061a6f5f7b4",
+      "tool_calls": 16,
+      "findings": [
+        {
+          "status": "CONFIRMED",
+          "title": "OS command injection in GET /echo via child_process.exec"
+        }
+      ]
+    },
+    {
+      "job_index": 19,
+      "case": "node-shell",
+      "arm": "on",
+      "repeat": 1,
+      "audit_id": "585174e7c8fc4a00aa339d320489768b",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "246bad8b506a716c758ee59b39815f2c5939bfbe26fe7216dc26b061a6f5f7b4",
+      "tool_calls": 17,
+      "findings": [
+        {
+          "status": "CONFIRMED",
+          "title": "OS command injection in GET /echo via cp.exec string concatenation"
+        }
+      ]
+    },
+    {
+      "job_index": 20,
+      "case": "node-argv",
+      "arm": "on",
+      "repeat": 0,
+      "audit_id": "2bd723a8979f4a70868552c5b6d43192",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "5365b69accf5861523e1f4ca0d9e1dbb424e57ec90439e117035898c7dd31c52",
+      "tool_calls": 20,
+      "findings": [
+        {
+          "status": "REJECTED",
+          "title": "Command injection via req.query.name in cp.execFile('/bin/echo', ['--', name])"
+        }
+      ]
+    },
+    {
+      "job_index": 21,
+      "case": "node-argv",
+      "arm": "on",
+      "repeat": 1,
+      "audit_id": "95d3b7765d7c4008b42a5a4117fba7af",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "5365b69accf5861523e1f4ca0d9e1dbb424e57ec90439e117035898c7dd31c52",
+      "tool_calls": 19,
+      "findings": [
+        {
+          "status": "REJECTED",
+          "title": "Command injection via req.query.name in cp.execFile('/bin/echo', ['--', name])"
+        }
+      ]
+    },
+    {
+      "job_index": 22,
+      "case": "node-sql-raw",
+      "arm": "on",
+      "repeat": 0,
+      "audit_id": "23a6e76a7b8e41039e413c10ff496b85",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "e621f3f0bfc295f7b53fe6cd4852ad0b3084c7b1895f3b6d2199bdd4ae3b35cb",
+      "tool_calls": 18,
+      "findings": [
+        {
+          "status": "CONFIRMED",
+          "title": "SQL injection via string concatenation in GET /lookup"
+        }
+      ]
+    },
+    {
+      "job_index": 23,
+      "case": "node-sql-raw",
+      "arm": "on",
+      "repeat": 1,
+      "audit_id": "b6d33dd01c2f47e38e4810a1e5acfbe3",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "e621f3f0bfc295f7b53fe6cd4852ad0b3084c7b1895f3b6d2199bdd4ae3b35cb",
+      "tool_calls": 18,
+      "findings": [
+        {
+          "status": "CONFIRMED",
+          "title": "SQL injection in GET /lookup via string concatenation into better-sqlite3 query"
+        }
+      ]
+    },
+    {
+      "job_index": 24,
+      "case": "node-sql-bound",
+      "arm": "on",
+      "repeat": 0,
+      "audit_id": "f700e89de3f14d51801aa224776aad42",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "af28727376bbc2dbbe98754e04c7931fcf097b7a5d87f63db2cd160e5cea170e",
+      "tool_calls": 18,
+      "findings": [
+        {
+          "status": "REJECTED",
+          "title": "SQL injection in GET /lookup via req.query.name"
+        }
+      ]
+    },
+    {
+      "job_index": 25,
+      "case": "node-sql-bound",
+      "arm": "on",
+      "repeat": 1,
+      "audit_id": "926b4e4dd7a64acab6165b1e0978352d",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "af28727376bbc2dbbe98754e04c7931fcf097b7a5d87f63db2cd160e5cea170e",
+      "tool_calls": 21,
+      "findings": [
+        {
+          "status": "REJECTED",
+          "title": "GET /lookup uses parameterized query — no SQL injection"
+        }
+      ]
+    },
+    {
+      "job_index": 26,
+      "case": "go-shell",
+      "arm": "on",
+      "repeat": 0,
+      "audit_id": "47b34f24efcc4b939009659352a2de6c",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "2cc290460496c8cfcce51a188d881239314339bac4bbfdd2243a1e9a4543883d",
+      "tool_calls": 18,
+      "findings": [
+        {
+          "status": "CONFIRMED",
+          "title": "OS command injection in /echo handler via 'name' query parameter"
+        }
+      ]
+    },
+    {
+      "job_index": 27,
+      "case": "go-shell",
+      "arm": "on",
+      "repeat": 1,
+      "audit_id": "452c4703cbd0471685fed2eab246bfd8",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "2cc290460496c8cfcce51a188d881239314339bac4bbfdd2243a1e9a4543883d",
+      "tool_calls": 18,
+      "findings": [
+        {
+          "status": "CONFIRMED",
+          "title": "OS command injection in /echo handler via unsanitized 'name' query parameter"
+        }
+      ]
+    },
+    {
+      "job_index": 28,
+      "case": "go-argv",
+      "arm": "on",
+      "repeat": 0,
+      "audit_id": "ea2c9d9c47b541df8b4e38c0298d532d",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "647fe192c04fc39a9b89784a3712e4c27aaf1f6b679042c2a3e287acbd248ad3",
+      "tool_calls": 17,
+      "findings": [
+        {
+          "status": "REJECTED",
+          "title": "Command injection via 'name' query parameter at exec.Command (REJECTED)"
+        }
+      ]
+    },
+    {
+      "job_index": 29,
+      "case": "go-argv",
+      "arm": "on",
+      "repeat": 1,
+      "audit_id": "446d17e90f24463bbeded0bb6c46c198",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "647fe192c04fc39a9b89784a3712e4c27aaf1f6b679042c2a3e287acbd248ad3",
+      "tool_calls": 19,
+      "findings": [
+        {
+          "status": "REJECTED",
+          "title": "Command injection via /echo query parameter 'name'"
+        }
+      ]
+    },
+    {
+      "job_index": 30,
+      "case": "go-url",
+      "arm": "on",
+      "repeat": 0,
+      "audit_id": "39abde54283646139b9776d842a8fe2f",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "6c5e753b9dde611112c8c4e7362bfadf2d3aa03c839787f7b370580cc0fd82a8",
+      "tool_calls": 20,
+      "findings": [
+        {
+          "status": "CONFIRMED",
+          "title": "Server-Side Request Forgery in /fetch handler via unvalidated url parameter"
+        }
+      ]
+    },
+    {
+      "job_index": 31,
+      "case": "go-url",
+      "arm": "on",
+      "repeat": 1,
+      "audit_id": "d1e378d6fba1410cab1db56ba8f51e9c",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "6c5e753b9dde611112c8c4e7362bfadf2d3aa03c839787f7b370580cc0fd82a8",
+      "tool_calls": 19,
+      "findings": [
+        {
+          "status": "CONFIRMED",
+          "title": "Server-Side Request Forgery (SSRF) in /fetch handler via unvalidated url parameter"
+        }
+      ]
+    },
+    {
+      "job_index": 32,
+      "case": "go-fixed-url",
+      "arm": "on",
+      "repeat": 0,
+      "audit_id": "f55b589cfc8b4be6b8427a2ce6df6168",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "22b0cace14f23d07ca465abafc495964e3f51a8d311118d337689991a4c84307",
+      "tool_calls": 21,
+      "findings": [
+        {
+          "status": "REJECTED",
+          "title": "SSRF via /fetch 'kind' query parameter"
+        }
+      ]
+    },
+    {
+      "job_index": 33,
+      "case": "go-fixed-url",
+      "arm": "on",
+      "repeat": 1,
+      "audit_id": "b7e1d9c075d344888989d96b3bfbc2cd",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "22b0cace14f23d07ca465abafc495964e3f51a8d311118d337689991a4c84307",
+      "tool_calls": 21,
+      "findings": [
+        {
+          "status": "REJECTED",
+          "title": "No SSRF: /fetch destination is a fixed hardcoded URL, not user-controllable"
+        }
+      ]
+    },
+    {
+      "job_index": 34,
+      "case": "java-runtime-string",
+      "arm": "on",
+      "repeat": 0,
+      "audit_id": "35007a3e03704317ba66ec1489be7030",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "36947ba086bb7da8e3231ff01d881efda43caf843a7871c81a060aa2c3d1240d",
+      "tool_calls": 17,
+      "findings": [
+        {
+          "status": "REJECTED",
+          "title": "Command injection via Runtime.exec(\"/bin/echo \" + name) in EchoController"
+        }
+      ]
+    },
+    {
+      "job_index": 35,
+      "case": "java-runtime-string",
+      "arm": "on",
+      "repeat": 1,
+      "audit_id": "c7bc705ef05f4555a25fa90d7674eaf9",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "36947ba086bb7da8e3231ff01d881efda43caf843a7871c81a060aa2c3d1240d",
+      "tool_calls": 17,
+      "findings": [
+        {
+          "status": "REJECTED",
+          "title": "Runtime.exec with concatenated request parameter in EchoController — command injection rejected (no shell)"
+        }
+      ]
+    },
+    {
+      "job_index": 36,
+      "case": "java-shell-array",
+      "arm": "on",
+      "repeat": 0,
+      "audit_id": "4cddc49254f64f2ab9abdcfa8355bee7",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "947cf3870b594a05080f2b5d06ec86ea3e23d7c98bae439579c795f9b5e479eb",
+      "tool_calls": 16,
+      "findings": [
+        {
+          "status": "CONFIRMED",
+          "title": "OS Command Injection in EchoController.echo via /bin/sh -c"
+        }
+      ]
+    },
+    {
+      "job_index": 37,
+      "case": "java-shell-array",
+      "arm": "on",
+      "repeat": 1,
+      "audit_id": "9b84df836e6745c4aa0e7f371a2c3de0",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "947cf3870b594a05080f2b5d06ec86ea3e23d7c98bae439579c795f9b5e479eb",
+      "tool_calls": 16,
+      "findings": [
+        {
+          "status": "CONFIRMED",
+          "title": "OS command injection in EchoController.echo via /bin/sh -c"
+        }
+      ]
+    },
+    {
+      "job_index": 38,
+      "case": "python-template",
+      "arm": "on",
+      "repeat": 0,
+      "audit_id": "892c1c3613984c63bdf40bb2a79f13c0",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "b944f9e248c6382a03c8ae4d2f8dd268f18b3d151a2b73f8fa3f639c1f5a512a",
+      "tool_calls": 20,
+      "findings": [
+        {
+          "status": "CONFIRMED",
+          "title": "Server-Side Template Injection (SSTI) via unvalidated template parameter in /render"
+        }
+      ]
+    },
+    {
+      "job_index": 39,
+      "case": "python-template",
+      "arm": "on",
+      "repeat": 1,
+      "audit_id": "995eab470915461c9c1d888f7d35dd4c",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "b944f9e248c6382a03c8ae4d2f8dd268f18b3d151a2b73f8fa3f639c1f5a512a",
+      "tool_calls": 20,
+      "findings": [
+        {
+          "status": "CONFIRMED",
+          "title": "Server-Side Template Injection via render_template_string on user-controlled template"
+        }
+      ]
+    },
+    {
+      "job_index": 40,
+      "case": "tenant-read-unscoped",
+      "arm": "on",
+      "repeat": 0,
+      "audit_id": "cabc5e2fe91b42db9f6f94114d7fc5fe",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "c5464a8ddcd2769f9ad8691a9a9f3300ae28cac1d1b23fa0d2678235fe2cafaf",
+      "tool_calls": 36,
+      "findings": [
+        {
+          "status": "CONFIRMED",
+          "title": "Cross-tenant invoice read (IDOR): service ignores principal.tenant_id and uses unscoped find_invoice"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Header-based tenant/role spoofing in authenticate()"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Shared cache cross-tenant leakage"
+        }
+      ]
+    },
+    {
+      "job_index": 41,
+      "case": "tenant-read-unscoped",
+      "arm": "off",
+      "repeat": 0,
+      "audit_id": "c9af4ac099c8450d80de51b7eea22f48",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "c5464a8ddcd2769f9ad8691a9a9f3300ae28cac1d1b23fa0d2678235fe2cafaf",
+      "tool_calls": 32,
+      "findings": [
+        {
+          "status": "CONFIRMED",
+          "title": "Cross-tenant invoice disclosure: perform() uses unscoped find_invoice instead of find_scoped"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Shared cache cross-tenant leakage hypothesis rejected (cache unused)"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Authorization header identity spoofing hypothesis rejected (server-side session lookup)"
+        }
+      ]
+    },
+    {
+      "job_index": 42,
+      "case": "tenant-read-unscoped",
+      "arm": "generic",
+      "repeat": 0,
+      "audit_id": "80df2a3e63e74a1c89e8f218ab911e32",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "c5464a8ddcd2769f9ad8691a9a9f3300ae28cac1d1b23fa0d2678235fe2cafaf",
+      "tool_calls": 35,
+      "findings": [
+        {
+          "status": "CONFIRMED",
+          "title": "Cross-tenant invoice disclosure via unscoped find_invoice (IDOR)"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Shared cache cross-tenant leakage (rejected)"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Missing role/authorization check (rejected)"
+        }
+      ]
+    },
+    {
+      "job_index": 43,
+      "case": "tenant-read-unscoped",
+      "arm": "on",
+      "repeat": 1,
+      "audit_id": "07d2ed0898014872a47d13f33d5592e0",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "c5464a8ddcd2769f9ad8691a9a9f3300ae28cac1d1b23fa0d2678235fe2cafaf",
+      "tool_calls": 32,
+      "findings": [
+        {
+          "status": "CONFIRMED",
+          "title": "Missing tenant authorization: invoice read uses unscoped lookup, enabling cross-tenant IDOR"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Shared cache cross-tenant leakage (rejected: cache never read or written)"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Client-supplied header trusted for tenant/role spoofing (rejected: principal from server-side sessions)"
+        }
+      ]
+    },
+    {
+      "job_index": 44,
+      "case": "tenant-read-unscoped",
+      "arm": "off",
+      "repeat": 1,
+      "audit_id": "9756cc36e2024570b24a314ebf2e1cec",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "c5464a8ddcd2769f9ad8691a9a9f3300ae28cac1d1b23fa0d2678235fe2cafaf",
+      "tool_calls": 32,
+      "findings": [
+        {
+          "status": "CONFIRMED",
+          "title": "Cross-tenant invoice disclosure: perform() uses unscoped find_invoice instead of find_scoped"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Shared cache cross-tenant leakage"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Role (editor) never enforced in service layer"
+        }
+      ]
+    },
+    {
+      "job_index": 45,
+      "case": "tenant-read-unscoped",
+      "arm": "generic",
+      "repeat": 1,
+      "audit_id": "3f867e70247847779196280b91ff29f3",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "c5464a8ddcd2769f9ad8691a9a9f3300ae28cac1d1b23fa0d2678235fe2cafaf",
+      "tool_calls": 32,
+      "findings": [
+        {
+          "status": "CONFIRMED",
+          "title": "Cross-tenant invoice disclosure: perform() uses unscoped find_invoice instead of tenant-scoped find_scoped"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Shared cache cross-tenant leakage hypothesis rejected: cache is never read or written"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Role field never enforced: no role-gated operation exists in this fixture"
+        }
+      ]
+    },
+    {
+      "job_index": 46,
+      "case": "tenant-read-protected",
+      "arm": "on",
+      "repeat": 0,
+      "audit_id": "7aafa730cfae4b8c8d665fbb53c1b214",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "fac3d5d2689ee560b73e7ae490836d6b9b48806d0bf5cfe32dc9ea665d78f5e5",
+      "tool_calls": 29,
+      "findings": [
+        {
+          "status": "REJECTED",
+          "title": "Cross-tenant invoice access via globally-unique invoice_id (IDOR)"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Shared cache cross-tenant invoice data leakage"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Authentication bypass in authenticate()"
+        }
+      ]
+    },
+    {
+      "job_index": 47,
+      "case": "tenant-read-protected",
+      "arm": "off",
+      "repeat": 0,
+      "audit_id": "d2ec041e6ffe4c96aad8c3748dda94ff",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "fac3d5d2689ee560b73e7ae490836d6b9b48806d0bf5cfe32dc9ea665d78f5e5",
+      "tool_calls": 37,
+      "findings": [
+        {
+          "status": "REJECTED",
+          "title": "Cross-tenant invoice access (IDOR) via invoice_id"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Shared cache cross-tenant data leakage"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Authentication bypass or identity spoofing"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Missing role enforcement / privilege escalation"
+        },
+        {
+          "status": "REJECTED",
+          "title": "SQL/command injection in repository"
+        }
+      ]
+    },
+    {
+      "job_index": 48,
+      "case": "tenant-read-protected",
+      "arm": "generic",
+      "repeat": 0,
+      "audit_id": "ff731694af1d487f9f251d238ce1987c",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "fac3d5d2689ee560b73e7ae490836d6b9b48806d0bf5cfe32dc9ea665d78f5e5",
+      "tool_calls": 38,
+      "findings": [
+        {
+          "status": "REJECTED",
+          "title": "Cross-tenant invoice access via IDOR is prevented by tenant-scoped lookup"
+        },
+        {
+          "status": "REJECTED",
+          "title": "No shared-cache cross-tenant leakage because cache is never accessed"
+        },
+        {
+          "status": "REJECTED",
+          "title": "No missing-authorization impact because no role-gated operation exists"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Principal tenant/role are server-derived, not client-controlled"
+        }
+      ]
+    },
+    {
+      "job_index": 49,
+      "case": "tenant-read-protected",
+      "arm": "on",
+      "repeat": 1,
+      "audit_id": "ff22a48ee97f4164aebf3c4f53b5613e",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "fac3d5d2689ee560b73e7ae490836d6b9b48806d0bf5cfe32dc9ea665d78f5e5",
+      "tool_calls": 29,
+      "findings": [
+        {
+          "status": "REJECTED",
+          "title": "Unscoped find_invoice import does not create a reachable cross-tenant read"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Shared cache parameter is never read or written; no cross-tenant cache leak"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Invoice endpoint enforces tenant-scoped object authorization"
+        }
+      ]
+    },
+    {
+      "job_index": 50,
+      "case": "tenant-read-protected",
+      "arm": "off",
+      "repeat": 1,
+      "audit_id": "74e218e2bf124fea99e81da5b3a6d82b",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "fac3d5d2689ee560b73e7ae490836d6b9b48806d0bf5cfe32dc9ea665d78f5e5",
+      "tool_calls": 39,
+      "findings": [
+        {
+          "status": "REJECTED",
+          "title": "No cross-tenant invoice access: request path uses tenant-scoped lookup"
+        },
+        {
+          "status": "REJECTED",
+          "title": "No cache usage: shared cache cannot leak cross-tenant data"
+        },
+        {
+          "status": "REJECTED",
+          "title": "No role-gated operation exists; missing role check is not exploitable"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Authentication derives principal from server-side session store, not client input"
+        }
+      ]
+    },
+    {
+      "job_index": 51,
+      "case": "tenant-read-protected",
+      "arm": "generic",
+      "repeat": 1,
+      "audit_id": "130712c4811b4f96834c39276c06a8c2",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "fac3d5d2689ee560b73e7ae490836d6b9b48806d0bf5cfe32dc9ea665d78f5e5",
+      "tool_calls": 34,
+      "findings": [
+        {
+          "status": "REJECTED",
+          "title": "Cross-tenant invoice access via globally-unique IDs (IDOR)"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Shared cache cross-tenant data leakage"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Authentication bypass in identity.authenticate"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Role-based privilege escalation (editor local to tenant)"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Injection in repository invoice lookup"
+        }
+      ]
+    },
+    {
+      "job_index": 52,
+      "case": "tenant-update-unscoped",
+      "arm": "on",
+      "repeat": 0,
+      "audit_id": "ad3f5b8bb3e841dda4b3c4ae67ccffc0",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "de6c1b03eeeda7c6d23e58f766824d4513ef66c2bbc33fb9b27378c1dcbce694",
+      "tool_calls": 23,
+      "findings": [
+        {
+          "status": "CONFIRMED",
+          "title": "Cross-tenant invoice access via unscoped find_invoice in service.perform"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Shared cache cross-tenant leakage in service.perform"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Role escalation via editor role not bound to tenant"
+        }
+      ]
+    },
+    {
+      "job_index": 53,
+      "case": "tenant-update-unscoped",
+      "arm": "off",
+      "repeat": 0,
+      "audit_id": "34c50efd91124264822dfcc41d3406e1",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "de6c1b03eeeda7c6d23e58f766824d4513ef66c2bbc33fb9b27378c1dcbce694",
+      "tool_calls": 29,
+      "findings": [
+        {
+          "status": "CONFIRMED",
+          "title": "Cross-tenant invoice access (IDOR): unscoped find_invoice used instead of tenant-scoped find_scoped"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Shared cache cross-tenant leakage (rejected: cache unused)"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Client-forged identity/role (rejected: principal resolved from server-side session store)"
+        }
+      ]
+    },
+    {
+      "job_index": 54,
+      "case": "tenant-update-unscoped",
+      "arm": "generic",
+      "repeat": 0,
+      "audit_id": "62381a1d72dd42bea38244a6008d1dc8",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "de6c1b03eeeda7c6d23e58f766824d4513ef66c2bbc33fb9b27378c1dcbce694",
+      "tool_calls": 28,
+      "findings": [
+        {
+          "status": "CONFIRMED",
+          "title": "Cross-tenant IDOR: invoice read/write uses unscoped find_invoice ignoring principal.tenant_id"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Shared cache cross-tenant leakage (rejected: cache unused)"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Authentication bypass in authenticate() (rejected: token must be a valid session key)"
+        }
+      ]
+    },
+    {
+      "job_index": 55,
+      "case": "tenant-update-unscoped",
+      "arm": "on",
+      "repeat": 1,
+      "audit_id": "eaa44d4d809a48a783aa2f8d3fc0330a",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "de6c1b03eeeda7c6d23e58f766824d4513ef66c2bbc33fb9b27378c1dcbce694",
+      "tool_calls": 32,
+      "findings": [
+        {
+          "status": "CONFIRMED",
+          "title": "Cross-tenant invoice access: service uses unscoped find_invoice instead of tenant-scoped find_scoped"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Shared cache cross-tenant leakage (cache parameter unused)"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Identity spoofing via client-supplied Authorization header"
+        }
+      ]
+    },
+    {
+      "job_index": 56,
+      "case": "tenant-update-unscoped",
+      "arm": "off",
+      "repeat": 1,
+      "audit_id": "10e205970f474bfbbee4f18ff05e6db7",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "de6c1b03eeeda7c6d23e58f766824d4513ef66c2bbc33fb9b27378c1dcbce694",
+      "tool_calls": 32,
+      "findings": [
+        {
+          "status": "CONFIRMED",
+          "title": "Cross-tenant invoice access: perform() uses unscoped find_invoice instead of tenant-scoped find_scoped"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Shared cache cross-tenant leakage (rejected: cache is never used)"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Authentication header spoofing (rejected: identity comes from server-side session store)"
+        }
+      ]
+    },
+    {
+      "job_index": 57,
+      "case": "tenant-update-unscoped",
+      "arm": "generic",
+      "repeat": 1,
+      "audit_id": "0ce87870b12f4f28b965251e59c033ea",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "de6c1b03eeeda7c6d23e58f766824d4513ef66c2bbc33fb9b27378c1dcbce694",
+      "tool_calls": 32,
+      "findings": [
+        {
+          "status": "CONFIRMED",
+          "title": "Cross-tenant invoice access via unscoped find_invoice (IDOR / broken tenant isolation)"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Shared cache cross-tenant leakage (cache parameter unused)"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Authentication trusts client-supplied tenant/role"
+        }
+      ]
+    },
+    {
+      "job_index": 58,
+      "case": "tenant-update-protected",
+      "arm": "on",
+      "repeat": 0,
+      "audit_id": "bf71123918704d1c8db072b0983da50c",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "2bb1475e03270c2e2be03663a22b1d922b9a92d8c49ccd3dbbd6931860f4d5e0",
+      "tool_calls": 41,
+      "findings": [
+        {
+          "status": "REJECTED",
+          "title": "Cross-tenant invoice access via IDOR is blocked by tenant-scoped lookup"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Shared cache cross-tenant leakage not present (cache unused)"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Authentication cannot be spoofed; principal comes from server-side session store"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Editor role check enforced before data access; no cross-tenant role escalation"
+        },
+        {
+          "status": "REJECTED",
+          "title": "No SQL/command injection sink; repository uses dict access"
+        }
+      ]
+    },
+    {
+      "job_index": 59,
+      "case": "tenant-update-protected",
+      "arm": "off",
+      "repeat": 0,
+      "audit_id": "5364412e819d4e16b8d65338daf4bd00",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "2bb1475e03270c2e2be03663a22b1d922b9a92d8c49ccd3dbbd6931860f4d5e0",
+      "tool_calls": 38,
+      "findings": [
+        {
+          "status": "REJECTED",
+          "title": "Cross-tenant invoice access via missing tenant filter"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Shared cache leaks cross-tenant invoice data"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Identity spoofing via client-supplied headers"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Role/authorization bypass allowing non-editor to modify invoices"
+        },
+        {
+          "status": "REJECTED",
+          "title": "SQL injection in repository query construction"
+        }
+      ]
+    },
+    {
+      "job_index": 60,
+      "case": "tenant-update-protected",
+      "arm": "generic",
+      "repeat": 0,
+      "audit_id": "2a06ca54743e4771912a16bac3c5a9a8",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "2bb1475e03270c2e2be03663a22b1d922b9a92d8c49ccd3dbbd6931860f4d5e0",
+      "tool_calls": 41,
+      "findings": [
+        {
+          "status": "REJECTED",
+          "title": "Cross-tenant invoice access via IDOR"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Shared cache cross-tenant data leakage"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Insufficient role check / privilege escalation"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Forgeable authentication token"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Injection in repository query construction"
+        }
+      ]
+    },
+    {
+      "job_index": 61,
+      "case": "tenant-update-protected",
+      "arm": "on",
+      "repeat": 1,
+      "audit_id": "ae91946263174d5e900262269cef36c2",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "2bb1475e03270c2e2be03663a22b1d922b9a92d8c49ccd3dbbd6931860f4d5e0",
+      "tool_calls": 35,
+      "findings": [
+        {
+          "status": "REJECTED",
+          "title": "Cross-tenant invoice access via invoice_id (IDOR)"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Shared cache cross-tenant data leakage"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Client-forged identity/tenant/role bypassing authentication"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Persistent mutation of shared db invoice object"
+        }
+      ]
+    },
+    {
+      "job_index": 62,
+      "case": "tenant-update-protected",
+      "arm": "off",
+      "repeat": 1,
+      "audit_id": "f88f88cc7bd145a68457f366d8a15312",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "2bb1475e03270c2e2be03663a22b1d922b9a92d8c49ccd3dbbd6931860f4d5e0",
+      "tool_calls": 33,
+      "findings": [
+        {
+          "status": "REJECTED",
+          "title": "Tenant isolation enforced on invoice access (no IDOR)"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Shared cache not used; no cross-tenant cache leakage"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Session lookup authentication is not bypassable"
+        },
+        {
+          "status": "REJECTED",
+          "title": "In-place memo mutation is tenant-scoped, not a cross-tenant write"
+        }
+      ]
+    },
+    {
+      "job_index": 63,
+      "case": "tenant-update-protected",
+      "arm": "generic",
+      "repeat": 1,
+      "audit_id": "8022450a909e4198a5bbc4f8ef1b03af",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "2bb1475e03270c2e2be03663a22b1d922b9a92d8c49ccd3dbbd6931860f4d5e0",
+      "tool_calls": 33,
+      "findings": [
+        {
+          "status": "REJECTED",
+          "title": "Cross-tenant invoice access via missing tenant scoping"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Shared cache cross-tenant leakage or poisoning"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Client-controlled tenant/user/role identity"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Injection via invoice_id or memo into repository query"
+        }
+      ]
+    },
+    {
+      "job_index": 64,
+      "case": "tenant-batch-unscoped",
+      "arm": "on",
+      "repeat": 0,
+      "audit_id": "0d73e712961c4f1d93e19f1dc8b04cd0",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "ba05ceebb515ae54f0a9d84601c939d348bf51e5ebbdb0832cdc18b57f260873",
+      "tool_calls": 25,
+      "findings": [
+        {
+          "status": "CONFIRMED",
+          "title": "Batch invoice fetch only tenant-checks the first ID, disclosing other tenants' invoices"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Shared cache cross-tenant leak (no cache read/write in code)"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Editor role privilege escalation (no role-gated action exists)"
+        }
+      ]
+    },
+    {
+      "job_index": 65,
+      "case": "tenant-batch-unscoped",
+      "arm": "off",
+      "repeat": 0,
+      "audit_id": "85a3d9d8beaf46699b43af53da89eedd",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "ba05ceebb515ae54f0a9d84601c939d348bf51e5ebbdb0832cdc18b57f260873",
+      "tool_calls": 26,
+      "findings": [
+        {
+          "status": "CONFIRMED",
+          "title": "Cross-tenant invoice disclosure: only first invoice id is tenant-scoped"
+        }
+      ]
+    },
+    {
+      "job_index": 66,
+      "case": "tenant-batch-unscoped",
+      "arm": "generic",
+      "repeat": 0,
+      "audit_id": "0273258de6ba436da722d84c47d39310",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "ba05ceebb515ae54f0a9d84601c939d348bf51e5ebbdb0832cdc18b57f260873",
+      "tool_calls": 32,
+      "findings": [
+        {
+          "status": "CONFIRMED",
+          "title": "Cross-tenant invoice disclosure: only first invoice ID is tenant-scoped"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Shared cache cross-tenant leakage not present in code"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Session token authentication is a server-side lookup with no bypass"
+        }
+      ]
+    },
+    {
+      "job_index": 67,
+      "case": "tenant-batch-unscoped",
+      "arm": "on",
+      "repeat": 1,
+      "audit_id": "2a968939252a463eb7b7d55b4a6d31b2",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "ba05ceebb515ae54f0a9d84601c939d348bf51e5ebbdb0832cdc18b57f260873",
+      "tool_calls": 26,
+      "findings": [
+        {
+          "status": "CONFIRMED",
+          "title": "Cross-tenant invoice disclosure: batch scoping checks only first ID then fetches all IDs unscoped"
+        }
+      ]
+    },
+    {
+      "job_index": 68,
+      "case": "tenant-batch-unscoped",
+      "arm": "off",
+      "repeat": 1,
+      "audit_id": "74b575670c1c422aa7aa07f0a8019eff",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "ba05ceebb515ae54f0a9d84601c939d348bf51e5ebbdb0832cdc18b57f260873",
+      "tool_calls": 32,
+      "findings": [
+        {
+          "status": "CONFIRMED",
+          "title": "Cross-tenant invoice disclosure via unscoped find_invoice after single-ID scope check"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Shared cache cross-tenant leakage"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Role field defined but never enforced"
+        }
+      ]
+    },
+    {
+      "job_index": 69,
+      "case": "tenant-batch-unscoped",
+      "arm": "generic",
+      "repeat": 1,
+      "audit_id": "d36b07885e5348f89ac9bfcfda528296",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "ba05ceebb515ae54f0a9d84601c939d348bf51e5ebbdb0832cdc18b57f260873",
+      "tool_calls": 24,
+      "findings": [
+        {
+          "status": "CONFIRMED",
+          "title": "Broken object-level authorization: only first invoice id is tenant-scoped, remaining ids fetched unscoped (cross-tenant invoice disclosure)"
+        }
+      ]
+    },
+    {
+      "job_index": 70,
+      "case": "tenant-batch-protected",
+      "arm": "on",
+      "repeat": 0,
+      "audit_id": "ab2884384fc84e41a970162a97ef79f1",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "7c24f766ec32de3bc61e8a9f3a6177dedf474f5661a949cac5a4d714e8edbda0",
+      "tool_calls": 34,
+      "findings": [
+        {
+          "status": "REJECTED",
+          "title": "Cross-tenant invoice access via IDOR in perform()"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Shared cache cross-tenant data leakage in perform()"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Missing role authorization (editor role never enforced)"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Authentication bypass in authenticate()"
+        }
+      ]
+    },
+    {
+      "job_index": 71,
+      "case": "tenant-batch-protected",
+      "arm": "off",
+      "repeat": 0,
+      "audit_id": "2b12c9893ff24791910819a488c7c784",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "7c24f766ec32de3bc61e8a9f3a6177dedf474f5661a949cac5a4d714e8edbda0",
+      "tool_calls": 43,
+      "findings": [
+        {
+          "status": "REJECTED",
+          "title": "Cross-tenant invoice access via unscoped lookup"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Cross-tenant leakage via shared cache"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Missing editor-role authorization check"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Authentication bypass via client-controlled identity"
+        },
+        {
+          "status": "REJECTED",
+          "title": "SQL injection in repository lookup"
+        }
+      ]
+    },
+    {
+      "job_index": 72,
+      "case": "tenant-batch-protected",
+      "arm": "generic",
+      "repeat": 0,
+      "audit_id": "9c7ab0547761496b9be88e22ae3e1456",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "7c24f766ec32de3bc61e8a9f3a6177dedf474f5661a949cac5a4d714e8edbda0",
+      "tool_calls": 38,
+      "findings": [
+        {
+          "status": "REJECTED",
+          "title": "No cross-tenant IDOR: invoice reads are tenant-scoped via find_scoped"
+        },
+        {
+          "status": "REJECTED",
+          "title": "No shared-cache cross-tenant leakage: cache is never accessed"
+        },
+        {
+          "status": "REJECTED",
+          "title": "No authentication bypass: identity comes from server-side session store"
+        },
+        {
+          "status": "REJECTED",
+          "title": "No exploitable missing-role-check: no role-gated operation exists"
+        },
+        {
+          "status": "REJECTED",
+          "title": "No injection: repository uses dict-style lookup, no query construction"
+        }
+      ]
+    },
+    {
+      "job_index": 73,
+      "case": "tenant-batch-protected",
+      "arm": "on",
+      "repeat": 1,
+      "audit_id": "cc4a858b6a494d69ab07ae6a1fe1660b",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "7c24f766ec32de3bc61e8a9f3a6177dedf474f5661a949cac5a4d714e8edbda0",
+      "tool_calls": 42,
+      "findings": [
+        {
+          "status": "REJECTED",
+          "title": "Cross-tenant invoice access via IDOR is prevented by per-item tenant scoping"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Shared cache cross-tenant leakage not implemented (cache parameter unused)"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Authentication derives identity from trusted session store, not client headers"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Unused role field does not create an authorization bypass in examined code"
+        }
+      ]
+    },
+    {
+      "job_index": 74,
+      "case": "tenant-batch-protected",
+      "arm": "off",
+      "repeat": 1,
+      "audit_id": "39f294030fe541028b79d5129eba0296",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "7c24f766ec32de3bc61e8a9f3a6177dedf474f5661a949cac5a4d714e8edbda0",
+      "tool_calls": 32,
+      "findings": [
+        {
+          "status": "REJECTED",
+          "title": "Cross-tenant invoice access via unscoped lookup"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Shared cache cross-tenant data leakage"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Spoofable identity via Authorization header"
+        }
+      ]
+    },
+    {
+      "job_index": 75,
+      "case": "tenant-batch-protected",
+      "arm": "generic",
+      "repeat": 1,
+      "audit_id": "28092030812944178f7775c7f48bc85f",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "7c24f766ec32de3bc61e8a9f3a6177dedf474f5661a949cac5a4d714e8edbda0",
+      "tool_calls": 35,
+      "findings": [
+        {
+          "status": "REJECTED",
+          "title": "Cross-tenant invoice access via IDOR is prevented by tenant scoping"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Shared cache cross-tenant leakage is not present (cache unused)"
+        },
+        {
+          "status": "REJECTED",
+          "title": "No role-gated operation exists; missing role check is not exploitable"
+        }
+      ]
+    },
+    {
+      "job_index": 76,
+      "case": "tenant-cache-unscoped",
+      "arm": "on",
+      "repeat": 0,
+      "audit_id": "76c1a34e851e4c6d887199a07bc70653",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "f87c3efd7428448e1ffbd0f4946af32cfad4aff693323134c3084f12d30b5f96",
+      "tool_calls": 25,
+      "findings": [
+        {
+          "status": "CONFIRMED",
+          "title": "Cross-tenant invoice disclosure via tenant-unscoped shared cache key"
+        },
+        {
+          "status": "REJECTED",
+          "title": "IDOR on invoice_id via DB path (rejected: tenant-scoped lookup)"
+        }
+      ]
+    },
+    {
+      "job_index": 77,
+      "case": "tenant-cache-unscoped",
+      "arm": "off",
+      "repeat": 0,
+      "audit_id": "31bbcf22582840818bef9d8d2a6803cc",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "f87c3efd7428448e1ffbd0f4946af32cfad4aff693323134c3084f12d30b5f96",
+      "tool_calls": 32,
+      "findings": [
+        {
+          "status": "CONFIRMED",
+          "title": "Cross-tenant invoice disclosure via shared cache keyed only by invoice_id"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Authorization role never enforced (role field unused)"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Unscoped find_invoice lookup (no reachable caller)"
+        }
+      ]
+    },
+    {
+      "job_index": 78,
+      "case": "tenant-cache-unscoped",
+      "arm": "generic",
+      "repeat": 0,
+      "audit_id": "63e7fe004d7944f397b3d442ff404f08",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "f87c3efd7428448e1ffbd0f4946af32cfad4aff693323134c3084f12d30b5f96",
+      "tool_calls": 27,
+      "findings": [
+        {
+          "status": "CONFIRMED",
+          "title": "Cross-tenant invoice disclosure via cache keyed only by invoice_id"
+        },
+        {
+          "status": "REJECTED",
+          "title": "No role enforcement (editor role) in identity/service"
+        }
+      ]
+    },
+    {
+      "job_index": 79,
+      "case": "tenant-cache-unscoped",
+      "arm": "on",
+      "repeat": 1,
+      "audit_id": "3aefeb816f0143cfb4bdc3b37cd6c52a",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "f87c3efd7428448e1ffbd0f4946af32cfad4aff693323134c3084f12d30b5f96",
+      "tool_calls": 27,
+      "findings": [
+        {
+          "status": "CONFIRMED",
+          "title": "Cross-tenant invoice disclosure via shared cache hit before tenant scope check"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Authorization token lookup in server-owned sessions mapping"
+        }
+      ]
+    },
+    {
+      "job_index": 80,
+      "case": "tenant-cache-unscoped",
+      "arm": "off",
+      "repeat": 1,
+      "audit_id": "3ee9180608e24d16bc37373d0d4ee73b",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "f87c3efd7428448e1ffbd0f4946af32cfad4aff693323134c3084f12d30b5f96",
+      "tool_calls": 31,
+      "findings": [
+        {
+          "status": "CONFIRMED",
+          "title": "Cross-tenant invoice disclosure via shared cache keyed only by invoice_id"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Unscoped find_invoice helper (dead code, no reachable caller)"
+        }
+      ]
+    },
+    {
+      "job_index": 81,
+      "case": "tenant-cache-unscoped",
+      "arm": "generic",
+      "repeat": 1,
+      "audit_id": "13b9c0ec056f432a9721755583b6ef1b",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "f87c3efd7428448e1ffbd0f4946af32cfad4aff693323134c3084f12d30b5f96",
+      "tool_calls": 33,
+      "findings": [
+        {
+          "status": "CONFIRMED",
+          "title": "Cross-tenant invoice disclosure via shared cache keyed only by invoice_id"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Session token lookup in authenticate"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Unscoped find_invoice accessor"
+        }
+      ]
+    },
+    {
+      "job_index": 82,
+      "case": "tenant-cache-protected",
+      "arm": "on",
+      "repeat": 0,
+      "audit_id": "b087e07b9d1042aaba79878ccf1ba4b7",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "4c3cb755d643ad444bdb915cb9c5beb83ec992a242c052fad83128d71664c31f",
+      "tool_calls": 34,
+      "findings": [
+        {
+          "status": "REJECTED",
+          "title": "Shared cache does not leak cross-tenant invoice data (tenant bound in cache key)"
+        },
+        {
+          "status": "REJECTED",
+          "title": "No IDOR: invoice access is tenant-scoped via find_scoped"
+        },
+        {
+          "status": "REJECTED",
+          "title": "No authentication bypass in authenticate()"
+        }
+      ]
+    },
+    {
+      "job_index": 83,
+      "case": "tenant-cache-protected",
+      "arm": "off",
+      "repeat": 0,
+      "audit_id": "b528cd214357477798212b6c9710ef18",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "4c3cb755d643ad444bdb915cb9c5beb83ec992a242c052fad83128d71664c31f",
+      "tool_calls": 41,
+      "findings": [
+        {
+          "status": "REJECTED",
+          "title": "Cross-tenant invoice read is blocked by tenant-scoped lookup"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Shared cache is tenant-partitioned by session tenant_id"
+        },
+        {
+          "status": "REJECTED",
+          "title": "No role gate present, but no privileged operation requires one"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Identity fields are session-derived, not client-spoofable"
+        },
+        {
+          "status": "REJECTED",
+          "title": "No query injection; unscoped lookup is dead code"
+        }
+      ]
+    },
+    {
+      "job_index": 84,
+      "case": "tenant-cache-protected",
+      "arm": "generic",
+      "repeat": 0,
+      "audit_id": "4f4751606d564bd0bcfb28a00510db5d",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "4c3cb755d643ad444bdb915cb9c5beb83ec992a242c052fad83128d71664c31f",
+      "tool_calls": 34,
+      "findings": [
+        {
+          "status": "REJECTED",
+          "title": "Tenant-scoped invoice read is enforced; no IDOR"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Shared cache key includes tenant; no cross-tenant leakage"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Session-token authentication is server-side; no spoofing"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Role field unused but no role-gated operation exists"
+        }
+      ]
+    },
+    {
+      "job_index": 85,
+      "case": "tenant-cache-protected",
+      "arm": "on",
+      "repeat": 1,
+      "audit_id": "2321dae845e1484bac420c307d1038cf",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "4c3cb755d643ad444bdb915cb9c5beb83ec992a242c052fad83128d71664c31f",
+      "tool_calls": 34,
+      "findings": [
+        {
+          "status": "REJECTED",
+          "title": "Shared cache cross-tenant invoice leakage"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Cross-tenant IDOR via globally unique invoice IDs"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Authentication bypass via forged or absent session token"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Editor role privilege escalation to cross-tenant access"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Injection via invoice_id in repository lookup"
+        }
+      ]
+    },
+    {
+      "job_index": 86,
+      "case": "tenant-cache-protected",
+      "arm": "off",
+      "repeat": 1,
+      "audit_id": "fa33126e03814dc68c056a40d3464777",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "4c3cb755d643ad444bdb915cb9c5beb83ec992a242c052fad83128d71664c31f",
+      "tool_calls": 36,
+      "findings": [
+        {
+          "status": "REJECTED",
+          "title": "Cross-tenant invoice access (IDOR) via globally-unique invoice_id"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Shared cache cross-tenant invoice leakage"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Missing editor role authorization check"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Authentication bypass via client-supplied identity"
+        }
+      ]
+    },
+    {
+      "job_index": 87,
+      "case": "tenant-cache-protected",
+      "arm": "generic",
+      "repeat": 1,
+      "audit_id": "f7c3fec2af54446083d778695d5b68c9",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "4c3cb755d643ad444bdb915cb9c5beb83ec992a242c052fad83128d71664c31f",
+      "tool_calls": 45,
+      "findings": [
+        {
+          "status": "REJECTED",
+          "title": "Cross-tenant invoice access (IDOR) via client-supplied invoice_id"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Shared cache cross-tenant invoice leakage"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Authentication bypass / spoofable tenant or role"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Missing role authorization check enabling privilege escalation"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Injection via invoice_id in repository lookup"
+        }
+      ]
+    },
+    {
+      "job_index": 88,
+      "case": "werkzeug-3.0.5",
+      "arm": "on",
+      "repeat": 0,
+      "audit_id": "bc3581f353f144319b7826cdbe665b9b",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "ca6f54ce58072c67da814d84814be555be978b90013cc12cb96a41a69dc4d0f6",
+      "tool_calls": 99,
+      "findings": [
+        {
+          "status": "REJECTED",
+          "title": "No unsafe deserialization of untrusted data in local.py or debug"
+        },
+        {
+          "status": "REJECTED",
+          "title": "No SSTI in testapp.py; dynamic values are escaped"
+        }
+      ]
+    },
+    {
+      "job_index": 89,
+      "case": "werkzeug-3.0.5",
+      "arm": "off",
+      "repeat": 0,
+      "audit_id": "fd19d437b50c4369953697089db28381",
+      "status": "PARTIAL",
+      "failure": null,
+      "snapshot_sha256": "ca6f54ce58072c67da814d84814be555be978b90013cc12cb96a41a69dc4d0f6",
+      "tool_calls": 93,
+      "findings": [
+        {
+          "status": "REJECTED",
+          "title": "DebuggedApplication evalex console RCE is gated by secret, PIN trust and host trust"
+        }
+      ]
+    },
+    {
+      "job_index": 90,
+      "case": "werkzeug-3.0.5",
+      "arm": "generic",
+      "repeat": 0,
+      "audit_id": "b3b6ee20262f44f281f3eca7695aa153",
+      "status": "INCOMPLETE",
+      "failure": "RuntimeError: Audit budget exceeded",
+      "snapshot_sha256": "ca6f54ce58072c67da814d84814be555be978b90013cc12cb96a41a69dc4d0f6",
+      "tool_calls": 100,
+      "findings": []
+    },
+    {
+      "job_index": 91,
+      "case": "werkzeug-3.0.5",
+      "arm": "on",
+      "repeat": 1,
+      "audit_id": "6cd304f349864757a1abb2349c707ab4",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "ca6f54ce58072c67da814d84814be555be978b90013cc12cb96a41a69dc4d0f6",
+      "tool_calls": 96,
+      "findings": [
+        {
+          "status": "REJECTED",
+          "title": "Debug console PIN comparison uses non-constant-time == (timing side channel)"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Path traversal in SharedDataMiddleware / send_file"
+        },
+        {
+          "status": "REJECTED",
+          "title": "ProxyFix trusts client-supplied X-Forwarded-* headers"
+        }
+      ]
+    },
+    {
+      "job_index": 92,
+      "case": "werkzeug-3.0.5",
+      "arm": "off",
+      "repeat": 1,
+      "audit_id": "9212182d49ef49aeb6a23140df659d30",
+      "status": "PARTIAL",
+      "failure": null,
+      "snapshot_sha256": "ca6f54ce58072c67da814d84814be555be978b90013cc12cb96a41a69dc4d0f6",
+      "tool_calls": 96,
+      "findings": [
+        {
+          "status": "REJECTED",
+          "title": "Werkzeug debugger console RCE via evalex is gated by PIN + secret + host trust (no bypass found)"
+        }
+      ]
+    },
+    {
+      "job_index": 93,
+      "case": "werkzeug-3.0.5",
+      "arm": "generic",
+      "repeat": 1,
+      "audit_id": "8b408aec14d3411c87f2aba23acd4c0c",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "ca6f54ce58072c67da814d84814be555be978b90013cc12cb96a41a69dc4d0f6",
+      "tool_calls": 99,
+      "findings": [
+        {
+          "status": "REJECTED",
+          "title": "Debug console RCE via PIN/host-trust bypass"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Path traversal in send_file / shared_data middleware"
+        },
+        {
+          "status": "REJECTED",
+          "title": "HTTP header injection / response splitting via request-derived values"
+        }
+      ]
+    },
+    {
+      "job_index": 94,
+      "case": "werkzeug-3.0.6",
+      "arm": "on",
+      "repeat": 0,
+      "audit_id": "1f143a9f1f704008acf60ccdb72e5aec",
+      "status": "INCOMPLETE",
+      "failure": "RuntimeError: Tool call budget exceeded",
+      "snapshot_sha256": "86ef1873bdf393f3f49afb5d9646f4ea77df5a8071dc81e47f909525387c61d6",
+      "tool_calls": 100,
+      "findings": [
+        {
+          "status": "REJECTED",
+          "title": "Werkzeug debugger console RCE via evalex/pin bypass"
+        }
+      ]
+    },
+    {
+      "job_index": 95,
+      "case": "werkzeug-3.0.6",
+      "arm": "off",
+      "repeat": 0,
+      "audit_id": "ecc85aa540a54978b2b5d8b9cb6f97be",
+      "status": "COMPLETE",
+      "failure": null,
+      "snapshot_sha256": "86ef1873bdf393f3f49afb5d9646f4ea77df5a8071dc81e47f909525387c61d6",
+      "tool_calls": 87,
+      "findings": [
+        {
+          "status": "REJECTED",
+          "title": "Werkzeug debugger interactive console exec is gated by PIN and host trust (no unauthenticated RCE)"
+        }
+      ]
+    },
+    {
+      "job_index": 96,
+      "case": "werkzeug-3.0.6",
+      "arm": "generic",
+      "repeat": 0,
+      "audit_id": "99c973a3c4d04119b25f813f24b8638d",
+      "status": "INCOMPLETE",
+      "failure": "RuntimeError: Tool call budget exceeded",
+      "snapshot_sha256": "86ef1873bdf393f3f49afb5d9646f4ea77df5a8071dc81e47f909525387c61d6",
+      "tool_calls": 100,
+      "findings": [
+        {
+          "status": "REJECTED",
+          "title": "send_file / send_from_directory path traversal"
+        }
+      ]
+    },
+    {
+      "job_index": 97,
+      "case": "werkzeug-3.0.6",
+      "arm": "on",
+      "repeat": 1,
+      "audit_id": "160a638452454177914249d620a0c671",
+      "status": "INCOMPLETE",
+      "failure": "RuntimeError: Tool call budget exceeded",
+      "snapshot_sha256": "86ef1873bdf393f3f49afb5d9646f4ea77df5a8071dc81e47f909525387c61d6",
+      "tool_calls": 100,
+      "findings": [
+        {
+          "status": "REJECTED",
+          "title": "Debug console eval/exec is gated by PIN and host trust; no unauthenticated RCE"
+        },
+        {
+          "status": "REJECTED",
+          "title": "SharedDataMiddleware uses safe_join; no path traversal"
+        },
+        {
+          "status": "REJECTED",
+          "title": "ProxyFix header trust is configuration-controlled, not a code vulnerability"
+        },
+        {
+          "status": "REJECTED",
+          "title": "Routing rule compilation uses AST nodes; no code/regex injection"
+        }
+      ]
+    },
+    {
+      "job_index": 98,
+      "case": "werkzeug-3.0.6",
+      "arm": "off",
+      "repeat": 1,
+      "audit_id": "d64245d2681d4995b744141ffd3d60a9",
+      "status": "INCOMPLETE",
+      "failure": "RuntimeError: Model HTTP error 402",
+      "snapshot_sha256": "86ef1873bdf393f3f49afb5d9646f4ea77df5a8071dc81e47f909525387c61d6",
+      "tool_calls": 73,
+      "findings": []
+    }
+  ]
+}

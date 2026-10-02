@@ -1,17 +1,20 @@
 {
   "source_base": "91c9e7a",
-  "phase": "offline-development-candidate",
-  "paid_model_calls": 0,
+  "phase": "live-acceptance-failed",
   "pushed": false,
   "deployed": false,
-  "implementation_sha256": "4efc74b5b891aaf33f029b7b8b9a8bf4e4801ee399b5d7b1c385de75e324c65a",
+  "implementation_sha256": "6908e101c487acd74e1f3258f762f4dba81983cb250ecb42a8fba4d95d9ebf4f",
   "offline_prepared_runs": 88,
-  "live_status": "NOT_RUN",
+  "live_status": "FAILED",
   "independent_validation": "PENDING",
   "knowledge_unique_gain": "NOT_ESTABLISHED",
   "offline_tests": {
     "passed": 166,
     "seconds": 17.31,
     "environment": "isolated Linux Docker test container; network none"
-  }
+  },
+  "candidate_commit": "9214a05",
+  "attempted_runs": 99,
+  "pending_runs": 1,
+  "note": "Earlier offline preparation made zero model calls; current live campaign attempted99 audits. Exact API call count differs from audit count."
 }
