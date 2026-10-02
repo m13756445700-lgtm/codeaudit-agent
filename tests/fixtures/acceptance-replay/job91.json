@@ -1,0 +1,76 @@
+{
+  "audit_id": "6cd304f349864757a1abb2349c707ab4",
+  "findings_file_sha256": "e3d61e051be77461afdbf36f7551bd293e21f4161fd78a59d3b39636e2fb29c2",
+  "finding": {
+    "category": "path_traversal",
+    "confidence": "high",
+    "confidence_rationale": "Direct code reads of safe_join and both loaders confirm effective sanitization.",
+    "controllability": "Attacker controls the request path but safe_join neutralizes traversal sequences.",
+    "counter_evidence": [
+      {
+        "evidence": "from ..security import safe_join",
+        "file": "src/werkzeug/middleware/shared_data.py",
+        "line": 28,
+        "operation": "sanitizer applied to path",
+        "symbol": "safe_join"
+      }
+    ],
+    "data_flow": [
+      {
+        "evidence": "from ..security import safe_join",
+        "file": "src/werkzeug/middleware/shared_data.py",
+        "line": 28,
+        "operation": "request path joined to directory via safe_join",
+        "symbol": "safe_join"
+      }
+    ],
+    "exploit_preconditions": [
+      "Attacker supplies a traversal path",
+      "safe_join fails to reject it"
+    ],
+    "false_positive_analysis": "The presence of request-derived path components triggers traversal heuristics, but safe_join is an effective sanitizer and send_file's contract places responsibility on the caller. Rejected as a false positive.",
+    "id": "H2-shared-data-traversal",
+    "knowledge_application": "path_traversal.md requires verifying canonical confinement and checking ../, absolute override and decoding order; safe_join performs posixpath.normpath normalization and rejects absolute/'..'/alt separators, satisfying the boundary proof. The CA-K04 card notes a Windows UNC edge case in older Werkzeug; this repo's safe_join explicitly rejects leading-slash paths, and no Windows deployment is evidenced, so the Linux-scope rejection stands with that platform caveat recorded.",
+    "knowledge_used": [
+      "path_traversal.md",
+      "vulnerability_judgement.md"
+    ],
+    "reachability": "SharedDataMiddleware is reachable for any request under a mounted prefix, but the path is sanitized by safe_join before filesystem access.",
+    "reasoning_summary": "The middleware builds filesystem paths from the request path but passes them through safe_join, which rejects traversal sequences. send_file explicitly documents that its path must be trusted. No traversal is possible through these code paths.",
+    "remediation": "None required; continue using send_from_directory for user-provided paths.",
+    "sanitizer_analysis": "safe_join normalizes with posixpath.normpath and rejects absolute paths, '..' components, '../' prefixes, and OS alternate separators. Both get_directory_loader and get_package_loader call safe_join(directory, path) and return None on escape. send_file documents that its path argument is trusted and directs callers to send_from_directory for user-provided paths.",
+    "security_boundary": "Static file serving boundary.",
+    "severity": "info",
+    "sink": {
+      "evidence": "from ..security import safe_join",
+      "file": "src/werkzeug/middleware/shared_data.py",
+      "line": 28,
+      "operation": "path construction guarded by safe_join",
+      "symbol": "safe_join"
+    },
+    "source": {
+      "evidence": "from ..security import safe_join",
+      "file": "src/werkzeug/middleware/shared_data.py",
+      "line": 28,
+      "operation": "import of safe_join used to build file paths",
+      "symbol": "safe_join"
+    },
+    "status": "REJECTED",
+    "title": "Path traversal in SharedDataMiddleware / send_file",
+    "unknowns": [
+      "Deployment OS/runtime (Windows UNC edge case in older Werkzeug versions)"
+    ],
+    "ai_status": "REJECTED",
+    "evidence_gate": {
+      "passed": true,
+      "problems": [],
+      "snapshot_sha256": "ca6f54ce58072c67da814d84814be555be978b90013cc12cb96a41a69dc4d0f6",
+      "files": {
+        "src/werkzeug/middleware/shared_data.py": "1b6f1b1b7af3acfe91d243833ac6c57d63a3e5771cfea20e56ed5535597c896d"
+      },
+      "scope": "reference integrity and completeness; AI owns security judgment"
+    }
+  },
+  "source_path": "src/werkzeug/middleware/shared_data.py",
+  "source_sha256": "1b6f1b1b7af3acfe91d243833ac6c57d63a3e5771cfea20e56ed5535597c896d"
+}

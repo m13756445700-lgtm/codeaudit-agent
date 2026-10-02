@@ -50,3 +50,33 @@ def test_surface_rejects_unread_files(tmp_path):
     with pytest.raises(ValueError, match='actually read'):
         engine.dispatch('settle_surface', {'surface':'input', 'status':'reviewed', 'files':['missing.py'], 'reason':'claim'})
     assert not engine.surface_settlements
+
+
+def test_segment_requires_new_evidence_checkpoint_without_promoting_status(tmp_path):
+    engine = make_engine(tmp_path)
+    request = {'tool':'repo.read_file', 'arguments':{'path':'a.py'}, 'purpose':'inspect'}
+    for _ in range(11):
+        engine.dispatch('use_tool', request)
+    with pytest.raises(ValueError, match='segment exhausted'):
+        engine.dispatch('use_tool', request)
+    assert engine.status == 'RUNNING' and not engine.findings
+    note = {'id':'N1', 'summary':'Input read; storage still unexamined',
+            'references':[{'file':'a.py','line':1,'symbol':'value','evidence':'value = input()'}],
+            'open_questions':['Storage use?'], 'next_action':'Search storage callers'}
+    engine.dispatch('investigation_note', note)
+    assert engine.segment_calls == 0
+    engine.dispatch('use_tool', request)
+    result = engine.dispatch('investigation_note', note)
+    assert result['unchanged'] and engine.segment_calls == 1
+    state = engine.investigation_checkpoint(1)
+    assert state['segment']['remaining_capability_calls'] == 11
+    assert not engine.surface_settlements
+
+
+def test_unchanged_settlement_does_not_extend_investigation(tmp_path):
+    engine = make_engine(tmp_path)
+    review = {'surface':'input','status':'reviewed','files':['a.py'],'reason':'Input read'}
+    engine.dispatch('settle_surface', review)
+    result = engine.dispatch('settle_surface', review)
+    assert result['unchanged'] and result['remaining'] == ['storage']
+    assert engine.segment_calls == 1 and not engine.finished

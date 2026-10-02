@@ -40,6 +40,7 @@ Use submit_decision for both confirmed and rejected hypotheses. Correct rejected
 At finish, settle EVERY planned attack surface in surface_reviews: surface (exact planned name), status reviewed or deferred, files (actually read paths), and reason. Deferred surfaces require limitations and yield PARTIAL. Reviewed surfaces require read evidence. Never silently drop surfaces when revising a plan.
 Review uncovered attack surfaces then finish with scope and limitations; don't claim entire repo safe from sample reads.
 Use investigation_state to retrieve earlier notes after compaction. Use investigation_note to preserve concise evidence summaries and open questions before expanding or rereading. Record each completed surface using settle_surface as you go; finish remains mandatory. Notes are provisional model assessments, not validated security verdicts.
+Investigations run in segments of at most 12 capability calls. Before continuing, save an investigation_note with evidence, unresolved questions and the next action, or submit a valid decision. A segment boundary never establishes coverage or safety. Do not resettle unchanged surfaces.
 Batch independent reads if useful. Budget is finite; use focused reads, stop unnecessary exploration once evidence complete.
 '''
 
@@ -113,6 +114,8 @@ class Engine:
         self.progress = progress
         self.receipts, self.knowledge, self.hypotheses, self.findings = [], {}, {}, {}
         self.notes, self.surface_settlements = {}, {}
+        self.segment_calls = 0
+        self.segment_index = 1
         self.read_cache = {}
         self.file_lengths = {}
         self.plan = None
@@ -159,6 +162,9 @@ class Engine:
         if self.plan is None:
             raise ValueError('Submit repository-specific plan first')
         if name == 'use_tool':
+            if self.segment_calls >= 12:
+                raise ValueError('Investigation segment exhausted (12 capability calls). Save investigation_note with read evidence, open questions and next action, or submit an evidence-based decision before more exploration. Missing evidence must stay unresolved.')
+            self.segment_calls += 1
             tool, arguments = args['tool'], args['arguments']
             if tool in ('repo.read_file', 'repo.read_range'):
                 start, end = arguments.get('start', 1), arguments.get('end')
@@ -204,6 +210,9 @@ class Engine:
             if previous and previous['evidence_gate']['passed'] and not checked['evidence_gate']['passed']:
                 return {'accepted': False, 'gate': checked['evidence_gate'], 'retained_status': previous['status'],
                         'next_action': 'Previous valid decision retained; fix only genuinely new evidence or finish.'}
+            if checked['evidence_gate']['passed']:
+                self.segment_calls = 0
+                self.segment_index += 1
             self.findings[f['id']] = checked
             self.hypotheses[f['id']]['status'] = checked['status']
             self.save('hypotheses.json', list(self.hypotheses.values()))
@@ -244,12 +253,21 @@ class Engine:
                 quote = ref.get('evidence')
                 if code is None or not isinstance(quote, str) or not quote.strip() or quote not in code:
                     raise ValueError('Note reference must quote an actually read line')
+            if self.notes.get(args['id']) == args:
+                return {'accepted': True, 'unchanged': True,
+                        'notice': 'Existing note retained; unchanged note does not renew the investigation segment.'}
+            self.segment_calls = 0
+            self.segment_index += 1
             self.notes[args['id']] = args
             self.save('investigation_notes.json', list(self.notes.values()))
             self.event({'tool': name, 'arguments': args, 'purpose': 'Provisional evidence summary; not a verdict', 'result_summary': {'accepted': True}})
             return {'accepted': True, 'notice': 'References verified against read text; interpretation remains provisional.'}
         if name == 'settle_surface':
             self.validate_surface(args)
+            if self.surface_settlements.get(args['surface']) == args:
+                return {'accepted': True, 'unchanged': True,
+                        'remaining': sorted(self.planned_surfaces - self.surface_settlements.keys()),
+                        'next_action': 'Already recorded. Investigate remaining scope or finish; do not repeat settlement.'}
             self.surface_settlements[args['surface']] = args
             self.save('surface_progress.json', list(self.surface_settlements.values()))
             self.event({'tool': name, 'arguments': args, 'purpose': 'Incremental surface settlement', 'result_summary': {'accepted': True}})
@@ -378,6 +396,8 @@ class Engine:
         settling = (remaining['iterations'] <= max(6, self.max_iterations // 3)
                     or remaining['tool_calls'] <= max(12, self.max_calls // 3))
         state = {'execution_state': True, 'remaining': remaining,
+                 'segment': {'index': self.segment_index, 'remaining_capability_calls': max(0, 12-self.segment_calls),
+                             'boundary': 'Persist new evidence/open questions in investigation_note or submit a valid decision; no automatic verdict or coverage credit.'},
                  'priority': 'settle' if settling else 'investigate',
                  'planned_surfaces': sorted(self.planned_surfaces),
                  'surface_progress': {key: value['status'] for key, value in self.surface_settlements.items()},
