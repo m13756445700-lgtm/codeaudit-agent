@@ -26,7 +26,8 @@ def finding():
             'exploit_preconditions': ['Endpoint exposed'], 'reachability': 'view calls wrapper',
             'controllability': 'request argument', 'security_boundary': 'HTTP to database',
             'confidence_rationale': 'Read caller and sink', 'unknowns': [], 'counter_evidence': [],
-            'remediation': 'Bind parameters', 'confidence': 'high', 'severity': 'high', 'knowledge_used': []}
+            'remediation': 'Bind parameters', 'confidence': 'high', 'severity': 'high', 'knowledge_used': [],
+            'defense_claims': [], 'environment_assumptions': []}
 
 
 def test_gate_does_not_decide_vulnerability(context):
@@ -35,6 +36,7 @@ def test_gate_does_not_decide_vulnerability(context):
     f = finding()
     assert validate(f, audit/'repo', meta, receipts, {})['status'] == 'CONFIRMED'
     f['status'] = 'REJECTED'
+    f['counter_evidence'] = [f['sink']]
     assert validate(f, audit/'repo', meta, receipts, {})['status'] == 'REJECTED'
 
 
@@ -82,3 +84,50 @@ def test_incomplete_model_run_is_not_success(context):
     summary = Engine(BrokenModel(), Local(tools), audit, meta, profile(audit/'repo')).run()
     assert summary['status'] == 'INCOMPLETE'
     assert json.loads((audit/'findings.json').read_text()) == []
+
+
+def test_defense_claim_must_quote_read_implementation(context):
+    audit, meta, tools = context
+    receipts = [tools.read('app.py'), tools.read('db.py')]
+    f = finding()
+    f['defense_claims'] = [{'claim': 'Rejects leading slash', 'references': [
+        dict(f['sink'], evidence='filename.startswith("/")')], 'limitations': ''}]
+    checked = validate(f, audit/'repo', meta, receipts, {})
+    assert not checked['evidence_gate']['passed']
+    assert any('quote not at cited line' in p for p in checked['evidence_gate']['problems'])
+
+
+def test_import_cannot_prove_defense(tmp_path):
+    src = tmp_path/'src'
+    src.mkdir()
+    (src/'app.py').write_text('from security import safe_join\n')
+    audit, meta = snapshot(src, tmp_path/'ws')
+    tools = ToolLayer(audit)
+    ref = {'file': 'app.py', 'line': 1, 'symbol': 'safe_join',
+           'evidence': 'from security import safe_join'}
+    f = finding()
+    f.update(status='REJECTED', source=ref, sink=ref, data_flow=[ref], counter_evidence=[ref],
+             defense_claims=[{'claim': 'Traversal prevented', 'references': [ref], 'limitations': ''}])
+    checked = validate(f, audit/'repo', meta, [tools.read('app.py')], {})
+    assert checked['status'] == 'INSUFFICIENT_EVIDENCE'
+    assert any('import is not implementation' in p for p in checked['evidence_gate']['problems'])
+
+
+@pytest.mark.parametrize('status', ['CONFIRMED', 'LIKELY', 'REJECTED', 'INSUFFICIENT_EVIDENCE'])
+def test_unknown_material_platform_cannot_settle_verdict(context, status):
+    audit, meta, tools = context
+    f = finding()
+    f.update(status=status, counter_evidence=[f['sink']], environment_assumptions=[{
+        'claim': 'Deployment OS is Linux', 'state': 'unknown', 'references': [], 'affects_verdict': True}])
+    checked = validate(f, audit/'repo', meta, [tools.read('app.py'), tools.read('db.py')], {})
+    assert checked['status'] == 'INSUFFICIENT_EVIDENCE'
+    assert checked['evidence_gate']['passed'] == (status == 'INSUFFICIENT_EVIDENCE')
+
+
+def test_verified_platform_needs_read_evidence(context):
+    audit, meta, tools = context
+    f = finding()
+    f['environment_assumptions'] = [{'claim': 'Linux deployment', 'state': 'verified',
+                                     'references': [], 'affects_verdict': True}]
+    checked = validate(f, audit/'repo', meta, [tools.read('app.py'), tools.read('db.py')], {})
+    assert not checked['evidence_gate']['passed']

@@ -24,6 +24,13 @@ sink, sanitizer_analysis, exploit_preconditions (array), reachability, reasoning
 remediation, confidence, severity, knowledge_used (array of returned document IDs), controllability,
 security_boundary, confidence_rationale, knowledge_application (specific effect on this decision or explicit unavailable/not-applicable reason), unknowns (array of missing facts), counter_evidence (array of code references).
 Counter evidence cites protections or contradictory code you actually read; empty only if none was found, explain why.
+Every decision also supplies defense_claims and environment_assumptions (arrays, empty only when none applies).
+Each defense claim has claim, references (actual implementation lines, not imports), and limitations.
+Each environment assumption has claim, state verified or unknown, references, and affects_verdict (boolean).
+Verified assumptions require read repository evidence; the audit host OS is not deployment evidence.
+If an unknown environment assumption affects the verdict, use INSUFFICIENT_EVIDENCE, not REJECTED or CONFIRMED.
+REJECTED requires implementation counter_evidence; an imported function name does not prove its behavior.
+Check each claimed guard against the exact snapshot, including platform/version branches. Do not transfer a guard from knowledge into source evidence.
 Never base a confirmed impact on hypothetical future code changes.
 For configuration-only claims retrieve vulnerability_judgement knowledge and verify deployment reachability and concrete impact; unknown exposure is not confirmed compromise.
 Source, sink AND EACH data_flow item: {file,line,symbol,evidence,operation}. Evidence must be a verbatim substring
@@ -54,6 +61,13 @@ DECISION_FIELDS.update(status={'type': 'string', 'enum': ['CONFIRMED', 'LIKELY',
     counter_evidence={'type': 'array', 'items': REFERENCE})
 for field in ('exploit_preconditions', 'unknowns', 'knowledge_used'):
     DECISION_FIELDS[field] = {'type': 'array', 'items': STRING}
+DECISION_FIELDS['defense_claims'] = {'type': 'array', 'items': {'type': 'object', 'properties': {
+    'claim': STRING, 'references': {'type': 'array', 'items': REFERENCE}, 'limitations': STRING},
+    'required': ['claim', 'references', 'limitations'], 'additionalProperties': False}}
+DECISION_FIELDS['environment_assumptions'] = {'type': 'array', 'items': {'type': 'object', 'properties': {
+    'claim': STRING, 'state': {'type': 'string', 'enum': ['verified', 'unknown']},
+    'references': {'type': 'array', 'items': REFERENCE}, 'affects_verdict': {'type': 'boolean'}},
+    'required': ['claim', 'state', 'references', 'affects_verdict'], 'additionalProperties': False}}
 DECISION = {'type': 'object', 'properties': DECISION_FIELDS, 'required': list(DECISION_FIELDS), 'additionalProperties': False}
 
 TOOLS = [

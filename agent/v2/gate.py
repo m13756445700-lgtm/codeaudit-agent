@@ -1,5 +1,6 @@
 """Evidence quality only. This module contains no vulnerability detection rules."""
 import copy
+import re
 from agent.v2.repository import safe_path, digest
 
 
@@ -27,6 +28,41 @@ def validate(finding, repo, metadata, receipts, knowledge):
         flow = []
     references = [('source', result.get('source')), *[(f'data_flow[{i}]', ref) for i, ref in enumerate(flow)],
                   ('sink', result.get('sink')), *[(f'counter_evidence[{i}]', ref) for i, ref in enumerate(counter)]]
+    implementation_locations = set()
+    if result.get('status') == 'REJECTED':
+        if not counter:
+            problems.append('REJECTED requires implementation counter_evidence')
+        implementation_locations.update(f'counter_evidence[{i}]' for i in range(len(counter)))
+    for field in ('defense_claims', 'environment_assumptions'):
+        claims = result.get(field)
+        if not isinstance(claims, list) or len(claims) > 16:
+            problems.append('invalid:' + field)
+            continue
+        for i, claim in enumerate(claims):
+            location = f'{field}[{i}]'
+            if not isinstance(claim, dict) or not isinstance(claim.get('claim'), str) or not claim['claim'].strip():
+                problems.append('invalid:' + location)
+                continue
+            refs = claim.get('references')
+            if not isinstance(refs, list) or len(refs) > 16:
+                problems.append('invalid references:' + location)
+                continue
+            if field == 'defense_claims':
+                if not refs or not isinstance(claim.get('limitations'), str):
+                    problems.append('defense requires implementation references and limitations:' + location)
+            else:
+                state = claim.get('state')
+                if state not in ('verified', 'unknown') or type(claim.get('affects_verdict')) is not bool:
+                    problems.append('invalid assumption:' + location)
+                if state == 'verified' and not refs:
+                    problems.append('verified assumption requires evidence:' + location)
+                if state == 'unknown' and claim.get('affects_verdict') and result.get('status') != 'INSUFFICIENT_EVIDENCE':
+                    problems.append('unresolved environment affects verdict:' + location)
+            for j, ref in enumerate(refs):
+                ref_location = f'{location}.references[{j}]'
+                references.append((ref_location, ref))
+                if field == 'defense_claims':
+                    implementation_locations.add(ref_location)
     hashes = {}
     for location, ref in references:
         try:
@@ -42,6 +78,11 @@ def validate(finding, repo, metadata, receipts, knowledge):
             lines = p.read_text(errors='replace').splitlines()
             if line > len(lines) or quote.strip() not in lines[line-1]:
                 raise ValueError('quote not at cited line')
+            # A provenance check, not a proof that the claimed defense is effective.
+            # Imports/declarations of dependencies alone are not implementation evidence.
+            if location in implementation_locations and re.match(
+                    r'^\s*(?:from\s+\S+\s+import\b|import\b|#\s*include\b|using\s+\S+\s*;)', lines[line-1]):
+                raise ValueError('dependency import is not implementation evidence')
             if symbol not in '\n'.join(lines):
                 raise ValueError('symbol absent')
             if not any(r['file'] == path and r['sha256'] == current and r['start'] <= line <= r['end'] for r in receipts):
