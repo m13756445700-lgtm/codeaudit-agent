@@ -1,0 +1,9 @@
+{
+  "implementation_sha256": "5ff368cc9f246f6eb6f7613ec189bb15bbd685b825a8be19253fbc070b170371",
+  "targeted_passed": 61,
+  "linux_passed": 195,
+  "linux_seconds": 18.28,
+  "network": "none",
+  "live_runs_for_new_code": 0,
+  "release_ready": false
+}

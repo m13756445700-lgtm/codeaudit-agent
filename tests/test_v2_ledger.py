@@ -160,3 +160,32 @@ def test_truncated_read_line_cannot_support_feature_absence(tmp_path):
               'absence_evidence':[{'file':'a.py','line':1,'symbol':'value','evidence':'value = input()'}]}
     with pytest.raises(ValueError,match='fully read'):
         engine.dispatch('settle_surface',review)
+
+
+def test_unread_note_error_identifies_recovery_location(tmp_path):
+    engine = make_engine(tmp_path)
+    note = {'id':'n','summary':'Version unknown','references':[{'file':'pyproject.toml','line':3,
+            'symbol':'version','evidence':'version = "3.0.5"'}], 'open_questions':[], 'next_action':'read version'}
+    with pytest.raises(ValueError,match=r'pyproject.toml:3.*not read.*repo.read_range'):
+        engine.dispatch('investigation_note',note)
+    assert engine.notes == {}
+
+
+def test_repeated_failed_notes_stop_before_iteration_budget(tmp_path):
+    engine = make_engine(tmp_path)
+    class RepeatingModel:
+        model='offline-test-double'
+        usage=[]
+        calls=0
+        def complete(self, messages, tools):
+            self.calls += 1
+            return {'role':'assistant','tool_calls':[{'id':str(self.calls),'type':'function','function':{
+                'name':'investigation_note','arguments':json.dumps({'id':'n','summary':'Version unknown',
+                'references':[{'file':'pyproject.toml','line':3,'symbol':'version','evidence':'version = "3.0.5"'}],
+                'open_questions':[],'next_action':'read'})}}]}
+    engine.model=RepeatingModel()
+    result=engine.run()
+    assert result['status']=='INCOMPLETE' and 'Repeated action failure' in result['failure']
+    assert engine.model.calls==3 and engine.notes=={}
+    events=[json.loads(line) for line in (engine.audit/'tool_calls.jsonl').read_text().splitlines()]
+    assert events[-1]['result_summary']['consecutive_same_failure']==3

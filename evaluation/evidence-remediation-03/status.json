@@ -1,14 +1,20 @@
 {
   "planned_runs": 4,
-  "attempted_runs": 0,
+  "attempted_runs": 1,
   "paid_calls_this_step": 0,
   "release_ready": false,
-  "execution": "Offline frozen; first focused pair requires post-run review before full-scope pair.",
+  "execution": "Stopped expansion after first focused failure. Iteration budget exceeded;42 failed notes, no finding.",
   "offline_tests": {
     "targeted_passed": 59,
     "linux_passed": 193,
     "linux_seconds": 18.69,
     "network": "none"
   },
-  "implementation_and_sources_verified": true
+  "implementation_and_sources_verified": true,
+  "complete_runs": 0,
+  "incomplete_runs": 1,
+  "pending_runs": 3,
+  "tokens_observed": 911311,
+  "archive_sha256": "1dba3995b700f6e6ed4dcc23da5220e61a3e4070b269e9a3ee2ddef2464369ee",
+  "temporary_stack": "down after verified evidence backup"
 }

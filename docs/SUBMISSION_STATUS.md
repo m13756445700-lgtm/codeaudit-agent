@@ -2,6 +2,10 @@
 
 **暂不建议作为最终达标作品提交。** 部署与入口问题已修复，通用大仓库审计和独特知识收益仍未闭环。题目没有给出“120分”的量化标准，不能承诺该分数。
 
+## Latest live result: freeze03 stopped after first failure
+
+First focused run exhausted iteration budget after42 failed note submissions referring to unread pyproject.toml:3. No finding; remaining3 runs not executed. Evidence preserved and temporary stack removed. Subsequent offline recovery feedback and repeated-error stop passed195 Linux tests, but live recovery is unverified. See [failure review](EVIDENCE_REMEDIATION_03_RESULT.md). No push/deployment.
+
 ## Latest offline update: surface04
 
 Feature absence requires complete untruncated reads of declared files and unchanged snapshots; linked findings must share source/flow/sink files with the surface. Reports explicitly distinguish workflow completion from insufficient evidence and unknown deployment exposure. 193 isolated Linux tests passed. [New four-run protocol](../evaluation/evidence-remediation-03/plan.json) is frozen, with focused-pair review before broader runs. Zero paid calls this step; no push/deployment. See [limits and next step](plans/2026-10-02-surface04.md).

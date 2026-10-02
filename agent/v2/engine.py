@@ -290,7 +290,7 @@ class Engine:
                 code = self.read_cache.get(ref.get('file'), {}).get(ref['line'])
                 quote = ref.get('evidence')
                 if code is None or not isinstance(quote, str) or not quote.strip() or quote not in code:
-                    raise ValueError('Note reference must quote an actually read line')
+                    raise ValueError(f'Note reference must quote an actually read line: {ref.get("file")}:{ref["line"]}. ' + ('Line was not read; use repo.read_range for this location or remove this reference.' if code is None else 'Quote differs from cached source; use the exact previously read text or reread this line.'))
             if self.notes.get(args['id']) == args:
                 return {'accepted': True, 'unchanged': True,
                         'notice': 'Existing note retained; unchanged note does not renew the investigation segment.'}
@@ -520,6 +520,7 @@ class Engine:
         started = time.monotonic()
         self.save('repo_profile.json', self.profile)
         failure = None
+        last_failed_action, repeated_failures = None, 0
         try:
             for iteration in range(self.max_iterations):
                 if time.monotonic() - started > self.timeout or self.calls >= self.max_calls:
@@ -540,10 +541,17 @@ class Engine:
                     self.calls += 1
                     try:
                         result = self.dispatch(call['function']['name'], json.loads(call['function']['arguments']))
+                        last_failed_action, repeated_failures = None, 0
                     except (ValueError, KeyError, TypeError, OSError) as error:
-                        result = {'error': str(error)[:500]}
+                        failed_action = (call['function']['name'], str(error))
+                        repeated_failures = repeated_failures + 1 if failed_action == last_failed_action else 1
+                        last_failed_action = failed_action
+                        result = {'error': str(error)[:500], 'consecutive_same_failure': repeated_failures,
+                                  'next_action': 'Correct the cited problem or choose another action; three consecutive identical action errors stop this run.'}
                         self.event({'tool': call['function']['name'], 'arguments': call['function']['arguments'],
                                     'purpose': 'failed action', 'result_summary': result})
+                        if repeated_failures >= 3:
+                            raise RuntimeError('Repeated action failure without recovery: ' + call['function']['name'] + ': ' + str(error)[:300])
                     self.messages.append({'role': 'tool', 'tool_call_id': call['id'], 'content': json.dumps(result, ensure_ascii=False)})
                     if self.finished:
                         break
