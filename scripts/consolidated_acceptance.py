@@ -87,6 +87,10 @@ def load_frozen(output):
 
 
 def run_live(output, max_runs):
+    if type(max_runs) is not int or max_runs < 1:
+        raise ValueError('max_runs must be positive')
+    if (output/'STOPPED.json').exists():
+        raise ValueError('Campaign stopped; preserve it and prepare a new campaign after provider restoration')
     # Imports and credential use are intentionally confined to explicit live mode.
     from agent.v2.engine import Engine
     from agent.v2.model import Model
@@ -95,6 +99,16 @@ def run_live(output, max_runs):
     plan = load_frozen(output)
     results_path = output/'results.jsonl'
     records = [json.loads(line) for line in results_path.read_text().splitlines()] if results_path.exists() else []
+    if any('Model HTTP error' in (r.get('summary', {}).get('failure') or '') for r in records):
+        raise ValueError('Campaign contains a provider failure; a new campaign is required even if STOPPED.json was removed')
+    for job in plan['jobs']:
+        focus = job.get('focus')
+        if focus is not None and (not isinstance(focus, str) or not focus.strip() or len(focus) > 4000):
+            raise ValueError('Job focus must be null or a nonempty string of at most4000 characters')
+        if job.get('scope') == 'focused' and not focus:
+            raise ValueError('Focused job requires explicit focus')
+        if job.get('scope') == 'full' and focus is not None:
+            raise ValueError('Full-scope job cannot contain focus')
     # A failed job is an attempt, never silently overwritten/retried in the same campaign.
     done = {r['job_index'] for r in records}
     cases = {c['id']: c for c in plan['cases']}
@@ -111,7 +125,7 @@ def run_live(output, max_runs):
             transport = GenericKnowledge(transport)
         model = Model()
         engine = Engine(model, transport, directory, metadata, profile(directory/'repo'),
-                        knowledge=job['arm'] != 'off', **plan['budget_per_run'])
+                        knowledge=job['arm'] != 'off', focus=job.get('focus'), **plan['budget_per_run'])
         if case.get('policy'):
             engine.messages.append({'role': 'user', 'content': json.dumps({
                 'operator_supplied_business_policy': case['policy'],

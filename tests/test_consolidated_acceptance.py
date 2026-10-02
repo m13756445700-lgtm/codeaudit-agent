@@ -40,3 +40,57 @@ def test_http402_stops_entire_campaign_and_keeps_failed_attempt(tmp_path, monkey
     assert json.loads((output/'STOPPED.json').read_text())['reason'].endswith('402')
     records = (output/'results.jsonl').read_text().splitlines()
     assert len(records) == 1 and json.loads(records[0])['summary']['status'] == 'INCOMPLETE'
+
+
+def test_stopped_campaign_cannot_make_any_model_call(tmp_path, monkeypatch):
+    import agent.v2.model
+    monkeypatch.setattr(agent.v2.model, 'Model', lambda: pytest.fail('Must not instantiate model'))
+    out = tmp_path/'campaign'; batch.prepare(out, repeats=1)
+    (out/'STOPPED.json').write_text('{}')
+    with pytest.raises(ValueError, match='Campaign stopped'):
+        batch.run_live(out, 1)
+    (out/'STOPPED.json').unlink()
+    (out/'results.jsonl').write_text(json.dumps({'job_index':0,'summary':{'failure':'Model HTTP error 402'}})+'\n')
+    with pytest.raises(ValueError, match='provider failure'):
+        batch.run_live(out, 1)
+
+
+@pytest.mark.parametrize('scope,focus,valid', [
+    ('focused','Inspect file serving',True), ('full',None,True),
+    ('focused',None,False), ('full','Hidden narrowing',False), ('focused',42,False)])
+def test_frozen_job_focus_reaches_engine_without_labels(tmp_path, monkeypatch, scope, focus, valid):
+    import hashlib
+    import agent.v2.model
+    import agent.v2.transport
+    seen = []
+    class ProbeModel:
+        model = 'deepseek-flash'
+        usage = []
+        def complete(self, messages, tools):
+            seen.append(messages)
+            raise RuntimeError('Offline probe end')
+    class NoNetwork:
+        kind = 'offline-test-double'
+        def __init__(self, *args): pass
+        def call(self, *args): pytest.fail('No network expected')
+    monkeypatch.setattr(agent.v2.model, 'Model', ProbeModel)
+    monkeypatch.setattr(agent.v2.transport, 'OctoBus', NoNetwork)
+    for key,value in {'CODEAUDIT_WORKSPACES':str(tmp_path/'ws'),'CODEAUDIT_MCP_URL':'http://unused','CODEAUDIT_OCTOBUS_TOKEN':'test-only'}.items():
+        monkeypatch.setenv(key,value)
+    out = tmp_path/'campaign'; plan = batch.prepare(out, repeats=1)
+    plan['jobs'] = [dict(plan['jobs'][0], scope=scope, focus=focus)]
+    plan['cases'][0]['target']['private_label'] = 'DO_NOT_SEND_TARGET_LABEL'
+    raw = json.dumps(plan)
+    (out/'plan.json').write_text(raw)
+    (out/'plan.sha256').write_text(hashlib.sha256(raw.encode()).hexdigest())
+    if not valid:
+        with pytest.raises(ValueError, match='focus'):
+            batch.run_live(out, 1)
+        assert seen == []
+        return
+    batch.run_live(out, 1)
+    context = json.loads(seen[0][1]['content'])
+    assert context['operator_scope'] == (focus or 'Prioritize a bounded set of repository-specific risks within budget; clearly state unexamined scope.')
+    assert 'DO_NOT_SEND_TARGET_LABEL' not in json.dumps(seen)
+    record = json.loads((out/'results.jsonl').read_text())
+    assert record['scope'] == scope and record['focus'] == focus

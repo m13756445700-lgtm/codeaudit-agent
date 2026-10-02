@@ -1,0 +1,8 @@
+{
+  "planned_audits": 6,
+  "attempted_audits": 0,
+  "provider_probes_this_step": 0,
+  "last_provider_result": "HTTP402 in preceding step",
+  "release_ready": false,
+  "execution": "Runner supports frozen focus; awaiting provider restoration and isolated live-stack preparation."
+}
