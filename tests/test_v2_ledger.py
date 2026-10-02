@@ -102,3 +102,61 @@ def test_absence_cannot_be_claimed_with_unread_quote(tmp_path):
               'absence_evidence':[{'file':'a.py','line':2,'symbol':'print','evidence':'no database access'}]}
     with pytest.raises(ValueError,match='Absence evidence'):
         engine.dispatch('settle_surface',review)
+
+
+def test_sampled_lines_cannot_establish_feature_absence(tmp_path):
+    engine = make_engine(tmp_path)
+    engine.read_cache['a.py'].pop(2)
+    review = {'surface':'storage','status':'reviewed','files':['a.py'],'reason':'No database',
+              'assessment':'feature_absent','decision_ids':[],
+              'absence_evidence':[{'file':'a.py','line':1,'symbol':'value','evidence':'value = input()'}]}
+    with pytest.raises(ValueError,match='fully read'):
+        engine.dispatch('settle_surface',review)
+
+
+def test_absence_rechecks_snapshot_integrity(tmp_path):
+    engine = make_engine(tmp_path)
+    path = engine.audit/'repo/a.py';path.chmod(0o600);path.write_text('eval(input())\n')
+    review = {'surface':'storage','status':'reviewed','files':['a.py'],'reason':'No database',
+              'assessment':'feature_absent','decision_ids':[],
+              'absence_evidence':[{'file':'a.py','line':1,'symbol':'value','evidence':'value = input()'}]}
+    with pytest.raises(ValueError,match='snapshot changed'):
+        engine.dispatch('settle_surface',review)
+
+
+def test_cross_file_unrelated_decision_cannot_settle_surface(tmp_path):
+    engine = make_engine(tmp_path)
+    engine.findings['unrelated'] = {'source':{'file':'elsewhere.py'},'sink':{'file':'elsewhere.py'},'data_flow':[]}
+    with pytest.raises(ValueError,match='unrelated evidence'):
+        engine.dispatch('settle_surface',{'surface':'input','status':'reviewed','files':['a.py'],
+            'reason':'Safe because another module was checked','assessment':'decision',
+            'decision_ids':['unrelated'],'absence_evidence':[]})
+
+
+def test_insufficient_evidence_requires_limitations_and_visible_report(tmp_path):
+    engine = make_engine(tmp_path)
+    engine.findings['h1'] = {'id':'h1','title':'Unresolved query','status':'INSUFFICIENT_EVIDENCE',
+                            'source':{'file':'a.py'},'sink':{'file':'a.py'},'data_flow':[],
+                            'judgment_scope':'conditional_code','deployment_exposure':'unknown'}
+    reviews = [{'surface':surface,'status':'reviewed','files':['a.py'],'reason':'Unresolved hypothesis',
+                'assessment':'decision','decision_ids':['h1'],'absence_evidence':[]} for surface in ('input','storage')]
+    args = {'summary':'Investigation ended','limitations':[],'surface_reviews':reviews}
+    with pytest.raises(ValueError,match='Insufficient evidence requires'):
+        engine.dispatch('finish',args)
+    engine.dispatch('finish',dict(args,limitations=['Query behavior unresolved']))
+    assert engine.status == 'COMPLETE'  # Workflow completion is deliberately distinct.
+    engine.report({'status':engine.status,'counts':{'INSUFFICIENT_EVIDENCE':1},'coverage':engine.coverage(),'completion':engine.completion})
+    report = (engine.audit/'report.md').read_text()
+    assert 'insufficient_evidence_ids' in report and 'h1' in report
+    assert 'workflow_completion_is_not_safety' in report
+    assert engine.assessment_summary()['deployment_exposure_unknown_ids'] == ['h1']
+
+
+def test_truncated_read_line_cannot_support_feature_absence(tmp_path):
+    engine = make_engine(tmp_path)
+    engine.read_cache['a.py'][2] = 'print('
+    review = {'surface':'storage','status':'reviewed','files':['a.py'],'reason':'No database',
+              'assessment':'feature_absent','decision_ids':[],
+              'absence_evidence':[{'file':'a.py','line':1,'symbol':'value','evidence':'value = input()'}]}
+    with pytest.raises(ValueError,match='fully read'):
+        engine.dispatch('settle_surface',review)

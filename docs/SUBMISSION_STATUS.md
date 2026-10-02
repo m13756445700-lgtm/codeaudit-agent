@@ -2,6 +2,10 @@
 
 **暂不建议作为最终达标作品提交。** 部署与入口问题已修复，通用大仓库审计和独特知识收益仍未闭环。题目没有给出“120分”的量化标准，不能承诺该分数。
 
+## Latest offline update: surface04
+
+Feature absence requires complete untruncated reads of declared files and unchanged snapshots; linked findings must share source/flow/sink files with the surface. Reports explicitly distinguish workflow completion from insufficient evidence and unknown deployment exposure. 193 isolated Linux tests passed. [New four-run protocol](../evaluation/evidence-remediation-03/plan.json) is frozen, with focused-pair review before broader runs. Zero paid calls this step; no push/deployment. See [limits and next step](plans/2026-10-02-surface04.md).
+
 ## Latest offline remediation: contract03
 
 Surface settlement now requires linked decisions or read evidence for explicit feature absence. Conditional code judgments and deployment exposure are separate. Definition headers alone cannot prove defense behavior. 188 network-isolated Linux tests passed; no new model run. See [implementation and limitations](plans/2026-10-02-contract03.md). Overall acceptance remains FAILED; no push/deployment.

@@ -1,0 +1,14 @@
+{
+  "planned_runs": 4,
+  "attempted_runs": 0,
+  "paid_calls_this_step": 0,
+  "release_ready": false,
+  "execution": "Offline frozen; first focused pair requires post-run review before full-scope pair.",
+  "offline_tests": {
+    "targeted_passed": 59,
+    "linux_passed": 193,
+    "linux_seconds": 18.69,
+    "network": "none"
+  },
+  "implementation_and_sources_verified": true
+}
