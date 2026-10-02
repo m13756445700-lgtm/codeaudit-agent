@@ -56,3 +56,8 @@ Gate 只检查证据契约和引用，不证明自然语言主张蕴含于代码
 当前实现指纹（consolidated_acceptance.implementation_hash）：`525320c2a110f5e658fc039d23499ed0c6a89436c2acfbde6445dac134435cbf`。
 
 next_task：在隔离候选环境核对同一实现指纹，冻结上述6次已知案例的源快照/范围/执行顺序及模型参数，先检查供应商服务是否恢复，再串行小规模实测；遇402立即停止。新自复核的额外调用计入原100次总预算，不扩额度。实测必须分别报告目标正确性、错误防护解释、完整性和消耗；仍未通过不得扩大测试或推送。
+
+
+## WORKLOG-20261002-RUNNER-FREEZE02
+Commit668f100 implements per-job focus passing and scope validation before model creation; permanent campaign stop on STOPPED marker or historical Model HTTP error, even if marker removed. 8 targeted PASS (0.21s);184 full Linux PASS (17.93s), network none/read-only source. New immutable evaluation/evidence-remediation-02 plan SHA 5f0518ccde83d9621a602cfb256aac61d81d56f458669ad2b54e85261c5dfb3b; implementation e5322b3f07f6fb2d0c16c2905a75a61cb8e0ab9082a97cbcace3f46d32c7e7c0. Server verified implementation and both311-file snapshots. Prior plan01 preserved. Zero API calls/audits/push/deploy this step.
+next_task: after provider restoration prepare isolated candidate MCP stack and verify freeze02; run first max-runs1 then remaining5 serially only if provider healthy. Stop on HTTP error; preserve findings/self-reviews/traces and adjudicate correctness separately from completion. Provider last known HTTP402; release NOT ready. Overall IN_PROGRESS; production/GitHub91c9e7a.

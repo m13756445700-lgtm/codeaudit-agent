@@ -4,5 +4,12 @@
   "provider_probes_this_step": 0,
   "last_provider_result": "HTTP402 in preceding step",
   "release_ready": false,
-  "execution": "Runner supports frozen focus; awaiting provider restoration and isolated live-stack preparation."
+  "execution": "Runner supports frozen focus; awaiting provider restoration and isolated live-stack preparation.",
+  "offline_tests": {
+    "targeted": 8,
+    "linux_full": 184,
+    "linux_seconds": 17.93,
+    "network": "none"
+  },
+  "frozen_inputs_verified": true
 }

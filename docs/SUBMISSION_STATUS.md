@@ -2,6 +2,10 @@
 
 **暂不建议作为最终达标作品提交。** 部署与入口问题已修复，通用大仓库审计和独特知识收益仍未闭环。题目没有给出“120分”的量化标准，不能承诺该分数。
 
+## Latest runner update (2026-10-02)
+
+Per-job focus and persistent provider-failure stop are implemented in668f100. 184 offline Linux tests pass. The new [freeze02 plan](../evaluation/evidence-remediation-02/plan.json) and both311-file snapshots were verified on server. Prior freeze01 is historical and retained. Zero of six live audits executed; provider restoration is required. No publication or deployment.
+
 ## 最新集中验收：不通过（尚未发布）
 
 候选9214a05完成99/100次真实尝试：92COMPLETE、2PARTIAL、5INCOMPLETE；job98再次HTTP402后停止。40次Benchmark和48次业务案例目标判断通过，但真实仓库漏洞版6次均漏掉已知目标，其中有错误防护解释。验收条件不满足，未推送、未部署。详见[集中验收结果](CONSOLIDATED_ACCEPTANCE_RESULT.md)。
