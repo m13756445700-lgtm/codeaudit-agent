@@ -1,15 +1,19 @@
 {
   "planned_audits": 6,
-  "attempted_audits": 0,
+  "attempted_audits": 6,
   "provider_probes_this_step": 0,
   "last_provider_result": "HTTP402 in preceding step",
   "release_ready": false,
-  "execution": "Runner supports frozen focus; awaiting provider restoration and isolated live-stack preparation.",
+  "execution": "Completed six serial real MCP runs; acceptance FAILED. Evidence exported and checksum verified.",
   "offline_tests": {
     "targeted": 8,
     "linux_full": 184,
     "linux_seconds": 17.93,
     "network": "none"
   },
-  "frozen_inputs_verified": true
+  "frozen_inputs_verified": true,
+  "provider_restoration_verified": true,
+  "provider_last_campaign_http_errors": 0,
+  "next_task": "Fix safety conclusions outside decisions, separate conditional code defects from deployment exposure, strengthen evidence relevance and replay failures offline before another frozen test.",
+  "temporary_stack": "down after evidence backup; four production services healthy"
 }

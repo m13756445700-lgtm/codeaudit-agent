@@ -1,0 +1,151 @@
+{
+  "campaign": "evidence-remediation-02",
+  "implementation_sha256": "e5322b3f07f6fb2d0c16c2905a75a61cb8e0ab9082a97cbcace3f46d32c7e7c0",
+  "attempted": 6,
+  "complete": 3,
+  "partial": 3,
+  "incomplete": 0,
+  "tokens_observed": 5033397,
+  "provider_http_errors": 0,
+  "release_ready": false,
+  "reviewer": "Codex AI-assisted source and trace review; not independent human review",
+  "known_regression_not_blind": true,
+  "archive_sha256": "3e541a1e2ff6f4701f8beee9a6448da32a80006a4fea9692080b8229831c2ae2",
+  "records": [
+    {
+      "job_index": 0,
+      "case": "werkzeug-3.0.5",
+      "scope": "full",
+      "repeat": 0,
+      "audit_id": "9d604c7016f64d3dadfb412dd27e4f52",
+      "status": "PARTIAL",
+      "failure": null,
+      "tool_calls": 74,
+      "elapsed_seconds": 81.19,
+      "files_read": 13,
+      "tokens_observed": 901685,
+      "findings": [],
+      "self_reviews": 0,
+      "failed_actions": 9,
+      "review": "MISSED_TARGET_NO_FORMAL_DECISION"
+    },
+    {
+      "job_index": 1,
+      "case": "werkzeug-3.0.6",
+      "scope": "full",
+      "repeat": 0,
+      "audit_id": "fcc86398159244a398cf9e328a58d3c6",
+      "status": "COMPLETE",
+      "failure": null,
+      "tool_calls": 98,
+      "elapsed_seconds": 105.43,
+      "files_read": 19,
+      "tokens_observed": 884746,
+      "findings": [
+        {
+          "id": "debug-pin-bypass",
+          "status": "REJECTED",
+          "title": "Werkzeug debugger PIN/console RCE \u2014 no bypass found",
+          "gate_passed": true
+        },
+        {
+          "id": "send-file-traversal",
+          "status": "REJECTED",
+          "title": "send_file path traversal \u2014 rejected (trusted-path API, safe_join for user paths)",
+          "gate_passed": true
+        },
+        {
+          "id": "reloader-cmd-injection",
+          "status": "REJECTED",
+          "title": "Reloader subprocess command injection \u2014 rejected (args from sys.argv, dev-only)",
+          "gate_passed": true
+        }
+      ],
+      "self_reviews": 3,
+      "failed_actions": 9,
+      "review": "TARGET_NOT_REPORTED_BUT_WEAK_EVIDENCE"
+    },
+    {
+      "job_index": 2,
+      "case": "werkzeug-3.0.5",
+      "scope": "full",
+      "repeat": 1,
+      "audit_id": "4d093992094844019923e0e48ebb7ab2",
+      "status": "PARTIAL",
+      "failure": null,
+      "tool_calls": 80,
+      "elapsed_seconds": 80.11,
+      "files_read": 16,
+      "tokens_observed": 825712,
+      "findings": [],
+      "self_reviews": 0,
+      "failed_actions": 8,
+      "review": "MISSED_TARGET_NO_FORMAL_DECISION"
+    },
+    {
+      "job_index": 3,
+      "case": "werkzeug-3.0.6",
+      "scope": "full",
+      "repeat": 1,
+      "audit_id": "a7414b16615d4b9196cb0de74b686d8b",
+      "status": "PARTIAL",
+      "failure": null,
+      "tool_calls": 84,
+      "elapsed_seconds": 85.88,
+      "files_read": 17,
+      "tokens_observed": 913614,
+      "findings": [],
+      "self_reviews": 0,
+      "failed_actions": 8,
+      "review": "PARTIAL_NO_FORMAL_DECISION"
+    },
+    {
+      "job_index": 4,
+      "case": "werkzeug-3.0.5",
+      "scope": "focused",
+      "repeat": 0,
+      "audit_id": "15e981ca9051494781b187313740abaf",
+      "status": "COMPLETE",
+      "failure": null,
+      "tool_calls": 71,
+      "elapsed_seconds": 103.15,
+      "files_read": 13,
+      "tokens_observed": 818912,
+      "findings": [
+        {
+          "id": "H1",
+          "status": "INSUFFICIENT_EVIDENCE",
+          "title": "safe_join lacks leading-slash guard; UNC/leading-slash bypass possible on Windows with Python < 3.11 (GHSA-f9vj-2wh5-fj8j, Werkzeug 3.0.5)",
+          "gate_passed": true
+        }
+      ],
+      "self_reviews": 0,
+      "failed_actions": 7,
+      "review": "TARGET_RECOGNIZED_BUT_INSUFFICIENT_NOT_ACCEPTED"
+    },
+    {
+      "job_index": 5,
+      "case": "werkzeug-3.0.6",
+      "scope": "focused",
+      "repeat": 0,
+      "audit_id": "157106a04a0246c385969f0c9247d5e6",
+      "status": "COMPLETE",
+      "failure": null,
+      "tool_calls": 50,
+      "elapsed_seconds": 99.0,
+      "files_read": 9,
+      "tokens_observed": 688728,
+      "findings": [
+        {
+          "id": "path-traversal-static-serving",
+          "status": "REJECTED",
+          "title": "Path traversal in static file serving via safe_join is not exploitable in this snapshot (Werkzeug 3.0.6)",
+          "gate_passed": true
+        }
+      ],
+      "self_reviews": 1,
+      "failed_actions": 6,
+      "review": "TARGET_REJECTION_SUPPORTED_WITH_REPORT_CAVEATS"
+    }
+  ]
+}
