@@ -1,0 +1,17 @@
+{
+  "planned_audits": 6,
+  "attempted_audits": 0,
+  "provider_probes": 1,
+  "provider_available": false,
+  "error": "Model HTTP error 402",
+  "release_ready": false,
+  "next_task": "Restore provider; adapt runner to frozen per-job focus and test offline before live execution. No retry until restored.",
+  "offline_verification": {
+    "implementation_match": true,
+    "source_files_verified": {
+      "werkzeug-3.0.5": 311,
+      "werkzeug-3.0.6": 311
+    },
+    "network": "none"
+  }
+}
