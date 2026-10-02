@@ -131,3 +131,48 @@ def test_verified_platform_needs_read_evidence(context):
                                      'references': [], 'affects_verdict': True}]
     checked = validate(f, audit/'repo', meta, [tools.read('app.py'), tools.read('db.py')], {})
     assert not checked['evidence_gate']['passed']
+
+
+def test_real_but_irrelevant_reference_remains_a_documented_gate_limit(context):
+    audit, meta, tools = context
+    f = finding()
+    f['defense_claims'] = [{'claim': 'Tenant authorization is enforced',
+                           'references': [f['sink']], 'limitations': ''}]
+    # db.execute(value) is real but cannot substantiate this claim. The Gate
+    # deliberately cannot replace semantic review with a lexical detector.
+    checked = validate(f, audit/'repo', meta, [tools.read('app.py'), tools.read('db.py')], {})
+    assert checked['evidence_gate']['passed']
+
+
+def test_finish_requires_review_of_exact_decision_revision(context):
+    audit, meta, tools = context
+    engine = Engine(None, Local(tools), audit, meta, profile(audit/'repo'), knowledge=False)
+    engine.dispatch('submit_plan', {'plan': {'attack_surfaces':['database'], 'next_actions':['read']}})
+    for path in ('app.py', 'db.py'):
+        engine.dispatch('use_tool', {'tool':'repo.read_file','arguments':{'path':path},'purpose':'inspect'})
+    engine.dispatch('hypothesis', {'hypothesis':{'id':'H1','statement':'Input reaches query','status':'INVESTIGATING'}})
+    f = finding(); f['knowledge_application'] = 'Disabled for test'
+    engine.dispatch('submit_decision', {'finding':f})
+    finish = {'summary':'Bounded audit', 'limitations':['Deployment unknown'], 'surface_reviews':[
+        {'surface':'database','status':'reviewed','files':['app.py','db.py'],'reason':'Read caller and query'}]}
+    with pytest.raises(ValueError, match='self-review'):
+        engine.dispatch('finish', finish)
+    review = {'id':'H1','counterexample':'Does wrapper bind parameters?',
+              'assessment':'Read call passes the value as query text.', 'outcome':'upheld','references':[f['sink']]}
+    bad = dict(review, references=[dict(f['sink'], evidence='not real')])
+    with pytest.raises(ValueError, match='evidence invalid'):
+        engine.dispatch('review_decision', bad)
+    assert engine.pending_decision_reviews() == ['H1']
+    engine.dispatch('review_decision', dict(review, outcome='revise'))
+    with pytest.raises(ValueError, match='self-review'):
+        engine.dispatch('finish', finish)
+    engine.dispatch('review_decision', review)
+    assert engine.pending_decision_reviews() == []
+    f['reasoning_summary'] = 'Revised analysis of the caller and query'
+    engine.dispatch('submit_decision', {'finding':f})
+    assert engine.pending_decision_reviews() == ['H1']
+    engine.dispatch('review_decision', review)
+    engine.dispatch('finish', finish)
+    assert engine.status == 'COMPLETE'
+    saved = json.loads((audit/'decision_reviews.json').read_text())
+    assert saved[0]['kind'] == 'model_self_review'

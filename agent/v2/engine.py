@@ -1,5 +1,6 @@
 """Model-selected bounded investigation loop with auditable decisions."""
 import json
+import hashlib
 import time
 from collections import Counter
 from datetime import datetime, timezone
@@ -36,6 +37,7 @@ For configuration-only claims retrieve vulnerability_judgement knowledge and ver
 Source, sink AND EACH data_flow item: {file,line,symbol,evidence,operation}. Evidence must be a verbatim substring
 at the SINGLE cited line, symbol must literally occur in file. Cite only lines YOU READ, not guessed search snippets.
 Explain absence or effectiveness of sanitizer in sanitizer_analysis. Gate validates references, not your judgment.
+Before finish, use review_decision for each non-INSUFFICIENT_EVIDENCE decision. Challenge it with a concrete counterexample or missing precondition; reread implementation as needed. This is your self-review, not independent verification. If the challenge invalidates the decision, submit a corrected decision and review that revision. Never rubber-stamp a guard from its name.
 Use submit_decision for both confirmed and rejected hypotheses. Correct rejected evidence references if Gate fails.
 At finish, settle EVERY planned attack surface in surface_reviews: surface (exact planned name), status reviewed or deferred, files (actually read paths), and reason. Deferred surfaces require limitations and yield PARTIAL. Reviewed surfaces require read evidence. Never silently drop surfaces when revising a plan.
 Review uncovered attack surfaces then finish with scope and limitations; don't claim entire repo safe from sample reads.
@@ -85,6 +87,11 @@ TOOLS = [
                'required': ['id', 'statement', 'status']}}, ['hypothesis']),
     function('submit_decision', 'AI security judgment with complete code references. Gate cannot invent a verdict.',
              {'finding': DECISION}, ['finding']),
+    function('review_decision', 'Record evidence-based self-review of the current decision revision; does not change verdict. Challenge guards, platform assumptions and impact.',
+             {'id': STRING, 'counterexample': STRING, 'assessment': STRING,
+              'outcome': {'type': 'string', 'enum': ['upheld', 'revise']},
+              'references': {'type': 'array', 'items': REFERENCE}},
+             ['id', 'counterexample', 'assessment', 'outcome', 'references']),
     function('investigation_state', 'Read persisted provisional note by id after compaction; omit id to list notes and surface progress.', {'id': STRING}, []),
     function('investigation_note', 'Persist concise provisional facts with actually read line references, open questions and next action. No private reasoning; notes are not verdicts.',
              {'id': STRING, 'summary': STRING, 'references': {'type': 'array', 'items': REFERENCE},
@@ -114,6 +121,7 @@ class Engine:
         self.progress = progress
         self.receipts, self.knowledge, self.hypotheses, self.findings = [], {}, {}, {}
         self.notes, self.surface_settlements = {}, {}
+        self.decision_reviews = {}
         self.segment_calls = 0
         self.segment_index = 1
         self.read_cache = {}
@@ -222,6 +230,31 @@ class Engine:
             return {'accepted': checked['evidence_gate']['passed'], 'status': checked['status'], 'gate': checked['evidence_gate'],
                     'next_action': 'Decision recorded. Do not resubmit unchanged. Investigate another hypothesis or call finish with limitations.',
                     'unresolved': [key for key, value in self.hypotheses.items() if value['status'] in ('NEW', 'INVESTIGATING')]}
+        if name == 'review_decision':
+            finding = self.findings.get(args.get('id'))
+            if not finding:
+                raise ValueError('Review requires an existing decision')
+            for field in ('counterexample', 'assessment'):
+                if not isinstance(args.get(field), str) or not 1 <= len(args[field].strip()) <= 2000:
+                    raise ValueError('Review requires concise counterexample and assessment')
+            if args.get('outcome') not in ('upheld', 'revise'):
+                raise ValueError('Review outcome must be upheld or revise')
+            refs = args.get('references')
+            if not isinstance(refs, list) or not 1 <= len(refs) <= 8:
+                raise ValueError('Review requires 1..8 actually read implementation references')
+            # Reuse integrity checks without manufacturing a vulnerability judgment.
+            probe = dict(finding, status='INSUFFICIENT_EVIDENCE', defense_claims=[{
+                'claim': args['assessment'], 'references': refs, 'limitations': 'Model self-review'}])
+            checked = validate(probe, self.audit/'repo', self.metadata, self.receipts, self.knowledge)
+            if not checked['evidence_gate']['passed']:
+                raise ValueError('Review evidence invalid: ' + '; '.join(checked['evidence_gate']['problems']))
+            review = dict(args, decision_sha256=self.decision_digest(finding), kind='model_self_review')
+            self.decision_reviews[args['id']] = review
+            self.save('decision_reviews.json', list(self.decision_reviews.values()))
+            self.event({'tool': name, 'arguments': args, 'purpose': 'Model counterevidence self-review',
+                        'result_summary': {'recorded': True, 'outcome': args['outcome']}})
+            return {'recorded': True, 'outcome': args['outcome'],
+                    'next_action': 'Correct decision before finish' if args['outcome'] == 'revise' else 'Review recorded; not independent semantic verification'}
         if name == 'investigation_state':
             if 'id' in args:
                 if args['id'] not in self.notes:
@@ -312,12 +345,25 @@ class Engine:
                 raise ValueError('Unsettled attack surfaces: ' + ', '.join(sorted(self.planned_surfaces - seen)))
             if deferred and not any(v.strip() for v in args['limitations']):
                 raise ValueError('Deferred surfaces require explicit limitations')
+            pending = self.pending_decision_reviews()
+            if pending:
+                raise ValueError('Current decisions require counterevidence self-review or correction: ' + ', '.join(pending))
             self.finished = True
             self.completion = args
             self.status = 'PARTIAL' if deferred else 'COMPLETE'
             self.save('surface_reviews.json', reviews)
             return {'accepted': True}
         raise ValueError('Unknown action')
+
+    @staticmethod
+    def decision_digest(finding):
+        return hashlib.sha256(json.dumps(finding, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
+
+    def pending_decision_reviews(self):
+        return [key for key, finding in self.findings.items()
+                if finding['status'] != 'INSUFFICIENT_EVIDENCE' and
+                (self.decision_reviews.get(key, {}).get('outcome') != 'upheld' or
+                 self.decision_reviews.get(key, {}).get('decision_sha256') != self.decision_digest(finding))]
 
     def validate_surface(self, review):
         if review.get('surface') not in self.planned_surfaces:
@@ -402,6 +448,7 @@ class Engine:
                  'planned_surfaces': sorted(self.planned_surfaces),
                  'surface_progress': {key: value['status'] for key, value in self.surface_settlements.items()},
                  'notes_available': list(self.notes),
+                 'pending_decision_self_reviews': self.pending_decision_reviews(),
                  'hypotheses': {key: value['status'] for key, value in self.hypotheses.items()},
                  'decisions': {key: {'status': value['status'],
                                      'gate_passed': value['evidence_gate']['passed'],

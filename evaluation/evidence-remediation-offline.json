@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-02",
+  "implementation_sha256": "525320c2a110f5e658fc039d23499ed0c6a89436c2acfbde6445dac134435cbf",
+  "targeted": {
+    "passed": 44,
+    "seconds": 0.45
+  },
+  "linux_full": {
+    "passed": 178,
+    "seconds": 17.29,
+    "network": "none",
+    "source_mount": "read-only"
+  },
+  "live_runs": 0,
+  "release_ready": false,
+  "next_task": "Freeze isolated six-run known-regression protocol and source snapshots; verify provider availability before serial live acceptance. No push until acceptance passes.",
+  "limitations": [
+    "Model self-review is not independent review",
+    "Reference integrity does not prove semantic relevance",
+    "No-finding surface settlements do not establish absence of vulnerabilities",
+    "Live completion and correctness remain unverified"
+  ]
+}
