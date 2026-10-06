@@ -189,3 +189,34 @@ def test_repeated_failed_notes_stop_before_iteration_budget(tmp_path):
     assert engine.model.calls==3 and engine.notes=={}
     events=[json.loads(line) for line in (engine.audit/'tool_calls.jsonl').read_text().splitlines()]
     assert events[-1]['result_summary']['consecutive_same_failure']==3
+
+
+def test_segment_boundary_allows_only_bounded_note_repair(tmp_path):
+    engine = make_engine(tmp_path)
+    engine.read_cache['a.py'].pop(2)
+    engine.segment_calls = 12
+    note = {'id':'repair','summary':'Read output','references':[{'file':'a.py','line':2,
+            'symbol':'print','evidence':'print(value)'}],'open_questions':[],'next_action':'Review output'}
+    with pytest.raises(ValueError,match='a.py:2'):
+        engine.dispatch('investigation_note',note)
+    with pytest.raises(ValueError,match='segment exhausted'):
+        engine.dispatch('use_tool',{'tool':'repo.read_range','arguments':{'path':'a.py','start':1,'end':2},'purpose':'broad read'})
+    exact={'tool':'repo.read_range','arguments':{'path':'a.py','start':2,'end':2},'purpose':'Repair note evidence'}
+    engine.dispatch('use_tool',exact)
+    assert engine.segment_calls == 13 and engine.recovery_reads == 1
+    assert engine.dispatch('investigation_note',note)['accepted']
+    assert engine.segment_calls == 0 and engine.note_recovery is None
+    assert not engine.findings and not engine.finished
+
+
+def test_recovery_allowance_cannot_be_renewed_by_failed_notes(tmp_path):
+    engine = make_engine(tmp_path);engine.segment_calls=12
+    note={'id':'bad','summary':'Bad quote','references':[{'file':'a.py','line':2,'symbol':'print','evidence':'invented'}],
+          'open_questions':[],'next_action':'Repair'}
+    exact={'tool':'repo.read_range','arguments':{'path':'a.py','start':2,'end':2},'purpose':'Repair'}
+    for _ in range(2):
+        with pytest.raises(ValueError):engine.dispatch('investigation_note',note)
+        engine.dispatch('use_tool',exact)
+    with pytest.raises(ValueError):engine.dispatch('investigation_note',note)
+    with pytest.raises(ValueError,match='segment exhausted'):engine.dispatch('use_tool',exact)
+    assert engine.notes == {} and engine.recovery_reads == 2

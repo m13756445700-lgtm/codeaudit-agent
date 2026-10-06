@@ -128,6 +128,8 @@ class Engine:
         self.notes, self.surface_settlements = {}, {}
         self.decision_reviews = {}
         self.segment_calls = 0
+        self.note_recovery = None
+        self.recovery_reads = 0
         self.segment_index = 1
         self.read_cache = {}
         self.file_lengths = {}
@@ -175,10 +177,17 @@ class Engine:
         if self.plan is None:
             raise ValueError('Submit repository-specific plan first')
         if name == 'use_tool':
-            if self.segment_calls >= 12:
-                raise ValueError('Investigation segment exhausted (12 capability calls). Save investigation_note with read evidence, open questions and next action, or submit an evidence-based decision before more exploration. Missing evidence must stay unresolved.')
-            self.segment_calls += 1
             tool, arguments = args['tool'], args['arguments']
+            recovery = (self.note_recovery is not None and self.recovery_reads < 2
+                        and tool == 'repo.read_range'
+                        and arguments.get('path') == self.note_recovery[0]
+                        and arguments.get('start') == self.note_recovery[1]
+                        and arguments.get('end') == self.note_recovery[1])
+            if self.segment_calls >= 12 and not recovery:
+                raise ValueError('Investigation segment exhausted (12 capability calls). Save investigation_note with read evidence, open questions and next action, or submit an evidence-based decision before more exploration. Missing evidence must stay unresolved.')
+            if self.segment_calls >= 12:
+                self.recovery_reads += 1
+            self.segment_calls += 1
             if tool in ('repo.read_file', 'repo.read_range'):
                 start, end = arguments.get('start', 1), arguments.get('end')
                 if type(start) is not int or start < 1 or (end is not None and (type(end) is not int or end < start or end - start >= 120)):
@@ -224,6 +233,8 @@ class Engine:
                 return {'accepted': False, 'gate': checked['evidence_gate'], 'retained_status': previous['status'],
                         'next_action': 'Previous valid decision retained; fix only genuinely new evidence or finish.'}
             if checked['evidence_gate']['passed']:
+                self.note_recovery = None
+                self.recovery_reads = 0
                 self.segment_calls = 0
                 self.segment_index += 1
             self.findings[f['id']] = checked
@@ -290,11 +301,14 @@ class Engine:
                 code = self.read_cache.get(ref.get('file'), {}).get(ref['line'])
                 quote = ref.get('evidence')
                 if code is None or not isinstance(quote, str) or not quote.strip() or quote not in code:
-                    raise ValueError(f'Note reference must quote an actually read line: {ref.get("file")}:{ref["line"]}. ' + ('Line was not read; use repo.read_range for this location or remove this reference.' if code is None else 'Quote differs from cached source; use the exact previously read text or reread this line.'))
+                    self.note_recovery = (ref.get('file'), ref['line'])
+                    raise ValueError(f'Note reference must quote an actually read line: {ref.get("file")}:{ref["line"]}. ' + ('Line was not read; use repo.read_range with start=end at this line or remove this reference. At a segment boundary at most2 such recovery reads are allowed.' if code is None else 'Quote differs from cached source; use the exact previously read text or reread this line.'))
             if self.notes.get(args['id']) == args:
                 return {'accepted': True, 'unchanged': True,
                         'notice': 'Existing note retained; unchanged note does not renew the investigation segment.'}
             self.segment_calls = 0
+            self.recovery_reads = 0
+            self.note_recovery = None
             self.segment_index += 1
             self.notes[args['id']] = args
             self.save('investigation_notes.json', list(self.notes.values()))

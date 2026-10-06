@@ -2,6 +2,10 @@
 
 **暂不建议作为最终达标作品提交。** 部署与入口问题已修复，通用大仓库审计和独特知识收益仍未闭环。题目没有给出“120分”的量化标准，不能承诺该分数。
 
+## Latest offline recovery (2026-10-06)
+
+Bounded exact-line recovery now works at exhausted segment boundaries. Original failed note replay passed after the missing read;197 offline Linux tests passed. No model calls or publication. See [recovery details](plans/2026-10-06-recovery06.md). Overall live acceptance remains FAILED.
+
 ## Latest live result: freeze03 stopped after first failure
 
 First focused run exhausted iteration budget after42 failed note submissions referring to unread pyproject.toml:3. No finding; remaining3 runs not executed. Evidence preserved and temporary stack removed. Subsequent offline recovery feedback and repeated-error stop passed195 Linux tests, but live recovery is unverified. See [failure review](EVIDENCE_REMEDIATION_03_RESULT.md). No push/deployment.

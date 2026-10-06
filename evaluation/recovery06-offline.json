@@ -1,0 +1,9 @@
+{
+  "implementation_sha256": "37608437952857c4adab188585897380b0b368a0027be2551ccbe028138b5dea",
+  "targeted_passed": 63,
+  "linux_passed": 197,
+  "linux_seconds": 17.46,
+  "original_failed_note_replay": "unchanged note accepted after exact unread-line recovery at exhausted segment boundary",
+  "model_calls": 0,
+  "release_ready": false
+}
