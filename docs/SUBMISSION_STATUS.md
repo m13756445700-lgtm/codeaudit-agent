@@ -2,6 +2,10 @@
 
 **暂不建议作为最终达标作品提交。** 部署与入口问题已修复，通用大仓库审计和独特知识收益仍未闭环。题目没有给出“120分”的量化标准，不能承诺该分数。
 
+## Latest offline fix (2026-10-06): failure rounds
+
+Same-batch errors now count once per model response; all batch feedback is recorded before stopping. Missing-decision feedback includes requested and recorded IDs. 198 isolated Linux tests passed; no model run or publication. See [details](plans/2026-10-06-roundguard07.md). Overall live acceptance remains FAILED.
+
 ## Latest live result (2026-10-06): freeze04 FAILED
 
 Single focused run stopped after three missing-decision errors in one response batch (27 calls). No finding. Early-stop counting incorrectly treated batch errors as repeated feedback rounds. See [review and next fix](EVIDENCE_REMEDIATION_04_RESULT.md). No publication or deployment.

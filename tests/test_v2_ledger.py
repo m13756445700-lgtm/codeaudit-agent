@@ -220,3 +220,27 @@ def test_recovery_allowance_cannot_be_renewed_by_failed_notes(tmp_path):
     with pytest.raises(ValueError):engine.dispatch('investigation_note',note)
     with pytest.raises(ValueError,match='segment exhausted'):engine.dispatch('use_tool',exact)
     assert engine.notes == {} and engine.recovery_reads == 2
+
+
+def test_batch_errors_get_feedback_before_failure_stop(tmp_path):
+    engine = make_engine(tmp_path)
+    class BatchModel:
+        model='offline-batch-test';usage=[];calls=0
+        def complete(self,messages,tools):
+            self.calls+=1
+            if self.calls==2:
+                feedback=[json.loads(m['content']) for m in messages if m['role']=='tool']
+                assert len(feedback)==3
+                assert all(x['consecutive_same_failure']==1 for x in feedback)
+                # A successful recovery action must reset failed-round history.
+                return {'role':'assistant','tool_calls':[{'id':'read','type':'function','function':{
+                    'name':'use_tool','arguments':json.dumps({'tool':'repo.read_range','arguments':{'path':'a.py','start':1,'end':1},'purpose':'recover'})}}]}
+            return {'role':'assistant','tool_calls':[{'id':f'{self.calls}-{i}','type':'function','function':{
+                'name':'investigation_note','arguments':json.dumps({'id':'n','summary':'missing','references':[{
+                    'file':'missing.py','line':1,'symbol':'x','evidence':'x'}],'open_questions':[],'next_action':'read'})}} for i in range(3)]}
+    engine.model=BatchModel();result=engine.run()
+    assert engine.model.calls==5 # error round, success, then three failed rounds
+    assert result['status']=='INCOMPLETE' and 'response rounds' in result['failure']
+    events=[json.loads(x) for x in (engine.audit/'tool_calls.jsonl').read_text().splitlines()]
+    errors=[x['result_summary']['consecutive_same_failure'] for x in events if x.get('purpose')=='failed action']
+    assert errors == [1,1,1,1,1,1,2,2,2,3,3,3]

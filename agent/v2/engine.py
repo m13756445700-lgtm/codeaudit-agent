@@ -407,7 +407,7 @@ class Engine:
             return
         ids = review.get('decision_ids', [])
         if not isinstance(ids, list) or any(not isinstance(key, str) or key not in self.findings for key in ids):
-            raise ValueError('Surface must link existing decision IDs')
+            raise ValueError(f'Surface must link existing decision IDs. Requested: {str(ids)[:160]}; recorded: {str(list(self.findings))[:160]}. Register hypothesis, submit_decision with that ID, then settle_surface; do not invent a recorded decision.')
         assessment = review.get('assessment')
         if assessment == 'decision':
             if not ids:
@@ -534,7 +534,7 @@ class Engine:
         started = time.monotonic()
         self.save('repo_profile.json', self.profile)
         failure = None
-        last_failed_action, repeated_failures = None, 0
+        failure_rounds = {}
         try:
             for iteration in range(self.max_iterations):
                 if time.monotonic() - started > self.timeout or self.calls >= self.max_calls:
@@ -549,28 +549,32 @@ class Engine:
                 if not calls:
                     self.messages.append({'role': 'user', 'content': 'Use tool calls to act; text alone is not an executed audit. Finish only after evidence-based decisions.'})
                     continue
+                round_errors = {}
+                round_success = False
                 for call in calls:
                     if self.calls >= self.max_calls:
                         raise RuntimeError('Tool call budget exceeded')
                     self.calls += 1
                     try:
                         result = self.dispatch(call['function']['name'], json.loads(call['function']['arguments']))
-                        last_failed_action, repeated_failures = None, 0
+                        round_success = True
                     except (ValueError, KeyError, TypeError, OSError) as error:
                         failed_action = (call['function']['name'], str(error))
-                        repeated_failures = repeated_failures + 1 if failed_action == last_failed_action else 1
-                        last_failed_action = failed_action
+                        repeated_failures = failure_rounds.get(failed_action, 0) + 1
+                        round_errors[failed_action] = repeated_failures
                         result = {'error': str(error)[:500], 'consecutive_same_failure': repeated_failures,
-                                  'next_action': 'Correct the cited problem or choose another action; three consecutive identical action errors stop this run.'}
+                                  'next_action': 'Correct the cited problem or choose another action; three consecutive wholly failed response rounds with this error stop this run; errors within one batch count once.'}
                         self.event({'tool': call['function']['name'], 'arguments': call['function']['arguments'],
                                     'purpose': 'failed action', 'result_summary': result})
-                        if repeated_failures >= 3:
-                            raise RuntimeError('Repeated action failure without recovery: ' + call['function']['name'] + ': ' + str(error)[:300])
                     self.messages.append({'role': 'tool', 'tool_call_id': call['id'], 'content': json.dumps(result, ensure_ascii=False)})
                     if self.finished:
                         break
                 if self.finished:
                     break
+                failure_rounds = {} if round_success else round_errors
+                exhausted = next((key for key, count in failure_rounds.items() if count >= 3), None)
+                if exhausted:
+                    raise RuntimeError('Repeated action failure without recovery across response rounds: ' + exhausted[0] + ': ' + exhausted[1][:300])
             if not self.finished:
                 raise RuntimeError('Iteration budget exceeded')
         except Exception as error:
