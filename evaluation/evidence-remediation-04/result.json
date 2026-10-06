@@ -1,0 +1,13 @@
+{
+  "audit_id": "92b5c40e0ce6410bb46604cdd1ad6996",
+  "status": "INCOMPLETE",
+  "failure": "RuntimeError: Repeated action failure without recovery: settle_surface: Surface must link existing decision IDs",
+  "tool_calls": 27,
+  "elapsed_seconds": 26.8,
+  "tokens_observed": 221339,
+  "findings": [],
+  "release_ready": false,
+  "archive_sha256": "d8b94488cc0c51237331d405137fa13ecf764ca7455dbf1228d18fb5e5b440ba",
+  "review": "Three missing-decision errors in one model response batch triggered early termination before feedback; this is not three failed correction rounds.",
+  "next_task": "Count repeated failures per feedback round, report missing IDs, test offline before new freeze."
+}
