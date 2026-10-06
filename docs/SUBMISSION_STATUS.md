@@ -2,6 +2,10 @@
 
 **暂不建议作为最终达标作品提交。** 部署与入口问题已修复，通用大仓库审计和独特知识收益仍未闭环。题目没有给出“120分”的量化标准，不能承诺该分数。
 
+## Runtime patch boundary follow-up (2026-10-06)
+
+Pinned offline replay establishes the observed 3.11.1 to 3.11.2 transition. Tampered sources are rejected before execution (1 test passed). Caller filesystem impact remains unproven; no model acceptance or release promotion. [Evidence](RUNTIME_EVIDENCE_REVIEW.md).
+
 ## Latest semantic review (2026-10-06)
 
 Official tagged runtime sources show path-shape and patch-version distinctions missing in earlier claims. Knowledge card corrected; old results remain unchanged. [Evidence and limits](RUNTIME_EVIDENCE_REVIEW.md). 28 related tests passed; no model calls or publication.

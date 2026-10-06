@@ -1,0 +1,69 @@
+{
+  "sources": [
+    {
+      "version": "3.11.1",
+      "url": "https://raw.githubusercontent.com/python/cpython/v3.11.1/Lib/ntpath.py",
+      "sha256": "ee9655fc0b3dd63aa8e583bb8cdcdd692e8d1cdcb347e1483475718f9a95ca3d",
+      "results": [
+        {
+          "path": "//server/share",
+          "splitdrive": [
+            "//server/share",
+            ""
+          ],
+          "isabs": false
+        },
+        {
+          "path": "//server/share/file",
+          "splitdrive": [
+            "//server/share",
+            "/file"
+          ],
+          "isabs": true
+        },
+        {
+          "path": "\\\\server\\share",
+          "splitdrive": [
+            "\\\\server\\share",
+            ""
+          ],
+          "isabs": false
+        }
+      ]
+    },
+    {
+      "version": "3.11.2",
+      "url": "https://raw.githubusercontent.com/python/cpython/v3.11.2/Lib/ntpath.py",
+      "sha256": "6dcebd56222c03c4c897938d0a153b3f164bbd2edf7474aaebf0fff7aee7d504",
+      "results": [
+        {
+          "path": "//server/share",
+          "splitdrive": [
+            "//server/share",
+            ""
+          ],
+          "isabs": true
+        },
+        {
+          "path": "//server/share/file",
+          "splitdrive": [
+            "//server/share",
+            "/file"
+          ],
+          "isabs": true
+        },
+        {
+          "path": "\\\\server\\share",
+          "splitdrive": [
+            "\\\\server\\share",
+            ""
+          ],
+          "isabs": true
+        }
+      ]
+    }
+  ],
+  "scope": "CPython 3.11 adjacent-tag string-helper comparison only",
+  "windows_runtime_test": false,
+  "filesystem_exposure_proven": false
+}
