@@ -2,6 +2,10 @@
 
 **暂不建议作为最终达标作品提交。** 部署与入口问题已修复，通用大仓库审计和独特知识收益仍未闭环。题目没有给出“120分”的量化标准，不能承诺该分数。
 
+## Latest semantic review (2026-10-06)
+
+Official tagged runtime sources show path-shape and patch-version distinctions missing in earlier claims. Knowledge card corrected; old results remain unchanged. [Evidence and limits](RUNTIME_EVIDENCE_REVIEW.md). 28 related tests passed; no model calls or publication.
+
 ## Latest live result (2026-10-06): freeze05
 
 Focused run COMPLETE:1 LIKELY/8 REJECTED,9 self-reviews,94 calls. Model recovered after missing-hypothesis and knowledge feedback. Conditional target recognized with deployment exposure unknown, but frozen CONFIRMED target not met. [Detailed review](EVIDENCE_REMEDIATION_05_RESULT.md). No publication or broader testing.

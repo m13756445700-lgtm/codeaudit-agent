@@ -1,0 +1,108 @@
+{
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/python/cpython/v3.10.0/Lib/ntpath.py",
+      "sha256": "483b607718da99f655bbb5f85ca4a0682c7d6c6a47880ccc298877f95a9a96fc",
+      "version": "3.10.0",
+      "method": "Selected upstream path-string functions on local Python; not a Windows runtime or target execution",
+      "results": [
+        {
+          "path": "//server/share",
+          "splitdrive": [
+            "//server/share",
+            ""
+          ],
+          "isabs": false
+        },
+        {
+          "path": "//server/share/file",
+          "splitdrive": [
+            "//server/share",
+            "/file"
+          ],
+          "isabs": true
+        },
+        {
+          "path": "\\\\server\\share",
+          "splitdrive": [
+            "\\\\server\\share",
+            ""
+          ],
+          "isabs": false
+        }
+      ]
+    },
+    {
+      "url": "https://raw.githubusercontent.com/python/cpython/v3.11.0/Lib/ntpath.py",
+      "sha256": "ee9655fc0b3dd63aa8e583bb8cdcdd692e8d1cdcb347e1483475718f9a95ca3d",
+      "version": "3.11.0",
+      "method": "Selected upstream path-string functions on local Python; not a Windows runtime or target execution",
+      "results": [
+        {
+          "path": "//server/share",
+          "splitdrive": [
+            "//server/share",
+            ""
+          ],
+          "isabs": false
+        },
+        {
+          "path": "//server/share/file",
+          "splitdrive": [
+            "//server/share",
+            "/file"
+          ],
+          "isabs": true
+        },
+        {
+          "path": "\\\\server\\share",
+          "splitdrive": [
+            "\\\\server\\share",
+            ""
+          ],
+          "isabs": false
+        }
+      ]
+    },
+    {
+      "url": "https://raw.githubusercontent.com/python/cpython/v3.11.9/Lib/ntpath.py",
+      "sha256": "030fdd768135c4de3b4c56ca0f13d2f4801ccbcde4144382334cf75a477dd0de",
+      "version": "3.11.9",
+      "method": "Selected upstream path-string functions on local Python; not a Windows runtime or target execution",
+      "results": [
+        {
+          "path": "//server/share",
+          "splitdrive": [
+            "//server/share",
+            ""
+          ],
+          "isabs": true
+        },
+        {
+          "path": "//server/share/file",
+          "splitdrive": [
+            "//server/share",
+            "/file"
+          ],
+          "isabs": true
+        },
+        {
+          "path": "\\\\server\\share",
+          "splitdrive": [
+            "\\\\server\\share",
+            ""
+          ],
+          "isabs": true
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Selected official path-string helpers evaluated on local Python, not Windows runtime",
+    "No target repository code executed",
+    "No filesystem access or exploit demonstrated",
+    "Exact patch release transition not established",
+    "Past model results unchanged"
+  ],
+  "release_ready": false
+}
