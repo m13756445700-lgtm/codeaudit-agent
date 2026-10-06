@@ -1,0 +1,17 @@
+{
+  "audit_id": "de3b0a79aa6c46efab4bd983a85cb8d2",
+  "status": "COMPLETE",
+  "failure": null,
+  "counts": {
+    "LIKELY": 1,
+    "REJECTED": 8
+  },
+  "tool_calls": 94,
+  "elapsed_seconds": 162.28,
+  "tokens_observed": 1007783,
+  "release_ready": false,
+  "target_status": "LIKELY",
+  "strict_frozen_target": "CONFIRMED",
+  "review": "Workflow recovery observed; strict target not met. AI-assisted review, not independent human review.",
+  "archive_sha256": "8464b43be31d1d33d3a48b70609f0705f2b18a1cf9cf96d7f4aac9f56a95d85f"
+}
