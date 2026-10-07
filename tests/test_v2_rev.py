@@ -303,3 +303,24 @@ def test_cli_rejects_oversized_policy_before_model(monkeypatch, tmp_path):
     with pytest.raises(SystemExit) as exc:
         cli.main([str(tmp_path), '--policy-file', str(path)])
     assert exc.value.code == 2
+
+
+def test_compaction_drops_oversized_complete_tool_rounds_not_policy_or_state(tmp_path):
+    src = tmp_path/'src'; src.mkdir(); (src/'a.py').write_text('x=1\n')
+    audit, metadata = snapshot(src, tmp_path/'ws')
+    engine = Engine(None,None,audit,metadata,profile(audit/'repo'),business_policy='Owner-only writes')
+    engine.hypotheses['H1'] = {'id':'H1','status':'INVESTIGATING','statement':'Examine owner check'}
+    for i in range(2):
+        engine.messages.extend([
+            {'role':'assistant','content':None,'tool_calls':[{'id':str(i),'type':'function','function':{'name':'submit_decision','arguments':json.dumps({'finding':{'analysis':'x'*70000}})}}]},
+            {'role':'tool','tool_call_id':str(i),'content':'{"accepted":false}'}])
+    engine.compact_context()
+    assert len(json.dumps(engine.messages)) <= 85000
+    assert json.loads(engine.messages[1]['content'])['operator_supplied_business_policy'] == 'Owner-only writes'
+    memory = json.loads(engine.messages[2]['content'])
+    assert memory['hypotheses'][0]['id'] == 'H1'
+    pending = set()
+    for m in engine.messages[3:]:
+        if m['role']=='assistant': pending.update(c['id'] for c in m.get('tool_calls',[]))
+        elif m['role']=='tool': assert m['tool_call_id'] in pending
+    assert engine.hypotheses['H1']['status']=='INVESTIGATING' and not engine.findings

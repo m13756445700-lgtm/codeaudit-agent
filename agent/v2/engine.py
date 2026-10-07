@@ -521,6 +521,16 @@ class Engine:
                   'remaining_tool_calls': self.max_calls - self.calls}
         def packed():
             return self.messages[:2] + [{'role': 'user', 'content': json.dumps(memory, ensure_ascii=False)}] + recent
+        # Oversized assistant tool arguments can dominate the envelope even when
+        # individual tool results are bounded. Drop complete historical rounds,
+        # never orphan tool replies or truncate JSON tool arguments. Full trace and
+        # persisted decisions remain on disk; operational state is retained below.
+        dropped_rounds = 0
+        while len(json.dumps(packed())) > 85000 and recent:
+            next_round = next((i for i, m in enumerate(recent[1:], 1)
+                               if m['role'] == 'assistant'), len(recent))
+            del recent[:next_round]
+            dropped_rounds += 1
         # Measure the same serialized envelope used by the hard limit. Escapes and
         # long tool-call arguments can exceed a raw-character estimate substantially.
         while len(json.dumps(packed())) > 85000 and excerpts:
@@ -532,9 +542,20 @@ class Engine:
                 excerpts[largest] = ''.join(lines[:len(lines)//2])
         while len(json.dumps(packed())) > 85000 and knowledge_documents:
             knowledge_documents.pop(next(reversed(knowledge_documents)))
+        while len(json.dumps(packed())) > 85000 and memory['investigation_notes']:
+            memory['investigation_notes'].pop(0)
+        if len(json.dumps(packed())) > 85000:
+            memory['hypotheses'] = [{'id': key, 'status': value['status'],
+                                      'statement': str(value.get('statement', ''))[:500]}
+                                     for key, value in self.hypotheses.items()]
+            memory['hypotheses_notice'] = 'Navigation-only summaries; original hypotheses remain in hypotheses.json. No omitted text is evidence.'
+            memory['surface_progress'] = [{'surface': key, 'status': value['status']}
+                                           for key, value in self.surface_settlements.items()]
+            memory['surface_progress_notice'] = 'Settlement details remain available through investigation_state and on disk.'
         self.messages = packed()
         self.event({'tool': 'context.compact', 'purpose': 'Bound model context while preserving full disk trace',
-                    'result_summary': {'retained_messages': len(recent), 'read_receipts': len(self.receipts)}})
+                    'result_summary': {'retained_messages': len(recent), 'read_receipts': len(self.receipts),
+                                       'dropped_complete_rounds': dropped_rounds, 'serialized_chars': len(json.dumps(self.messages))}})
 
     def investigation_checkpoint(self, iteration):
         """Refresh operational state without making or changing a security judgment."""

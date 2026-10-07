@@ -1,0 +1,5 @@
+{
+  "status": "UNEXECUTED_SUPERSEDED",
+  "model_calls": 0,
+  "reason": "Candidate code changed during broad14 failure repair; do not run this obsolete fingerprint or rewrite frozen plan."
+}

@@ -1,0 +1,18 @@
+{
+  "campaign": "evidence-remediation-14",
+  "planned": 4,
+  "attempted": 1,
+  "audit_id": "b3363530d9c3457aa99ae3fc4ef2d030",
+  "status": "INCOMPLETE",
+  "failure": "RuntimeError: Context budget exceeded; partial findings only",
+  "counts": {
+    "LIKELY": 1,
+    "REJECTED": 7
+  },
+  "calls": 114,
+  "tokens": 1271043,
+  "archive_sha256": "53ad3e27e88a4d754929b593e1621e3d2c02e44d7793aaf44d57ddb7ff5a67a9",
+  "release_ready": false,
+  "diagnosis": "Compaction bounded tool outputs and read excerpts but retained large assistant tool-argument rounds; serialized context still exceeded hard limit. Complete-round eviction implemented; no semantic success claim.",
+  "next": "Current-source freeze16 first job, same9module focus and250calls120iterations;209LinuxPASS."
+}
