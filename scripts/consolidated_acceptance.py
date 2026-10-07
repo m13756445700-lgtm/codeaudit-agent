@@ -125,11 +125,8 @@ def run_live(output, max_runs):
             transport = GenericKnowledge(transport)
         model = Model()
         engine = Engine(model, transport, directory, metadata, profile(directory/'repo'),
-                        knowledge=job['arm'] != 'off', focus=job.get('focus'), **plan['budget_per_run'])
-        if case.get('policy'):
-            engine.messages.append({'role': 'user', 'content': json.dumps({
-                'operator_supplied_business_policy': case['policy'],
-                'notice': 'Policy context only; verify implementation. Do not assume a vulnerability.'})})
+                        knowledge=job['arm'] != 'off', focus=job.get('focus'),
+                        business_policy=case.get('policy'), **plan['budget_per_run'])
         summary = engine.run()
         static = None
         if case['kind'] == 'benchmark' and not summary.get('failure'):

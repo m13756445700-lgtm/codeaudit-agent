@@ -1,0 +1,17 @@
+{
+  "campaign": "evidence-remediation-12",
+  "attempted": 1,
+  "planned": 4,
+  "unexecuted": 3,
+  "audit_id": "fbff3e39893f4becaa5c952791596319",
+  "status": "INCOMPLETE",
+  "failure": "RuntimeError: Iteration budget exceeded",
+  "counts": {
+    "INSUFFICIENT_EVIDENCE": 1
+  },
+  "tokens": 1169867,
+  "archive_sha256": "8d28f3eaf2cb95385952f53290d372adaa83432907d2138a5ae9672d7c968770",
+  "release_ready": false,
+  "analysis": "15 submit_decision attempts repeatedly failed exact precondition list membership; next-action feedback misleadingly said recorded. Remaining scope not settled. Original failed proposal retained for offline replay.",
+  "next": "Correct feedback without relaxing validation, retain operator policy across compaction, full offline tests then new budget-declared freeze."
+}

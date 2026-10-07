@@ -1,0 +1,1 @@
+Original failed proposal from audit fbff3e39893f4becaa5c952791596319. Source excerpts are complete referenced modules from pinned Werkzeug 3.0.5 (BSD-3-Clause; LICENSE.txt retained). This fixture verifies structural feedback recovery, not semantic correctness or independent evaluation.

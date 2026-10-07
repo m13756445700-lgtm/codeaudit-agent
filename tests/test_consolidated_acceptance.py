@@ -80,6 +80,7 @@ def test_frozen_job_focus_reaches_engine_without_labels(tmp_path, monkeypatch, s
     out = tmp_path/'campaign'; plan = batch.prepare(out, repeats=1)
     plan['jobs'] = [dict(plan['jobs'][0], scope=scope, focus=focus)]
     plan['cases'][0]['target']['private_label'] = 'DO_NOT_SEND_TARGET_LABEL'
+    plan['cases'][0]['policy'] = 'Only project owners may change billing.'
     raw = json.dumps(plan)
     (out/'plan.json').write_text(raw)
     (out/'plan.sha256').write_text(hashlib.sha256(raw.encode()).hexdigest())
@@ -91,6 +92,7 @@ def test_frozen_job_focus_reaches_engine_without_labels(tmp_path, monkeypatch, s
     batch.run_live(out, 1)
     context = json.loads(seen[0][1]['content'])
     assert context['operator_scope'] == (focus or 'Prioritize a bounded set of repository-specific risks within budget; clearly state unexamined scope.')
+    assert context['operator_supplied_business_policy'] == 'Only project owners may change billing.'
     assert 'DO_NOT_SEND_TARGET_LABEL' not in json.dumps(seen)
     record = json.loads((out/'results.jsonl').read_text())
     assert record['scope'] == scope and record['focus'] == focus

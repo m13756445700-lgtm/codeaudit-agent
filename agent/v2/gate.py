@@ -1,5 +1,6 @@
 """Evidence quality only. This module contains no vulnerability detection rules."""
 import copy
+import json
 import re
 from agent.v2.repository import safe_path, digest
 
@@ -70,7 +71,9 @@ def validate(finding, repo, metadata, receipts, knowledge):
                     if scope != 'conditional_code':
                         problems.append('unresolved environment affects verdict:' + location)
                     elif not isinstance(result.get('exploit_preconditions'), list) or claim['claim'] not in result['exploit_preconditions']:
-                        problems.append('conditional verdict must retain material unknown as explicit precondition:' + location)
+                        problems.append('conditional verdict must retain material unknown as explicit precondition:' + location
+                                        + '; add its claim as a separate, exactly equal exploit_preconditions item (no prefix or paraphrase): '
+                                        + json.dumps(claim['claim'], ensure_ascii=False))
                     if exposure != 'unknown':
                         problems.append('unknown material environment cannot establish deployment exposure:' + location)
             for j, ref in enumerate(refs):

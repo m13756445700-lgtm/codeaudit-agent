@@ -270,3 +270,36 @@ def test_compaction_omits_whole_knowledge_payloads_with_explicit_retrieval_notic
     assert len(memory['retrieved_knowledge']) == 4
     assert 'knowledge.retrieve' in memory['knowledge_notice']
     assert len(json.dumps(engine.messages)) <= 85000
+
+
+def test_operator_policy_survives_repeated_compaction_without_becoming_evidence(tmp_path):
+    src = tmp_path/'src'; src.mkdir()
+    (src/'a.py').write_text('x = 1\n')
+    audit, metadata = snapshot(src, tmp_path/'ws')
+    policy = '编辑权限只在本租户有效。 External deployment remains unknown.'
+    engine = Engine(None, None, audit, metadata, profile(audit/'repo'), business_policy=policy)
+    for _ in range(2):
+        engine.messages.append({'role': 'assistant', 'content': 'old work'})
+        engine.messages.append({'role': 'user', 'content': 'x'*90000})
+        engine.messages.append({'role': 'assistant', 'content': 'recent work'})
+        engine.messages.append({'role': 'assistant', 'content': 'last work'})
+        engine.compact_context()
+        assert json.loads(engine.messages[1]['content'])['operator_supplied_business_policy'] == policy
+        assert len(json.dumps(engine.messages)) < 85000
+    assert json.loads((audit/'operator_context.json').read_text())['operator_supplied_business_policy'] == policy
+    assert engine.findings == {} and engine.receipts == []
+
+
+@pytest.mark.parametrize('policy', [42, 'x'*8001])
+def test_engine_rejects_invalid_operator_policy(tmp_path, policy):
+    with pytest.raises(ValueError, match='Business policy'):
+        Engine(None, None, tmp_path, {}, {}, business_policy=policy)
+
+
+def test_cli_rejects_oversized_policy_before_model(monkeypatch, tmp_path):
+    import agent.v2.cli as cli
+    monkeypatch.setattr(cli, 'Model', lambda: pytest.fail('Policy validation must precede model'))
+    path = tmp_path/'policy.txt'; path.write_text('x'*8001)
+    with pytest.raises(SystemExit) as exc:
+        cli.main([str(tmp_path), '--policy-file', str(path)])
+    assert exc.value.code == 2

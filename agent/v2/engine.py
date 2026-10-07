@@ -119,7 +119,9 @@ TOOLS = [
 
 class Engine:
     def __init__(self, model, transport, audit, metadata, profile, max_iterations=48, max_calls=100,
-                 timeout=1200, knowledge=True, progress=None, focus=None):
+                 timeout=1200, knowledge=True, progress=None, focus=None, business_policy=None):
+        if business_policy is not None and (not isinstance(business_policy, str) or len(business_policy) > 8000):
+            raise ValueError('Business policy must be text of at most 8000 characters')
         self.model, self.transport = model, transport
         self.audit, self.metadata, self.profile = Path(audit), metadata, profile
         self.max_iterations, self.max_calls, self.timeout = max_iterations, max_calls, timeout
@@ -149,6 +151,14 @@ class Engine:
             'goal': 'Audit this repository. Find real code vulnerabilities and reject false positives.',
             'operator_scope': focus or 'Prioritize a bounded set of repository-specific risks within budget; clearly state unexamined scope.',
             'profile': model_profile, 'budget': {'iterations': max_iterations, 'calls': max_calls}}, ensure_ascii=False)}]
+
+        if business_policy:
+            operator_context = json.loads(self.messages[1]['content'])
+            policy_context = {'operator_supplied_business_policy': business_policy,
+                              'notice': 'Operator policy context only; verify implementation. Not repository evidence or proof of a vulnerability.'}
+            operator_context.update(policy_context)
+            self.messages[1]['content'] = json.dumps(operator_context, ensure_ascii=False)
+            self.save('operator_context.json', policy_context)
 
     def save(self, filename, data):
         p = self.audit / filename
@@ -249,7 +259,9 @@ class Engine:
             self.event({'tool': name, 'purpose': 'AI security decision', 'arguments': f,
                         'result_summary': checked['evidence_gate']})
             return {'accepted': checked['evidence_gate']['passed'], 'status': checked['status'], 'gate': checked['evidence_gate'],
-                    'next_action': 'Decision recorded. Do not resubmit unchanged. Investigate another hypothesis or call finish with limitations.',
+                    'next_action': ('Decision recorded. Do not resubmit unchanged. Investigate another hypothesis or call finish with limitations.'
+                                    if checked['evidence_gate']['passed'] else
+                                    'Decision failed evidence validation. Correct the listed fields and resubmit the same hypothesis ID; do not recreate the hypothesis or resend unchanged. If evidence cannot be supplied, retain INSUFFICIENT_EVIDENCE and explain the unresolved link.'),
                     'unresolved': [key for key, value in self.hypotheses.items() if value['status'] in ('NEW', 'INVESTIGATING')]}
         if name == 'review_decision':
             finding = self.findings.get(args.get('id'))

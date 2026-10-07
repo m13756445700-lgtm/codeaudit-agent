@@ -205,3 +205,30 @@ def test_definition_header_cannot_prove_defense(context):
     checked = validate(f,audit/'repo',meta,[tools.read('app.py'),tools.read('db.py')],{})
     assert checked['status'] == 'INSUFFICIENT_EVIDENCE'
     assert any('definition header' in x for x in checked['evidence_gate']['problems'])
+
+
+def test_failed_precondition_feedback_replays_actual_model_proposal(tmp_path):
+    from pathlib import Path
+    replay = json.loads((Path(__file__).parent/'fixtures/acceptance-replay12/proposal.json').read_text())
+    src = tmp_path/'src'; src.mkdir()
+    for name, content in replay['sources'].items():
+        path = src/name; path.parent.mkdir(parents=True, exist_ok=True); path.write_text(content)
+    audit, meta = snapshot(src, tmp_path/'ws')
+    tools = ToolLayer(audit)
+    receipts = []
+    for name, content in replay['sources'].items():
+        lines = content.splitlines()
+        for start in range(1, len(lines)+1, 120):
+            receipts.append(tools.read(name, start, min(start+119, len(lines))))
+    f = replay['proposal']
+    knowledge = {name:'test-replay-known-card' for name in f['knowledge_used']}
+    rejected = validate(f, audit/'repo', meta, receipts, knowledge)
+    assert not rejected['evidence_gate']['passed']
+    claim = f['environment_assumptions'][0]['claim']
+    assert json.dumps(claim, ensure_ascii=False) in rejected['evidence_gate']['problems'][0]
+    # Simulate a model-authored correction; the Gate must not insert this itself.
+    assert claim not in f['exploit_preconditions']
+    f['exploit_preconditions'].append(claim)
+    accepted = validate(f, audit/'repo', meta, receipts, knowledge)
+    assert accepted['evidence_gate']['passed'], accepted['evidence_gate']['problems']
+    assert accepted['status'] == f['status']
