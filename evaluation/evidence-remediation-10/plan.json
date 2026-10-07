@@ -1,0 +1,815 @@
+{
+  "budget_per_run": {
+    "max_calls": 100,
+    "max_iterations": 48,
+    "timeout": 1200
+  },
+  "cases": [
+    {
+      "arms": [
+        "on"
+      ],
+      "id": "cross-file-flow",
+      "kind": "benchmark",
+      "policy": "",
+      "source": "/Users/bo/codeaudit-v2-final/benchmark/cross-file-flow",
+      "source_hashes": {
+        "app.py": "7b946359402de3e8fe2b3bf1994031ee09e7fc5fe8a181d826306f44ce5c2c39",
+        "service.py": "8a03c07a58f78daebfaf2d9c30f02a8a82e1f7013639043a454baa1885814e86",
+        "worker.py": "100956bca91fedf4577e891c2e56607b554c374112476312de22ac7f0086d5c6"
+      },
+      "target": {
+        "category": "command_injection",
+        "cross_file": true,
+        "file": "worker.py",
+        "id": "cross-file-flow",
+        "sink": "subprocess.check_output",
+        "status": "CONFIRMED"
+      }
+    },
+    {
+      "arms": [
+        "on"
+      ],
+      "id": "false-positive",
+      "kind": "benchmark",
+      "policy": "",
+      "source": "/Users/bo/codeaudit-v2-final/benchmark/false-positive",
+      "source_hashes": {
+        "SearchController.java": "8056a8d95af8e8539d538d8ad20420cc5ec46c8c2b8c1e696de0b0af5ada2988",
+        "SearchService.java": "d271329bf0596bedb2f4612d1bcfee6d5af6d3befd8c2d9a3e6496a8989ef0dd",
+        "UserMapper.java": "05e8de3a32f65eea7a2dac03702e37465ba48af747d2155a91b2837aba5965c3",
+        "UserMapper.xml": "9bd4cf591d64a610b9ee0c036546c2a04773996b6906a678f6c8bcc111916c0e"
+      },
+      "target": {
+        "category": "sql_injection",
+        "file": "UserMapper.xml",
+        "id": "false-positive",
+        "sink": "${column}",
+        "static_false_positive": true,
+        "status": "SAFE"
+      }
+    },
+    {
+      "arms": [
+        "on"
+      ],
+      "id": "python-sql-raw",
+      "kind": "benchmark",
+      "policy": "",
+      "source": "/Users/bo/codeaudit-v2-final/benchmark/python-sql-raw",
+      "source_hashes": {
+        "app.py": "416eebb6d5d9fc4ad4f84f7e124e8839e20d2de10f6bc1bd74da22c8745c00c2"
+      },
+      "target": {
+        "category": "sql_injection",
+        "file": "app.py",
+        "id": "python-sql-raw",
+        "sink": "con.execute",
+        "status": "CONFIRMED"
+      }
+    },
+    {
+      "arms": [
+        "on"
+      ],
+      "id": "python-sql-bound",
+      "kind": "benchmark",
+      "policy": "",
+      "source": "/Users/bo/codeaudit-v2-final/benchmark/python-sql-bound",
+      "source_hashes": {
+        "app.py": "01467849d1adfd3b62b1979141581247dfe4e3e90c9d5c9bf79a690c83ab975d"
+      },
+      "target": {
+        "category": "sql_injection",
+        "file": "app.py",
+        "id": "python-sql-bound",
+        "sink": "con.execute",
+        "status": "SAFE"
+      }
+    },
+    {
+      "arms": [
+        "on"
+      ],
+      "id": "python-argv",
+      "kind": "benchmark",
+      "policy": "",
+      "source": "/Users/bo/codeaudit-v2-final/benchmark/python-argv",
+      "source_hashes": {
+        "app.py": "73f305c064be2a81ca7753d3da1cb9573ba91c07f29dac46acdd723c34d17505"
+      },
+      "target": {
+        "category": "command_injection",
+        "file": "app.py",
+        "id": "python-argv",
+        "sink": "subprocess.check_output",
+        "status": "SAFE"
+      }
+    },
+    {
+      "arms": [
+        "on"
+      ],
+      "id": "python-url",
+      "kind": "benchmark",
+      "policy": "",
+      "source": "/Users/bo/codeaudit-v2-final/benchmark/python-url",
+      "source_hashes": {
+        "app.py": "6866485d8f524279b32251d804cff0a58209183e354679d73ac9e6e640588934"
+      },
+      "target": {
+        "category": "ssrf",
+        "file": "app.py",
+        "id": "python-url",
+        "sink": "requests.get",
+        "status": "CONFIRMED"
+      }
+    },
+    {
+      "arms": [
+        "on"
+      ],
+      "id": "python-fixed-url",
+      "kind": "benchmark",
+      "policy": "",
+      "source": "/Users/bo/codeaudit-v2-final/benchmark/python-fixed-url",
+      "source_hashes": {
+        "app.py": "25b89a961dad338570a41acbce62236db923003a3587e49627307c20b06ccb76"
+      },
+      "target": {
+        "category": "ssrf",
+        "file": "app.py",
+        "id": "python-fixed-url",
+        "sink": "requests.get",
+        "status": "SAFE"
+      }
+    },
+    {
+      "arms": [
+        "on"
+      ],
+      "id": "python-file",
+      "kind": "benchmark",
+      "policy": "",
+      "source": "/Users/bo/codeaudit-v2-final/benchmark/python-file",
+      "source_hashes": {
+        "app.py": "30cbfcde1526aa099fef1aa1a5327f54fad4870f2bc7a5b328c925e29908afc3"
+      },
+      "target": {
+        "category": "path_traversal",
+        "file": "app.py",
+        "id": "python-file",
+        "sink": "read_text",
+        "status": "CONFIRMED"
+      }
+    },
+    {
+      "arms": [
+        "on"
+      ],
+      "id": "python-fixed-file",
+      "kind": "benchmark",
+      "policy": "",
+      "source": "/Users/bo/codeaudit-v2-final/benchmark/python-fixed-file",
+      "source_hashes": {
+        "app.py": "eb00ea36055ff1eb7b142b029d9c7b4789d148ca0ca8613fec17077d2d66b931"
+      },
+      "target": {
+        "category": "path_traversal",
+        "file": "app.py",
+        "id": "python-fixed-file",
+        "sink": "read_text",
+        "status": "SAFE"
+      }
+    },
+    {
+      "arms": [
+        "on"
+      ],
+      "id": "node-shell",
+      "kind": "benchmark",
+      "policy": "",
+      "source": "/Users/bo/codeaudit-v2-final/benchmark/node-shell",
+      "source_hashes": {
+        "app.js": "c1dcd3f168912ad34b5c1dc509bcc235baabe3fde866d0a210c9b682ec3d67bc"
+      },
+      "target": {
+        "category": "command_injection",
+        "file": "app.js",
+        "id": "node-shell",
+        "sink": "cp.exec",
+        "status": "CONFIRMED"
+      }
+    },
+    {
+      "arms": [
+        "on"
+      ],
+      "id": "node-argv",
+      "kind": "benchmark",
+      "policy": "",
+      "source": "/Users/bo/codeaudit-v2-final/benchmark/node-argv",
+      "source_hashes": {
+        "app.js": "8f3532580d27780d9d7e78b8292909cdcd588add191a95b3e9aab1aef5ecab79"
+      },
+      "target": {
+        "category": "command_injection",
+        "file": "app.js",
+        "id": "node-argv",
+        "sink": "cp.execFile",
+        "status": "SAFE"
+      }
+    },
+    {
+      "arms": [
+        "on"
+      ],
+      "id": "node-sql-raw",
+      "kind": "benchmark",
+      "policy": "",
+      "source": "/Users/bo/codeaudit-v2-final/benchmark/node-sql-raw",
+      "source_hashes": {
+        "app.js": "e9befe23baf6d62c698f0b211fe2af44a3ae02390b3548d5755be89a9890b7ba"
+      },
+      "target": {
+        "category": "sql_injection",
+        "file": "app.js",
+        "id": "node-sql-raw",
+        "sink": "db.prepare",
+        "status": "CONFIRMED"
+      }
+    },
+    {
+      "arms": [
+        "on"
+      ],
+      "id": "node-sql-bound",
+      "kind": "benchmark",
+      "policy": "",
+      "source": "/Users/bo/codeaudit-v2-final/benchmark/node-sql-bound",
+      "source_hashes": {
+        "app.js": "fe05d9a47dca4486aacc5a9b9f568cdf3ff0cef47045b632bac70747d4df513a"
+      },
+      "target": {
+        "category": "sql_injection",
+        "file": "app.js",
+        "id": "node-sql-bound",
+        "sink": "db.prepare",
+        "status": "SAFE"
+      }
+    },
+    {
+      "arms": [
+        "on"
+      ],
+      "id": "go-shell",
+      "kind": "benchmark",
+      "policy": "",
+      "source": "/Users/bo/codeaudit-v2-final/benchmark/go-shell",
+      "source_hashes": {
+        "main.go": "3f349f2b0f5682ba84dd2ce764ed98cd7f67f7403a2be4753acf791a8059a93b"
+      },
+      "target": {
+        "category": "command_injection",
+        "file": "main.go",
+        "id": "go-shell",
+        "sink": "exec.Command",
+        "status": "CONFIRMED"
+      }
+    },
+    {
+      "arms": [
+        "on"
+      ],
+      "id": "go-argv",
+      "kind": "benchmark",
+      "policy": "",
+      "source": "/Users/bo/codeaudit-v2-final/benchmark/go-argv",
+      "source_hashes": {
+        "main.go": "f538b75a3e73aa704bb3fb08dcb61819b91c3f657af4a8b083d1ef61bcb5fb07"
+      },
+      "target": {
+        "category": "command_injection",
+        "file": "main.go",
+        "id": "go-argv",
+        "sink": "exec.Command",
+        "status": "SAFE"
+      }
+    },
+    {
+      "arms": [
+        "on"
+      ],
+      "id": "go-url",
+      "kind": "benchmark",
+      "policy": "",
+      "source": "/Users/bo/codeaudit-v2-final/benchmark/go-url",
+      "source_hashes": {
+        "main.go": "cdb38367bea48b449a93e2ad3a9d7708d923c41d3dc40a907ec9494a4a7ce23e"
+      },
+      "target": {
+        "category": "ssrf",
+        "file": "main.go",
+        "id": "go-url",
+        "sink": "http.Get",
+        "status": "CONFIRMED"
+      }
+    },
+    {
+      "arms": [
+        "on"
+      ],
+      "id": "go-fixed-url",
+      "kind": "benchmark",
+      "policy": "",
+      "source": "/Users/bo/codeaudit-v2-final/benchmark/go-fixed-url",
+      "source_hashes": {
+        "main.go": "cb37058e8fbcee5114c2eb111d593f3b59fd5245ea1809efed379f7752ab6c9f"
+      },
+      "target": {
+        "category": "ssrf",
+        "file": "main.go",
+        "id": "go-fixed-url",
+        "sink": "client.Get",
+        "status": "SAFE"
+      }
+    },
+    {
+      "arms": [
+        "on"
+      ],
+      "id": "java-runtime-string",
+      "kind": "benchmark",
+      "policy": "",
+      "source": "/Users/bo/codeaudit-v2-final/benchmark/java-runtime-string",
+      "source_hashes": {
+        "EchoController.java": "18839718b0a2f7eef3379bcb29859bde8b4c598c320d4bb583f3a542cfdbdc23"
+      },
+      "target": {
+        "category": "command_injection",
+        "file": "EchoController.java",
+        "id": "java-runtime-string",
+        "sink": "Runtime.getRuntime().exec",
+        "status": "SAFE"
+      }
+    },
+    {
+      "arms": [
+        "on"
+      ],
+      "id": "java-shell-array",
+      "kind": "benchmark",
+      "policy": "",
+      "source": "/Users/bo/codeaudit-v2-final/benchmark/java-shell-array",
+      "source_hashes": {
+        "EchoController.java": "b2791f3778d126eac4302b0542a6894919fc50bf7f23bdb7d0322786d70a7a6e"
+      },
+      "target": {
+        "category": "command_injection",
+        "file": "EchoController.java",
+        "id": "java-shell-array",
+        "sink": "Runtime.getRuntime().exec",
+        "status": "CONFIRMED"
+      }
+    },
+    {
+      "arms": [
+        "on"
+      ],
+      "id": "python-template",
+      "kind": "benchmark",
+      "policy": "",
+      "source": "/Users/bo/codeaudit-v2-final/benchmark/python-template",
+      "source_hashes": {
+        "app.py": "9a319d271e32b36430d3d9c52ee1ce9561a561f15c91db9d9af0a355c44afd4a"
+      },
+      "target": {
+        "category": "template_injection",
+        "file": "app.py",
+        "id": "python-template",
+        "sink": "render_template_string",
+        "status": "CONFIRMED"
+      }
+    },
+    {
+      "arms": [
+        "on",
+        "off",
+        "generic"
+      ],
+      "id": "tenant-read-unscoped",
+      "kind": "business-development",
+      "policy": "All invoices are tenant-private. Editor role is local to its tenant. Invoice IDs are globally unique but not secret. Shared cache may contain prior requests from other tenants. No external authorization middleware exists in this fixture.",
+      "source": "/Users/bo/codeaudit-v2-final/evaluation/business-cases/tenant-read-unscoped/source",
+      "source_hashes": {
+        "src/billing/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "src/billing/identity.py": "3c8ab7a8a9fd489964456775a30333f0d7d0b7f17b52ee9ae8123ec90a1a120c",
+        "src/billing/repository.py": "d69bbce2cb33d4785533daf13105fe325e1674c4d851aa76ee76ce057e93d618",
+        "src/billing/routes.py": "629b65dc4ff562e68a10fd64911e5d8bebd8a524d4c7c91efff554b6b9866961",
+        "src/billing/service.py": "336a1b3eaa0ec1a481ac1cdbbff05109b8b29ce3ae77a4c063194eb497ae54ac"
+      },
+      "target": {
+        "category": "authz",
+        "expected": "CONFIRMED",
+        "file": "src/billing/service.py",
+        "sink": "return dict(invoice)"
+      }
+    },
+    {
+      "arms": [
+        "on",
+        "off",
+        "generic"
+      ],
+      "id": "tenant-read-protected",
+      "kind": "business-development",
+      "policy": "All invoices are tenant-private. Editor role is local to its tenant. Invoice IDs are globally unique but not secret. Shared cache may contain prior requests from other tenants. No external authorization middleware exists in this fixture.",
+      "source": "/Users/bo/codeaudit-v2-final/evaluation/business-cases/tenant-read-protected/source",
+      "source_hashes": {
+        "src/billing/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "src/billing/identity.py": "3c8ab7a8a9fd489964456775a30333f0d7d0b7f17b52ee9ae8123ec90a1a120c",
+        "src/billing/repository.py": "d69bbce2cb33d4785533daf13105fe325e1674c4d851aa76ee76ce057e93d618",
+        "src/billing/routes.py": "629b65dc4ff562e68a10fd64911e5d8bebd8a524d4c7c91efff554b6b9866961",
+        "src/billing/service.py": "3b84b66c1fb82903399df298b456a5a9d1de062ed1b9edc60cc39837d5a6280c"
+      },
+      "target": {
+        "category": "authz",
+        "expected": "REJECTED",
+        "file": "src/billing/service.py",
+        "sink": "return dict(invoice)"
+      }
+    },
+    {
+      "arms": [
+        "on",
+        "off",
+        "generic"
+      ],
+      "id": "tenant-update-unscoped",
+      "kind": "business-development",
+      "policy": "All invoices are tenant-private. Editor role is local to its tenant. Invoice IDs are globally unique but not secret. Shared cache may contain prior requests from other tenants. No external authorization middleware exists in this fixture.",
+      "source": "/Users/bo/codeaudit-v2-final/evaluation/business-cases/tenant-update-unscoped/source",
+      "source_hashes": {
+        "src/billing/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "src/billing/identity.py": "3c8ab7a8a9fd489964456775a30333f0d7d0b7f17b52ee9ae8123ec90a1a120c",
+        "src/billing/repository.py": "d69bbce2cb33d4785533daf13105fe325e1674c4d851aa76ee76ce057e93d618",
+        "src/billing/routes.py": "629b65dc4ff562e68a10fd64911e5d8bebd8a524d4c7c91efff554b6b9866961",
+        "src/billing/service.py": "9473c2edd49e4dea6bbd782d22ee6113447996286602e338ea9016e9d54c020e"
+      },
+      "target": {
+        "category": "authz",
+        "expected": "CONFIRMED",
+        "file": "src/billing/service.py",
+        "sink": "invoice[\"memo\"] = payload[\"memo\"]"
+      }
+    },
+    {
+      "arms": [
+        "on",
+        "off",
+        "generic"
+      ],
+      "id": "tenant-update-protected",
+      "kind": "business-development",
+      "policy": "All invoices are tenant-private. Editor role is local to its tenant. Invoice IDs are globally unique but not secret. Shared cache may contain prior requests from other tenants. No external authorization middleware exists in this fixture.",
+      "source": "/Users/bo/codeaudit-v2-final/evaluation/business-cases/tenant-update-protected/source",
+      "source_hashes": {
+        "src/billing/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "src/billing/identity.py": "3c8ab7a8a9fd489964456775a30333f0d7d0b7f17b52ee9ae8123ec90a1a120c",
+        "src/billing/repository.py": "d69bbce2cb33d4785533daf13105fe325e1674c4d851aa76ee76ce057e93d618",
+        "src/billing/routes.py": "629b65dc4ff562e68a10fd64911e5d8bebd8a524d4c7c91efff554b6b9866961",
+        "src/billing/service.py": "77fdcfcea26427d61158f24a63a341aedb70273925e0fa7d31ee2ca6d7bc5c55"
+      },
+      "target": {
+        "category": "authz",
+        "expected": "REJECTED",
+        "file": "src/billing/service.py",
+        "sink": "invoice[\"memo\"] = payload[\"memo\"]"
+      }
+    },
+    {
+      "arms": [
+        "on",
+        "off",
+        "generic"
+      ],
+      "id": "tenant-batch-unscoped",
+      "kind": "business-development",
+      "policy": "All invoices are tenant-private. Editor role is local to its tenant. Invoice IDs are globally unique but not secret. Shared cache may contain prior requests from other tenants. No external authorization middleware exists in this fixture.",
+      "source": "/Users/bo/codeaudit-v2-final/evaluation/business-cases/tenant-batch-unscoped/source",
+      "source_hashes": {
+        "src/billing/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "src/billing/identity.py": "3c8ab7a8a9fd489964456775a30333f0d7d0b7f17b52ee9ae8123ec90a1a120c",
+        "src/billing/repository.py": "d69bbce2cb33d4785533daf13105fe325e1674c4d851aa76ee76ce057e93d618",
+        "src/billing/routes.py": "629b65dc4ff562e68a10fd64911e5d8bebd8a524d4c7c91efff554b6b9866961",
+        "src/billing/service.py": "60544628e02992953a864a5c4f8b137d59a118c324c44566edef0ed93e16af80"
+      },
+      "target": {
+        "category": "authz",
+        "expected": "CONFIRMED",
+        "file": "src/billing/service.py",
+        "sink": "return [dict(invoice) for invoice in selected]"
+      }
+    },
+    {
+      "arms": [
+        "on",
+        "off",
+        "generic"
+      ],
+      "id": "tenant-batch-protected",
+      "kind": "business-development",
+      "policy": "All invoices are tenant-private. Editor role is local to its tenant. Invoice IDs are globally unique but not secret. Shared cache may contain prior requests from other tenants. No external authorization middleware exists in this fixture.",
+      "source": "/Users/bo/codeaudit-v2-final/evaluation/business-cases/tenant-batch-protected/source",
+      "source_hashes": {
+        "src/billing/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "src/billing/identity.py": "3c8ab7a8a9fd489964456775a30333f0d7d0b7f17b52ee9ae8123ec90a1a120c",
+        "src/billing/repository.py": "d69bbce2cb33d4785533daf13105fe325e1674c4d851aa76ee76ce057e93d618",
+        "src/billing/routes.py": "629b65dc4ff562e68a10fd64911e5d8bebd8a524d4c7c91efff554b6b9866961",
+        "src/billing/service.py": "9c6c17457ae3f616ed608facf70fb04336b85fdbb9c0ee256db7eb7efef5b46a"
+      },
+      "target": {
+        "category": "authz",
+        "expected": "REJECTED",
+        "file": "src/billing/service.py",
+        "sink": "return [dict(invoice) for invoice in selected]"
+      }
+    },
+    {
+      "arms": [
+        "on",
+        "off",
+        "generic"
+      ],
+      "id": "tenant-cache-unscoped",
+      "kind": "business-development",
+      "policy": "All invoices are tenant-private. Editor role is local to its tenant. Invoice IDs are globally unique but not secret. Shared cache may contain prior requests from other tenants. No external authorization middleware exists in this fixture.",
+      "source": "/Users/bo/codeaudit-v2-final/evaluation/business-cases/tenant-cache-unscoped/source",
+      "source_hashes": {
+        "src/billing/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "src/billing/identity.py": "3c8ab7a8a9fd489964456775a30333f0d7d0b7f17b52ee9ae8123ec90a1a120c",
+        "src/billing/repository.py": "d69bbce2cb33d4785533daf13105fe325e1674c4d851aa76ee76ce057e93d618",
+        "src/billing/routes.py": "629b65dc4ff562e68a10fd64911e5d8bebd8a524d4c7c91efff554b6b9866961",
+        "src/billing/service.py": "fba503231f303d32f855c05f6fc39977a804c7bebcdae9a64e7617c145f1aa57"
+      },
+      "target": {
+        "category": "authz",
+        "expected": "CONFIRMED",
+        "file": "src/billing/service.py",
+        "sink": "return dict(cache[key])"
+      }
+    },
+    {
+      "arms": [
+        "on",
+        "off",
+        "generic"
+      ],
+      "id": "tenant-cache-protected",
+      "kind": "business-development",
+      "policy": "All invoices are tenant-private. Editor role is local to its tenant. Invoice IDs are globally unique but not secret. Shared cache may contain prior requests from other tenants. No external authorization middleware exists in this fixture.",
+      "source": "/Users/bo/codeaudit-v2-final/evaluation/business-cases/tenant-cache-protected/source",
+      "source_hashes": {
+        "src/billing/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "src/billing/identity.py": "3c8ab7a8a9fd489964456775a30333f0d7d0b7f17b52ee9ae8123ec90a1a120c",
+        "src/billing/repository.py": "d69bbce2cb33d4785533daf13105fe325e1674c4d851aa76ee76ce057e93d618",
+        "src/billing/routes.py": "629b65dc4ff562e68a10fd64911e5d8bebd8a524d4c7c91efff554b6b9866961",
+        "src/billing/service.py": "cf909e741227ff577143eca2567d47abaad69d32884d360c4f93c7dd55866e49"
+      },
+      "target": {
+        "category": "authz",
+        "expected": "REJECTED",
+        "file": "src/billing/service.py",
+        "sink": "return dict(cache[key])"
+      }
+    }
+  ],
+  "implementation_sha256": "7ae01237abac7c8513a8bc1b0503de78cf0a7e27b06056d0859196fa242e5070",
+  "jobs": [
+    {
+      "arm": "on",
+      "case": "cross-file-flow",
+      "repeat": 0
+    },
+    {
+      "arm": "on",
+      "case": "false-positive",
+      "repeat": 0
+    },
+    {
+      "arm": "on",
+      "case": "python-sql-raw",
+      "repeat": 0
+    },
+    {
+      "arm": "on",
+      "case": "python-sql-bound",
+      "repeat": 0
+    },
+    {
+      "arm": "on",
+      "case": "python-argv",
+      "repeat": 0
+    },
+    {
+      "arm": "on",
+      "case": "python-url",
+      "repeat": 0
+    },
+    {
+      "arm": "on",
+      "case": "python-fixed-url",
+      "repeat": 0
+    },
+    {
+      "arm": "on",
+      "case": "python-file",
+      "repeat": 0
+    },
+    {
+      "arm": "on",
+      "case": "python-fixed-file",
+      "repeat": 0
+    },
+    {
+      "arm": "on",
+      "case": "node-shell",
+      "repeat": 0
+    },
+    {
+      "arm": "on",
+      "case": "node-argv",
+      "repeat": 0
+    },
+    {
+      "arm": "on",
+      "case": "node-sql-raw",
+      "repeat": 0
+    },
+    {
+      "arm": "on",
+      "case": "node-sql-bound",
+      "repeat": 0
+    },
+    {
+      "arm": "on",
+      "case": "go-shell",
+      "repeat": 0
+    },
+    {
+      "arm": "on",
+      "case": "go-argv",
+      "repeat": 0
+    },
+    {
+      "arm": "on",
+      "case": "go-url",
+      "repeat": 0
+    },
+    {
+      "arm": "on",
+      "case": "go-fixed-url",
+      "repeat": 0
+    },
+    {
+      "arm": "on",
+      "case": "java-runtime-string",
+      "repeat": 0
+    },
+    {
+      "arm": "on",
+      "case": "java-shell-array",
+      "repeat": 0
+    },
+    {
+      "arm": "on",
+      "case": "python-template",
+      "repeat": 0
+    },
+    {
+      "arm": "on",
+      "case": "tenant-read-unscoped",
+      "repeat": 0
+    },
+    {
+      "arm": "off",
+      "case": "tenant-read-unscoped",
+      "repeat": 0
+    },
+    {
+      "arm": "generic",
+      "case": "tenant-read-unscoped",
+      "repeat": 0
+    },
+    {
+      "arm": "on",
+      "case": "tenant-read-protected",
+      "repeat": 0
+    },
+    {
+      "arm": "off",
+      "case": "tenant-read-protected",
+      "repeat": 0
+    },
+    {
+      "arm": "generic",
+      "case": "tenant-read-protected",
+      "repeat": 0
+    },
+    {
+      "arm": "on",
+      "case": "tenant-update-unscoped",
+      "repeat": 0
+    },
+    {
+      "arm": "off",
+      "case": "tenant-update-unscoped",
+      "repeat": 0
+    },
+    {
+      "arm": "generic",
+      "case": "tenant-update-unscoped",
+      "repeat": 0
+    },
+    {
+      "arm": "on",
+      "case": "tenant-update-protected",
+      "repeat": 0
+    },
+    {
+      "arm": "off",
+      "case": "tenant-update-protected",
+      "repeat": 0
+    },
+    {
+      "arm": "generic",
+      "case": "tenant-update-protected",
+      "repeat": 0
+    },
+    {
+      "arm": "on",
+      "case": "tenant-batch-unscoped",
+      "repeat": 0
+    },
+    {
+      "arm": "off",
+      "case": "tenant-batch-unscoped",
+      "repeat": 0
+    },
+    {
+      "arm": "generic",
+      "case": "tenant-batch-unscoped",
+      "repeat": 0
+    },
+    {
+      "arm": "on",
+      "case": "tenant-batch-protected",
+      "repeat": 0
+    },
+    {
+      "arm": "off",
+      "case": "tenant-batch-protected",
+      "repeat": 0
+    },
+    {
+      "arm": "generic",
+      "case": "tenant-batch-protected",
+      "repeat": 0
+    },
+    {
+      "arm": "on",
+      "case": "tenant-cache-unscoped",
+      "repeat": 0
+    },
+    {
+      "arm": "off",
+      "case": "tenant-cache-unscoped",
+      "repeat": 0
+    },
+    {
+      "arm": "generic",
+      "case": "tenant-cache-unscoped",
+      "repeat": 0
+    },
+    {
+      "arm": "on",
+      "case": "tenant-cache-protected",
+      "repeat": 0
+    },
+    {
+      "arm": "off",
+      "case": "tenant-cache-protected",
+      "repeat": 0
+    },
+    {
+      "arm": "generic",
+      "case": "tenant-cache-protected",
+      "repeat": 0
+    }
+  ],
+  "model": "deepseek-flash",
+  "repeats": 1,
+  "schema": 1,
+  "warning": "Development cases are not blind evaluation. Completion and correctness are separate. Human adjudication required. No automatic publication."
+}

@@ -1,0 +1,7 @@
+{
+  "phase": "frozen-plan source-snapshot validation before model construction",
+  "error": "Frozen campaign10 used local absolute source paths; container source hash validation failed at cross-file-flow",
+  "model_calls": 0,
+  "audit_result_created": false,
+  "action": "Preserved plan10; fresh plan11 maps immutable snapshotted source trees to verified read-only /opt/codeaudit paths"
+}
