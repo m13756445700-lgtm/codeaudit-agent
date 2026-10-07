@@ -1,0 +1,26 @@
+{
+  "campaign": "evidence-remediation-17",
+  "audit_id": "4b0b1ec85e834d7ea118079e7d4c6b80",
+  "status": "INCOMPLETE",
+  "failure": "RuntimeError: Repeated action failure without recovery across response rounds: use_tool: Investigation segment exhausted (12 capability calls). Save investigation_note with read evidence, open questions and next ac",
+  "tool_calls": 232,
+  "tokens": 2865503,
+  "archive_sha256": "bef524eeba38f12a329df85c2e530b974573d0b02bbd7ece00f5683fce66a357",
+  "tool_counts": {
+    "submit_plan": 1,
+    "repo.read_file": 3,
+    "repo.search": 141,
+    "repo.read_range": 53,
+    "use_tool": 12,
+    "investigation_note": 20,
+    "context.compact": 102,
+    "hypothesis": 2
+  },
+  "planned": 4,
+  "attempted": 1,
+  "unexecuted": 3,
+  "provider_restoration": "No HTTP errors; real model ran",
+  "release_ready": false,
+  "diagnosis": "Repeated search after compacted latest feedback eviction; final segment exhaustion failed recovery. Corrected memory prioritization preserves latest assistant/tool round before old read excerpts.",
+  "next": "Fresh18 first job,210Linux tests passed, same scope/budget."
+}

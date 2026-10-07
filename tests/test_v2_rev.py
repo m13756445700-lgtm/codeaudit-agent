@@ -324,3 +324,20 @@ def test_compaction_drops_oversized_complete_tool_rounds_not_policy_or_state(tmp
         if m['role']=='assistant': pending.update(c['id'] for c in m.get('tool_calls',[]))
         elif m['role']=='tool': assert m['tool_call_id'] in pending
     assert engine.hypotheses['H1']['status']=='INVESTIGATING' and not engine.findings
+
+
+def test_compaction_keeps_latest_search_feedback_ahead_of_old_read_excerpts(tmp_path):
+    src=tmp_path/'src';src.mkdir();(src/'a.py').write_text('x=1\n')
+    audit,meta=snapshot(src,tmp_path/'ws')
+    engine=Engine(None,None,audit,meta,profile(audit/'repo'))
+    engine.read_cache={'a.py':{n:'old evidence'*60 for n in range(1,90)}}
+    engine.knowledge_cache={'card':{'id':'card','sha256':'hash','content':'fact '*4000}}
+    engine.messages += [{'role':'user','content':'old context'*10000},
+                        {'role':'assistant','content':None,'tool_calls':[{'id':'latest','type':'function','function':{'name':'use_tool','arguments':'{"tool":"repo.search"}'}}]},
+                        {'role':'tool','tool_call_id':'latest','content':json.dumps({'matches':['UNIQUE_NEW_SEARCH_RESULT'], 'context':'c'*7900})}]
+    engine.compact_context()
+    assert len(json.dumps(engine.messages)) <= 85000
+    assert engine.messages[-1]['role']=='tool'
+    assert engine.messages[-1]['tool_call_id']=='latest'
+    assert 'UNIQUE_NEW_SEARCH_RESULT' in engine.messages[-1]['content']
+    assert engine.messages[-2]['tool_calls'][0]['id']=='latest'

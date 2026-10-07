@@ -16,3 +16,6 @@ First run COMPLETE with5 decisions, but serving.py/test.py/response.py sampled s
 
 ## Frozen14 context failure and candidate16
 First14audit b3363530d9c3457aa99ae3fc4ef2d030 stopped after114calls with context limit,1LIKELY7REJECTED. Remaining3jobs not attempted. Compactor now evicts complete old assistant/tool rounds when serialized envelope exceeds85000; it never truncates tool argument JSON or leaves orphan replies. Policy and state retained, full trace stays on disk. Notes/hypothesis/settlement memory may shrink to explicit navigation summaries when necessary.71targetedPASS;209isolatedLinuxPASS17.72s. Freeze16 retains14scope/budget and uses new fingerprint;15knowledge plan unexecuted/superseded. This prevents one engineering failure mode, not a semantic correctness claim.
+
+## Freeze17 feedback loss and candidate18
+Provider restored;17 endedINCOMPLETE with repeated segment-boundary failure after141search calls and102compactions,2865503tokens. Old round-eviction order erased latest search feedback before reducing stale excerpts. Candidate18 keeps newest complete round, reduces old read/notes memory first, evicts latest only if intrinsically oversized. No orphan tool replies or altered verdicts.72targetedPASS/210LinuxPASS18.51s. Same9module scope/250calls120iterations in new18, first only before expansion.

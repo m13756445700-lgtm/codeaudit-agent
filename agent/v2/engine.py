@@ -521,18 +521,18 @@ class Engine:
                   'remaining_tool_calls': self.max_calls - self.calls}
         def packed():
             return self.messages[:2] + [{'role': 'user', 'content': json.dumps(memory, ensure_ascii=False)}] + recent
-        # Oversized assistant tool arguments can dominate the envelope even when
-        # individual tool results are bounded. Drop complete historical rounds,
-        # never orphan tool replies or truncate JSON tool arguments. Full trace and
-        # persisted decisions remain on disk; operational state is retained below.
+        # Keep recent feedback before navigation excerpts: losing the result of
+        # the last search/read causes the model to repeat the same investigation.
         dropped_rounds = 0
-        while len(json.dumps(packed())) > 85000 and recent:
+        def drop_oldest_round():
+            nonlocal dropped_rounds
             next_round = next((i for i, m in enumerate(recent[1:], 1)
                                if m['role'] == 'assistant'), len(recent))
             del recent[:next_round]
             dropped_rounds += 1
-        # Measure the same serialized envelope used by the hard limit. Escapes and
-        # long tool-call arguments can exceed a raw-character estimate substantially.
+        # Prefer the newest complete round over the preceding round.
+        while len(json.dumps(packed())) > 85000 and sum(m['role'] == 'assistant' for m in recent) > 1:
+            drop_oldest_round()
         while len(json.dumps(packed())) > 85000 and excerpts:
             largest = max(excerpts, key=lambda key: len(excerpts[key]))
             lines = excerpts[largest].splitlines(keepends=True)
@@ -540,8 +540,6 @@ class Engine:
                 del excerpts[largest]
             else:
                 excerpts[largest] = ''.join(lines[:len(lines)//2])
-        while len(json.dumps(packed())) > 85000 and knowledge_documents:
-            knowledge_documents.pop(next(reversed(knowledge_documents)))
         while len(json.dumps(packed())) > 85000 and memory['investigation_notes']:
             memory['investigation_notes'].pop(0)
         if len(json.dumps(packed())) > 85000:
@@ -552,6 +550,12 @@ class Engine:
             memory['surface_progress'] = [{'surface': key, 'status': value['status']}
                                            for key, value in self.surface_settlements.items()]
             memory['surface_progress_notice'] = 'Settlement details remain available through investigation_state and on disk.'
+        while len(json.dumps(packed())) > 85000 and knowledge_documents:
+            knowledge_documents.pop(next(reversed(knowledge_documents)))
+        # Only an intrinsically oversized last round is removed. Never truncate
+        # tool-call JSON or leave replies without their assistant call.
+        while len(json.dumps(packed())) > 85000 and recent:
+            drop_oldest_round()
         self.messages = packed()
         self.event({'tool': 'context.compact', 'purpose': 'Bound model context while preserving full disk trace',
                     'result_summary': {'retained_messages': len(recent), 'read_receipts': len(self.receipts),
