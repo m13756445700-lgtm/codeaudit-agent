@@ -244,3 +244,22 @@ def test_batch_errors_get_feedback_before_failure_stop(tmp_path):
     events=[json.loads(x) for x in (engine.audit/'tool_calls.jsonl').read_text().splitlines()]
     errors=[x['result_summary']['consecutive_same_failure'] for x in events if x.get('purpose')=='failed action']
     assert errors == [1,1,1,1,1,1,2,2,2,3,3,3]
+
+
+def test_rejected_decision_cannot_bypass_negative_coverage_reads(tmp_path):
+    engine = make_engine(tmp_path)
+    engine.findings['negative'] = {'id':'negative','status':'REJECTED',
+                                 'source':{'file':'a.py'},'sink':{'file':'a.py'},'data_flow':[]}
+    review = {'surface':'input','status':'reviewed','files':['a.py'],
+              'reason':'No sink in sampled entrypoint','assessment':'decision',
+              'decision_ids':['negative'],'absence_evidence':[]}
+    del engine.read_cache['a.py'][2]
+    with pytest.raises(ValueError, match=r'REJECTED.*start=2, end=2'):
+        engine.dispatch('settle_surface',review)
+    assert 'input' not in engine.surface_settlements
+    engine.dispatch('use_tool', {'tool':'repo.read_range','arguments':{'path':'a.py','start':2,'end':2},'purpose':'Close unread negative coverage gap'})
+    assert engine.dispatch('settle_surface',review)['accepted']
+    assert engine.findings['negative']['status'] == 'REJECTED'
+    source = engine.audit/'repo/a.py'; source.chmod(0o600); source.write_text('eval(input())\n')
+    with pytest.raises(ValueError, match='snapshot changed'):
+        engine.dispatch('settle_surface',review)

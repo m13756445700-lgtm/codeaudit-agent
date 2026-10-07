@@ -33,7 +33,7 @@ Each environment assumption has claim, state verified or unknown, references, an
 Verified assumptions require read repository evidence; the audit host OS is not deployment evidence.
 State judgment_scope as conditional_code or deployment and deployment_exposure as unknown, evidenced, or not_evidenced. A conditional_code verdict assesses the code under explicitly listed preconditions, not whether a real deployment is vulnerable. Copy each material unknown environment claim into exploit_preconditions. Unknown deployment does not erase a demonstrated conditional code flaw; unknown implementation behavior still requires INSUFFICIENT_EVIDENCE. A deployment verdict with material unknowns requires INSUFFICIENT_EVIDENCE. Repository version is not deployment evidence.
 REJECTED requires implementation counter_evidence; an imported function name does not prove its behavior.
-Check each claimed guard against the exact snapshot, including platform/version branches. Do not transfer a guard from knowledge into source evidence.
+Check each claimed guard against the exact snapshot, including platform/version branches. Do not transfer a guard from knowledge into source evidence. When external evidence covers selected runtime tags or versions, enumerate only those observed versions; do not convert sampled evidence into an all-earlier/all-later version range. Preserve untested versions as unknown.
 Never base a confirmed impact on hypothetical future code changes.
 For configuration-only claims retrieve vulnerability_judgement knowledge and verify deployment reachability and concrete impact; unknown exposure is not confirmed compromise.
 Source, sink AND EACH data_flow item: {file,line,symbol,evidence,operation}. Evidence must be a verbatim substring
@@ -41,7 +41,7 @@ at the SINGLE cited line, symbol must literally occur in file. Cite only lines Y
 Explain absence or effectiveness of sanitizer in sanitizer_analysis. Gate validates references, not your judgment.
 Before finish, use review_decision for each non-INSUFFICIENT_EVIDENCE decision. Challenge it with a concrete counterexample or missing precondition; reread implementation as needed. This is your self-review, not independent verification. If the challenge invalidates the decision, submit a corrected decision and review that revision. Never rubber-stamp a guard from its name.
 Use submit_decision for both confirmed and rejected hypotheses. Correct rejected evidence references if Gate fails.
-Every reviewed surface must specify assessment=decision with decision_ids of recorded judgments, or assessment=feature_absent with actual read absence_evidence references and an absence reason. A working defense is NOT an absent feature: it requires a REJECTED judgment. Feature absence is limited to fully read declared files, never a repository-wide claim from sampled lines. Linked decisions must cite implementation files included in the surface. Deferred surfaces use assessment=unexamined. Never place a new security verdict only in a settlement or summary.
+Every reviewed surface must specify assessment=decision with decision_ids of recorded judgments, or assessment=feature_absent with actual read absence_evidence references and an absence reason. A surface linked to a REJECTED decision requires complete untruncated reads of every declared surface file before it can be settled as reviewed. A targeted rejection may be recorded earlier, but does not establish whole-file negative coverage. A working defense is NOT an absent feature: it requires a REJECTED judgment. Feature absence is limited to fully read declared files, never a repository-wide claim from sampled lines. Linked decisions must cite implementation files included in the surface. Deferred surfaces use assessment=unexamined. Never place a new security verdict only in a settlement or summary.
 At finish, settle EVERY planned attack surface in surface_reviews: surface (exact planned name), status reviewed or deferred, files (actually read paths), and reason. Deferred surfaces require limitations and yield PARTIAL. Reviewed surfaces require read evidence. Never silently drop surfaces when revising a plan.
 Review uncovered attack surfaces then finish with scope and limitations; don't claim entire repo safe from sample reads.
 Use investigation_state to retrieve earlier notes after compaction. Use investigation_note to preserve concise evidence summaries and open questions before expanding or rereading. Record each completed surface using settle_surface as you go; finish remains mandatory. Notes are provisional model assessments, not validated security verdicts.
@@ -435,6 +435,17 @@ class Engine:
                 linked_files = {ref.get('file') for ref in refs if isinstance(ref, dict)}
                 if not linked_files.intersection(files):
                     raise ValueError('Linked decision has no source/data-flow/sink file in this surface; cannot reuse unrelated evidence')
+            if any(self.findings[key].get('status') == 'REJECTED' for key in ids):
+                for path in files:
+                    source = safe_path(self.audit/'repo', path)
+                    if digest(source) != self.metadata['files'].get(path):
+                        raise ValueError('Negative coverage snapshot changed')
+                    lines = source.read_text(errors='replace').splitlines()
+                    observed = self.read_cache.get(path, {})
+                    missing = [n for n, code in enumerate(lines, 1) if observed.get(n) != code]
+                    if missing:
+                        start = missing[0]
+                        raise ValueError(f'REJECTED surface requires fully read declared files; {path} has {len(missing)} unread or truncated lines. Next repo.read_range: path={path}, start={start}, end={min(start+119, len(lines))}. Read remaining gaps before settlement, or defer honestly; do not infer absence from sampled code.')
         elif assessment == 'feature_absent':
             refs = review.get('absence_evidence')
             if ids or not isinstance(refs, list) or not 1 <= len(refs) <= 8:

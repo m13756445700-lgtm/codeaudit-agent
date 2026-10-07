@@ -1,0 +1,22 @@
+{
+  "campaign": "evidence-remediation-13",
+  "planned": 4,
+  "attempted": 1,
+  "remaining_unexecuted": 3,
+  "audit_id": "3ed1102404eb4cdbb7c3a887a5e7fe07",
+  "workflow": "COMPLETE",
+  "semantic_acceptance": "FAILED",
+  "archive_sha256": "735d7d759ea80a96794740930d7dae19b1ee6e84374dc0f331b7fee4b05ec5da",
+  "observed_improvement": "Exact-precondition feedback recovered after one failed contract submission; no15-repeat loop.",
+  "findings": {
+    "CONFIRMED": 1,
+    "REJECTED": 4
+  },
+  "review_failures": [
+    "REJECTED claims no filesystem sinks in entire serving.py/test.py/response.py based on samples only.",
+    "Runtime range below3.11.2 overgeneralizes evidence for selected tags.",
+    "Original formparser scope not selected in fresh dynamic plan; cannot count as full closure of earlier scope."
+  ],
+  "next": "Full-read negative-surface contract, explicit retained9-module scope and sampled-version instruction;208LinuxPASS then fresh14.",
+  "release_ready": false
+}
