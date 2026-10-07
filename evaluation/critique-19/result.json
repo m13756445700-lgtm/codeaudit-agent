@@ -1,0 +1,29 @@
+{
+  "kind": "known failed decision replay; not blind evaluation",
+  "source_audit_id": "6d6cfa2903cd4a22b5ba0c04bed3b1b3",
+  "finding_id": "safe_join-confinement",
+  "original_status": "REJECTED",
+  "implementation_sha256": "9b2b3769938f3ffd95f83baa87e0ea828fe857cad29b0535d256841d1a189cb8",
+  "feedback": {
+    "assessment": "The REJECTED verdict rests on a guard trace that is internally consistent for the vectors it enumerates, but the claim \"no concrete input returns a path outside the base\" is broader than the evidence supports. Two concrete gaps are visible in the supplied excerpts and knowledge card, both of which the finding's own false_positive_analysis gestures at without resolving.\n\n1) The finding's residual case is dismissed with a POSIX-only argument. The knowledge card's pinned table shows isabs('//server/share') == False on CPython 3.10.0, 3.11.0, 3.11.1 \u2014 i.e. the guard at line 153 does NOT fire for a bare forward-slash UNC component on those tags. The finding's rebuttal (\"on POSIX posixpath.normpath preserves '//' and os.path.isabs('//server/share') is True\") silently substitutes posixpath semantics for os.path semantics. On Windows, os.path is ntpath, and the card's own table is ntpath evidence: isabs('//server/share') is False on 3.10.0/3.11.0/3.11.1. The alt-sep check at line 152 does not cover this, because _os_alt_seps excludes '/' by construction (line 13: `sep != \"/\"`), so a forward-slash UNC string contains no element of _os_alt_seps on Windows either. The finding asserts \"forward-slash '//server/share' is caught by isabs on the reviewed tags\" \u2014 that is contradicted by the card's table for the tags it names. The finding never states which CPython tag it reviewed, so the guard result for line 153 is unresolved, not established.\n\n2) The variadic structure is not addressed. The card explicitly warns: \"For a variadic helper, check each component before the final join. A bare UNC component followed by a separate relative filename is distinct from one UNC string containing a filename.\" The finding's sanitizer_analysis only analyzes single components containing a filename ('a/../../etc/passwd', '/etc/passwd'). For the two-component input ('//server/share', 'file') on a tag where isabs('//server/share') is False, the card's pinned replay yields join('//server/share', 'file') == '//server/share/file' \u2014 a path outside the trusted base. The finding's claim that \"the final posixpath.join (161) cannot be overridden by a later component because any component starting with '/' is rejected by isabs\" is a non-sequitur: the escape is produced by the FIRST component, not a later override, and the first component is not rejected on those tags.\n\nNeither gap is closed by the supplied excerpts. The finding's confidence_rationale claims \"each rejection condition was traced against concrete traversal inputs,\" but no concrete input is given for the UNC component, and the environment_assumptions field marks the platform as \"unknown\" while the verdict depends on it. The correct disposition for the helper-contract claim under the card's own guidance (\"preserve LIKELY or INSUFFICIENT_EVIDENCE if decisive facts for that claim remain missing\") is not a clean REJECTED.",
+    "objections": [
+      "Line 153 guard result is unresolved, not established: the finding asserts isabs('//server/share') is True 'on the reviewed tags', but the knowledge card's pinned table shows False on CPython 3.10.0, 3.11.0 and 3.11.1. The finding never names the CPython tag it reviewed, so the guard outcome for a bare forward-slash UNC component is unknown.",
+      "The alt-sep guard at line 152 cannot cover the forward-slash UNC route: _os_alt_seps is built with `sep != \"/\"` (line 13), so '/' is never in the list on any platform. The finding's claim that 'on Windows the backslash alt-sep check (152) independently rejects backslash UNC forms, and forward-slash //server/share is caught by isabs' leaves the forward-slash form resting entirely on the disputed isabs result.",
+      "The variadic case the card explicitly flags is not analyzed: for the two-component input ('//server/share', 'file') on a tag where isabs('//server/share') is False, the card's pinned replay gives join('//server/share', 'file') == '//server/share/file', outside the trusted base. The finding's rebuttal ('the final join cannot be overridden by a later component') addresses a different mechanism \u2014 the escape originates in the first component, which is not rejected on those tags.",
+      "The finding's false_positive_analysis substitutes posixpath semantics for os.path semantics: it argues 'on POSIX posixpath.normpath preserves // and os.path.isabs(//server/share) is True', but on Windows os.path is ntpath, and the card's table is ntpath evidence showing False on 3.10.0/3.11.0/3.11.1. The environment_assumptions field itself marks the platform as 'unknown' while the verdict depends on it."
+    ]
+  },
+  "usage": [
+    {
+      "prompt_tokens": 4881,
+      "completion_tokens": 1131,
+      "total_tokens": 6012,
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      },
+      "prompt_cache_hit_tokens": 0,
+      "prompt_cache_miss_tokens": 4881
+    }
+  ],
+  "no_verdict_mutation": true
+}

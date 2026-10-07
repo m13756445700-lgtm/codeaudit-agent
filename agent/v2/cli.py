@@ -49,7 +49,7 @@ def main(argv=None):
             os.environ['CODEAUDIT_MCP_URL'], os.environ['CODEAUDIT_OCTOBUS_TOKEN'], audit.name)
         repo_profile = profile(audit / 'repo')
         progress({'event': 'repository_understanding', 'languages': repo_profile['languages'], 'files': metadata['file_count']})
-        result = Engine(model, transport, audit, metadata, repo_profile, knowledge=not args.no_knowledge, progress=progress, max_iterations=args.max_iterations, max_calls=args.max_calls, timeout=args.timeout, focus=args.focus, business_policy=policy).run()
+        result = Engine(model, transport, audit, metadata, repo_profile, knowledge=not args.no_knowledge, progress=progress, max_iterations=args.max_iterations, max_calls=args.max_calls, timeout=args.timeout, focus=args.focus, business_policy=policy, adversarial_review=True).run()
         print(json.dumps({**result, 'report': str(audit / 'report.md')}, ensure_ascii=False))
         return 0 if result['status'] == 'COMPLETE' else 2
     finally:

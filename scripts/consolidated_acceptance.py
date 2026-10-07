@@ -126,7 +126,7 @@ def run_live(output, max_runs):
         model = Model()
         engine = Engine(model, transport, directory, metadata, profile(directory/'repo'),
                         knowledge=job['arm'] != 'off', focus=job.get('focus'),
-                        business_policy=case.get('policy'), **plan['budget_per_run'])
+                        business_policy=case.get('policy'), adversarial_review=True, **plan['budget_per_run'])
         summary = engine.run()
         static = None
         if case['kind'] == 'benchmark' and not summary.get('failure'):

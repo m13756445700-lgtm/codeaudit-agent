@@ -1,0 +1,19 @@
+{
+  "campaign": "evidence-remediation-18",
+  "planned": 4,
+  "attempted": 1,
+  "unexecuted": 3,
+  "audit_id": "6d6cfa2903cd4a22b5ba0c04bed3b1b3",
+  "workflow": "COMPLETE",
+  "calls": 157,
+  "counts": {
+    "REJECTED": 8,
+    "INSUFFICIENT_EVIDENCE": 1
+  },
+  "tokens": 1842181,
+  "archive_sha256": "8cd66d10075ab687dbdd643f3715afe256ed24ab8945b8ad1b084a2670425750",
+  "semantic_acceptance": "FAILED",
+  "reason": "Target safe_join-confinement incorrectly REJECTED: mixes POSIX isabs with Windows guards, contradicting received pinned knowledge. Self-review upheld incorrect claim.",
+  "release_ready": false,
+  "next": "Bounded fresh-context model critique; known failed claim replay before broad19. Not independent human review."
+}

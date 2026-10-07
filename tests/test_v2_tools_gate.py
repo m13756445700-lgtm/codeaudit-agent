@@ -232,3 +232,35 @@ def test_failed_precondition_feedback_replays_actual_model_proposal(tmp_path):
     accepted = validate(f, audit/'repo', meta, receipts, knowledge)
     assert accepted['evidence_gate']['passed'], accepted['evidence_gate']['problems']
     assert accepted['status'] == f['status']
+
+
+def test_fresh_context_critique_requires_response_without_changing_verdict(context):
+    audit, meta, tools = context
+    class Critic:
+        def __init__(self): self.calls=[]
+        def complete(self,messages,schema):
+            self.calls.append(messages)
+            return {'tool_calls':[{'function':{'name':'critique','arguments':json.dumps({'assessment':'Check alternate execution context','objections':['Is the guard effective for every stated precondition?']})}}]}
+    model=Critic()
+    engine=Engine(model,Local(tools),audit,meta,profile(audit/'repo'),knowledge=False,adversarial_review=True,business_policy='Tenant-private records')
+    engine.dispatch('submit_plan',{'plan':{'attack_surfaces':['database'],'next_actions':['read']}})
+    for name in ['app.py','db.py']:
+        engine.dispatch('use_tool',{'tool':'repo.read_file','arguments':{'path':name},'purpose':'inspect'})
+    engine.dispatch('hypothesis',{'hypothesis':{'id':'H1','statement':'Inspect query','status':'INVESTIGATING'}})
+    f=finding();f['knowledge_application']='No knowledge in this test'
+    engine.dispatch('submit_decision',{'finding':f})
+    args={'id':'H1','counterexample':'Bound query would be safe','assessment':'Query is unbound','outcome':'upheld','references':[f['sink']]}
+    first=engine.dispatch('review_decision',args)
+    assert first['recorded'] is False and engine.findings['H1']['status']=='CONFIRMED'
+    assert engine.pending_decision_reviews()==['H1']
+    assert engine.dispatch('review_decision',args)['recorded'] is False
+    assert len(model.calls)==1
+    assert len(model.calls[0])==2 and 'read_excerpts' in model.calls[0][1]['content']
+    assert 'Tenant-private records' in model.calls[0][1]['content']
+    assert engine.dispatch('review_decision',dict(args,challenge_response='db.py line2 directly executes the caller value; no guard exists in this inspected body.'))['recorded']
+    assert engine.pending_decision_reviews()==[]
+    f['reasoning_summary']='Changed claim must get its own critique'
+    engine.dispatch('submit_decision',{'finding':f})
+    assert engine.pending_decision_reviews()==['H1']
+    assert not engine.dispatch('review_decision',args)['recorded']
+    assert len(model.calls)==2

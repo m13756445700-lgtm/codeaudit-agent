@@ -39,7 +39,7 @@ For configuration-only claims retrieve vulnerability_judgement knowledge and ver
 Source, sink AND EACH data_flow item: {file,line,symbol,evidence,operation}. Evidence must be a verbatim substring
 at the SINGLE cited line, symbol must literally occur in file. Cite only lines YOU READ, not guessed search snippets.
 Explain absence or effectiveness of sanitizer in sanitizer_analysis. Gate validates references, not your judgment.
-Before finish, use review_decision for each non-INSUFFICIENT_EVIDENCE decision. Challenge it with a concrete counterexample or missing precondition; reread implementation as needed. This is your self-review, not independent verification. If the challenge invalidates the decision, submit a corrected decision and review that revision. Never rubber-stamp a guard from its name.
+Before finish, use review_decision for each non-INSUFFICIENT_EVIDENCE decision. Challenge it with a concrete counterexample or missing precondition; reread implementation as needed. This is your self-review, not independent verification. When fresh-context model critique returns objections, check them against evidence; correct your decision or explicitly answer each objection via challenge_response and references. The critic is fallible and cannot change your verdict. If the challenge invalidates the decision, submit a corrected decision and review that revision. Never rubber-stamp a guard from its name.
 Use submit_decision for both confirmed and rejected hypotheses. Correct rejected evidence references if Gate fails.
 Every reviewed surface must specify assessment=decision with decision_ids of recorded judgments, or assessment=feature_absent with actual read absence_evidence references and an absence reason. A surface linked to a REJECTED decision requires complete untruncated reads of every declared surface file before it can be settled as reviewed. A targeted rejection may be recorded earlier, but does not establish whole-file negative coverage. A working defense is NOT an absent feature: it requires a REJECTED judgment. Feature absence is limited to fully read declared files, never a repository-wide claim from sampled lines. Linked decisions must cite implementation files included in the surface. Deferred surfaces use assessment=unexamined. Never place a new security verdict only in a settlement or summary.
 At finish, settle EVERY planned attack surface in surface_reviews: surface (exact planned name), status reviewed or deferred, files (actually read paths), and reason. Deferred surfaces require limitations and yield PARTIAL. Reviewed surfaces require read evidence. Never silently drop surfaces when revising a plan.
@@ -100,6 +100,7 @@ TOOLS = [
     function('review_decision', 'Record evidence-based self-review of the current decision revision; does not change verdict. Challenge guards, platform assumptions and impact.',
              {'id': STRING, 'counterexample': STRING, 'assessment': STRING,
               'outcome': {'type': 'string', 'enum': ['upheld', 'revise']},
+              'challenge_response': STRING,
               'references': {'type': 'array', 'items': REFERENCE}},
              ['id', 'counterexample', 'assessment', 'outcome', 'references']),
     function('investigation_state', 'Read persisted provisional note by id after compaction; omit id to list notes and surface progress.', {'id': STRING}, []),
@@ -119,9 +120,13 @@ TOOLS = [
 
 class Engine:
     def __init__(self, model, transport, audit, metadata, profile, max_iterations=48, max_calls=100,
-                 timeout=1200, knowledge=True, progress=None, focus=None, business_policy=None):
+                 timeout=1200, knowledge=True, progress=None, focus=None, business_policy=None, adversarial_review=False):
         if business_policy is not None and (not isinstance(business_policy, str) or len(business_policy) > 8000):
             raise ValueError('Business policy must be text of at most 8000 characters')
+        self.adversarial_review = adversarial_review
+        self.business_policy = business_policy
+        self.claim_critiques = {}
+        self.critique_calls = 0
         self.model, self.transport = model, transport
         self.audit, self.metadata, self.profile = Path(audit), metadata, profile
         self.max_iterations, self.max_calls, self.timeout = max_iterations, max_calls, timeout
@@ -281,7 +286,25 @@ class Engine:
             checked = validate(probe, self.audit/'repo', self.metadata, self.receipts, self.knowledge)
             if not checked['evidence_gate']['passed']:
                 raise ValueError('Review evidence invalid: ' + '; '.join(checked['evidence_gate']['problems']))
-            review = dict(args, decision_sha256=self.decision_digest(finding), kind='model_self_review')
+            decision_hash = self.decision_digest(finding)
+            if self.adversarial_review:
+                if decision_hash not in self.claim_critiques:
+                    if self.critique_calls >= 24:
+                        raise ValueError('Claim critique budget exhausted; preserve unresolved scope')
+                    from agent.v2.challenge import critique
+                    self.critique_calls += 1
+                    feedback = critique(self.model, finding, self.read_cache, self.knowledge_cache, self.business_policy)
+                    self.claim_critiques[decision_hash] = dict(feedback, id=finding['id'], decision_sha256=decision_hash)
+                    self.save('claim_critiques.json', list(self.claim_critiques.values()))
+                    self.event({'tool':'claim_critique', 'purpose':'Fresh-context model critique (not independent human review)',
+                                'result_summary': self.claim_critiques[decision_hash]})
+                    if feedback['objections']:
+                        return {'recorded':False, 'critique':feedback,
+                                'next_action':'Examine these model objections against source/knowledge. Correct the decision and review its new revision, or respond to each objection in challenge_response with the cited implementation evidence. Do not assume the critic is correct.'}
+                feedback = self.claim_critiques[decision_hash]
+                if feedback['objections'] and (not isinstance(args.get('challenge_response'), str) or not 1 <= len(args['challenge_response'].strip()) <= 4000):
+                    return {'recorded':False,'critique':feedback,'next_action':'Correct the finding or supply a substantive challenge_response with your read references before review can be recorded.'}
+            review = dict(args, decision_sha256=decision_hash, kind='model_self_review')
             self.decision_reviews[args['id']] = review
             self.save('decision_reviews.json', list(self.decision_reviews.values()))
             self.event({'tool': name, 'arguments': args, 'purpose': 'Model counterevidence self-review',
@@ -518,6 +541,10 @@ class Engine:
                   'retrieved_knowledge': self.knowledge,
                   'knowledge_documents': knowledge_documents,
                   'knowledge_notice': 'Exact previously received knowledge payloads, not repository evidence or deployment verification. Whole payloads retained newest-first within a 24000-character serialized budget; IDs absent here require knowledge.retrieve before relying on their facts. No conclusion is promoted by retention.',
+                  'claim_critiques': [{'id': c['id'], 'decision_sha256': c['decision_sha256'],
+                                      'assessment': c['assessment'][:500], 'objections': [o[:500] for o in c['objections']]}
+                                     for c in list(self.claim_critiques.values())[-4:]],
+                  'critique_notice': 'Truncated navigation summaries; review_decision returns complete cached feedback for the current finding revision.',
                   'remaining_tool_calls': self.max_calls - self.calls}
         def packed():
             return self.messages[:2] + [{'role': 'user', 'content': json.dumps(memory, ensure_ascii=False)}] + recent
@@ -654,7 +681,7 @@ class Engine:
                        'transport': self.transport.kind, 'tool_calls': self.calls, 'elapsed_seconds': round(time.monotonic()-started, 2),
                        'counts': dict(Counter(f['status'] for f in self.findings.values())), 'failure': failure,
                        'completion': getattr(self, 'completion', None), 'usage': self.model.usage,
-                       'assessment_summary': self.assessment_summary(),
+                       'assessment_summary': self.assessment_summary(), 'claim_critique_calls': self.critique_calls,
                        'snapshot_sha256': self.metadata['snapshot_sha256']}
             self.save('run_summary.json', summary)
             self.report(summary)

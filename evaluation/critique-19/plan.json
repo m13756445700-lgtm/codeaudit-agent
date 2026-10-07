@@ -1,0 +1,8 @@
+{
+  "kind": "one model critique of actual failed18 decision; no target label passed",
+  "source_archive_sha256": "8cd66d10075ab687dbdd643f3715afe256ed24ab8945b8ad1b084a2670425750",
+  "script_sha256": "28c2c6e1fb0ac605d65b534788213c861a31b1232e8edfe7a5c602e560e70e76",
+  "max_model_calls": 1,
+  "acceptance": "Critic identifies inconsistent Windows/POSIX guard reasoning using supplied read evidence and knowledge; no new verdict injected.",
+  "release_ready": false
+}
