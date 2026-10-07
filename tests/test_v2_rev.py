@@ -232,3 +232,41 @@ def test_compaction_accounts_for_escaped_literal_evidence(tmp_path):
     engine.compact_context()
     assert len(json.dumps(engine.messages)) <= 85000
     assert engine.read_cache['a.py'][99] == '\\"'*400
+
+
+def test_compaction_keeps_retrieved_knowledge_caveats_verbatim(tmp_path):
+    src = tmp_path/'src'; src.mkdir()
+    (src/'a.py').write_text('x = 1\n')
+    audit, metadata = snapshot(src, tmp_path/'ws')
+    knowledge = tmp_path/'knowledge'; knowledge.mkdir()
+    content = 'Fact: platform-specific behavior.\n' + 'context\n'*900 + 'LIMIT: exact versions only; no deployment proof.'
+    (knowledge/'path_traversal.md').write_text(content)
+    engine = Engine(None, Local(ToolLayer(audit, knowledge=knowledge)), audit, metadata, profile(audit/'repo'))
+    engine.dispatch('submit_plan', {'plan': {'attack_surfaces': ['input'], 'next_actions': ['read']}})
+    received = engine.dispatch('use_tool', {'tool': 'knowledge.retrieve', 'arguments': {'category': 'path_traversal'}, 'purpose': 'runtime semantics'})
+    engine.messages.append({'role': 'user', 'content': 'x'*90000})
+    engine.compact_context()
+    memory = json.loads(engine.messages[2]['content'])
+    assert memory['knowledge_documents']['path_traversal.md'] == received
+    assert memory['knowledge_documents']['path_traversal.md']['content'].endswith('no deployment proof.')
+    assert engine.findings == {}
+    assert len(json.dumps(engine.messages)) <= 85000
+
+
+def test_compaction_omits_whole_knowledge_payloads_with_explicit_retrieval_notice(tmp_path):
+    src = tmp_path/'src'; src.mkdir()
+    (src/'a.py').write_text('x = 1\n')
+    audit, metadata = snapshot(src, tmp_path/'ws')
+    engine = Engine(None, None, audit, metadata, profile(audit/'repo'))
+    for index in range(4):
+        key = f'card{index}'
+        engine.knowledge[key] = f'hash{index}'
+        engine.knowledge_cache[key] = {'id': key, 'sha256': f'hash{index}', 'content': '\\"'*5000}
+    engine.messages.append({'role': 'user', 'content': 'x'*90000})
+    engine.compact_context()
+    memory = json.loads(engine.messages[2]['content'])
+    assert list(memory['knowledge_documents']) == ['card3']
+    assert memory['knowledge_documents']['card3'] == engine.knowledge_cache['card3']
+    assert len(memory['retrieved_knowledge']) == 4
+    assert 'knowledge.retrieve' in memory['knowledge_notice']
+    assert len(json.dumps(engine.messages)) <= 85000

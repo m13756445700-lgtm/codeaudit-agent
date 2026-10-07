@@ -1,0 +1,175 @@
+{
+  "audit_id": "8c1fe8f8732846249c2c60098e9929ca",
+  "status": "PARTIAL",
+  "counts": {
+    "LIKELY": 1,
+    "REJECTED": 4
+  },
+  "tool_calls": 98,
+  "elapsed_seconds": 150.98,
+  "tokens_observed": 1034004,
+  "archive_sha256": "58f7b97f844e6aebba45d3413425a60100f3d126e747d9a9c29ca0098abbbb73",
+  "target": {
+    "category": "path_traversal",
+    "confidence": "medium",
+    "confidence_rationale": "Version and guard-set match the documented vulnerable release exactly, and the knowledge card pins the ntpath.isabs semantics. Confidence is medium rather than high because the Windows/Python<3.11.2 runtime is unverified and no concrete caller-to-file-read chain was proven in this snapshot.",
+    "controllability": "Attacker controls the untrusted path component passed to safe_join (e.g. via PATH_INFO in SharedDataMiddleware or a route parameter in send_from_directory).",
+    "counter_evidence": [
+      {
+        "evidence": "any(sep in filename for sep in _os_alt_seps)",
+        "file": "src/werkzeug/security.py",
+        "line": 152,
+        "operation": "rejects backslash-containing inputs on Windows",
+        "symbol": "safe_join"
+      },
+      {
+        "evidence": "or os.path.isabs(filename)",
+        "file": "src/werkzeug/security.py",
+        "line": 153,
+        "operation": "rejects absolute paths on POSIX and on Python>=3.11.2",
+        "symbol": "safe_join"
+      }
+    ],
+    "data_flow": [
+      {
+        "evidence": "for filename in pathnames:",
+        "file": "src/werkzeug/security.py",
+        "line": 147,
+        "operation": "untrusted component enters",
+        "symbol": "safe_join"
+      },
+      {
+        "evidence": "filename = posixpath.normpath(filename)",
+        "file": "src/werkzeug/security.py",
+        "line": 149,
+        "operation": "posix normalization (does not collapse UNC)",
+        "symbol": "safe_join"
+      },
+      {
+        "evidence": "or os.path.isabs(filename)",
+        "file": "src/werkzeug/security.py",
+        "line": 153,
+        "operation": "absolute-path guard (ntpath.isabs False for bare //server/share on Py<3.11.2)",
+        "symbol": "safe_join"
+      },
+      {
+        "evidence": "return posixpath.join(*parts)",
+        "file": "src/werkzeug/security.py",
+        "line": 161,
+        "operation": "returns share-root path outside trusted directory",
+        "symbol": "safe_join"
+      }
+    ],
+    "defense_claims": [
+      {
+        "claim": "Alternate separators (backslash on Windows) are rejected before joining.",
+        "limitations": "Only rejects backslash shapes; forward-slash UNC '//server/share' contains no backslash and passes.",
+        "references": [
+          {
+            "evidence": "any(sep in filename for sep in _os_alt_seps)",
+            "file": "src/werkzeug/security.py",
+            "line": 152,
+            "operation": "alt-sep rejection",
+            "symbol": "safe_join"
+          },
+          {
+            "evidence": "_os_alt_seps: list[str] = list(",
+            "file": "src/werkzeug/security.py",
+            "line": 12,
+            "operation": "list built from os.sep/os.path.altsep",
+            "symbol": "_os_alt_seps"
+          }
+        ]
+      },
+      {
+        "claim": "Absolute paths are rejected via os.path.isabs.",
+        "limitations": "On Windows with Python < 3.11.2, ntpath.isabs('//server/share') is False, so a bare UNC share root is not rejected.",
+        "references": [
+          {
+            "evidence": "or os.path.isabs(filename)",
+            "file": "src/werkzeug/security.py",
+            "line": 153,
+            "operation": "absolute-path guard",
+            "symbol": "safe_join"
+          }
+        ]
+      }
+    ],
+    "deployment_exposure": "unknown",
+    "environment_assumptions": [
+      {
+        "affects_verdict": true,
+        "claim": "Deployment OS is Windows.",
+        "references": [],
+        "state": "unknown"
+      },
+      {
+        "affects_verdict": true,
+        "claim": "Python runtime is < 3.11.2.",
+        "references": [],
+        "state": "unknown"
+      }
+    ],
+    "exploit_preconditions": [
+      "Deployment OS is Windows.",
+      "Python runtime is < 3.11.2.",
+      "A caller passes a single UNC-shaped component (e.g. //server/share) to safe_join.",
+      "The returned path reaches a file operation that reads the share root or a file under it."
+    ],
+    "false_positive_analysis": "Not a false positive: the code demonstrably lacks the 3.0.6 leading-slash guard and matches the documented vulnerable version. It is not a confirmed deployment compromise because the Windows/Python-version precondition is unverified and the returned share-root string alone does not prove a readable-file exposure without a caller chain. The alt-separator guard does reject backslash-containing inputs, so only forward-slash UNC shapes are relevant.",
+    "id": "safe-join-1",
+    "judgment_scope": "conditional_code",
+    "knowledge_application": "The path_traversal knowledge card (CA-K04) directly documents this exact Werkzeug 3.0.5 safe_join UNC bypass (GHSA-f9vj-2wh5-fj8j) and the 3.0.6 leading-slash fix, and pins ntpath.isabs behavior for //server/share on Python < 3.11.2. This drove the LIKELY conditional_code verdict and the explicit Windows/Python precondition.",
+    "knowledge_used": [
+      "path_traversal.md"
+    ],
+    "reachability": "safe_join is a public helper (docs/utils.rst autofunction) and is called by send_from_directory (utils.py:564) and SharedDataMiddleware loaders (shared_data.py:171,207). Reachability of the defect requires the caller to pass a single UNC-shaped component and the returned path to reach a file operation; the helper itself is directly reachable by any application code that uses it as documented.",
+    "reasoning_summary": "The snapshot is Werkzeug 3.0.5 (pyproject.toml:3). safe_join's guard set (security.py:151-157) lacks the explicit leading-slash rejection added in 3.0.6. The retrieved path_traversal knowledge card documents GHSA-f9vj-2wh5-fj8j: a UNC path such as //server/share escapes safe_join on Windows with Python below 3.11.2 because ntpath.isabs returns False for a bare share root. The code matches the vulnerable version and guard set exactly, so the conditional code flaw is present. Impact on a real deployment depends on Windows + Python < 3.11.2, which is unverified.",
+    "remediation": "Upgrade to Werkzeug >= 3.0.6, which adds an explicit rejection of leading-slash paths in safe_join. Alternatively, reject any filename starting with '/' before joining, and/or run on Python >= 3.11.2 where ntpath.isabs treats bare UNC share roots as absolute.",
+    "sanitizer_analysis": "Guards present: alt-separator rejection (line 152, _os_alt_seps includes '\\\\' on Windows), os.path.isabs (line 153), '..' equality (154) and '../' prefix (155). None independently rejects a leading-slash path. On Windows with Python < 3.11.2, ntpath.isabs('//server/share') returns False because splitdrive yields ('//server/share','') leaving an empty tail, so the isabs guard does not fire; posixpath.normpath preserves the leading '//' and posixpath.join returns the UNC share root, escaping the trusted directory. The explicit leading-slash rejection that fixes this was added in Werkzeug 3.0.6 and is absent here. On POSIX, os.path.isabs('/...') is True so the guard fires; the bypass is Windows-specific.",
+    "security_boundary": "Trusted base directory vs. attacker-supplied relative path component; safe_join is the confinement boundary.",
+    "severity": "medium",
+    "sink": {
+      "evidence": "return posixpath.join(*parts)",
+      "file": "src/werkzeug/security.py",
+      "line": 161,
+      "operation": "join trusted directory with untrusted component",
+      "symbol": "safe_join"
+    },
+    "source": {
+      "evidence": "for filename in pathnames:",
+      "file": "src/werkzeug/security.py",
+      "line": 147,
+      "operation": "iterate untrusted path components",
+      "symbol": "safe_join"
+    },
+    "status": "LIKELY",
+    "title": "safe_join UNC path bypass on Windows with Python < 3.11.2 (Werkzeug 3.0.5)",
+    "unknowns": [
+      "Deployed OS (Windows vs POSIX).",
+      "Deployed Python patch version.",
+      "Whether any caller passes a bare UNC share-root component and reaches a file read."
+    ],
+    "ai_status": "LIKELY",
+    "evidence_gate": {
+      "passed": true,
+      "problems": [],
+      "snapshot_sha256": "ca6f54ce58072c67da814d84814be555be978b90013cc12cb96a41a69dc4d0f6",
+      "files": {
+        "src/werkzeug/security.py": "4ab51f809846cd6fc4c7baa370120d44671f59d8a46a2a689c0e5bb29b3890b0"
+      },
+      "scope": "reference integrity and completeness; AI owns security judgment"
+    }
+  },
+  "review": {
+    "accepted": false,
+    "reasons": [
+      "Focused static-serving scope incomplete; three surfaces deferred",
+      "Target remains LIKELY, frozen CONFIRMED expectation not met",
+      "Runtime observations overgeneralized into all Python<3.11.2; only pinned versions are established",
+      "Caller self-review notes inheritance but completion calls shared_data no traversal, an overbroad summary"
+    ],
+    "next": "Separate narrow helper-contract diagnostic, not replacement of failed broader scope"
+  },
+  "release_ready": false
+}

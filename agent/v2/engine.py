@@ -21,6 +21,7 @@ execution context, preconditions and business constraints. Retrieve relevant cat
 Unknown external dependency behavior requires INSUFFICIENT_EVIDENCE, never invent behavior.
 No private chain of thought. Supply concise auditable summaries only.
 Decision statuses: CONFIRMED, LIKELY, REJECTED, INSUFFICIENT_EVIDENCE. Explicitly reject false-positive candidates.
+First define the precise property and scope you are judging. CONFIRMED requires a concrete input and an evidence-supported trace proving that property is violated under explicitly stated preconditions. For conditional_code, this can be a demonstrated library contract violation; it does not assert downstream exploitation or actual deployment. Static source proof can suffice when relevant dependency semantics are established. LIKELY means a specific link in that scoped violation remains unproved: identify that link, rather than treating unknown deployment alone as a missing code-proof step. Never promote status to satisfy a benchmark, infer deployment from a hypothetical precondition, or expand a finite set of runtime observations into an unverified version range.
 Every decision MUST contain: id (matching hypothesis), title, category, status, source, data_flow (nonempty array),
 sink, sanitizer_analysis, exploit_preconditions (array), reachability, reasoning_summary, false_positive_analysis,
 remediation, confidence, severity, knowledge_used (array of returned document IDs), controllability,
@@ -126,6 +127,7 @@ class Engine:
         self.progress = progress
         self.receipts, self.knowledge, self.hypotheses, self.findings = [], {}, {}, {}
         self.notes, self.surface_settlements = {}, {}
+        self.knowledge_cache = {}
         self.decision_reviews = {}
         self.segment_calls = 0
         self.note_recovery = None
@@ -207,6 +209,9 @@ class Engine:
                     cache[line['line']] = line['code']
             if tool == 'knowledge.retrieve' and 'id' in result:
                 self.knowledge[result['id']] = result['sha256']
+                # Preserve received facts and caveats, not just an ID after compaction.
+                self.knowledge_cache.pop(result['id'], None)
+                self.knowledge_cache[result['id']] = {key: result[key] for key in ('id', 'sha256', 'content') if key in result}
             self.event({'tool': tool, 'arguments': arguments, 'purpose': args['purpose'],
                         'transport': self.transport.kind, 'result_summary': result})
             return result
@@ -470,6 +475,13 @@ class Engine:
                     break
                 excerpts[path] = excerpts.get(path, '') + line
                 excerpt_chars += len(line)
+        knowledge_documents = {}
+        knowledge_chars = 0
+        for key, document in reversed(list(self.knowledge_cache.items())):
+            size = len(json.dumps(document))
+            if 'content' in document and knowledge_chars + size <= 24000:
+                knowledge_documents[key] = document
+                knowledge_chars += size
         memory = {'context_compacted': True, 'notice': 'Earlier tool outputs remain in the audit trace. This state is not new evidence. Reread exact lines if needed; do not invent quotes.',
                   'investigation_notes': list(self.notes.values())[-6:],
                   'notes_notice': 'At most6 most recent notes shown; full provisional ledger remains investigation_notes.json. Notes are not verdicts.',
@@ -481,6 +493,8 @@ class Engine:
                   'read_receipts': self.receipts[-40:], 'file_lengths': self.file_lengths, 'literal_read_excerpts': excerpts,
                   'excerpt_notice': 'Only actually read lines; excerpt budget 45000 characters, each line at most800 chars. Missing lines are omitted, not proven safe. Reread only when needed; use retained exact lines for decisions.',
                   'retrieved_knowledge': self.knowledge,
+                  'knowledge_documents': knowledge_documents,
+                  'knowledge_notice': 'Exact previously received knowledge payloads, not repository evidence or deployment verification. Whole payloads retained newest-first within a 24000-character serialized budget; IDs absent here require knowledge.retrieve before relying on their facts. No conclusion is promoted by retention.',
                   'remaining_tool_calls': self.max_calls - self.calls}
         def packed():
             return self.messages[:2] + [{'role': 'user', 'content': json.dumps(memory, ensure_ascii=False)}] + recent
@@ -493,6 +507,8 @@ class Engine:
                 del excerpts[largest]
             else:
                 excerpts[largest] = ''.join(lines[:len(lines)//2])
+        while len(json.dumps(packed())) > 85000 and knowledge_documents:
+            knowledge_documents.pop(next(reversed(knowledge_documents)))
         self.messages = packed()
         self.event({'tool': 'context.compact', 'purpose': 'Bound model context while preserving full disk trace',
                     'result_summary': {'retained_messages': len(recent), 'read_receipts': len(self.receipts)}})

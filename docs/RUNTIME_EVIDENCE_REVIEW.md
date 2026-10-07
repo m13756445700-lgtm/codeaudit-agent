@@ -25,3 +25,11 @@ The previous unknown transition is now established for the 3.11 branch: adjacent
 [Replay script](../scripts/replay_runtime_evidence.py) and [new evidence](../evaluation/runtime-patch-boundary-20261006.json) pin the official URLs and SHA256. Save those raw sources as ntpath-3.11.1.py.txt and ntpath-3.11.2.py.txt, then run `python -m scripts.replay_runtime_evidence SOURCE_DIRECTORY`. The script checks hashes before compiling only the three reviewed string helpers. It neither downloads nor imports the target repository.
 
 Tampered-source rejection test: 1 PASS. Adjacent-tag replay completed with expected False/True bare-UNC behavior. No live model test, publication, or filesystem exploit claim. Next: establish caller impact and freeze an explicit distinction between a path-primitive contract defect and proven file exposure.
+
+## Call-chain follow-up and frozen regression06
+
+The public helper accepts variadic components. Distinguish one UNC filename from a bare UNC share plus a separate relative filename. The local string-only [trace](../evaluation/path-component-trace-20261006.json) preserves this distinction; it does not run target code or prove filesystem access. Actual single-component callers additionally use isfile or resource-reader checks. Pinned runtime facts are now included in the retrieved knowledge card, so the model can cite the knowledge hash while independently reading target guards. [Protocol and offline verification](plans/2026-10-06-runtime06.md).
+
+## Pinned POSIX string semantics (follow-up 2026-10-07)
+
+Added [exact tagged normalization/join replay](../evaluation/posix-runtime-evidence-20261006.json), selected from CPython3.11.1 after SHA verification. Run `python -m scripts.replay_runtime_evidence SOURCE_DIRECTORY --posix`. It selects the reviewed Python fallback, not native acceleration; no target code or filesystem access is executed. This closes the missing dependency-string-semantics evidence, not deployment or file exposure.

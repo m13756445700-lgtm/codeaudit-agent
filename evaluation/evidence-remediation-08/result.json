@@ -1,0 +1,252 @@
+{
+  "audit_id": "550a0186f8244cb4aea6eeb7d18201c7",
+  "status": "COMPLETE",
+  "counts": {
+    "LIKELY": 1
+  },
+  "tool_calls": 39,
+  "elapsed_seconds": 105.07,
+  "tokens_observed": 527886,
+  "archive_sha256": "cfea243cd2fb0dc1ff55f4d19934323ca587796eaf4373280a4e926adf23ac91",
+  "compactions": 4,
+  "findings": [
+    {
+      "category": "path_traversal",
+      "confidence": "medium",
+      "confidence_rationale": "The guard set was read verbatim and the missing leading-slash check is confirmed against the 3.0.5 snapshot; the knowledge card independently names 3.0.5 as affected and 3.0.6 as adding the check. Confidence is medium rather than high because the exact posixpath.normpath/join behavior for '//server/share' and the ntpath.isabs result depend on the runtime Python version and OS, which are not verifiable from the repository; the knowledge card pins isabs only for specific CPython tags.",
+      "controllability": "Attacker controls the untrusted path component passed to safe_join (e.g. the client-supplied path in send_from_directory / shared_data loaders). The bypass additionally requires the process to run on Windows with a CPython whose ntpath.isabs returns False for a bare UNC string (<=3.11.1 per the knowledge card).",
+      "counter_evidence": [
+        {
+          "evidence": "or os.path.isabs(filename)",
+          "file": "src/werkzeug/security.py",
+          "line": 153,
+          "operation": "guard that would reject absolute paths on runtimes where isabs('//server/share') is True (e.g. CPython 3.11.2+)",
+          "symbol": "os.path.isabs"
+        },
+        {
+          "evidence": "any(sep in filename for sep in _os_alt_seps)",
+          "file": "src/werkzeug/security.py",
+          "line": 152,
+          "operation": "guard that rejects backslash-containing components on Windows",
+          "symbol": "_os_alt_seps"
+        },
+        {
+          "evidence": "if not os.path.isfile(path_str):",
+          "file": "src/werkzeug/utils.py",
+          "line": 574,
+          "operation": "caller-side existence gate limiting downstream access",
+          "symbol": "os.path.isfile"
+        },
+        {
+          "evidence": "if os.path.isfile(path):",
+          "file": "src/werkzeug/middleware/shared_data.py",
+          "line": 214,
+          "operation": "caller-side existence gate limiting downstream access",
+          "symbol": "os.path.isfile"
+        }
+      ],
+      "data_flow": [
+        {
+          "evidence": "for filename in pathnames:",
+          "file": "src/werkzeug/security.py",
+          "line": 147,
+          "operation": "untrusted component iteration",
+          "symbol": "safe_join"
+        },
+        {
+          "evidence": "filename = posixpath.normpath(filename)",
+          "file": "src/werkzeug/security.py",
+          "line": 149,
+          "operation": "normalization (POSIX flavor; preserves leading '//')",
+          "symbol": "posixpath.normpath"
+        },
+        {
+          "evidence": "any(sep in filename for sep in _os_alt_seps)",
+          "file": "src/werkzeug/security.py",
+          "line": 152,
+          "operation": "guard: only rejects backslash on Windows, not forward slash",
+          "symbol": "_os_alt_seps"
+        },
+        {
+          "evidence": "or os.path.isabs(filename)",
+          "file": "src/werkzeug/security.py",
+          "line": 153,
+          "operation": "guard: returns False for '//server/share' on CPython <=3.11.1",
+          "symbol": "os.path.isabs"
+        },
+        {
+          "evidence": "or filename.startswith(\"../\")",
+          "file": "src/werkzeug/security.py",
+          "line": 155,
+          "operation": "guard: False for '//server/share'",
+          "symbol": "safe_join"
+        },
+        {
+          "evidence": "return posixpath.join(*parts)",
+          "file": "src/werkzeug/security.py",
+          "line": 161,
+          "operation": "join: second arg starting with '/' overrides directory",
+          "symbol": "posixpath.join"
+        },
+        {
+          "evidence": "path_str = safe_join(os.fspath(directory), os.fspath(path))",
+          "file": "src/werkzeug/utils.py",
+          "line": 564,
+          "operation": "caller: send_from_directory passes single untrusted component",
+          "symbol": "safe_join"
+        },
+        {
+          "evidence": "if not os.path.isfile(path_str):",
+          "file": "src/werkzeug/utils.py",
+          "line": 574,
+          "operation": "caller existence gate before send_file",
+          "symbol": "os.path.isfile"
+        },
+        {
+          "evidence": "path = safe_join(directory, path)",
+          "file": "src/werkzeug/middleware/shared_data.py",
+          "line": 207,
+          "operation": "caller: get_directory_loader passes single untrusted component",
+          "symbol": "safe_join"
+        },
+        {
+          "evidence": "if os.path.isfile(path):",
+          "file": "src/werkzeug/middleware/shared_data.py",
+          "line": 214,
+          "operation": "caller existence gate before opener",
+          "symbol": "os.path.isfile"
+        }
+      ],
+      "defense_claims": [
+        {
+          "claim": "os.path.isabs rejects absolute paths, including UNC paths on newer CPython.",
+          "limitations": "Per the knowledge card, ntpath.isabs('//server/share') is False on CPython 3.10.0/3.11.0/3.11.1, so this guard does not catch a bare UNC component on those runtimes.",
+          "references": [
+            {
+              "evidence": "or os.path.isabs(filename)",
+              "file": "src/werkzeug/security.py",
+              "line": 153,
+              "operation": "guard",
+              "symbol": "os.path.isabs"
+            }
+          ]
+        },
+        {
+          "claim": "The alt-separator guard rejects backslash components on Windows.",
+          "limitations": "On Windows _os_alt_seps == ['\\\\'] only (altsep '/' is filtered at line 13), so forward-slash UNC strings are not rejected.",
+          "references": [
+            {
+              "evidence": "any(sep in filename for sep in _os_alt_seps)",
+              "file": "src/werkzeug/security.py",
+              "line": 152,
+              "operation": "guard",
+              "symbol": "_os_alt_seps"
+            }
+          ]
+        },
+        {
+          "claim": "Callers gate on os.path.isfile before opening the returned path.",
+          "limitations": "This limits downstream file access but does not restore the helper's confinement contract; a UNC path resolving to an existing file would still pass.",
+          "references": [
+            {
+              "evidence": "if not os.path.isfile(path_str):",
+              "file": "src/werkzeug/utils.py",
+              "line": 574,
+              "operation": "caller gate",
+              "symbol": "os.path.isfile"
+            },
+            {
+              "evidence": "if os.path.isfile(path):",
+              "file": "src/werkzeug/middleware/shared_data.py",
+              "line": 214,
+              "operation": "caller gate",
+              "symbol": "os.path.isfile"
+            }
+          ]
+        }
+      ],
+      "deployment_exposure": "unknown",
+      "environment_assumptions": [
+        {
+          "affects_verdict": true,
+          "claim": "The deployment runs on Windows.",
+          "references": [],
+          "state": "unknown"
+        },
+        {
+          "affects_verdict": true,
+          "claim": "The runtime CPython's ntpath.isabs returns False for a bare UNC string.",
+          "references": [],
+          "state": "unknown"
+        }
+      ],
+      "exploit_preconditions": [
+        "The deployment runs on Windows.",
+        "The runtime CPython's ntpath.isabs returns False for a bare UNC string.",
+        "A caller passes a single bare UNC component (e.g. '//server/share') as the untrusted path to safe_join.",
+        "For downstream file access (not claimed here): the returned UNC path must resolve to an existing file passing the caller's os.path.isfile gate."
+      ],
+      "false_positive_analysis": "Not a false positive for the helper-contract claim: the guards were read verbatim and none rejects a forward-slash UNC component on Windows. It is NOT claimed that a caller can read an arbitrary external file: both in-repo callers add an os.path.isfile gate (utils.py:574, shared_data.py:214) and the returned bare share must resolve to an existing file, which is not established. It is also not claimed that any deployment is exposed: the OS is unknown and repository version is not deployment evidence. On POSIX, _os_alt_seps is empty and posixpath.join with a leading-'/' component would be caught by os.path.isabs (posixpath.isabs returns True for '/...'), so the bypass is Windows-specific.",
+      "id": "safe_join_contract",
+      "judgment_scope": "conditional_code",
+      "knowledge_application": "The path_traversal card (CA-K04) supplied the exact ntpath.isabs observations for '//server/share' (False on 3.10.0/3.11.0/3.11.1, True on 3.11.2+) and the advisory note that Werkzeug 3.0.5 and earlier are affected while 3.0.6 adds a leading-slash check. This directly shaped the verdict: it identified the UNC route and the exact version boundary, and I verified the snapshot is 3.0.5 with no leading-slash guard. The card's guidance to separate (1) helper contract, (2) caller file access, (3) deployment exposure is reflected in the scope and unknowns.",
+      "knowledge_used": [
+        "path_traversal.md"
+      ],
+      "reachability": "safe_join is a public helper (docs/utils.rst:60 autofunction). In-repo callers pass a single untrusted component: utils.py:564 send_from_directory and shared_data.py:207 get_directory_loader. Both then require os.path.isfile(path) (utils.py:574, shared_data.py:214) before opening, so a returned bare UNC path must also resolve to an existing file for downstream access. The helper-contract violation (returned value not confined under directory) is reachable whenever safe_join is called with a bare UNC component on Windows; downstream file access is a separate, additional requirement.",
+      "reasoning_summary": "Snapshot is Werkzeug 3.0.5 (pyproject.toml:3), the exact version the maintainer advisory GHSA-f9vj-2wh5-fj8j names as affected by a Windows UNC issue. The guards at security.py:151-156 lack any leading-slash rejection. On Windows, _os_alt_seps contains only backslash, so a forward-slash UNC string is not caught by the alt-sep guard; ntpath.isabs('//server/share') is False on CPython <=3.11.1 per the knowledge card; and the '..' guards do not apply. posixpath.normpath preserves the leading '//', and posixpath.join(directory, '//server/share') returns '//server/share', escaping the trusted base. This violates the documented input-to-return-value confinement contract ('avoid escaping the base directory', security.py:132-133). This is a conditional code-level contract violation; whether a real deployment runs on Windows and exposes a caller is unknown.",
+      "remediation": "Add an explicit leading-slash rejection to the guard, e.g. reject when filename.startswith('/') (and '\\\\' on Windows), matching the fix shipped in Werkzeug 3.0.6. Alternatively normalize with the platform-native path module and verify containment of the final joined path against the resolved base directory.",
+      "sanitizer_analysis": "The only normalization is posixpath.normpath (line 149), which is POSIX-flavored and preserves a leading '//' (POSIX normpath collapses 3+ slashes to one but keeps exactly two leading slashes). The four guards (lines 152-155) are: (1) membership of any _os_alt_seps character \u2014 on Windows _os_alt_seps == ['\\\\'] because os.sep='\\\\' and os.path.altsep='/' is filtered out by the '!= \"/\"' condition at line 13, so a forward slash is NOT rejected; (2) os.path.isabs \u2014 on Windows this is ntpath.isabs, which per the knowledge card returns False for the bare string '//server/share' on CPython 3.10.0/3.11.0/3.11.1; (3) filename == '..' \u2014 False; (4) startswith('../') \u2014 False. No leading-slash check exists in this snapshot (the knowledge card states 3.0.6 adds one). Therefore no guard rejects '//server/share', and posixpath.join(directory, '//server/share') returns '//server/share' because the second argument begins with '/', discarding the trusted directory. The sanitizer chain is incomplete for this input class.",
+      "security_boundary": "Trusted base directory vs. untrusted client-supplied path component; the helper promises the returned path stays under the base directory.",
+      "severity": "medium",
+      "sink": {
+        "evidence": "return posixpath.join(*parts)",
+        "file": "src/werkzeug/security.py",
+        "line": 161,
+        "operation": "path join returning value",
+        "symbol": "posixpath.join"
+      },
+      "source": {
+        "evidence": "for filename in pathnames:",
+        "file": "src/werkzeug/security.py",
+        "line": 147,
+        "operation": "untrusted component iteration",
+        "symbol": "safe_join"
+      },
+      "status": "LIKELY",
+      "title": "safe_join does not confine a bare UNC component on Windows (missing leading-slash check in 3.0.5)",
+      "unknowns": [
+        "Deployment operating system (Windows vs POSIX) \u2014 repository version is not deployment evidence.",
+        "Exact runtime CPython version and its ntpath.isabs behavior for the bare UNC string.",
+        "Whether any deployed caller passes a bare UNC component rather than a path with a filename suffix.",
+        "Whether the returned UNC path resolves to an existing file for the callers' isfile gate."
+      ],
+      "ai_status": "LIKELY",
+      "evidence_gate": {
+        "passed": true,
+        "problems": [],
+        "snapshot_sha256": "ca6f54ce58072c67da814d84814be555be978b90013cc12cb96a41a69dc4d0f6",
+        "files": {
+          "src/werkzeug/security.py": "4ab51f809846cd6fc4c7baa370120d44671f59d8a46a2a689c0e5bb29b3890b0",
+          "src/werkzeug/utils.py": "ea257ff8974568b5c6e9b091dc5312332518d070a7b1dce52a2ac035abc05e49",
+          "src/werkzeug/middleware/shared_data.py": "1b6f1b1b7af3acfe91d243833ac6c57d63a3e5771cfea20e56ed5535597c896d"
+        },
+        "scope": "reference integrity and completeness; AI owns security judgment"
+      }
+    }
+  ],
+  "review": {
+    "accepted": false,
+    "improvements": [
+      "No downstream file-access claim",
+      "Fewer calls and provider tokens in this single run; not statistical performance proof"
+    ],
+    "remaining": [
+      "LIKELY, target CONFIRMED not met",
+      "Normpath/join exact runtime semantics identified as missing by model",
+      "Some phrases still overgeneralize exact runtime tags into version ranges"
+    ],
+    "next": "Pin posixpath string semantics and clarify generic scoped status criteria; preserve unknown deployment"
+  },
+  "release_ready": false
+}

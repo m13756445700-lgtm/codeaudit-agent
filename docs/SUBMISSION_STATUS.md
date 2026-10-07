@@ -2,6 +2,10 @@
 
 **暂不建议作为最终达标作品提交。** 部署与入口问题已修复，通用大仓库审计和独特知识收益仍未闭环。题目没有给出“120分”的量化标准，不能承诺该分数。
 
+## Current candidate: knowledge memory08 (2026-10-06)
+
+Freeze06 PARTIAL and narrow diagnostic07 COMPLETE both failed semantic acceptance; originals retained. Candidate now retains retrieved knowledge facts/caveats across context compaction and consolidates superseded card prose. 201 isolated Linux tests passed; live08 completed but remained LIKELY; semantic acceptance failed. Candidate09 adds pinned normalization/join facts and scoped verdict definitions; its live result is still pending. No release promotion or publication. [Design and tests](plans/2026-10-06-knowledge-memory08.md).
+
 ## Runtime patch boundary follow-up (2026-10-06)
 
 Pinned offline replay establishes the observed 3.11.1 to 3.11.2 transition. Tampered sources are rejected before execution (1 test passed). Caller filesystem impact remains unproven; no model acceptance or release promotion. [Evidence](RUNTIME_EVIDENCE_REVIEW.md).

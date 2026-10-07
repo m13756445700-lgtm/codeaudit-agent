@@ -1,0 +1,38 @@
+{
+  "method": "Local standard-library string operations only; symbolic trace inputs, not execution of Werkzeug or Windows filesystem",
+  "examples": [
+    {
+      "components": [
+        "//server/share"
+      ],
+      "normalized": [
+        "//server/share"
+      ],
+      "posix_join_if_guards_pass": "//server/share"
+    },
+    {
+      "components": [
+        "//server/share/file"
+      ],
+      "normalized": [
+        "//server/share/file"
+      ],
+      "posix_join_if_guards_pass": "//server/share/file"
+    },
+    {
+      "components": [
+        "//server/share",
+        "file"
+      ],
+      "normalized": [
+        "//server/share",
+        "file"
+      ],
+      "posix_join_if_guards_pass": "//server/share/file"
+    }
+  ],
+  "limits": [
+    "Guard outcomes must be established separately from pinned runtime semantics and target source",
+    "No file existence, permissions, network access, or deployment verified"
+  ]
+}

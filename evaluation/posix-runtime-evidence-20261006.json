@@ -1,0 +1,47 @@
+{
+  "url": "https://raw.githubusercontent.com/python/cpython/v3.11.1/Lib/posixpath.py",
+  "sha256": "115bb3d2051318ee3d951cdb13c60f118f15cea837cb69fb52cf543c12fe25c3",
+  "results": [
+    {
+      "components": [
+        "//server/share"
+      ],
+      "normalized": [
+        "//server/share"
+      ],
+      "joined_if_guards_pass": "//server/share"
+    },
+    {
+      "components": [
+        "//server/share/file"
+      ],
+      "normalized": [
+        "//server/share/file"
+      ],
+      "joined_if_guards_pass": "//server/share/file"
+    },
+    {
+      "components": [
+        "//server/share",
+        "file"
+      ],
+      "normalized": [
+        "//server/share",
+        "file"
+      ],
+      "joined_if_guards_pass": "//server/share/file"
+    },
+    {
+      "components": [
+        "../file"
+      ],
+      "normalized": [
+        "../file"
+      ],
+      "joined_if_guards_pass": "trusted-root/../file"
+    }
+  ],
+  "scope": "Reviewed string helpers including pure-Python normpath fallback; target guards not executed",
+  "windows_runtime_test": false,
+  "filesystem_exposure_proven": false
+}

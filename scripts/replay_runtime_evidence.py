@@ -5,6 +5,7 @@ No downloads, target imports, filesystem exploit, or Windows runtime claim.
 import argparse
 import ast
 import hashlib
+import genericpath
 import json
 import os
 from pathlib import Path
@@ -42,8 +43,40 @@ def replay(directory: Path) -> dict:
             'windows_runtime_test': False, 'filesystem_exposure_proven': False}
 
 
+POSIX_SHA256 = '115bb3d2051318ee3d951cdb13c60f118f15cea837cb69fb52cf543c12fe25c3'
+
+
+def replay_posix(directory: Path) -> dict:
+    path = directory / 'posixpath-3.11.1.py.txt'
+    raw = path.read_bytes()
+    if hashlib.sha256(raw).hexdigest() != POSIX_SHA256:
+        raise ValueError('Source hash mismatch: posixpath 3.11.1')
+    tree = ast.parse(raw)
+    functions = [n for n in tree.body if isinstance(n, ast.FunctionDef) and n.name in {'join', '_get_sep'}]
+    # Select the reviewed pure-Python fallback; never execute imports or native helpers.
+    for node in tree.body:
+        if isinstance(node, ast.Try):
+            for handler in node.handlers:
+                functions.extend(n for n in handler.body if isinstance(n, ast.FunctionDef) and n.name == 'normpath')
+    if len(functions) != 3 or {n.name for n in functions} != {'join', '_get_sep', 'normpath'}:
+        raise ValueError('Missing reviewed POSIX helpers')
+    namespace = {'os': os, 'genericpath': genericpath}
+    exec(compile(ast.Module(body=functions, type_ignores=[]), str(path), 'exec'), namespace)
+    results = []
+    for components in (['//server/share'], ['//server/share/file'], ['//server/share', 'file'], ['../file']):
+        normalized = [namespace['normpath'](p) for p in components]
+        results.append({'components': components, 'normalized': normalized,
+                        'joined_if_guards_pass': namespace['join']('trusted-root', *normalized)})
+    return {'url': 'https://raw.githubusercontent.com/python/cpython/v3.11.1/Lib/posixpath.py',
+            'sha256': POSIX_SHA256, 'results': results,
+            'scope': 'Reviewed string helpers including pure-Python normpath fallback; target guards not executed',
+            'windows_runtime_test': False, 'filesystem_exposure_proven': False}
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('source_directory', type=Path)
+    parser.add_argument('--posix', action='store_true', help='Replay pinned POSIX normalization/join helpers instead')
     args = parser.parse_args()
-    print(json.dumps(replay(args.source_directory), indent=2))
+    result = replay_posix(args.source_directory) if args.posix else replay(args.source_directory)
+    print(json.dumps(result, indent=2))

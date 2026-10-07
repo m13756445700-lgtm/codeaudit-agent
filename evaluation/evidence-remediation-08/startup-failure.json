@@ -1,0 +1,7 @@
+{
+  "phase": "OctoBus transport initialization before Model construction",
+  "error": "ConnectionRefusedError during immediate run after compose up -d --no-deps",
+  "model_calls": 0,
+  "audit_result_created": false,
+  "recovery": "Wait for compose health before retrying initialization; preserve this infrastructure failure separately from model outcomes"
+}

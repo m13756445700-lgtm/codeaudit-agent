@@ -1,0 +1,369 @@
+{
+  "audit_id": "2b3a1993649140ef94264a5848f42421",
+  "status": "COMPLETE",
+  "counts": {
+    "LIKELY": 2
+  },
+  "tool_calls": 57,
+  "elapsed_seconds": 145.11,
+  "tokens_observed": 753796,
+  "archive_sha256": "8d87d6d77a78cd4c328bcf52a8a8348259186e4321530e882a3bd87b1d9a96ed",
+  "findings": [
+    {
+      "category": "path_traversal",
+      "confidence": "medium",
+      "confidence_rationale": "The code path and guard set are fully read and the missing leading-slash check is confirmed by direct source inspection. The platform/version precondition (Windows + Python < 3.11) is established from the path_traversal knowledge card, not from repository code, and the deployment platform is unknown, so confidence is medium rather than high.",
+      "controllability": "Attacker controls the untrusted path component passed to safe_join (e.g. via a request path in send_from_directory or SharedDataMiddleware). Exploitation requires the host to be Windows with Python < 3.11.",
+      "counter_evidence": [
+        {
+          "evidence": "or os.path.isabs(filename)",
+          "file": "src/werkzeug/security.py",
+          "line": 153,
+          "operation": "guard that catches absolute paths on POSIX and on Windows Python>=3.11",
+          "symbol": "safe_join"
+        },
+        {
+          "evidence": "any(sep in filename for sep in _os_alt_seps)",
+          "file": "src/werkzeug/security.py",
+          "line": 152,
+          "operation": "guard that rejects backslash components on Windows",
+          "symbol": "safe_join"
+        },
+        {
+          "evidence": "or filename.startswith(\"../\")",
+          "file": "src/werkzeug/security.py",
+          "line": 155,
+          "operation": "guard that rejects relative-parent components",
+          "symbol": "safe_join"
+        }
+      ],
+      "data_flow": [
+        {
+          "evidence": "for filename in pathnames:",
+          "file": "src/werkzeug/security.py",
+          "line": 147,
+          "operation": "iterate untrusted components",
+          "symbol": "safe_join"
+        },
+        {
+          "evidence": "filename = posixpath.normpath(filename)",
+          "file": "src/werkzeug/security.py",
+          "line": 149,
+          "operation": "normalize (posixpath, not ntpath)",
+          "symbol": "safe_join"
+        },
+        {
+          "evidence": "any(sep in filename for sep in _os_alt_seps)",
+          "file": "src/werkzeug/security.py",
+          "line": 152,
+          "operation": "alt-sep guard (backslash on Windows)",
+          "symbol": "safe_join"
+        },
+        {
+          "evidence": "or os.path.isabs(filename)",
+          "file": "src/werkzeug/security.py",
+          "line": 153,
+          "operation": "isabs guard (ntpath on Windows)",
+          "symbol": "safe_join"
+        },
+        {
+          "evidence": "or filename.startswith(\"../\")",
+          "file": "src/werkzeug/security.py",
+          "line": 155,
+          "operation": "relative-prefix guard",
+          "symbol": "safe_join"
+        },
+        {
+          "evidence": "return posixpath.join(*parts)",
+          "file": "src/werkzeug/security.py",
+          "line": 161,
+          "operation": "join and return",
+          "symbol": "safe_join"
+        }
+      ],
+      "defense_claims": [
+        {
+          "claim": "os.path.isabs rejects absolute components including POSIX '//server/share' and Windows absolute paths on Python >= 3.11.",
+          "limitations": "On Windows with Python < 3.11, ntpath.isabs('//server/share') returns False, so a bare UNC component is not rejected.",
+          "references": [
+            {
+              "evidence": "or os.path.isabs(filename)",
+              "file": "src/werkzeug/security.py",
+              "line": 153,
+              "operation": "guard",
+              "symbol": "safe_join"
+            }
+          ]
+        },
+        {
+          "claim": "The alt-separator guard rejects components containing the platform separator (backslash on Windows).",
+          "limitations": "Only covers os.sep/os.path.altsep (backslash on Windows); forward-slash UNC components are not covered.",
+          "references": [
+            {
+              "evidence": "any(sep in filename for sep in _os_alt_seps)",
+              "file": "src/werkzeug/security.py",
+              "line": 152,
+              "operation": "guard",
+              "symbol": "safe_join"
+            }
+          ]
+        },
+        {
+          "claim": "posixpath.normpath collapses '..' segments and the '..'/'../' guards reject parent-relative results.",
+          "limitations": "Does not address absolute/UNC components.",
+          "references": [
+            {
+              "evidence": "filename = posixpath.normpath(filename)",
+              "file": "src/werkzeug/security.py",
+              "line": 149,
+              "operation": "normalization",
+              "symbol": "safe_join"
+            },
+            {
+              "evidence": "or filename == \"..\"",
+              "file": "src/werkzeug/security.py",
+              "line": 154,
+              "operation": "guard",
+              "symbol": "safe_join"
+            }
+          ]
+        }
+      ],
+      "deployment_exposure": "unknown",
+      "environment_assumptions": [
+        {
+          "affects_verdict": true,
+          "claim": "Deployment runs on Windows.",
+          "references": [],
+          "state": "unknown"
+        },
+        {
+          "affects_verdict": true,
+          "claim": "Deployment Python version is < 3.11.",
+          "references": [],
+          "state": "unknown"
+        }
+      ],
+      "exploit_preconditions": [
+        "Deployment runs on Windows.",
+        "Deployment Python version is < 3.11.",
+        "A caller forwards an attacker-controlled path component to safe_join (e.g. send_from_directory or SharedDataMiddleware).",
+        "The attacker can supply a component of the form '//server/share/...' using forward slashes."
+      ],
+      "false_positive_analysis": "Not a false positive on POSIX: posixpath.isabs('//server/share') is True and the guard fires, so the escape is Windows-specific. Not a false positive for the '..' family: normpath collapses those and the =='..'/startswith('../') guards catch them. The remaining uncertainty is whether the deployment is Windows + Python < 3.11; on Python >= 3.11 ntpath.isabs('//server/share') returns True and the guard fires, so the flaw is version-bounded. The helper itself is the vulnerable unit; downstream isfile/open is a separate consumption concern, not a mitigation of the contract violation.",
+      "id": "H1",
+      "judgment_scope": "conditional_code",
+      "knowledge_application": "The path_traversal knowledge card (GHSA-f9vj-2wh5-fj8j) documents that ntpath.isabs('//server/share') is False on Python < 3.11 and that the fix is an explicit leading-slash check added in 3.0.6. This directly explains why the isabs guard at line 153 fails for a bare UNC component and why this 3.0.5 snapshot is affected.",
+      "knowledge_used": [
+        "path_traversal.md"
+      ],
+      "reachability": "safe_join is a public helper. In-repo callers pass client-controlled path components: utils.send_from_directory (src/werkzeug/utils.py:564) and SharedDataMiddleware.get_directory_loader (src/werkzeug/middleware/shared_data.py:207). Both then gate on os.path.isfile before opening/serving, which on Windows resolves a UNC path to a remote SMB location rather than confining to the trusted directory. Reachability of the helper contract violation is conditional on a Windows host running Python < 3.11 and a caller forwarding an untrusted component.",
+      "reasoning_summary": "The helper's documented contract is to confine the returned path within the trusted directory. On Windows with Python < 3.11, a single untrusted component of the form '//server/share' (forward slashes) is not rejected by any guard: posixpath.normpath leaves it unchanged, the alt-sep guard only covers backslash, ntpath.isabs returns False for a bare UNC with empty tail, and it is not '..' or '../'-prefixed. posixpath.join then returns a value beginning with '//', which Windows treats as a UNC path, escaping the trusted directory. This is a genuine violation of the helper's input-to-return-value confinement contract, matching the documented GHSA-f9vj-2wh5-fj8j advisory fixed in 3.0.6.",
+      "remediation": "Upgrade to Werkzeug >= 3.0.6, which adds an explicit rejection of components with a leading '/' (and '\\\\') before joining. Alternatively, reject any component where filename.startswith(('/', '\\\\')) or use os.path.isabs on the platform-native path plus an explicit leading-separator check.",
+      "sanitizer_analysis": "The only normalization is posixpath.normpath (line 149), which does not treat backslash as a separator and does not strip a leading '//'. The guards are: alt-sep membership (152), os.path.isabs (153), equality to '..' (154), and startswith('../') (155). There is NO explicit rejection of a leading '/' or '//'. On POSIX, posixpath.normpath('//server/share') keeps '//server/share' and posixpath.isabs returns True, so the isabs guard catches it. On Windows, os.path is ntpath; per the path_traversal knowledge card (GHSA-f9vj-2wh5-fj8j), ntpath.isabs('//server/share') returns False on Python < 3.11 because splitdrive leaves an empty tail, so the isabs guard does not fire; the alt-sep guard only checks backslash (os.sep='\\\\'), not forward slash; and the component is neither '..' nor '../'-prefixed. The component therefore passes all guards and posixpath.join preserves the leading '//', yielding a UNC path. The fix (explicit leading-slash rejection) was added in Werkzeug 3.0.6, which this snapshot (3.0.5) lacks.",
+      "security_boundary": "Trusted base directory vs. untrusted client-supplied path component; the helper is the confinement boundary.",
+      "severity": "medium",
+      "sink": {
+        "evidence": "return posixpath.join(*parts)",
+        "file": "src/werkzeug/security.py",
+        "line": 161,
+        "operation": "return",
+        "symbol": "safe_join"
+      },
+      "source": {
+        "evidence": "def safe_join(directory: str, *pathnames: str) -> str | None:",
+        "file": "src/werkzeug/security.py",
+        "line": 131,
+        "operation": "definition",
+        "symbol": "safe_join"
+      },
+      "status": "LIKELY",
+      "title": "safe_join fails to reject a bare UNC/leading-slash component on Windows with Python < 3.11, allowing the returned path to escape the trusted directory",
+      "unknowns": [
+        "Deployment OS (Windows vs POSIX) is not evidenced in the repository.",
+        "Deployment Python version is not evidenced.",
+        "Whether any in-repo caller actually forwards an untrusted component on a Windows deployment."
+      ],
+      "ai_status": "LIKELY",
+      "evidence_gate": {
+        "passed": true,
+        "problems": [],
+        "snapshot_sha256": "ca6f54ce58072c67da814d84814be555be978b90013cc12cb96a41a69dc4d0f6",
+        "files": {
+          "src/werkzeug/security.py": "4ab51f809846cd6fc4c7baa370120d44671f59d8a46a2a689c0e5bb29b3890b0"
+        },
+        "scope": "reference integrity and completeness; AI owns security judgment"
+      }
+    },
+    {
+      "category": "path_traversal",
+      "confidence": "medium",
+      "confidence_rationale": "The caller code and its isfile gate are fully read. The conclusion that isfile does not confine to the trusted directory on Windows follows from the same platform behavior documented for H1; the deployment platform remains unknown, so confidence is medium.",
+      "controllability": "Attacker controls the path component forwarded to safe_join via the request path; exploitation requires a Windows host with Python < 3.11 and a reachable caller.",
+      "counter_evidence": [
+        {
+          "evidence": "if not os.path.isfile(path_str):",
+          "file": "src/werkzeug/utils.py",
+          "line": 574,
+          "operation": "guard that limits serving to existing regular files",
+          "symbol": "send_from_directory"
+        },
+        {
+          "evidence": "if os.path.isfile(path):",
+          "file": "src/werkzeug/middleware/shared_data.py",
+          "line": 214,
+          "operation": "guard that limits serving to existing regular files",
+          "symbol": "loader"
+        }
+      ],
+      "data_flow": [
+        {
+          "evidence": "path_str = safe_join(os.fspath(directory), os.fspath(path))",
+          "file": "src/werkzeug/utils.py",
+          "line": 564,
+          "operation": "call safe_join with client path",
+          "symbol": "send_from_directory"
+        },
+        {
+          "evidence": "if not os.path.isfile(path_str):",
+          "file": "src/werkzeug/utils.py",
+          "line": 574,
+          "operation": "isfile gate (does not confine to directory)",
+          "symbol": "send_from_directory"
+        },
+        {
+          "evidence": "return send_file(path_str, environ, **kwargs)",
+          "file": "src/werkzeug/utils.py",
+          "line": 577,
+          "operation": "serve the resolved path",
+          "symbol": "send_from_directory"
+        },
+        {
+          "evidence": "path = safe_join(directory, path)",
+          "file": "src/werkzeug/middleware/shared_data.py",
+          "line": 207,
+          "operation": "call safe_join with client path",
+          "symbol": "loader"
+        },
+        {
+          "evidence": "if os.path.isfile(path):",
+          "file": "src/werkzeug/middleware/shared_data.py",
+          "line": 214,
+          "operation": "isfile gate (does not confine to directory)",
+          "symbol": "loader"
+        },
+        {
+          "evidence": "return os.path.basename(path), self._opener(path)",
+          "file": "src/werkzeug/middleware/shared_data.py",
+          "line": 215,
+          "operation": "open the resolved path",
+          "symbol": "loader"
+        }
+      ],
+      "defense_claims": [
+        {
+          "claim": "send_from_directory raises NotFound when the resolved path is not an existing regular file.",
+          "limitations": "os.path.isfile does not verify the path is inside the trusted directory; on Windows a UNC path resolves to a remote SMB location and isfile can return True.",
+          "references": [
+            {
+              "evidence": "if not os.path.isfile(path_str):",
+              "file": "src/werkzeug/utils.py",
+              "line": 574,
+              "operation": "guard",
+              "symbol": "send_from_directory"
+            }
+          ]
+        },
+        {
+          "claim": "SharedDataMiddleware's directory loader returns (None, None) when the resolved path is not an existing regular file.",
+          "limitations": "Same as above: isfile does not confine to the trusted directory.",
+          "references": [
+            {
+              "evidence": "if os.path.isfile(path):",
+              "file": "src/werkzeug/middleware/shared_data.py",
+              "line": 214,
+              "operation": "guard",
+              "symbol": "loader"
+            }
+          ]
+        }
+      ],
+      "deployment_exposure": "unknown",
+      "environment_assumptions": [
+        {
+          "affects_verdict": true,
+          "claim": "Deployment runs on Windows.",
+          "references": [],
+          "state": "unknown"
+        },
+        {
+          "affects_verdict": true,
+          "claim": "Deployment Python version is < 3.11.",
+          "references": [],
+          "state": "unknown"
+        }
+      ],
+      "exploit_preconditions": [
+        "Deployment runs on Windows.",
+        "Deployment Python version is < 3.11.",
+        "A caller (send_from_directory or SharedDataMiddleware) is reachable with an attacker-controlled path component.",
+        "The attacker can supply a component of the form '//server/share/...' using forward slashes."
+      ],
+      "false_positive_analysis": "Not a false positive for the callers themselves: they correctly delegate confinement to safe_join and add an isfile existence check. The weakness is that isfile is an existence check, not a confinement check, so it does not compensate for the H1 helper escape. On POSIX or Windows Python >= 3.11 the helper returns None and the callers raise NotFound / return (None, None), so no escape occurs. This decision is conditional on the same Windows/Python<3.11 precondition as H1.",
+      "id": "H2",
+      "judgment_scope": "conditional_code",
+      "knowledge_application": "The path_traversal knowledge card (GHSA-f9vj-2wh5-fj8j) establishes that the helper escape is Windows/Python<3.11 specific; this decision applies that to the caller consumption path, showing the isfile gate does not mitigate the escape.",
+      "knowledge_used": [
+        "path_traversal.md"
+      ],
+      "reachability": "send_from_directory (src/werkzeug/utils.py:564) and SharedDataMiddleware.get_directory_loader (src/werkzeug/middleware/shared_data.py:207) both forward a client-controlled path to safe_join and then gate on os.path.isfile before serving/opening. Reachability of the escape is conditional on a Windows host running Python < 3.11.",
+      "reasoning_summary": "Both in-repo callers rely on safe_join for confinement and add only an os.path.isfile existence check. isfile does not verify the path lies within the trusted directory; on Windows a returned '//server/share/...' value is a UNC path that isfile resolves to a remote SMB location. Therefore the callers do not compensate for the H1 helper escape and would serve/open the escaped path if it exists. This is a conditional code-level consequence of H1, not an independent new flaw.",
+      "remediation": "Upgrade to Werkzeug >= 3.0.6 (fixes safe_join). Callers may additionally verify the resolved real path is within the trusted directory (e.g. os.path.realpath containment check) as defense in depth.",
+      "sanitizer_analysis": "The callers add no path-confinement sanitizer; they rely entirely on safe_join and then perform an os.path.isfile existence check (utils.py:574, shared_data.py:214). isfile is not a confinement sanitizer - it returns True for any existing file the process can stat, including a UNC path on Windows. No realpath/containment check is present in either caller.",
+      "security_boundary": "Trusted base directory vs. untrusted client-supplied path component; the callers delegate the boundary to safe_join and add only an existence check.",
+      "severity": "medium",
+      "sink": {
+        "evidence": "return send_file(path_str, environ, **kwargs)",
+        "file": "src/werkzeug/utils.py",
+        "line": 577,
+        "operation": "serve resolved path",
+        "symbol": "send_from_directory"
+      },
+      "source": {
+        "evidence": "path_str = safe_join(os.fspath(directory), os.fspath(path))",
+        "file": "src/werkzeug/utils.py",
+        "line": 564,
+        "operation": "call safe_join with client path",
+        "symbol": "send_from_directory"
+      },
+      "status": "LIKELY",
+      "title": "In-repo safe_join callers rely on os.path.isfile, which does not confine the resolved path to the trusted directory, so they do not mitigate the H1 UNC escape",
+      "unknowns": [
+        "Deployment OS (Windows vs POSIX) is not evidenced in the repository.",
+        "Deployment Python version is not evidenced.",
+        "Whether a caller is actually reachable with an attacker-controlled component in the deployment."
+      ],
+      "ai_status": "LIKELY",
+      "evidence_gate": {
+        "passed": true,
+        "problems": [],
+        "snapshot_sha256": "ca6f54ce58072c67da814d84814be555be978b90013cc12cb96a41a69dc4d0f6",
+        "files": {
+          "src/werkzeug/utils.py": "ea257ff8974568b5c6e9b091dc5312332518d070a7b1dce52a2ac035abc05e49",
+          "src/werkzeug/middleware/shared_data.py": "1b6f1b1b7af3acfe91d243833ac6c57d63a3e5771cfea20e56ed5535597c896d"
+        },
+        "scope": "reference integrity and completeness; AI owns security judgment"
+      }
+    }
+  ],
+  "review": {
+    "accepted": false,
+    "reasons": [
+      "Two LIKELY judgments, no target CONFIRMED",
+      "Reverted to advisory broad Python<3.11 summary despite exact runtime correction in received knowledge",
+      "Expanded bare UNC reasoning to file-suffixed caller behavior without establishing isfile/open success"
+    ],
+    "next": "Preserve knowledge facts/caveats across compaction and remove superseded conflicting summaries from active knowledge card"
+  },
+  "release_ready": false
+}
