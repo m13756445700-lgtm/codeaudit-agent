@@ -1,0 +1,17 @@
+{
+  "campaign": "evidence-remediation-16",
+  "attempted": 1,
+  "planned": 4,
+  "unexecuted": 3,
+  "audit_id": "bb95c5d99b0940ebbc8bf4f0a3140646",
+  "status": "INCOMPLETE",
+  "failure": "RuntimeError: Model HTTP error 402",
+  "tool_calls": 54,
+  "counts": {},
+  "tokens_observed": 472983,
+  "archive_sha256": "99fef89ef83564ed411af4af7f964850ef9cbae04017dca3cbdd5cd616f7d6e8",
+  "archive_verified": true,
+  "adjudication": "PROVIDER_BLOCKED; not a semantic false negative or acceptance pass",
+  "release_ready": false,
+  "next_task": "Restore provider; preserve STOPPED campaign16; freeze a new attempt with current hashes and same declared scope/budget, inspect first before expanding. No retries in place."
+}

@@ -1,0 +1,5 @@
+{
+  "job": 0,
+  "reason": "RuntimeError: Model HTTP error 402",
+  "instruction": "Restore provider before another invocation. Failed attempt remains recorded."
+}
