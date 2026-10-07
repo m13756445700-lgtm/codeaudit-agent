@@ -1,3 +1,7 @@
+## Latest narrow confirmation and fixed control (2026-10-07)
+
+The real model confirmed one conditional `safe_join` return-value confinement flaw in the 3.0.5 known regression; the 3.0.6 fixed control rejected the route. This confirms only the narrowly scoped helper contract under pinned external source semantics. No Windows deployment, external file read, whole-repository result, or120-point score is established. Full20-case benchmark, AI ablation/knowledge gain and broad static-serving coverage remain open. Not a final submission release. [Detailed adjudication](EVIDENCE_REMEDIATION_09_RESULT.md).
+
 # 提交前状态（2026-10-02）
 
 **暂不建议作为最终达标作品提交。** 部署与入口问题已修复，通用大仓库审计和独特知识收益仍未闭环。题目没有给出“120分”的量化标准，不能承诺该分数。

@@ -1,0 +1,49 @@
+{
+  "campaign": "evidence-remediation-09",
+  "plan_sha256": "bc50791dbb60e9e83773d075a29522f42a756d3bfa0bf9da8a85658b0d430148",
+  "implementation_sha256": "7ae01237abac7c8513a8bc1b0503de78cf0a7e27b06056d0859196fa242e5070",
+  "source_hashes_checked": true,
+  "archives_sha256": "1bceffd5246b2a3f8781ff1f4eee0e4705315313b5cd96a388004ddcbf21ede3",
+  "jobs": [
+    {
+      "index": 0,
+      "case": "werkzeug-3.0.5",
+      "audit_id": "bca8cf31c99c484a8ddb51da66e2b84a",
+      "status": "COMPLETE",
+      "findings": {
+        "H1_unc": "CONFIRMED"
+      },
+      "calls": 37,
+      "elapsed_seconds": 55.47,
+      "tokens": 367502
+    },
+    {
+      "index": 1,
+      "case": "werkzeug-3.0.6",
+      "audit_id": "63b53f97b5464357b7bb3a90ab95006e",
+      "status": "COMPLETE",
+      "findings": {
+        "H1-unc-bare-share": "REJECTED",
+        "H2-caller-contract": "REJECTED"
+      },
+      "calls": 42,
+      "elapsed_seconds": 84.97,
+      "tokens": 589406
+    }
+  ],
+  "adjudication": {
+    "conditional_helper_contract": {
+      "status": "SUPPORTED",
+      "detail": "The exact claim is confirmed for the pinned runtime semantics. Reviewed CPython tagged sources 3.10.0, 3.11.0 and 3.11.1 show bare UNC isabs=False; tags 3.11.2 and 3.11.9 show True. These are selected source semantics, not a Windows runtime test. Do not claim unlisted releases. Do not extend this list to all earlier versions. Windows plus one of those specifically evidenced runtime releases is the conditional precondition. The output path escape is proven by hash-pinned external pure-string helper evidence and the reviewed target guard chain."
+    },
+    "deployment_exposure": "NOT APPLICABLE to the conditional helper-contract determination; remains unknown and no deployment claim is made.",
+    "external_file_read": "NOT APPLICABLE to the helper-contract claim; no file-read impact is established.",
+    "fixed_control": "SUPPORTED: frozen Werkzeug 3.0.6 run rejected the same specific route and referenced its explicit leading slash guard. Known-version control, not blind generalization."
+  },
+  "remaining_acceptance": [
+    "The initial model report title generalized to CPython <=3.11.1. Preserve raw response; this is unsupported beyond the exact pinned tags. The published reviewer-facing summary must use only pinned tags and retain that runtime releases between/other branches were not exhaustively checked.",
+    "evidence-remediation-06 broad static-serving scope remains PARTIAL; this narrow diagnostic does not complete that prior scope or the full 20-case multilingual benchmark.",
+    "Independent repository generalization, blind assessment, and AI ablation/unique knowledge gain were not established by this known external vulnerability."
+  ],
+  "release_ready": false
+}
