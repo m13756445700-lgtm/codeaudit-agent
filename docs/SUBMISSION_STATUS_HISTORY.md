@@ -1,0 +1,112 @@
+# 恢复验收中（2026-10-07）
+
+操作者已确认充值。新冻结第17轮沿用当前实现、九模块范围和250次调用/120轮预算，先执行一例并复核；第16轮HTTP402记录不覆盖。当前仍未满足发布前置条件，未推送候选。
+
+# 最新状态：模型供应商阻塞（2026-10-07）
+
+候选已完成业务政策保留、失败校验反馈、负面覆盖完整读取与上下文压缩修复，209项隔离Linux测试通过。第16轮真实审计在54次调用后HTTP402中断，余下3例未执行；真实验收尚未通过，不能推送为最终交付。已归档并停止模型调用。[结果、证据与下一步](EVIDENCE_REMEDIATION_16_RESULT.md)。下方“API已恢复”仅指此前第11轮，不代表当前状态。
+
+# 当前提交状态（2026-10-07）
+
+**仍未达到最终发布条件。** 最新44/44审计完成，20例基准TP10/TN10/FP0/FN0；业务知识三组各8/8目标正确，但独特知识收益和较大真实仓库范围仍未闭环。API已恢复且本轮无供应商错误，不再将充值列为当前阻塞。详见[本轮结果与明确下一步](EVIDENCE_REMEDIATION_11_RESULT.md)。
+
+以下为历史阶段记录；与本段冲突的“待运行、充值阻塞、最终Benchmark未通过”均已被本轮状态覆盖，历史失败证据保留。
+
+## Latest narrow confirmation and fixed control (2026-10-07)
+
+The real model confirmed one conditional `safe_join` return-value confinement flaw in the 3.0.5 known regression; the 3.0.6 fixed control rejected the route. This confirms only the narrowly scoped helper contract under pinned external source semantics. No Windows deployment, external file read, whole-repository result, or120-point score is established. Full20-case benchmark, AI ablation/knowledge gain and broad static-serving coverage remain open. Not a final submission release. [Detailed adjudication](EVIDENCE_REMEDIATION_09_RESULT.md).
+
+# 提交前状态（2026-10-02）
+
+**暂不建议作为最终达标作品提交。** 部署与入口问题已修复，通用大仓库审计和独特知识收益仍未闭环。题目没有给出“120分”的量化标准，不能承诺该分数。
+
+## Current candidate: knowledge memory08 (2026-10-06)
+
+Freeze06 PARTIAL and narrow diagnostic07 COMPLETE both failed semantic acceptance; originals retained. Candidate now retains retrieved knowledge facts/caveats across context compaction and consolidates superseded card prose. 201 isolated Linux tests passed; live08 completed but remained LIKELY; semantic acceptance failed. Candidate09 adds pinned normalization/join facts and scoped verdict definitions; its live result is still pending. No release promotion or publication. [Design and tests](plans/2026-10-06-knowledge-memory08.md).
+
+## Runtime patch boundary follow-up (2026-10-06)
+
+Pinned offline replay establishes the observed 3.11.1 to 3.11.2 transition. Tampered sources are rejected before execution (1 test passed). Caller filesystem impact remains unproven; no model acceptance or release promotion. [Evidence](RUNTIME_EVIDENCE_REVIEW.md).
+
+## Latest semantic review (2026-10-06)
+
+Official tagged runtime sources show path-shape and patch-version distinctions missing in earlier claims. Knowledge card corrected; old results remain unchanged. [Evidence and limits](RUNTIME_EVIDENCE_REVIEW.md). 28 related tests passed; no model calls or publication.
+
+## Latest live result (2026-10-06): freeze05
+
+Focused run COMPLETE:1 LIKELY/8 REJECTED,9 self-reviews,94 calls. Model recovered after missing-hypothesis and knowledge feedback. Conditional target recognized with deployment exposure unknown, but frozen CONFIRMED target not met. [Detailed review](EVIDENCE_REMEDIATION_05_RESULT.md). No publication or broader testing.
+
+## Latest offline fix (2026-10-06): failure rounds
+
+Same-batch errors now count once per model response; all batch feedback is recorded before stopping. Missing-decision feedback includes requested and recorded IDs. 198 isolated Linux tests passed; no model run or publication. See [details](plans/2026-10-06-roundguard07.md). Overall live acceptance remains FAILED.
+
+## Latest live result (2026-10-06): freeze04 FAILED
+
+Single focused run stopped after three missing-decision errors in one response batch (27 calls). No finding. Early-stop counting incorrectly treated batch errors as repeated feedback rounds. See [review and next fix](EVIDENCE_REMEDIATION_04_RESULT.md). No publication or deployment.
+
+## Latest offline recovery (2026-10-06)
+
+Bounded exact-line recovery now works at exhausted segment boundaries. Original failed note replay passed after the missing read;197 offline Linux tests passed. No model calls or publication. See [recovery details](plans/2026-10-06-recovery06.md). Overall live acceptance remains FAILED.
+
+## Latest live result: freeze03 stopped after first failure
+
+First focused run exhausted iteration budget after42 failed note submissions referring to unread pyproject.toml:3. No finding; remaining3 runs not executed. Evidence preserved and temporary stack removed. Subsequent offline recovery feedback and repeated-error stop passed195 Linux tests, but live recovery is unverified. See [failure review](EVIDENCE_REMEDIATION_03_RESULT.md). No push/deployment.
+
+## Latest offline update: surface04
+
+Feature absence requires complete untruncated reads of declared files and unchanged snapshots; linked findings must share source/flow/sink files with the surface. Reports explicitly distinguish workflow completion from insufficient evidence and unknown deployment exposure. 193 isolated Linux tests passed. [New four-run protocol](../evaluation/evidence-remediation-03/plan.json) is frozen, with focused-pair review before broader runs. Zero paid calls this step; no push/deployment. See [limits and next step](plans/2026-10-02-surface04.md).
+
+## Latest offline remediation: contract03
+
+Surface settlement now requires linked decisions or read evidence for explicit feature absence. Conditional code judgments and deployment exposure are separate. Definition headers alone cannot prove defense behavior. 188 network-isolated Linux tests passed; no new model run. See [implementation and limitations](plans/2026-10-02-contract03.md). Overall acceptance remains FAILED; no push/deployment.
+
+## Latest live acceptance: FAILED (2026-10-02)
+
+Recharge verified. Six frozen real MCP runs finished: 3 COMPLETE, 3 PARTIAL, no HTTP errors. Both vulnerable full-scope runs missed the target. Focused vulnerable run recognized the flaw but reported INSUFFICIENT_EVIDENCE; focused fixed run rejected the target with implementation evidence. Safety conclusions outside formal decisions and weak self-review evidence remain open. See [full review](EVIDENCE_REMEDIATION_02_RESULT.md). No push/deployment. Earlier provider-blocked entries below are historical.
+
+## Latest runner update (2026-10-02)
+
+Per-job focus and persistent provider-failure stop are implemented in668f100. 184 offline Linux tests pass. The new [freeze02 plan](../evaluation/evidence-remediation-02/plan.json) and both311-file snapshots were verified on server. Prior freeze01 is historical and retained. Zero of six live audits executed; provider restoration is required. No publication or deployment.
+
+## 最新集中验收：不通过（尚未发布）
+
+候选9214a05完成99/100次真实尝试：92COMPLETE、2PARTIAL、5INCOMPLETE；job98再次HTTP402后停止。40次Benchmark和48次业务案例目标判断通过，但真实仓库漏洞版6次均漏掉已知目标，其中有错误防护解释。验收条件不满足，未推送、未部署。详见[集中验收结果](CONSOLIDATED_ACCEPTANCE_RESULT.md)。
+
+## 最新离线整改（尚未发布）
+
+已补防护主张的实现引用、平台前提证据契约和 REJECTED 反证要求，已加入 job91 原始失败判定回放与每段12次能力调用的调查检查点，并补齐绑定判定版本的结束前反证自复核。44项定向测试、178项隔离断网Linux全量测试通过；真实模型纠错效果未验证，模型自复核不等于独立评审。见[整改计划与测试记录](plans/2026-10-02-evidence-remediation.md)。
+
+## 最新模型服务检查
+
+2026-10-02单次连通性探针返回HTTP402，立即停止；新一轮6次审计均未执行。已冻结已知案例协议，并在断网容器核对实现指纹和两个版本各311个源文件。协议见[evidence-remediation-01](../evaluation/evidence-remediation-01/plan.json)。现有执行器尚需支持逐任务focus，修改后须生成新的实现指纹与计划，当前冻结记录不得覆写。
+
+## 本地集中开发候选（历史阶段记录）
+
+按操作者要求，本批先开发后集中离线测试，不调用付费模型、不推送或部署中间版本。已补调查笔记与逐项审查账本、src布局导航、8个跨租户成对回归案例、业务知识判断卡、默认零调用的冻结验收计划，以及遇模型HTTP错误停止整批的执行器和人工裁决汇总。具体步骤见[集中验收流程](CONSOLIDATED_ACCEPTANCE.md)。
+
+真实模型有效性、全仓稳定性、独立案例和知识独特收益仍待集中验收；新增自编案例不能替代独立证据。线上与GitHub仍为91c9e7a。
+
+## 已完成
+
+| 要求 | 实际验证 |
+|---|---|
+| 公开 GitHub、唯一 V2 main | main 已更新；V1 archive 分支按旧 SHA lease 删除，历史 bundle 仅保留本机 |
+| 服务器只运行 V2 | V1/重复 V2 容器、旧数据卷、旧部署目录和旧镜像已清理；保留唯一 V2 栈 |
+| 考官 SSH 提交信息 | README 有地址、账户、22端口和登录示例；公钥已安装，未持有考官私钥，不冒称替考官完成了私钥登录 |
+| 考官访问 V2 | 以 reviewer 权限验证 projects/triggers/methods/runs/report；可读源码，不可读 `.env`；sudo 仅限受控包装器 |
+| 自动触发 | 每日北京时间09:00任务真实成功，run `5cb3b6c863fd` |
+| 整机重启恢复 | boot ID 变化，四服务自动健康；重启后自动验收 run `229e4eb95ba8` 成功、MCP真实调用 |
+| 完成契约 | 攻击面逐项结算；延期 PARTIAL、执行失败 INCOMPLETE；引用必须来自实际读取 |
+| 模型实质参与 | 自主计划、假设与安全判断；确定性工具提供证据，Gate不创造安全结论 |
+| 工程回归 | 部署源码145项Linux测试通过；GitHub源码 `0cd8d15` fresh-clone测试145项通过（17.75秒）；状态反馈846c881的GitHub独立checkout通过148项（17.48秒）；82d37bb边界修复GitHub独立checkout150项通过（18.13秒） |
+| 公开文档 | 部署、SSH、设计、知识来源、实际排错、30分钟演示和失败评估记录齐备 |
+
+## 尚未通过与下一步
+
+1. **模型再次HTTP402，真实评估等待供应商恢复。** 第九轮发生新的402，已停止新增模型调用并保留失败数据。此前恢复记录如下： 第四轮评估期间返回 HTTP 402；操作者充值后真实V2触发 run `c567740b179d` 已成功。失败记录保留。并行实验还暴露能力忙碌错误被误报为响应无效，已实现明确错误及有界重试，后续验收串行运行。
+2. **真实规模自主审计未达标。** Werkzeug 311文件的前三轮共24次均耗尽上下文或迭代预算。第四轮一个全库运行仍超限，其余三个被HTTP402中断。所有失败数据保留在 `evaluation/`，未发现目标不能包装成通过。第五轮充值后仍有漏报和超限。第六轮加入字面证据记忆及已知案例实践卡后，漏洞版本定向审查为LIKELY/PARTIAL，修复版本定向审查COMPLETE；两次全库运行仍超限。这是训练后回归，不能算独立泛化验证。EOF反馈已修复并部署。第七轮漏洞版定向COMPLETE/CONFIRMED，修复版定向PARTIAL，两次全库仍INCOMPLETE。全库追踪显示收尾过晚、未先登记假设即提交判断等问题。第八轮加入每轮状态反馈与提前收尾后，两次定向均COMPLETE并正确区分目标，go-shell三次COMPLETE/CONFIRMED；两次全库仍INCOMPLETE，不能算整体闭环。首次读取EOF及序列化上下文大小修复已部署，但第九轮再次HTTP402：首例27次调用后中断，其余三例0次调用；Go三次也INCOMPLETE，不能评价修复效果。
+3. **知识的独特收益未证明。** 18次对照中项目知识避免了关闭知识时的两次误报，但通用文本也有效；项目知识组还有一次PARTIAL。需要更具业务针对性的真实案例、独立评判和足够重复。现有实践卡仅声明项目实验来源，不虚构客户经验。
+4. **最终Benchmark未通过。** 首轮20例TP10/FP0/FN0，但两例PARTIAL；最新尝试受HTTP402影响失败。充值后已在0cd8d15完整串行重跑20例：TP10/FP0/FN0，19例COMPLETE，go-shell因将不存在功能标为deferred而PARTIAL，整体仍未通过。详见 `evaluation/benchmark-post-recharge-results.json`。不能把开发夹具结果宣称为独立准确率。
+5. **支持边界仍存在。** Python AST导航仅提供语法候选；动态分派、其他语言语义和未提供的部署/权限策略不能保证。跨租户权限等真实业务标注评估尚未补齐。`--focus` 是明确限定范围的辅助调查，不等于全库成功。
+
+完整过程见 [整改记录](REMEDIATION.md)，协议及结果见 [evaluation](../evaluation/)；下次工作从上述未通过项继续，已验证部署和历史成功记录不重新包装为新结果。

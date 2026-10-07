@@ -1,0 +1,19 @@
+{
+  "campaign": "evidence-remediation-19",
+  "attempted": 1,
+  "planned": 4,
+  "unexecuted": 3,
+  "audit_id": "4c6f4521861746e4bd3c6581c5f90025",
+  "workflow": "INCOMPLETE",
+  "failure": "RuntimeError: Repeated action failure without recovery across response rounds: settle_surface: Feature absence requires fully read declared files; partial reads cannot establish absence",
+  "counts": {
+    "LIKELY": 1
+  },
+  "calls": 164,
+  "critique_calls": 2,
+  "tokens": 2278278,
+  "archive_sha256": "e02f2a6c2ef55364c2e2aa0816e6f5260542162b37c50edae25e5473fd3f62cb",
+  "release_ready": false,
+  "publication_decision": "User explicitly requested publishing latest assignment candidate today despite pending acceptance. Publication does not change failed status.",
+  "next_task": "After submission, investigate feature-absence settlement missing-read recovery; complete broad-scope and independent knowledge evaluation."
+}
