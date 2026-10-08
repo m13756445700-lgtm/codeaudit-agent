@@ -1,0 +1,13 @@
+{
+  "audit_id": "dd7dbb9e29ae4aae920e74932dc09d19",
+  "input_kind": "local",
+  "commit": null,
+  "files": {
+    "controller.py": "165e6fff68be78cdbd5c717014d1f2df6d46da01f90b3cedbbc0ff164fd12990",
+    "security_config.py": "474a2180a91d8f692f4d77828a59c88423dc93bdb712b958156df2e15d408a7b",
+    "service.py": "75f13cef5622337019a98803cb2e8ecc554187571a6a9687b68ffb53567b3737"
+  },
+  "file_count": 3,
+  "bytes": 4918,
+  "snapshot_sha256": "97a15eaa50bee0285811ce07a90b0cc85329ff6b89f03526b0447df2cfa0d173"
+}

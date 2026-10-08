@@ -1,0 +1,47 @@
+[
+  {
+    "id": "H1",
+    "counterexample": "Could a caller retrieve another tenant's invoice? The strongest counterexample: user={'authenticated': True, 'tenant_id': 'A'} requesting invoice_id whose record has tenant_id 'B'. At service.py:4 the record is fetched, but at service.py:5 may_read returns False (security_config.py:154: 'A' != 'B'), so service.py:6 raises PermissionError and line 7 never executes. No data is returned. A second counterexample: user={'authenticated': False, 'tenant_id': 'A'} — security_config.py:152 returns False, denied. A third: user missing 'authenticated' entirely — user.get('authenticated', False) is False, denied. The only residual edge is both tenant_ids absent (None==None), which requires authenticated=True and no tenant_id on either side; the operator-supplied context supplies tenant_id, so this is not a demonstrated violation of the stated property.",
+    "assessment": "The REJECTED verdict is upheld. The guard may_read is invoked on the sole retrieval path (service.py:5) and enforces both authentication (fail-closed default) and tenant equality before the data-returning sink (service.py:7). No bypass path exists across the three fully-read files. The fetch-before-check ordering does not leak because the local invoice object is only exposed via the post-guard return. The None==None tenant edge is a defense-in-depth observation, not a demonstrated violation under the operator-supplied context, and is recorded as a limitation rather than a confirmed finding.",
+    "outcome": "upheld",
+    "references": [
+      {
+        "evidence": "if not may_read(user, invoice):",
+        "file": "service.py",
+        "line": 5,
+        "operation": "guard on sole path",
+        "symbol": "fetch_invoice"
+      },
+      {
+        "evidence": "if not user.get(\"authenticated\", False):",
+        "file": "security_config.py",
+        "line": 152,
+        "operation": "fail-closed auth",
+        "symbol": "may_read"
+      },
+      {
+        "evidence": "if user.get(\"tenant_id\") != invoice.get(\"tenant_id\"):",
+        "file": "security_config.py",
+        "line": 154,
+        "operation": "tenant equality",
+        "symbol": "may_read"
+      },
+      {
+        "evidence": "raise PermissionError(\"access denied\")",
+        "file": "service.py",
+        "line": 6,
+        "operation": "deny before return",
+        "symbol": "fetch_invoice"
+      },
+      {
+        "evidence": "return {\"amount\": invoice[\"amount\"], \"tenant_id\": invoice[\"tenant_id\"]}",
+        "file": "service.py",
+        "line": 7,
+        "operation": "post-guard sink",
+        "symbol": "fetch_invoice"
+      }
+    ],
+    "decision_sha256": "8a931ea1273630c541181953411d693c33d1846c78d633fa4ab1928d3e47b2da",
+    "kind": "model_self_review"
+  }
+]

@@ -1,0 +1,5 @@
+{
+  "exit_code": 28,
+  "stdout": "",
+  "stderr": "curl: (28) Operation timed out after 10005 milliseconds with 0 bytes received\n"
+}

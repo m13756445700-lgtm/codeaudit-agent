@@ -1,0 +1,15 @@
+{
+  "role": "assistant",
+  "content": "I need to retrieve the relevant knowledge document before submitting the decision.",
+  "tool_calls": [
+    {
+      "index": 0,
+      "id": "call_00_sgizH6xFcQRd57KmkiIi8271",
+      "type": "function",
+      "function": {
+        "name": "use_tool",
+        "arguments": "{\"tool\": \"knowledge.retrieve\", \"arguments\": {\"category\": \"authz\"}, \"purpose\": \"Retrieve authz knowledge to cite before judgment\"}"
+      }
+    }
+  ]
+}

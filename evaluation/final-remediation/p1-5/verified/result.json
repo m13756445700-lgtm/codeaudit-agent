@@ -1,0 +1,51 @@
+{
+  "BUILD_SHA": "90586134ec701b4ec605c3536675f4e647b37965",
+  "FULL_PYTEST": {
+    "passed": 252,
+    "failed": 0,
+    "skipped": 0
+  },
+  "SEMGREP_VERSION": "1.99.0",
+  "SCHEMA_VALIDATION": "PASS",
+  "DOCKER_DAEMON": "PASS",
+  "BUILD": "PASS",
+  "DOCKER_SMOKE": "PASS",
+  "DOCKER_BUILD": "PASS",
+  "CI_CONFIG_VALIDATED": "PASS",
+  "CI_LOCAL_EQUIVALENT": "PASS",
+  "GITHUB_ACTIONS": "NOT_RUN",
+  "CLEAN_ENVIRONMENT": "PASS",
+  "clean_environment": "fresh local clone; clean initial status; new Python3.11.17 venv; linux/amd64 image on macOS arm64; not P2 GitHub clone",
+  "runtime_checks": [
+    "application import",
+    "codeaudit --help",
+    "repo-tools HTTP health and sustained Running",
+    "static-analysis HTTP health and sustained Running",
+    "octobus status and sustained Running"
+  ],
+  "image": {
+    "BUILD_SHA": "90586134ec701b4ec605c3536675f4e647b37965",
+    "IMAGE_ID": "sha256:ec3348b7df103c921b390c5141eb8565cd1cb8b763d34cdd5376913598a4f846",
+    "IMAGE_DIGEST": "NOT_AVAILABLE_PRE_PUSH",
+    "LOCAL_REPODIGESTS": [
+      "codeaudit-p1-5@sha256:ec3348b7df103c921b390c5141eb8565cd1cb8b763d34cdd5376913598a4f846"
+    ],
+    "OCI_REVISION": "90586134ec701b4ec605c3536675f4e647b37965",
+    "architecture": "amd64",
+    "os": "linux",
+    "size_bytes": 6467648900
+  },
+  "logs": [
+    "evaluation/final-remediation/p1-5/docker-build.log",
+    "evaluation/final-remediation/p1-5/docker-smoke.log",
+    "evaluation/final-remediation/p1-5/ci-local.log"
+  ],
+  "REAL_MODEL_POST_REJECTION_RECOVERY": "INCONCLUSIVE",
+  "UNIQUE_KNOWLEDGE_BENEFIT": "NOT_ESTABLISHED",
+  "SECRET_SCAN": "PASS",
+  "HISTORICAL_EVIDENCE_PRESERVED": "YES",
+  "P1_FINAL_GATE": "PASS",
+  "READY_FOR_P2": "YES",
+  "BLOCKERS": [],
+  "phase_boundary": "Stop for Gate Review; no P2 execution, no main push, no server deployment"
+}

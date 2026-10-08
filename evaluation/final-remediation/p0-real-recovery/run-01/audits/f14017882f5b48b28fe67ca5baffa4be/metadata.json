@@ -1,0 +1,11 @@
+{
+  "audit_id": "f14017882f5b48b28fe67ca5baffa4be",
+  "input_kind": "local",
+  "commit": null,
+  "files": {
+    "catalog.py": "28246f5c0509c48ddaca95ba7a553a0ac38b909861eee641dc0dcc782c4b6a9b"
+  },
+  "file_count": 1,
+  "bytes": 4104,
+  "snapshot_sha256": "0c5f50b14f1ab8e8042193f125c27219ae0cc8d388fe542fe30c2641ea080ac5"
+}

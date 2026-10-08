@@ -1,0 +1,14 @@
+{
+  "languages": {
+    "Python": 1
+  },
+  "frameworks": [],
+  "files": [
+    "catalog.py"
+  ],
+  "dependencies": [],
+  "surface_hints": {},
+  "mode": "identified",
+  "audit_priorities": null,
+  "note": "Lexical navigation hints, not security conclusions. Priorities must be supplied by AI."
+}

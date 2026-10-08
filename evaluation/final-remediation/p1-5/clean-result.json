@@ -1,0 +1,41 @@
+{
+  "BUILD_SHA": "764e1cb48ac9289cc1abdefd501d84e17c97ca2e",
+  "python": "3.11.17",
+  "source": "fresh local clone at exact commit; not GitHub fresh clone",
+  "steps": [
+    {
+      "name": "clean_status",
+      "exit_code": 0
+    },
+    {
+      "name": "commit",
+      "exit_code": 0
+    },
+    {
+      "name": "python",
+      "exit_code": 0
+    },
+    {
+      "name": "dependencies",
+      "exit_code": 0
+    },
+    {
+      "name": "semgrep",
+      "exit_code": 0
+    },
+    {
+      "name": "pytest",
+      "exit_code": 0
+    },
+    {
+      "name": "schema",
+      "exit_code": 0
+    }
+  ],
+  "docker_build": "FAIL_DAEMON_UNAVAILABLE",
+  "docker_smoke": "NOT_RUN_NO_IMAGE",
+  "CI_CONFIG_VALIDATED": "PASS",
+  "CI_LOCAL_EQUIVALENT": "FAIL",
+  "GITHUB_ACTIONS": "NOT_RUN",
+  "CLEAN_ENVIRONMENT": "FAIL_INCOMPLETE_DOCKER_CHECKS"
+}

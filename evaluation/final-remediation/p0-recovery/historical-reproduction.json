@@ -1,0 +1,102 @@
+{
+  "minimal": {
+    "file_lines": 121,
+    "read_lines": 120,
+    "observer_missing_ranges": [
+      [
+        121,
+        121
+      ]
+    ],
+    "error": "Feature absence requires fully read declared files; partial reads cannot establish absence",
+    "initial_rejection_before_run": 1,
+    "structured_feedback": {
+      "status": "NEEDS_MORE_EVIDENCE",
+      "reason": "NEGATIVE_SCOPE_INCOMPLETE",
+      "surface_id": "minimal",
+      "declared_files": [
+        "a.py"
+      ],
+      "missing_files": [
+        {
+          "path": "a.py",
+          "missing_ranges": [
+            [
+              121,
+              121
+            ]
+          ],
+          "blocked_reason": null
+        }
+      ],
+      "remaining_missing_evidence": [
+        {
+          "path": "a.py",
+          "missing_ranges": [
+            [
+              121,
+              121
+            ]
+          ],
+          "blocked_reason": null
+        }
+      ],
+      "recommended_actions": [
+        {
+          "action": "use_tool",
+          "tool": "repo.read_range",
+          "arguments": {
+            "path": "a.py",
+            "start": 121,
+            "end": 121
+          }
+        }
+      ],
+      "recovery_attempts": 1,
+      "response_round": null,
+      "max_recovery_attempts": 24,
+      "no_progress_failures": 1,
+      "fingerprint": "c6a1218135ba2539be54c306700b3d49e38da28809739fdcbd1224704f694818",
+      "last_failure": "Feature absence requires fully read declared files; partial reads cannot establish absence",
+      "notice": "Complete declared scope is required; missing source never establishes absence."
+    },
+    "model_response_rounds": 2,
+    "run_summary": {
+      "coverage": {
+        "files_total": 1,
+        "files_read": 1,
+        "distinct_lines_read": 120,
+        "unread_files": [],
+        "scope": "tool-observed reads; not semantic audit completeness"
+      },
+      "status": "INCOMPLETE",
+      "audit_id": "f18ae009426f40b28d546d5416ce6966",
+      "model": "scripted-reproduction-no-LLM",
+      "transport": "local-development",
+      "tool_calls": 2,
+      "elapsed_seconds": 0.01,
+      "counts": {},
+      "failure": "RuntimeError: Repeated evidence settlement without progress: minimal",
+      "completion": null,
+      "usage": [],
+      "assessment_summary": {
+        "workflow_status": "INCOMPLETE",
+        "workflow_completion_is_not_safety": true,
+        "insufficient_evidence_ids": [],
+        "conditional_code_finding_ids": [],
+        "deployment_exposure_unknown_ids": [],
+        "feature_absence_scope": [],
+        "notice": "Reference checks and file overlap do not prove semantic relevance. Feature absence is a model claim limited to the listed files."
+      },
+      "claim_critique_calls": 0,
+      "snapshot_sha256": "216f09eb5fd8c52980655b8373594a6495e095bad0983ac02045f427bce3090b"
+    }
+  },
+  "manual_full_read_control": {
+    "accepted": {
+      "accepted": true,
+      "remaining": []
+    },
+    "note": "Script-directed missing-line read; not autonomous LLM recovery or semantic verification"
+  }
+}

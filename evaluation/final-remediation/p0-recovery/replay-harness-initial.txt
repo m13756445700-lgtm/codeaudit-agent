@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/Users/bo/.codex-b/worktrees/p0-evidence-recovery/codeaudit-v2-final/evaluation/final-remediation/p0-recovery/reproduce.py", line 50, in <module>
+    summary=e.run();assert summary['status']=='INCOMPLETE' and e.model.n==3
+AssertionError

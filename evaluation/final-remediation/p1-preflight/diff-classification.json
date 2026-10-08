@@ -1,0 +1,1546 @@
+{
+  "baseline": "0733933113faee3121b2c5d692ef4ee1400d4d0d",
+  "audited_head": "a7cf6e46a87f6b0089cc962ed95c0dceeb2914e7",
+  "summary": {
+    "A. PRODUCT_CODE": {
+      "files": 2,
+      "insertions": 138,
+      "deletions": 2,
+      "bytes": 67924
+    },
+    "D. REQUIRED_DOCUMENTATION": {
+      "files": 4,
+      "insertions": 138,
+      "deletions": 0,
+      "bytes": 18334
+    },
+    "C. REQUIRED_ACCEPTANCE_EVIDENCE": {
+      "files": 30,
+      "insertions": 3312,
+      "deletions": 0,
+      "bytes": 139433
+    },
+    "B. TEST_CODE": {
+      "files": 4,
+      "insertions": 385,
+      "deletions": 0,
+      "bytes": 26889
+    },
+    "H. DUPLICATE / REDUNDANT": {
+      "files": 50,
+      "insertions": 2420,
+      "deletions": 0,
+      "bytes": 105188
+    },
+    "F. TEMP_FIXTURE": {
+      "files": 16,
+      "insertions": 1470,
+      "deletions": 0,
+      "bytes": 32614
+    },
+    "E. GENERATED_MODEL_TRACE": {
+      "files": 81,
+      "insertions": 37100,
+      "deletions": 0,
+      "bytes": 2788847
+    }
+  },
+  "files": [
+    {
+      "path": "agent/v2/engine.py",
+      "status": "M",
+      "category": "A. PRODUCT_CODE",
+      "insertions": 79,
+      "deletions": 2,
+      "bytes": 65246
+    },
+    {
+      "path": "agent/v2/recovery.py",
+      "status": "A",
+      "category": "A. PRODUCT_CODE",
+      "insertions": 59,
+      "deletions": 0,
+      "bytes": 2678
+    },
+    {
+      "path": "docs/final-remediation/02_P0_ROOT_CAUSE.md",
+      "status": "A",
+      "category": "D. REQUIRED_DOCUMENTATION",
+      "insertions": 19,
+      "deletions": 0,
+      "bytes": 3653
+    },
+    {
+      "path": "docs/final-remediation/03_P0_RECOVERY_GATE_REPORT.md",
+      "status": "A",
+      "category": "D. REQUIRED_DOCUMENTATION",
+      "insertions": 48,
+      "deletions": 0,
+      "bytes": 6462
+    },
+    {
+      "path": "docs/final-remediation/04_REAL_MODEL_TRIGGER_ANALYSIS.md",
+      "status": "A",
+      "category": "D. REQUIRED_DOCUMENTATION",
+      "insertions": 15,
+      "deletions": 0,
+      "bytes": 2955
+    },
+    {
+      "path": "docs/final-remediation/05_P0_FINAL_ACCEPTANCE.md",
+      "status": "A",
+      "category": "D. REQUIRED_DOCUMENTATION",
+      "insertions": 56,
+      "deletions": 0,
+      "bytes": 5264
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/PHASE_SHA256SUMS.json",
+      "status": "A",
+      "category": "C. REQUIRED_ACCEPTANCE_EVIDENCE",
+      "insertions": 143,
+      "deletions": 0,
+      "bytes": 15616
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/acceptance.py",
+      "status": "A",
+      "category": "B. TEST_CODE",
+      "insertions": 113,
+      "deletions": 0,
+      "bytes": 9270
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/result.json",
+      "status": "A",
+      "category": "C. REQUIRED_ACCEPTANCE_EVIDENCE",
+      "insertions": 246,
+      "deletions": 0,
+      "bytes": 8466
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-01/SHA256SUMS.json",
+      "status": "A",
+      "category": "C. REQUIRED_ACCEPTANCE_EVIDENCE",
+      "insertions": 45,
+      "deletions": 0,
+      "bytes": 4471
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-01/audits/f14017882f5b48b28fe67ca5baffa4be/audit_plan.json",
+      "status": "A",
+      "category": "H. DUPLICATE / REDUNDANT",
+      "insertions": 11,
+      "deletions": 0,
+      "bytes": 192
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-01/audits/f14017882f5b48b28fe67ca5baffa4be/coverage.json",
+      "status": "A",
+      "category": "H. DUPLICATE / REDUNDANT",
+      "insertions": 7,
+      "deletions": 0,
+      "bytes": 160
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-01/audits/f14017882f5b48b28fe67ca5baffa4be/decision_reviews.json",
+      "status": "A",
+      "category": "H. DUPLICATE / REDUNDANT",
+      "insertions": 27,
+      "deletions": 0,
+      "bytes": 1708
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-01/audits/f14017882f5b48b28fe67ca5baffa4be/findings.json",
+      "status": "A",
+      "category": "H. DUPLICATE / REDUNDANT",
+      "insertions": 86,
+      "deletions": 0,
+      "bytes": 4455
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-01/audits/f14017882f5b48b28fe67ca5baffa4be/hypotheses.json",
+      "status": "A",
+      "category": "H. DUPLICATE / REDUNDANT",
+      "insertions": 19,
+      "deletions": 0,
+      "bytes": 677
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-01/audits/f14017882f5b48b28fe67ca5baffa4be/investigation_notes.json",
+      "status": "A",
+      "category": "H. DUPLICATE / REDUNDANT",
+      "insertions": 24,
+      "deletions": 0,
+      "bytes": 976
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-01/audits/f14017882f5b48b28fe67ca5baffa4be/knowledge_used.json",
+      "status": "A",
+      "category": "H. DUPLICATE / REDUNDANT",
+      "insertions": 3,
+      "deletions": 0,
+      "bytes": 92
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-01/audits/f14017882f5b48b28fe67ca5baffa4be/metadata.json",
+      "status": "A",
+      "category": "H. DUPLICATE / REDUNDANT",
+      "insertions": 11,
+      "deletions": 0,
+      "bytes": 323
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-01/audits/f14017882f5b48b28fe67ca5baffa4be/repo/catalog.py",
+      "status": "A",
+      "category": "F. TEMP_FIXTURE",
+      "insertions": 180,
+      "deletions": 0,
+      "bytes": 4104
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-01/audits/f14017882f5b48b28fe67ca5baffa4be/repo_profile.json",
+      "status": "A",
+      "category": "H. DUPLICATE / REDUNDANT",
+      "insertions": 14,
+      "deletions": 0,
+      "bytes": 292
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-01/audits/f14017882f5b48b28fe67ca5baffa4be/report.md",
+      "status": "A",
+      "category": "H. DUPLICATE / REDUNDANT",
+      "insertions": 180,
+      "deletions": 0,
+      "bytes": 7328
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-01/audits/f14017882f5b48b28fe67ca5baffa4be/run_summary.json",
+      "status": "A",
+      "category": "H. DUPLICATE / REDUNDANT",
+      "insertions": 165,
+      "deletions": 0,
+      "bytes": 5829
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-01/audits/f14017882f5b48b28fe67ca5baffa4be/surface_progress.json",
+      "status": "A",
+      "category": "H. DUPLICATE / REDUNDANT",
+      "insertions": 35,
+      "deletions": 0,
+      "bytes": 1283
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-01/audits/f14017882f5b48b28fe67ca5baffa4be/surface_reviews.json",
+      "status": "A",
+      "category": "H. DUPLICATE / REDUNDANT",
+      "insertions": 15,
+      "deletions": 0,
+      "bytes": 637
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-01/audits/f14017882f5b48b28fe67ca5baffa4be/tool_calls.jsonl",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 15,
+      "deletions": 0,
+      "bytes": 28686
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-01/final-context.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 266,
+      "deletions": 0,
+      "bytes": 47420
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-01/initial-state.json",
+      "status": "A",
+      "category": "C. REQUIRED_ACCEPTANCE_EVIDENCE",
+      "insertions": 23,
+      "deletions": 0,
+      "bytes": 416
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-01/prompt.json",
+      "status": "A",
+      "category": "C. REQUIRED_ACCEPTANCE_EVIDENCE",
+      "insertions": 3,
+      "deletions": 0,
+      "bytes": 202
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-01/request-01.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 908,
+      "deletions": 0,
+      "bytes": 45363
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-01/request-02.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 942,
+      "deletions": 0,
+      "bytes": 48434
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-01/request-03.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 976,
+      "deletions": 0,
+      "bytes": 50133
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-01/request-04.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 996,
+      "deletions": 0,
+      "bytes": 51622
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-01/request-05.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 1016,
+      "deletions": 0,
+      "bytes": 53142
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-01/request-06.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 1036,
+      "deletions": 0,
+      "bytes": 54936
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-01/request-07.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 1056,
+      "deletions": 0,
+      "bytes": 58052
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-01/request-08.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 1076,
+      "deletions": 0,
+      "bytes": 62593
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-01/request-09.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 1096,
+      "deletions": 0,
+      "bytes": 64885
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-01/request-10.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 1116,
+      "deletions": 0,
+      "bytes": 69812
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-01/request-11.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 1136,
+      "deletions": 0,
+      "bytes": 71916
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-01/response-01.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 24,
+      "deletions": 0,
+      "bytes": 802
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-01/response-02.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 24,
+      "deletions": 0,
+      "bytes": 984
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-01/response-03.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 15,
+      "deletions": 0,
+      "bytes": 1270
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-01/response-04.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 15,
+      "deletions": 0,
+      "bytes": 1227
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-01/response-05.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 15,
+      "deletions": 0,
+      "bytes": 1541
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-01/response-06.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 15,
+      "deletions": 0,
+      "bytes": 2678
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-01/response-07.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 15,
+      "deletions": 0,
+      "bytes": 4024
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-01/response-08.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 15,
+      "deletions": 0,
+      "bytes": 494
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-01/response-09.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 15,
+      "deletions": 0,
+      "bytes": 4161
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-01/response-10.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 15,
+      "deletions": 0,
+      "bytes": 1814
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-01/response-11.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 15,
+      "deletions": 0,
+      "bytes": 2382
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-01/result.json",
+      "status": "A",
+      "category": "C. REQUIRED_ACCEPTANCE_EVIDENCE",
+      "insertions": 227,
+      "deletions": 0,
+      "bytes": 8394
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-01/source/catalog.py",
+      "status": "A",
+      "category": "F. TEMP_FIXTURE",
+      "insertions": 180,
+      "deletions": 0,
+      "bytes": 4104
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-01/state-transitions.jsonl",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 16,
+      "deletions": 0,
+      "bytes": 53163
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-02/SHA256SUMS.json",
+      "status": "A",
+      "category": "C. REQUIRED_ACCEPTANCE_EVIDENCE",
+      "insertions": 45,
+      "deletions": 0,
+      "bytes": 4575
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-02/audits/5d6d348f529447839aa1d8586ac00181/audit_plan.json",
+      "status": "A",
+      "category": "H. DUPLICATE / REDUNDANT",
+      "insertions": 11,
+      "deletions": 0,
+      "bytes": 192
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-02/audits/5d6d348f529447839aa1d8586ac00181/coverage.json",
+      "status": "A",
+      "category": "H. DUPLICATE / REDUNDANT",
+      "insertions": 7,
+      "deletions": 0,
+      "bytes": 160
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-02/audits/5d6d348f529447839aa1d8586ac00181/decision_reviews.json",
+      "status": "A",
+      "category": "H. DUPLICATE / REDUNDANT",
+      "insertions": 47,
+      "deletions": 0,
+      "bytes": 2788
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-02/audits/5d6d348f529447839aa1d8586ac00181/findings.json",
+      "status": "A",
+      "category": "H. DUPLICATE / REDUNDANT",
+      "insertions": 195,
+      "deletions": 0,
+      "bytes": 10084
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-02/audits/5d6d348f529447839aa1d8586ac00181/hypotheses.json",
+      "status": "A",
+      "category": "H. DUPLICATE / REDUNDANT",
+      "insertions": 20,
+      "deletions": 0,
+      "bytes": 928
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-02/audits/5d6d348f529447839aa1d8586ac00181/investigation_notes.json",
+      "status": "A",
+      "category": "H. DUPLICATE / REDUNDANT",
+      "insertions": 47,
+      "deletions": 0,
+      "bytes": 1835
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-02/audits/5d6d348f529447839aa1d8586ac00181/knowledge_used.json",
+      "status": "A",
+      "category": "H. DUPLICATE / REDUNDANT",
+      "insertions": 3,
+      "deletions": 0,
+      "bytes": 84
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-02/audits/5d6d348f529447839aa1d8586ac00181/metadata.json",
+      "status": "A",
+      "category": "H. DUPLICATE / REDUNDANT",
+      "insertions": 13,
+      "deletions": 0,
+      "bytes": 506
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-02/audits/5d6d348f529447839aa1d8586ac00181/repo/controller.py",
+      "status": "A",
+      "category": "F. TEMP_FIXTURE",
+      "insertions": 4,
+      "deletions": 0,
+      "bytes": 131
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-02/audits/5d6d348f529447839aa1d8586ac00181/repo/security_config.py",
+      "status": "A",
+      "category": "F. TEMP_FIXTURE",
+      "insertions": 180,
+      "deletions": 0,
+      "bytes": 4498
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-02/audits/5d6d348f529447839aa1d8586ac00181/repo/service.py",
+      "status": "A",
+      "category": "F. TEMP_FIXTURE",
+      "insertions": 7,
+      "deletions": 0,
+      "bytes": 277
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-02/audits/5d6d348f529447839aa1d8586ac00181/repo_profile.json",
+      "status": "A",
+      "category": "H. DUPLICATE / REDUNDANT",
+      "insertions": 23,
+      "deletions": 0,
+      "bytes": 448
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-02/audits/5d6d348f529447839aa1d8586ac00181/report.md",
+      "status": "A",
+      "category": "H. DUPLICATE / REDUNDANT",
+      "insertions": 215,
+      "deletions": 0,
+      "bytes": 10965
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-02/audits/5d6d348f529447839aa1d8586ac00181/run_summary.json",
+      "status": "A",
+      "category": "H. DUPLICATE / REDUNDANT",
+      "insertions": 151,
+      "deletions": 0,
+      "bytes": 6234
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-02/audits/5d6d348f529447839aa1d8586ac00181/surface_progress.json",
+      "status": "A",
+      "category": "H. DUPLICATE / REDUNDANT",
+      "insertions": 17,
+      "deletions": 0,
+      "bytes": 828
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-02/audits/5d6d348f529447839aa1d8586ac00181/surface_reviews.json",
+      "status": "A",
+      "category": "H. DUPLICATE / REDUNDANT",
+      "insertions": 17,
+      "deletions": 0,
+      "bytes": 826
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-02/audits/5d6d348f529447839aa1d8586ac00181/tool_calls.jsonl",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 17,
+      "deletions": 0,
+      "bytes": 42198
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-02/final-context.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 254,
+      "deletions": 0,
+      "bytes": 64015
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-02/initial-state.json",
+      "status": "A",
+      "category": "C. REQUIRED_ACCEPTANCE_EVIDENCE",
+      "insertions": 23,
+      "deletions": 0,
+      "bytes": 424
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-02/prompt.json",
+      "status": "A",
+      "category": "C. REQUIRED_ACCEPTANCE_EVIDENCE",
+      "insertions": 3,
+      "deletions": 0,
+      "bytes": 426
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-02/request-01.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 908,
+      "deletions": 0,
+      "bytes": 47234
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-02/request-02.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 942,
+      "deletions": 0,
+      "bytes": 50915
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-02/request-03.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 990,
+      "deletions": 0,
+      "bytes": 54484
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-02/request-04.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 1024,
+      "deletions": 0,
+      "bytes": 59507
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-02/request-05.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 1044,
+      "deletions": 0,
+      "bytes": 68488
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-02/request-06.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 1064,
+      "deletions": 0,
+      "bytes": 73250
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-02/request-07.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 1084,
+      "deletions": 0,
+      "bytes": 83130
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-02/request-08.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 1104,
+      "deletions": 0,
+      "bytes": 86234
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-02/request-09.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 1124,
+      "deletions": 0,
+      "bytes": 87611
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-02/response-01.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 24,
+      "deletions": 0,
+      "bytes": 883
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-02/response-02.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 33,
+      "deletions": 0,
+      "bytes": 2191
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-02/response-03.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 24,
+      "deletions": 0,
+      "bytes": 4536
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-02/response-04.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 15,
+      "deletions": 0,
+      "bytes": 8464
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-02/response-05.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 15,
+      "deletions": 0,
+      "bytes": 483
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-02/response-06.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 15,
+      "deletions": 0,
+      "bytes": 8931
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-02/response-07.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 15,
+      "deletions": 0,
+      "bytes": 2814
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-02/response-08.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 15,
+      "deletions": 0,
+      "bytes": 1124
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-02/response-09.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 15,
+      "deletions": 0,
+      "bytes": 3258
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-02/result.json",
+      "status": "A",
+      "category": "C. REQUIRED_ACCEPTANCE_EVIDENCE",
+      "insertions": 195,
+      "deletions": 0,
+      "bytes": 8244
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-02/source/controller.py",
+      "status": "A",
+      "category": "F. TEMP_FIXTURE",
+      "insertions": 4,
+      "deletions": 0,
+      "bytes": 131
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-02/source/security_config.py",
+      "status": "A",
+      "category": "F. TEMP_FIXTURE",
+      "insertions": 180,
+      "deletions": 0,
+      "bytes": 4498
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-02/source/service.py",
+      "status": "A",
+      "category": "F. TEMP_FIXTURE",
+      "insertions": 7,
+      "deletions": 0,
+      "bytes": 277
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-02/state-transitions.jsonl",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 18,
+      "deletions": 0,
+      "bytes": 57962
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-03/SHA256SUMS.json",
+      "status": "A",
+      "category": "C. REQUIRED_ACCEPTANCE_EVIDENCE",
+      "insertions": 49,
+      "deletions": 0,
+      "bytes": 4933
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-03/audits/dd7dbb9e29ae4aae920e74932dc09d19/audit_plan.json",
+      "status": "A",
+      "category": "H. DUPLICATE / REDUNDANT",
+      "insertions": 11,
+      "deletions": 0,
+      "bytes": 192
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-03/audits/dd7dbb9e29ae4aae920e74932dc09d19/coverage.json",
+      "status": "A",
+      "category": "H. DUPLICATE / REDUNDANT",
+      "insertions": 7,
+      "deletions": 0,
+      "bytes": 160
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-03/audits/dd7dbb9e29ae4aae920e74932dc09d19/decision_reviews.json",
+      "status": "A",
+      "category": "H. DUPLICATE / REDUNDANT",
+      "insertions": 41,
+      "deletions": 0,
+      "bytes": 2616
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-03/audits/dd7dbb9e29ae4aae920e74932dc09d19/findings.json",
+      "status": "A",
+      "category": "H. DUPLICATE / REDUNDANT",
+      "insertions": 217,
+      "deletions": 0,
+      "bytes": 10170
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-03/audits/dd7dbb9e29ae4aae920e74932dc09d19/hypotheses.json",
+      "status": "A",
+      "category": "H. DUPLICATE / REDUNDANT",
+      "insertions": 19,
+      "deletions": 0,
+      "bytes": 812
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-03/audits/dd7dbb9e29ae4aae920e74932dc09d19/investigation_notes.json",
+      "status": "A",
+      "category": "H. DUPLICATE / REDUNDANT",
+      "insertions": 48,
+      "deletions": 0,
+      "bytes": 2066
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-03/audits/dd7dbb9e29ae4aae920e74932dc09d19/knowledge_used.json",
+      "status": "A",
+      "category": "H. DUPLICATE / REDUNDANT",
+      "insertions": 3,
+      "deletions": 0,
+      "bytes": 84
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-03/audits/dd7dbb9e29ae4aae920e74932dc09d19/metadata.json",
+      "status": "A",
+      "category": "H. DUPLICATE / REDUNDANT",
+      "insertions": 13,
+      "deletions": 0,
+      "bytes": 506
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-03/audits/dd7dbb9e29ae4aae920e74932dc09d19/repo/controller.py",
+      "status": "A",
+      "category": "F. TEMP_FIXTURE",
+      "insertions": 4,
+      "deletions": 0,
+      "bytes": 131
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-03/audits/dd7dbb9e29ae4aae920e74932dc09d19/repo/security_config.py",
+      "status": "A",
+      "category": "F. TEMP_FIXTURE",
+      "insertions": 180,
+      "deletions": 0,
+      "bytes": 4510
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-03/audits/dd7dbb9e29ae4aae920e74932dc09d19/repo/service.py",
+      "status": "A",
+      "category": "F. TEMP_FIXTURE",
+      "insertions": 7,
+      "deletions": 0,
+      "bytes": 277
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-03/audits/dd7dbb9e29ae4aae920e74932dc09d19/repo_profile.json",
+      "status": "A",
+      "category": "H. DUPLICATE / REDUNDANT",
+      "insertions": 23,
+      "deletions": 0,
+      "bytes": 448
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-03/audits/dd7dbb9e29ae4aae920e74932dc09d19/report.md",
+      "status": "A",
+      "category": "H. DUPLICATE / REDUNDANT",
+      "insertions": 223,
+      "deletions": 0,
+      "bytes": 10308
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-03/audits/dd7dbb9e29ae4aae920e74932dc09d19/run_summary.json",
+      "status": "A",
+      "category": "H. DUPLICATE / REDUNDANT",
+      "insertions": 170,
+      "deletions": 0,
+      "bytes": 6270
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-03/audits/dd7dbb9e29ae4aae920e74932dc09d19/surface_progress.json",
+      "status": "A",
+      "category": "H. DUPLICATE / REDUNDANT",
+      "insertions": 17,
+      "deletions": 0,
+      "bytes": 788
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-03/audits/dd7dbb9e29ae4aae920e74932dc09d19/surface_reviews.json",
+      "status": "A",
+      "category": "H. DUPLICATE / REDUNDANT",
+      "insertions": 17,
+      "deletions": 0,
+      "bytes": 593
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-03/audits/dd7dbb9e29ae4aae920e74932dc09d19/tool_calls.jsonl",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 18,
+      "deletions": 0,
+      "bytes": 51622
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-03/final-context.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 280,
+      "deletions": 0,
+      "bytes": 72540
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-03/initial-state.json",
+      "status": "A",
+      "category": "C. REQUIRED_ACCEPTANCE_EVIDENCE",
+      "insertions": 23,
+      "deletions": 0,
+      "bytes": 422
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-03/prompt.json",
+      "status": "A",
+      "category": "C. REQUIRED_ACCEPTANCE_EVIDENCE",
+      "insertions": 3,
+      "deletions": 0,
+      "bytes": 426
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-03/request-01.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 908,
+      "deletions": 0,
+      "bytes": 48642
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-03/request-02.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 942,
+      "deletions": 0,
+      "bytes": 51174
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-03/request-03.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 990,
+      "deletions": 0,
+      "bytes": 54691
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-03/request-04.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 1010,
+      "deletions": 0,
+      "bytes": 57198
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-03/request-05.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 1030,
+      "deletions": 0,
+      "bytes": 58550
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-03/request-06.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 1050,
+      "deletions": 0,
+      "bytes": 67707
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-03/request-07.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 1070,
+      "deletions": 0,
+      "bytes": 72461
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-03/request-08.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 1090,
+      "deletions": 0,
+      "bytes": 82981
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-03/request-09.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 1110,
+      "deletions": 0,
+      "bytes": 92445
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-03/request-10.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 1130,
+      "deletions": 0,
+      "bytes": 95429
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-03/request-11.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 1150,
+      "deletions": 0,
+      "bytes": 96777
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-03/response-01.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 24,
+      "deletions": 0,
+      "bytes": 935
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-03/response-02.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 33,
+      "deletions": 0,
+      "bytes": 1594
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-03/response-03.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 15,
+      "deletions": 0,
+      "bytes": 2210
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-03/response-04.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 15,
+      "deletions": 0,
+      "bytes": 1133
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-03/response-05.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 15,
+      "deletions": 0,
+      "bytes": 8640
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-03/response-06.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 15,
+      "deletions": 0,
+      "bytes": 475
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-03/response-07.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 15,
+      "deletions": 0,
+      "bytes": 8805
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-03/response-08.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 15,
+      "deletions": 0,
+      "bytes": 8909
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-03/response-09.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 15,
+      "deletions": 0,
+      "bytes": 2694
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-03/response-10.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 15,
+      "deletions": 0,
+      "bytes": 1095
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-03/response-11.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 15,
+      "deletions": 0,
+      "bytes": 2669
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-03/result.json",
+      "status": "A",
+      "category": "C. REQUIRED_ACCEPTANCE_EVIDENCE",
+      "insertions": 214,
+      "deletions": 0,
+      "bytes": 8278
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-03/source/controller.py",
+      "status": "A",
+      "category": "F. TEMP_FIXTURE",
+      "insertions": 4,
+      "deletions": 0,
+      "bytes": 131
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-03/source/security_config.py",
+      "status": "A",
+      "category": "F. TEMP_FIXTURE",
+      "insertions": 180,
+      "deletions": 0,
+      "bytes": 4510
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-03/source/service.py",
+      "status": "A",
+      "category": "F. TEMP_FIXTURE",
+      "insertions": 7,
+      "deletions": 0,
+      "bytes": 277
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-03/state-transitions.jsonl",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 19,
+      "deletions": 0,
+      "bytes": 67616
+    },
+    {
+      "path": "evaluation/final-remediation/p0-recovery/SHA256SUMS.json",
+      "status": "A",
+      "category": "C. REQUIRED_ACCEPTANCE_EVIDENCE",
+      "insertions": 42,
+      "deletions": 0,
+      "bytes": 6152
+    },
+    {
+      "path": "evaluation/final-remediation/p0-recovery/coverage-recovery.json",
+      "status": "A",
+      "category": "C. REQUIRED_ACCEPTANCE_EVIDENCE",
+      "insertions": 108,
+      "deletions": 0,
+      "bytes": 2707
+    },
+    {
+      "path": "evaluation/final-remediation/p0-recovery/credential-source-check.txt",
+      "status": "A",
+      "category": "C. REQUIRED_ACCEPTANCE_EVIDENCE",
+      "insertions": 1,
+      "deletions": 0,
+      "bytes": 74
+    },
+    {
+      "path": "evaluation/final-remediation/p0-recovery/dependency-install.txt",
+      "status": "A",
+      "category": "C. REQUIRED_ACCEPTANCE_EVIDENCE",
+      "insertions": 113,
+      "deletions": 0,
+      "bytes": 7494
+    },
+    {
+      "path": "evaluation/final-remediation/p0-recovery/full-pytest.txt",
+      "status": "A",
+      "category": "C. REQUIRED_ACCEPTANCE_EVIDENCE",
+      "insertions": 5,
+      "deletions": 0,
+      "bytes": 341
+    },
+    {
+      "path": "evaluation/final-remediation/p0-recovery/historical-replay.json",
+      "status": "A",
+      "category": "C. REQUIRED_ACCEPTANCE_EVIDENCE",
+      "insertions": 235,
+      "deletions": 0,
+      "bytes": 7760
+    },
+    {
+      "path": "evaluation/final-remediation/p0-recovery/historical-reproduction.json",
+      "status": "A",
+      "category": "C. REQUIRED_ACCEPTANCE_EVIDENCE",
+      "insertions": 102,
+      "deletions": 0,
+      "bytes": 3063
+    },
+    {
+      "path": "evaluation/final-remediation/p0-recovery/historical-reproduction.txt",
+      "status": "A",
+      "category": "C. REQUIRED_ACCEPTANCE_EVIDENCE",
+      "insertions": 18,
+      "deletions": 0,
+      "bytes": 342
+    },
+    {
+      "path": "evaluation/final-remediation/p0-recovery/integrity.json",
+      "status": "A",
+      "category": "C. REQUIRED_ACCEPTANCE_EVIDENCE",
+      "insertions": 12,
+      "deletions": 0,
+      "bytes": 633
+    },
+    {
+      "path": "evaluation/final-remediation/p0-recovery/real-model-validation.txt",
+      "status": "A",
+      "category": "C. REQUIRED_ACCEPTANCE_EVIDENCE",
+      "insertions": 2,
+      "deletions": 0,
+      "bytes": 857
+    },
+    {
+      "path": "evaluation/final-remediation/p0-recovery/real-model/action-sequence.json",
+      "status": "A",
+      "category": "C. REQUIRED_ACCEPTANCE_EVIDENCE",
+      "insertions": 85,
+      "deletions": 0,
+      "bytes": 3748
+    },
+    {
+      "path": "evaluation/final-remediation/p0-recovery/real-model/audits/892583c225bd4ea6a0161ca36cbbad55/audit_plan.json",
+      "status": "A",
+      "category": "H. DUPLICATE / REDUNDANT",
+      "insertions": 8,
+      "deletions": 0,
+      "bytes": 152
+    },
+    {
+      "path": "evaluation/final-remediation/p0-recovery/real-model/audits/892583c225bd4ea6a0161ca36cbbad55/coverage.json",
+      "status": "A",
+      "category": "H. DUPLICATE / REDUNDANT",
+      "insertions": 7,
+      "deletions": 0,
+      "bytes": 160
+    },
+    {
+      "path": "evaluation/final-remediation/p0-recovery/real-model/audits/892583c225bd4ea6a0161ca36cbbad55/findings.json",
+      "status": "A",
+      "category": "H. DUPLICATE / REDUNDANT",
+      "insertions": 1,
+      "deletions": 0,
+      "bytes": 2
+    },
+    {
+      "path": "evaluation/final-remediation/p0-recovery/real-model/audits/892583c225bd4ea6a0161ca36cbbad55/hypotheses.json",
+      "status": "A",
+      "category": "H. DUPLICATE / REDUNDANT",
+      "insertions": 1,
+      "deletions": 0,
+      "bytes": 2
+    },
+    {
+      "path": "evaluation/final-remediation/p0-recovery/real-model/audits/892583c225bd4ea6a0161ca36cbbad55/knowledge_used.json",
+      "status": "A",
+      "category": "H. DUPLICATE / REDUNDANT",
+      "insertions": 1,
+      "deletions": 0,
+      "bytes": 2
+    },
+    {
+      "path": "evaluation/final-remediation/p0-recovery/real-model/audits/892583c225bd4ea6a0161ca36cbbad55/metadata.json",
+      "status": "A",
+      "category": "H. DUPLICATE / REDUNDANT",
+      "insertions": 11,
+      "deletions": 0,
+      "bytes": 335
+    },
+    {
+      "path": "evaluation/final-remediation/p0-recovery/real-model/audits/892583c225bd4ea6a0161ca36cbbad55/repo/inventory_constants.py",
+      "status": "A",
+      "category": "F. TEMP_FIXTURE",
+      "insertions": 173,
+      "deletions": 0,
+      "bytes": 2379
+    },
+    {
+      "path": "evaluation/final-remediation/p0-recovery/real-model/audits/892583c225bd4ea6a0161ca36cbbad55/repo_profile.json",
+      "status": "A",
+      "category": "H. DUPLICATE / REDUNDANT",
+      "insertions": 14,
+      "deletions": 0,
+      "bytes": 304
+    },
+    {
+      "path": "evaluation/final-remediation/p0-recovery/real-model/audits/892583c225bd4ea6a0161ca36cbbad55/report.md",
+      "status": "A",
+      "category": "H. DUPLICATE / REDUNDANT",
+      "insertions": 46,
+      "deletions": 0,
+      "bytes": 3505
+    },
+    {
+      "path": "evaluation/final-remediation/p0-recovery/real-model/audits/892583c225bd4ea6a0161ca36cbbad55/run_summary.json",
+      "status": "A",
+      "category": "H. DUPLICATE / REDUNDANT",
+      "insertions": 103,
+      "deletions": 0,
+      "bytes": 3968
+    },
+    {
+      "path": "evaluation/final-remediation/p0-recovery/real-model/audits/892583c225bd4ea6a0161ca36cbbad55/surface_progress.json",
+      "status": "A",
+      "category": "H. DUPLICATE / REDUNDANT",
+      "insertions": 28,
+      "deletions": 0,
+      "bytes": 1019
+    },
+    {
+      "path": "evaluation/final-remediation/p0-recovery/real-model/audits/892583c225bd4ea6a0161ca36cbbad55/surface_reviews.json",
+      "status": "A",
+      "category": "H. DUPLICATE / REDUNDANT",
+      "insertions": 28,
+      "deletions": 0,
+      "bytes": 896
+    },
+    {
+      "path": "evaluation/final-remediation/p0-recovery/real-model/audits/892583c225bd4ea6a0161ca36cbbad55/tool_calls.jsonl",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 4,
+      "deletions": 0,
+      "bytes": 9044
+    },
+    {
+      "path": "evaluation/final-remediation/p0-recovery/real-model/conversation.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 78,
+      "deletions": 0,
+      "bytes": 23520
+    },
+    {
+      "path": "evaluation/final-remediation/p0-recovery/real-model/request-01.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 901,
+      "deletions": 0,
+      "bytes": 42372
+    },
+    {
+      "path": "evaluation/final-remediation/p0-recovery/real-model/request-02.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 921,
+      "deletions": 0,
+      "bytes": 45915
+    },
+    {
+      "path": "evaluation/final-remediation/p0-recovery/real-model/request-03.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 941,
+      "deletions": 0,
+      "bytes": 47535
+    },
+    {
+      "path": "evaluation/final-remediation/p0-recovery/real-model/response-01.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 15,
+      "deletions": 0,
+      "bytes": 664
+    },
+    {
+      "path": "evaluation/final-remediation/p0-recovery/real-model/response-02.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 15,
+      "deletions": 0,
+      "bytes": 1352
+    },
+    {
+      "path": "evaluation/final-remediation/p0-recovery/real-model/response-03.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 15,
+      "deletions": 0,
+      "bytes": 2346
+    },
+    {
+      "path": "evaluation/final-remediation/p0-recovery/real-model/result.json",
+      "status": "A",
+      "category": "C. REQUIRED_ACCEPTANCE_EVIDENCE",
+      "insertions": 899,
+      "deletions": 0,
+      "bytes": 22495
+    },
+    {
+      "path": "evaluation/final-remediation/p0-recovery/real-model/source/inventory_constants.py",
+      "status": "A",
+      "category": "F. TEMP_FIXTURE",
+      "insertions": 173,
+      "deletions": 0,
+      "bytes": 2379
+    },
+    {
+      "path": "evaluation/final-remediation/p0-recovery/real_model_validation.py",
+      "status": "A",
+      "category": "B. TEST_CODE",
+      "insertions": 47,
+      "deletions": 0,
+      "bytes": 4296
+    },
+    {
+      "path": "evaluation/final-remediation/p0-recovery/replay-harness-initial.txt",
+      "status": "A",
+      "category": "C. REQUIRED_ACCEPTANCE_EVIDENCE",
+      "insertions": 4,
+      "deletions": 0,
+      "bytes": 280
+    },
+    {
+      "path": "evaluation/final-remediation/p0-recovery/replay/historical-replay-trace.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 3,
+      "deletions": 0,
+      "bytes": 4270
+    },
+    {
+      "path": "evaluation/final-remediation/p0-recovery/replay/minimal-trace.json",
+      "status": "A",
+      "category": "E. GENERATED_MODEL_TRACE",
+      "insertions": 640,
+      "deletions": 0,
+      "bytes": 13591
+    },
+    {
+      "path": "evaluation/final-remediation/p0-recovery/replay/result.json",
+      "status": "A",
+      "category": "C. REQUIRED_ACCEPTANCE_EVIDENCE",
+      "insertions": 338,
+      "deletions": 0,
+      "bytes": 11037
+    },
+    {
+      "path": "evaluation/final-remediation/p0-recovery/reproduce.py",
+      "status": "A",
+      "category": "B. TEST_CODE",
+      "insertions": 92,
+      "deletions": 0,
+      "bytes": 6349
+    },
+    {
+      "path": "evaluation/final-remediation/p0-recovery/unit-tests-initial-fault-fixture.txt",
+      "status": "A",
+      "category": "C. REQUIRED_ACCEPTANCE_EVIDENCE",
+      "insertions": 104,
+      "deletions": 0,
+      "bytes": 7058
+    },
+    {
+      "path": "evaluation/final-remediation/p0-recovery/unit-tests.txt",
+      "status": "A",
+      "category": "C. REQUIRED_ACCEPTANCE_EVIDENCE",
+      "insertions": 2,
+      "deletions": 0,
+      "bytes": 99
+    },
+    {
+      "path": "tests/test_v2_recovery.py",
+      "status": "A",
+      "category": "B. TEST_CODE",
+      "insertions": 133,
+      "deletions": 0,
+      "bytes": 6974
+    }
+  ]
+}

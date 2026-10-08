@@ -1,0 +1,48 @@
+[
+  {
+    "id": "note-1",
+    "summary": "Full declared scope read. controller.get_invoice (4 lines) delegates to service.fetch_invoice. service.fetch_invoice: records[invoice_id] lookup, then `if not may_read(user, invoice): raise PermissionError`, returns amount+tenant_id. security_config.may_read (lines 84-89): returns False if not user.get(\"authenticated\", False); returns False if user.get(\"tenant_id\") != invoice.get(\"tenant_id\"); else True. Only one may_read definition; only call site is service.py:5. No alternate path, no monkeypatch, no bypass branch. Authn (authenticated flag) and same-tenant authz (tenant_id equality) both enforced before returning data.",
+    "references": [
+      {
+        "file": "security_config.py",
+        "line": 84,
+        "symbol": "may_read",
+        "evidence": "def may_read(user, invoice):",
+        "operation": "definition"
+      },
+      {
+        "file": "security_config.py",
+        "line": 85,
+        "symbol": "may_read",
+        "evidence": "if not user.get(\"authenticated\", False):",
+        "operation": "authn check"
+      },
+      {
+        "file": "security_config.py",
+        "line": 87,
+        "symbol": "may_read",
+        "evidence": "if user.get(\"tenant_id\") != invoice.get(\"tenant_id\"):",
+        "operation": "tenant check"
+      },
+      {
+        "file": "service.py",
+        "line": 5,
+        "symbol": "fetch_invoice",
+        "evidence": "if not may_read(user, invoice):",
+        "operation": "guard call"
+      },
+      {
+        "file": "service.py",
+        "line": 6,
+        "symbol": "fetch_invoice",
+        "evidence": "raise PermissionError(\"access denied\")",
+        "operation": "deny"
+      }
+    ],
+    "open_questions": [
+      "Does records[invoice_id] KeyError leak existence? Not an authz bypass; out of scope for same-tenant property.",
+      "Is user context trustworthy? Operator-supplied authenticated context per task; assumed trusted."
+    ],
+    "next_action": "Submit REJECTED decision for authz bypass hypothesis; settle surface; finish."
+  }
+]

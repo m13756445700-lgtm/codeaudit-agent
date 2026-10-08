@@ -1,0 +1,17 @@
+[
+  {
+    "surface": "declared module review",
+    "status": "reviewed",
+    "files": [
+      "controller.py",
+      "service.py",
+      "security_config.py"
+    ],
+    "reason": "All three declared files read in full (controller.py 1-4, service.py 1-7, security_config.py 1-180). Assessed the declared property: invoice retrieval enforces authenticated same-tenant access. The sole entrypoint controller.get_invoice delegates to service.fetch_invoice, which fetches the record, calls may_read (the only call site), raises PermissionError on failure, and returns data only after the guard. may_read enforces fail-closed authentication and tenant_id equality. No bypass path exists; candidate vulnerability rejected as H1.",
+    "assessment": "decision",
+    "decision_ids": [
+      "H1"
+    ],
+    "absence_evidence": []
+  }
+]

@@ -1,0 +1,10 @@
+Collecting Werkzeug==3.0.6
+  Downloading werkzeug-3.0.6-py3-none-any.whl (227 kB)
+Collecting urllib3==2.2.3
+  Downloading urllib3-2.2.3-py3-none-any.whl (126 kB)
+Collecting MarkupSafe>=2.1.1
+  Using cached markupsafe-3.0.4-cp39-cp39-macosx_11_0_arm64.whl (12 kB)
+Installing collected packages: MarkupSafe, Werkzeug, urllib3
+Successfully installed MarkupSafe-3.0.4 Werkzeug-3.0.6 urllib3-2.2.3
+WARNING: You are using pip version 21.2.4; however, version 26.0.1 is available.
+You should consider upgrading via the '/Users/bo/codeaudit-v2-final/.internal/p0-test-venv/bin/python -m pip install --upgrade pip' command.

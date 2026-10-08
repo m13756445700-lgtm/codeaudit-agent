@@ -1,0 +1,24 @@
+{
+  "version": {
+    "status": "TIMEOUT",
+    "stdout": null
+  },
+  "info": {
+    "status": "TIMEOUT",
+    "stdout": null
+  },
+  "contexts": {
+    "returncode": 0,
+    "stdout": "NAME              DESCRIPTION                               DOCKER ENDPOINT                            ERROR\ndefault           Current DOCKER_HOST based configuration   unix:///var/run/docker.sock                \ndesktop-linux *   Docker Desktop                            unix:///Users/bo/.docker/run/docker.sock   \n",
+    "stderr": ""
+  },
+  "compose": {
+    "returncode": 0,
+    "stdout": "Docker Compose version v5.5.1\n",
+    "stderr": ""
+  },
+  "disk": {
+    "status": "TIMEOUT",
+    "stdout": null
+  }
+}

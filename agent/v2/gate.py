@@ -63,11 +63,13 @@ def validate(finding, repo, metadata, receipts, knowledge):
                     problems.append('defense requires implementation references and limitations:' + location)
             else:
                 state = claim.get('state')
-                if state not in ('verified', 'unknown') or type(claim.get('affects_verdict')) is not bool:
+                if state not in ('verified', 'supported', 'unknown', 'contradicted') or type(claim.get('affects_verdict')) is not bool:
                     problems.append('invalid assumption:' + location)
-                if state == 'verified' and not refs:
+                if state in ('verified', 'supported', 'contradicted') and not refs:
                     problems.append('verified assumption requires evidence:' + location)
-                if state == 'unknown' and claim.get('affects_verdict') and result.get('status') != 'INSUFFICIENT_EVIDENCE':
+                if state == 'contradicted' and claim.get('affects_verdict') and result.get('status') != 'INSUFFICIENT_EVIDENCE':
+                    problems.append('contradicted material assumption requires revised judgment or abstention:' + location)
+                if state in ('unknown', 'supported') and claim.get('affects_verdict') and result.get('status') != 'INSUFFICIENT_EVIDENCE':
                     if scope != 'conditional_code':
                         problems.append('unresolved environment affects verdict:' + location)
                     elif not isinstance(result.get('exploit_preconditions'), list) or claim['claim'] not in result['exploit_preconditions']:

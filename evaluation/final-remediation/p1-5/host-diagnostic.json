@@ -1,0 +1,40 @@
+[
+  {
+    "command": [
+      "df",
+      "-h",
+      "."
+    ],
+    "exit_code": 0,
+    "stdout": "Filesystem      Size    Used   Avail Capacity iused ifree %iused  Mounted on\n/dev/disk3s5   228Gi   193Gi   3.1Gi    99%    1.3M   33M    4%   /System/Volumes/Data\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "ls",
+      "-l",
+      "/Users/bo/.docker/run/docker.sock"
+    ],
+    "exit_code": 0,
+    "stdout": "srwxr-xr-x@ 1 bo  staff  0 Sep 28 13:57 /Users/bo/.docker/run/docker.sock\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "ps",
+      "-axo",
+      "pid,comm"
+    ],
+    "exit_code": 0,
+    "stdout": "18899 /Applications/Docker.app/Contents/MacOS/com.docker.backend\n18900 /Applications/Docker.app/Contents/MacOS/com.docker.backend\n18901 /Applications/Docker.app/Contents/MacOS/com.docker.backend\n18929 /Applications/Docker.app/Contents/MacOS/com.docker.build\n26191 /Applications/Docker.app/Contents/MacOS/Docker Desktop.app/Contents/MacOS/Docker Desktop\n26206 /Applications/Docker.app/Contents/MacOS/Docker Desktop.app/Contents/Frameworks/Docker Desktop Helper.app/Contents/MacOS/Docker Desktop Helper\n26207 /Applications/Docker.app/Contents/MacOS/Docker Desktop.app/Contents/Frameworks/Docker Desktop Helper.app/Contents/MacOS/Docker Desktop Helper\n26213 /Applications/Docker.app/Contents/MacOS/Docker Desktop.app/Contents/Frameworks/Docker Desktop Helper (Renderer).app/Contents/MacOS/Docker Desktop Helper (Renderer)\n49195 /Applications/Docker.app/Contents/Resources/cli-plugins/docker-agent\n54186 docker\n77755 docker",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "docker",
+      "desktop",
+      "status"
+    ],
+    "status": "TIMEOUT"
+  }
+]

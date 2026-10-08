@@ -1,0 +1,7 @@
+{
+  "exit_code": null,
+  "status": "BLOCKED_TIMEOUT",
+  "timeout_seconds": 60,
+  "stdout": null,
+  "stderr": null
+}

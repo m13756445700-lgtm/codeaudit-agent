@@ -1,0 +1,108 @@
+{
+  "REAL_MODEL": false,
+  "synthetic": {
+    "status": "NEEDS_MORE_EVIDENCE",
+    "reason": "NEGATIVE_SCOPE_INCOMPLETE",
+    "surface_id": "minimal",
+    "declared_files": [
+      "a.py"
+    ],
+    "missing_files": [
+      {
+        "path": "a.py",
+        "missing_ranges": [
+          [
+            121,
+            121
+          ]
+        ],
+        "blocked_reason": null
+      }
+    ],
+    "remaining_missing_evidence": [
+      {
+        "path": "a.py",
+        "missing_ranges": [
+          [
+            121,
+            121
+          ]
+        ],
+        "blocked_reason": null
+      }
+    ],
+    "recommended_actions": [
+      {
+        "action": "use_tool",
+        "tool": "repo.read_range",
+        "arguments": {
+          "path": "a.py",
+          "start": 121,
+          "end": 121
+        }
+      }
+    ],
+    "recovery_attempts": 1,
+    "response_round": null,
+    "max_recovery_attempts": 24,
+    "no_progress_failures": 1,
+    "fingerprint": "c6a1218135ba2539be54c306700b3d49e38da28809739fdcbd1224704f694818",
+    "last_failure": "Feature absence requires fully read declared files; partial reads cannot establish absence",
+    "notice": "Complete declared scope is required; missing source never establishes absence."
+  },
+  "historical": {
+    "status": "NEEDS_MORE_EVIDENCE",
+    "reason": "NEGATIVE_SCOPE_INCOMPLETE",
+    "surface_id": "test.py file handling",
+    "declared_files": [
+      "src/werkzeug/test.py"
+    ],
+    "missing_files": [
+      {
+        "path": "src/werkzeug/test.py",
+        "missing_ranges": [
+          [
+            1440,
+            1464
+          ]
+        ],
+        "blocked_reason": null
+      }
+    ],
+    "remaining_missing_evidence": [
+      {
+        "path": "src/werkzeug/test.py",
+        "missing_ranges": [
+          [
+            1440,
+            1464
+          ]
+        ],
+        "blocked_reason": null
+      }
+    ],
+    "recommended_actions": [
+      {
+        "action": "use_tool",
+        "tool": "repo.read_range",
+        "arguments": {
+          "path": "src/werkzeug/test.py",
+          "start": 1440,
+          "end": 1464
+        }
+      }
+    ],
+    "recovery_attempts": 1,
+    "response_round": null,
+    "max_recovery_attempts": 24,
+    "no_progress_failures": 1,
+    "fingerprint": "203ff60591a849e7354c2e5d62d5cafe65c09d3cd6aef95c0e4c21a573ee58bc",
+    "last_failure": "Feature absence requires fully read declared files; partial reads cannot establish absence",
+    "notice": "Complete declared scope is required; missing source never establishes absence."
+  },
+  "manual_full_read_control": {
+    "accepted": true,
+    "remaining": []
+  },
+  "note": "Deterministic scripted recovery, not autonomous model validation."
+}

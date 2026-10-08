@@ -1,0 +1,109 @@
+SOURCE_SHA=d26c64e0f1d53060e80da39a9ebc37413727ce38
+START=2026-10-08T06:23:27.981518+00:00
+COMMAND=['docker', 'image', 'inspect', 'codeaudit-p2:d26c64e0f1d53060e80da39a9ebc37413727ce38']
+[
+    {
+        "Id": "sha256:663290089e669447e8240f3108353e33de78f1869b3d549d538ae63b94f85a9c",
+        "RepoTags": [
+            "codeaudit-p2:d26c64e0f1d53060e80da39a9ebc37413727ce38"
+        ],
+        "RepoDigests": [
+            "codeaudit-p2@sha256:663290089e669447e8240f3108353e33de78f1869b3d549d538ae63b94f85a9c"
+        ],
+        "Comment": "buildkit.dockerfile.v0",
+        "Created": "2026-10-08T06:23:08.363800172Z",
+        "Config": {
+            "User": "root",
+            "Env": [
+                "PATH=/opt/codeaudit-venv/bin:/root/.local/bin:/usr/local/go/bin:/root/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "GOPATH=/root/go",
+                "GOPROXY=https://goproxy.cn,direct",
+                "PIP_INDEX_URL=https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple",
+                "PIP_TRUSTED_HOST=mirrors.tuna.tsinghua.edu.cn",
+                "PIP_DISABLE_PIP_VERSION_CHECK=1",
+                "HOME=/root",
+                "OPENCODE_DISABLE_AUTOUPDATE=true",
+                "OPENCODE_DISABLE_MODELS_FETCH=1",
+                "PYTHONPATH=/opt/codeaudit",
+                "PYTHONDONTWRITEBYTECODE=1"
+            ],
+            "Cmd": [
+                "codeaudit",
+                "--help"
+            ],
+            "WorkingDir": "/opt/codeaudit",
+            "Labels": {
+                "org.opencontainers.image.created": "2026-07-17T13:33:28.633Z",
+                "org.opencontainers.image.description": "docker/docker-compose like daemon for agents",
+                "org.opencontainers.image.licenses": "AGPL-3.0",
+                "org.opencontainers.image.revision": "d26c64e0f1d53060e80da39a9ebc37413727ce38",
+                "org.opencontainers.image.source": "https://github.com/m13756445700-lgtm/codeaudit-agent",
+                "org.opencontainers.image.title": "agent-compose",
+                "org.opencontainers.image.url": "https://github.com/chaitin/agent-compose",
+                "org.opencontainers.image.version": "v2607.10.0"
+            },
+            "ArgsEscaped": true
+        },
+        "Architecture": "amd64",
+        "Os": "linux",
+        "Size": 6467649122,
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:81f823b9617547261c907396f63f770deaa554748ff739bedfa650e3bb74595a",
+                "sha256:bd0d0bb29f6844eeb871fbe3574138df9449c0e87222b76a3b4da46346b48e22",
+                "sha256:df512bd3024608f3614f2d41c9bd8e09f477521724a7bf9340b909b8ded468ec",
+                "sha256:91cece164b38752eef700538352acbd89635069d1573ce7270f495b31af31a43",
+                "sha256:869646d866a9c8fd0bc100a8599c276ff0ba47932d4fbd983894e0e31da9adcd",
+                "sha256:0664598d6ea459fb03e7a133137b82899fafc8ed2f4e5175bf7ec7395ebd162a",
+                "sha256:7d2b17f43db119e282dbdd3e7687d8fda15e1b536334075a4b767483e34b9ce5",
+                "sha256:0839c13be5080770c365df221b3337ab76a41703de816059cf60402607cfe5e6",
+                "sha256:07661d2ec3d8c83a875256ca0c931205b6f31fe5e4ff15fc4abbe13ee5278fe5",
+                "sha256:9805a3740d7fc64a2cee7f125ea41fa10275f434bd29bc964e93d75e381730e5",
+                "sha256:5dd53a4c2e759c9aaed4bbcf7377c423e189c682b7a1c9c020bb7d65408e6933",
+                "sha256:8004d7f7b4ca8c559cfde118344da89f9ae7f68b4ddfc067ba2a1b4d6d6bfa08",
+                "sha256:f0e18578043918e456132e392b47674665db4a4570f3cd282c5a07ba91144c07",
+                "sha256:02ad2bd71d8ce079afeac2aee8711364f02254f83fe1b5a07600800e442e2884",
+                "sha256:e0af39c93ea80270ae5a11080c81a0e755522e59f51dca6ce6af91a50f4a8110",
+                "sha256:6c3054f0199698f19c03ef0836647d56e5599f5dcae94ea7077d89e0d22a72d6",
+                "sha256:f92abb3c88d22be301d14308c95a161f624d3f9c62c3fd85adb63b4b00d33618",
+                "sha256:3b09d48819fa4533e93d65d312bf16a65582ed177a65fd358bf33d49d8832544",
+                "sha256:991f7c01c900b4fb0ec6f5c6c4dc0403792dc1442aac448659b5ecb5be215c4c",
+                "sha256:ad8401942153cadceb058d155b9a7cb47aa18504a575e10bb3d561c111bb23c0",
+                "sha256:c21ca5adac87afe2376b376b5c51c996fbfd0e4767945c470584ae95c1ef1d97",
+                "sha256:081c6da66c3d7531bffa05fda657aa2d10d0b02eea962fb671d49c470763d7c2",
+                "sha256:1a6ad17a1b1ab9fe2b67f8699d972beee8e10f851793fc78649a9d4f67719cab",
+                "sha256:c868a6b9773a40cfbb17d80dea47a0041695bc7748389760139a7bf9dab93370",
+                "sha256:da30e9e592070fae1fb66a89233fd27f5e6019c56656c105f15e7225422cc7d0",
+                "sha256:31daead91bbc84dcf9d4d92c4f907446c70c2a4593f090dc0eefff260a57633d",
+                "sha256:f1f2ae8936573ecb067fd1ca92f0d743e3a5f6a2e30ea958ef80ca2c18f8ca54",
+                "sha256:41542b84f5d83ec616f4013ddd1e3667b36d280367425ecfc2509b6c4d8153bc",
+                "sha256:637567c766d97d8b5612c16fdf48729c45937d44754847ec07be5d7999cd8a02",
+                "sha256:e94804ec3c94db374ed3a68df3113f3a29f33e6d2149114736cbfff313dbe49b",
+                "sha256:e1c36a75cfa313cfb571cf18df316866b6789733620eb96ccb1b4a16213abf37",
+                "sha256:04a1ff2686ed02d0a047531aabe833b983973e078160c9eb4df01f053cf8ccaa",
+                "sha256:1cabf52af620403ba6799e177f5b792a98e5bb72e38403b84280853964a035ac",
+                "sha256:5f70bf18a086007016e948b04aed3b82103a36bea41755b6cddfaf10ace3c6ef"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "2026-10-08T06:23:13.089164633Z"
+        },
+        "Descriptor": {
+            "mediaType": "application/vnd.oci.image.index.v1+json",
+            "digest": "sha256:663290089e669447e8240f3108353e33de78f1869b3d549d538ae63b94f85a9c",
+            "size": 856
+        },
+        "Identity": {
+            "Build": [
+                {
+                    "Ref": "m0p8vhwi3qgzn688kdlnaoxuq",
+                    "CreatedAt": "2026-10-08T06:23:13.094319216Z"
+                }
+            ]
+        }
+    }
+]
+
+EXIT_CODE=0
+END=2026-10-08T06:23:28.052555+00:00

@@ -1,0 +1,364 @@
+SOURCE_SHA=d26c64e0f1d53060e80da39a9ebc37413727ce38
+START=2026-10-08T06:23:54.350645+00:00
+COMMAND=['docker', 'compose', '--env-file', '.env', '--env-file', '.runtime.env', '--profile', 'audit', 'config', '--format', 'json']
+{
+  "name": "source",
+  "networks": {
+    "capabilities": {
+      "name": "source_capabilities",
+      "ipam": {},
+      "internal": true
+    },
+    "default": {
+      "name": "source_default",
+      "ipam": {}
+    }
+  },
+  "services": {
+    "agent-compose": {
+      "cpus": 1,
+      "command": [
+        "daemon"
+      ],
+      "depends_on": {
+        "workspace-init": {
+          "condition": "service_completed_successfully",
+          "required": true
+        }
+      },
+      "entrypoint": null,
+      "environment": {
+        "AGENT_COMPOSE_AUTH_TOKEN": "CONFIG_ONLY",
+        "AGENT_COMPOSE_RUNTIME_BASE_URL": "http://127.0.0.1:17420",
+        "AGENT_TIMEOUT": "900s",
+        "DATA_ROOT": "/data",
+        "DEFAULT_IMAGE": "codeaudit-final:2.0",
+        "DOCKER_HOST_SANDBOX_ROOT": "/tmp/p2-config-only/sandboxes",
+        "HTTP_LISTEN": "0.0.0.0:7410",
+        "RUNTIME_DRIVER": "docker"
+      },
+      "healthcheck": {
+        "test": [
+          "CMD",
+          "agent-compose",
+          "status"
+        ],
+        "timeout": "5s",
+        "interval": "10s",
+        "retries": 6
+      },
+      "image": "ghcr.io/chaitin/agent-compose@sha256:3117226250256b03d25815bd1bb584ade5ac225b83f55d527be122b8b75a61e8",
+      "mem_limit": "1073741824",
+      "networks": {
+        "default": null
+      },
+      "ports": [
+        {
+          "mode": "ingress",
+          "host_ip": "127.0.0.1",
+          "target": 7410,
+          "published": "17420",
+          "protocol": "tcp"
+        }
+      ],
+      "restart": "unless-stopped",
+      "volumes": [
+        {
+          "type": "bind",
+          "source": "/var/run/docker.sock",
+          "target": "/var/run/docker.sock",
+          "bind": {}
+        },
+        {
+          "type": "volume",
+          "source": "agent-data",
+          "target": "/data",
+          "volume": {}
+        }
+      ]
+    },
+    "codeaudit-agent": {
+      "profiles": [
+        "audit"
+      ],
+      "cap_drop": [
+        "ALL"
+      ],
+      "cpus": 1,
+      "command": null,
+      "depends_on": {
+        "octobus": {
+          "condition": "service_healthy",
+          "required": true
+        },
+        "workspace-init": {
+          "condition": "service_completed_successfully",
+          "required": true
+        }
+      },
+      "entrypoint": [
+        "codeaudit"
+      ],
+      "environment": {
+        "CODEAUDIT_BIND_ADDRESS": "127.0.0.1",
+        "CODEAUDIT_DAEMON_TOKEN": "CONFIG_ONLY",
+        "CODEAUDIT_MCP_URL": "http://octobus:9000/capsets/codeaudit-v2/mcp",
+        "CODEAUDIT_OCTOBUS_TOKEN": "CONFIG_ONLY",
+        "CODEAUDIT_RUNTIME_URL": "http://127.0.0.1:17420",
+        "CODEAUDIT_SANDBOX_ROOT": "/tmp/p2-config-only/sandboxes",
+        "CODEAUDIT_WORKSPACES": "/workspaces",
+        "LLM_API_ENDPOINT": "https://example.invalid/v1",
+        "LLM_API_KEY": "CONFIG_ONLY",
+        "LLM_MODEL": "CONFIG_ONLY"
+      },
+      "image": "codeaudit-final:2.0",
+      "mem_limit": "1073741824",
+      "networks": {
+        "default": null
+      },
+      "security_opt": [
+        "no-new-privileges:true"
+      ],
+      "volumes": [
+        {
+          "type": "volume",
+          "source": "agent-data",
+          "target": "/workspaces",
+          "volume": {
+            "subpath": "sandboxes/codeaudit-v2-workspaces"
+          }
+        }
+      ]
+    },
+    "octobus": {
+      "build": {
+        "context": "/Users/bo/.codex-b/worktrees/p0-evidence-recovery/codeaudit-v2-final/.internal/p2-release/source",
+        "dockerfile": "Dockerfile"
+      },
+      "cap_drop": [
+        "ALL"
+      ],
+      "cpus": 0.5,
+      "command": [
+        "serve"
+      ],
+      "depends_on": {
+        "repo-tools": {
+          "condition": "service_healthy",
+          "required": true
+        },
+        "static-analysis": {
+          "condition": "service_healthy",
+          "required": true
+        },
+        "workspace-init": {
+          "condition": "service_completed_successfully",
+          "required": true
+        }
+      },
+      "entrypoint": [
+        "octobus"
+      ],
+      "environment": {
+        "HOME": "/var/lib/octobus",
+        "NPM_CONFIG_CACHE": "/var/lib/octobus/.npm",
+        "OCTOBUS_ADDR": "0.0.0.0:9000",
+        "OCTOBUS_DATA_DIR": "/var/lib/octobus"
+      },
+      "healthcheck": {
+        "test": [
+          "CMD",
+          "octobus",
+          "status"
+        ],
+        "timeout": "5s",
+        "interval": "10s",
+        "retries": 6,
+        "start_period": "10s"
+      },
+      "image": "codeaudit-final:2.0",
+      "init": true,
+      "mem_limit": "536870912",
+      "networks": {
+        "capabilities": null,
+        "default": null
+      },
+      "ports": [
+        {
+          "mode": "ingress",
+          "host_ip": "127.0.0.1",
+          "target": 9000,
+          "published": "19013",
+          "protocol": "tcp"
+        }
+      ],
+      "restart": "unless-stopped",
+      "security_opt": [
+        "no-new-privileges:true"
+      ],
+      "volumes": [
+        {
+          "type": "volume",
+          "source": "octobus-data",
+          "target": "/var/lib/octobus",
+          "volume": {}
+        },
+        {
+          "type": "volume",
+          "source": "agent-data",
+          "target": "/workspaces",
+          "volume": {
+            "subpath": "sandboxes/codeaudit-v2-workspaces"
+          }
+        }
+      ]
+    },
+    "repo-tools": {
+      "cap_drop": [
+        "ALL"
+      ],
+      "cpus": 0.5,
+      "command": null,
+      "depends_on": {
+        "workspace-init": {
+          "condition": "service_completed_successfully",
+          "required": true
+        }
+      },
+      "entrypoint": [
+        "/opt/codeaudit-venv/bin/python",
+        "-m",
+        "agent.v2.capability_server",
+        "repo-tools"
+      ],
+      "environment": {
+        "CODEAUDIT_WORKSPACES": "/workspaces",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "healthcheck": {
+        "test": [
+          "CMD",
+          "/opt/codeaudit-venv/bin/python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/health', timeout=3)"
+        ],
+        "timeout": "5s",
+        "interval": "10s",
+        "retries": 6
+      },
+      "image": "codeaudit-final:2.0",
+      "init": true,
+      "mem_limit": "536870912",
+      "networks": {
+        "capabilities": null
+      },
+      "read_only": true,
+      "restart": "unless-stopped",
+      "security_opt": [
+        "no-new-privileges:true"
+      ],
+      "tmpfs": [
+        "/tmp:size=64m"
+      ],
+      "volumes": [
+        {
+          "type": "volume",
+          "source": "agent-data",
+          "target": "/workspaces",
+          "read_only": true,
+          "volume": {
+            "subpath": "sandboxes/codeaudit-v2-workspaces"
+          }
+        }
+      ]
+    },
+    "static-analysis": {
+      "cap_drop": [
+        "ALL"
+      ],
+      "cpus": 2,
+      "command": null,
+      "depends_on": {
+        "workspace-init": {
+          "condition": "service_completed_successfully",
+          "required": true
+        }
+      },
+      "entrypoint": [
+        "/opt/codeaudit-venv/bin/python",
+        "-m",
+        "agent.v2.capability_server",
+        "static-analysis"
+      ],
+      "environment": {
+        "CODEAUDIT_WORKSPACES": "/workspaces",
+        "HOME": "/tmp",
+        "PYTHONDONTWRITEBYTECODE": "1"
+      },
+      "healthcheck": {
+        "test": [
+          "CMD",
+          "/opt/codeaudit-venv/bin/python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/health', timeout=3)"
+        ],
+        "timeout": "5s",
+        "interval": "10s",
+        "retries": 6
+      },
+      "image": "codeaudit-final:2.0",
+      "init": true,
+      "mem_limit": "2147483648",
+      "networks": {
+        "capabilities": null
+      },
+      "read_only": true,
+      "restart": "unless-stopped",
+      "security_opt": [
+        "no-new-privileges:true"
+      ],
+      "tmpfs": [
+        "/tmp:size=128m"
+      ],
+      "volumes": [
+        {
+          "type": "volume",
+          "source": "agent-data",
+          "target": "/workspaces",
+          "volume": {
+            "subpath": "sandboxes/codeaudit-v2-workspaces"
+          }
+        }
+      ]
+    },
+    "workspace-init": {
+      "command": null,
+      "entrypoint": [
+        "mkdir",
+        "-p",
+        "/data/sandboxes/codeaudit-v2-workspaces"
+      ],
+      "image": "codeaudit-final:2.0",
+      "network_mode": "none",
+      "restart": "no",
+      "volumes": [
+        {
+          "type": "volume",
+          "source": "agent-data",
+          "target": "/data",
+          "volume": {}
+        }
+      ]
+    }
+  },
+  "volumes": {
+    "agent-data": {
+      "name": "source-agent-data"
+    },
+    "octobus-data": {
+      "name": "source_octobus-data"
+    }
+  }
+}
+EXIT_CODE=0
+END=2026-10-08T06:23:54.589511+00:00

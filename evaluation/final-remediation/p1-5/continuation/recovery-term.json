@@ -1,0 +1,37 @@
+{
+  "reason": "Supported desktop restart failed to stop these observed processes; terminate stuck local Desktop processes then relaunch, no disk/volume deletion",
+  "targets": [
+    {
+      "pid": 18899,
+      "command": "/Applications/Docker.app/Contents/MacOS/com.docker.backend",
+      "term": "sent"
+    },
+    {
+      "pid": 18901,
+      "command": "/Applications/Docker.app/Contents/MacOS/com.docker.backend",
+      "term": "sent"
+    },
+    {
+      "pid": 26191,
+      "command": "/Applications/Docker.app/Contents/MacOS/Docker Desktop.app/Contents/MacOS/Docker Desktop",
+      "term": "sent"
+    },
+    {
+      "pid": 26206,
+      "command": "/Applications/Docker.app/Contents/MacOS/Docker Desktop.app/Contents/Frameworks/Docker Desktop Helper.app/Contents/MacOS/Docker Desktop Helper",
+      "term": "sent"
+    },
+    {
+      "pid": 26207,
+      "command": "/Applications/Docker.app/Contents/MacOS/Docker Desktop.app/Contents/Frameworks/Docker Desktop Helper.app/Contents/MacOS/Docker Desktop Helper",
+      "term": "sent"
+    },
+    {
+      "pid": 26213,
+      "command": "/Applications/Docker.app/Contents/MacOS/Docker Desktop.app/Contents/Frameworks/Docker Desktop Helper (Renderer).app/Contents/MacOS/Docker Desktop Helper (Renderer)",
+      "term": "sent"
+    }
+  ],
+  "open_exit": 0,
+  "stderr": ""
+}

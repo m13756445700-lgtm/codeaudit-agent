@@ -1,0 +1,30 @@
+{
+  "RELEASE_MANIFEST_VALIDATION": "PASS",
+  "COMPOSE_CONFIG_VALIDATION": "PASS",
+  "checks": {
+    "frozen_complete_source": true,
+    "git_tree": true,
+    "file_hashes": true,
+    "required_hashes": true,
+    "image_identity": true,
+    "oci_revision": true,
+    "platform": true,
+    "no_cache_build": true,
+    "no_registry_digest_fabrication": true,
+    "semgrep_pinned": true,
+    "all_execution_exit_codes_zero": true,
+    "new_full_tests": true,
+    "actual_smoke_pass": true,
+    "actual_semgrep_version": true,
+    "no_product_changes_since_freeze": true,
+    "compose_required_services": true,
+    "worker_network_internal": true,
+    "ports_loopback_in_test": true,
+    "project_secret_marking": true
+  },
+  "SOURCE_SHA": "d26c64e0f1d53060e80da39a9ebc37413727ce38",
+  "started": "2026-10-08T06:24:05.348216+00:00",
+  "finished": "2026-10-08T06:24:05.597437+00:00",
+  "exit_code": 0,
+  "limitation": "Compose interpolation used synthetic config only; no production config or daemon registration was tested. Local immutable Image ID is not a registry digest. Main merge may require another build."
+}

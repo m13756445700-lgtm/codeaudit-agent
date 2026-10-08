@@ -1,0 +1,47 @@
+[
+  {
+    "id": "n1",
+    "summary": "All 3 declared files fully read. controller.get_invoice delegates to service.fetch_invoice. service fetches records[invoice_id] (line 4), then guards with may_read (line 5), raising PermissionError (line 6) before returning data (line 7). may_read (security_config.py:151-156) requires authenticated truthy and tenant_id equality. Guard is correctly placed before the data-returning sink; no bypass path exists. Edge: if both tenant_ids are absent (None==None) and authenticated=True, check passes, but operator-supplied context provides tenant_id.",
+    "references": [
+      {
+        "file": "security_config.py",
+        "line": 151,
+        "symbol": "may_read",
+        "evidence": "def may_read(user, invoice):",
+        "operation": "definition"
+      },
+      {
+        "file": "security_config.py",
+        "line": 152,
+        "symbol": "may_read",
+        "evidence": "if not user.get(\"authenticated\", False):",
+        "operation": "auth check"
+      },
+      {
+        "file": "security_config.py",
+        "line": 154,
+        "symbol": "may_read",
+        "evidence": "if user.get(\"tenant_id\") != invoice.get(\"tenant_id\"):",
+        "operation": "tenant check"
+      },
+      {
+        "file": "service.py",
+        "line": 5,
+        "symbol": "fetch_invoice",
+        "evidence": "if not may_read(user, invoice):",
+        "operation": "guard"
+      },
+      {
+        "file": "service.py",
+        "line": 7,
+        "symbol": "fetch_invoice",
+        "evidence": "return {\"amount\": invoice[\"amount\"], \"tenant_id\": invoice[\"tenant_id\"]}",
+        "operation": "sink"
+      }
+    ],
+    "open_questions": [
+      "None==None tenant_id edge if keys absent"
+    ],
+    "next_action": "Submit REJECTED decision for the authz-bypass hypothesis and settle surface"
+  }
+]

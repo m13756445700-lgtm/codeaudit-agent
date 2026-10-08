@@ -1,0 +1,20 @@
+[
+  {
+    "id": "H1",
+    "statement": "Invoice retrieval enforces authenticated same-tenant access: fetch_invoice returns invoice data only when the caller is authenticated and the caller's tenant_id matches the invoice's tenant_id.",
+    "status": "REJECTED",
+    "evidence_for": [
+      "security_config.py:152 checks user.get('authenticated', False)",
+      "security_config.py:154 checks user.get('tenant_id') != invoice.get('tenant_id')",
+      "service.py:5-6 raises PermissionError when may_read is False",
+      "service.py:7 returns data only after the guard",
+      "controller.py:4 delegates directly with no bypass"
+    ],
+    "evidence_against": [
+      "service.py:4 fetches records[invoice_id] before the guard, but the object is not returned until line 7"
+    ],
+    "next_actions": [
+      "Settle surface with REJECTED false-positive candidates and note the None==None tenant edge as a limitation"
+    ]
+  }
+]

@@ -1,0 +1,5 @@
+{
+  "exit_code": 1,
+  "stdout": "\"\"\n",
+  "stderr": "Cannot connect to the Docker daemon at unix:///Users/bo/.docker/run/docker.sock. Is the docker daemon running?\n"
+}

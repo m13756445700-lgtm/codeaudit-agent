@@ -15,3 +15,6 @@ reports
 .DS_Store
 
 **/._*
+
+# Historical model traces are not runtime image inputs.
+evaluation/final-remediation

@@ -1,0 +1,12 @@
+{
+  "historical_archive_sha256": "e02f2a6c2ef55364c2e2aa0816e6f5260542162b37c50edae25e5473fd3f62cb",
+  "historical_evidence_modified": false,
+  "original_dirty_tracked_diff_unchanged": true,
+  "tested_commit": "fd175be8dd4577682a9a2d26d574e911b341e0e2",
+  "baseline_sha": "0733933113faee3121b2c5d692ef4ee1400d4d0d",
+  "product_files": {
+    "agent/v2/engine.py": "636771c80bf332f75a67c7c53c2fd956c018d4988709cd3349bf322d924a22bd",
+    "agent/v2/recovery.py": "22b9514babff3b561dc2878a98af88dc1180df16b89aefe5269da78b7ff33cbb",
+    "tests/test_v2_recovery.py": "c44b341be11e576cfa6f1158d67ce00ff9691f0a11ee9e29ef909874eddedf04"
+  }
+}

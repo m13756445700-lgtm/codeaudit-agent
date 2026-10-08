@@ -1,0 +1,640 @@
+[
+  {
+    "tool": "submit_plan",
+    "arguments": {
+      "plan": {
+        "attack_surfaces": [
+          "minimal"
+        ],
+        "next_actions": [
+          "read"
+        ],
+        "priorities": [
+          "bounded reproduction"
+        ]
+      }
+    },
+    "purpose": "AI audit planning",
+    "result_summary": {
+      "accepted": true
+    },
+    "timestamp": "2026-10-08T02:30:33.236755+00:00"
+  },
+  {
+    "tool": "repo.read_range",
+    "arguments": {
+      "path": "a.py",
+      "start": 1,
+      "end": 120
+    },
+    "purpose": "offline reproduction evidence",
+    "transport": "local-development",
+    "result_summary": {
+      "file": "a.py",
+      "sha256": "74896348083ae8749cfb45be5aca079eb2000786888382411da0a8b92c8c20bb",
+      "start": 1,
+      "end": 120,
+      "total_lines": 121,
+      "lines": [
+        {
+          "line": 1,
+          "code": "value = 1"
+        },
+        {
+          "line": 2,
+          "code": "value = 1"
+        },
+        {
+          "line": 3,
+          "code": "value = 1"
+        },
+        {
+          "line": 4,
+          "code": "value = 1"
+        },
+        {
+          "line": 5,
+          "code": "value = 1"
+        },
+        {
+          "line": 6,
+          "code": "value = 1"
+        },
+        {
+          "line": 7,
+          "code": "value = 1"
+        },
+        {
+          "line": 8,
+          "code": "value = 1"
+        },
+        {
+          "line": 9,
+          "code": "value = 1"
+        },
+        {
+          "line": 10,
+          "code": "value = 1"
+        },
+        {
+          "line": 11,
+          "code": "value = 1"
+        },
+        {
+          "line": 12,
+          "code": "value = 1"
+        },
+        {
+          "line": 13,
+          "code": "value = 1"
+        },
+        {
+          "line": 14,
+          "code": "value = 1"
+        },
+        {
+          "line": 15,
+          "code": "value = 1"
+        },
+        {
+          "line": 16,
+          "code": "value = 1"
+        },
+        {
+          "line": 17,
+          "code": "value = 1"
+        },
+        {
+          "line": 18,
+          "code": "value = 1"
+        },
+        {
+          "line": 19,
+          "code": "value = 1"
+        },
+        {
+          "line": 20,
+          "code": "value = 1"
+        },
+        {
+          "line": 21,
+          "code": "value = 1"
+        },
+        {
+          "line": 22,
+          "code": "value = 1"
+        },
+        {
+          "line": 23,
+          "code": "value = 1"
+        },
+        {
+          "line": 24,
+          "code": "value = 1"
+        },
+        {
+          "line": 25,
+          "code": "value = 1"
+        },
+        {
+          "line": 26,
+          "code": "value = 1"
+        },
+        {
+          "line": 27,
+          "code": "value = 1"
+        },
+        {
+          "line": 28,
+          "code": "value = 1"
+        },
+        {
+          "line": 29,
+          "code": "value = 1"
+        },
+        {
+          "line": 30,
+          "code": "value = 1"
+        },
+        {
+          "line": 31,
+          "code": "value = 1"
+        },
+        {
+          "line": 32,
+          "code": "value = 1"
+        },
+        {
+          "line": 33,
+          "code": "value = 1"
+        },
+        {
+          "line": 34,
+          "code": "value = 1"
+        },
+        {
+          "line": 35,
+          "code": "value = 1"
+        },
+        {
+          "line": 36,
+          "code": "value = 1"
+        },
+        {
+          "line": 37,
+          "code": "value = 1"
+        },
+        {
+          "line": 38,
+          "code": "value = 1"
+        },
+        {
+          "line": 39,
+          "code": "value = 1"
+        },
+        {
+          "line": 40,
+          "code": "value = 1"
+        },
+        {
+          "line": 41,
+          "code": "value = 1"
+        },
+        {
+          "line": 42,
+          "code": "value = 1"
+        },
+        {
+          "line": 43,
+          "code": "value = 1"
+        },
+        {
+          "line": 44,
+          "code": "value = 1"
+        },
+        {
+          "line": 45,
+          "code": "value = 1"
+        },
+        {
+          "line": 46,
+          "code": "value = 1"
+        },
+        {
+          "line": 47,
+          "code": "value = 1"
+        },
+        {
+          "line": 48,
+          "code": "value = 1"
+        },
+        {
+          "line": 49,
+          "code": "value = 1"
+        },
+        {
+          "line": 50,
+          "code": "value = 1"
+        },
+        {
+          "line": 51,
+          "code": "value = 1"
+        },
+        {
+          "line": 52,
+          "code": "value = 1"
+        },
+        {
+          "line": 53,
+          "code": "value = 1"
+        },
+        {
+          "line": 54,
+          "code": "value = 1"
+        },
+        {
+          "line": 55,
+          "code": "value = 1"
+        },
+        {
+          "line": 56,
+          "code": "value = 1"
+        },
+        {
+          "line": 57,
+          "code": "value = 1"
+        },
+        {
+          "line": 58,
+          "code": "value = 1"
+        },
+        {
+          "line": 59,
+          "code": "value = 1"
+        },
+        {
+          "line": 60,
+          "code": "value = 1"
+        },
+        {
+          "line": 61,
+          "code": "value = 1"
+        },
+        {
+          "line": 62,
+          "code": "value = 1"
+        },
+        {
+          "line": 63,
+          "code": "value = 1"
+        },
+        {
+          "line": 64,
+          "code": "value = 1"
+        },
+        {
+          "line": 65,
+          "code": "value = 1"
+        },
+        {
+          "line": 66,
+          "code": "value = 1"
+        },
+        {
+          "line": 67,
+          "code": "value = 1"
+        },
+        {
+          "line": 68,
+          "code": "value = 1"
+        },
+        {
+          "line": 69,
+          "code": "value = 1"
+        },
+        {
+          "line": 70,
+          "code": "value = 1"
+        },
+        {
+          "line": 71,
+          "code": "value = 1"
+        },
+        {
+          "line": 72,
+          "code": "value = 1"
+        },
+        {
+          "line": 73,
+          "code": "value = 1"
+        },
+        {
+          "line": 74,
+          "code": "value = 1"
+        },
+        {
+          "line": 75,
+          "code": "value = 1"
+        },
+        {
+          "line": 76,
+          "code": "value = 1"
+        },
+        {
+          "line": 77,
+          "code": "value = 1"
+        },
+        {
+          "line": 78,
+          "code": "value = 1"
+        },
+        {
+          "line": 79,
+          "code": "value = 1"
+        },
+        {
+          "line": 80,
+          "code": "value = 1"
+        },
+        {
+          "line": 81,
+          "code": "value = 1"
+        },
+        {
+          "line": 82,
+          "code": "value = 1"
+        },
+        {
+          "line": 83,
+          "code": "value = 1"
+        },
+        {
+          "line": 84,
+          "code": "value = 1"
+        },
+        {
+          "line": 85,
+          "code": "value = 1"
+        },
+        {
+          "line": 86,
+          "code": "value = 1"
+        },
+        {
+          "line": 87,
+          "code": "value = 1"
+        },
+        {
+          "line": 88,
+          "code": "value = 1"
+        },
+        {
+          "line": 89,
+          "code": "value = 1"
+        },
+        {
+          "line": 90,
+          "code": "value = 1"
+        },
+        {
+          "line": 91,
+          "code": "value = 1"
+        },
+        {
+          "line": 92,
+          "code": "value = 1"
+        },
+        {
+          "line": 93,
+          "code": "value = 1"
+        },
+        {
+          "line": 94,
+          "code": "value = 1"
+        },
+        {
+          "line": 95,
+          "code": "value = 1"
+        },
+        {
+          "line": 96,
+          "code": "value = 1"
+        },
+        {
+          "line": 97,
+          "code": "value = 1"
+        },
+        {
+          "line": 98,
+          "code": "value = 1"
+        },
+        {
+          "line": 99,
+          "code": "value = 1"
+        },
+        {
+          "line": 100,
+          "code": "value = 1"
+        },
+        {
+          "line": 101,
+          "code": "value = 1"
+        },
+        {
+          "line": 102,
+          "code": "value = 1"
+        },
+        {
+          "line": 103,
+          "code": "value = 1"
+        },
+        {
+          "line": 104,
+          "code": "value = 1"
+        },
+        {
+          "line": 105,
+          "code": "value = 1"
+        },
+        {
+          "line": 106,
+          "code": "value = 1"
+        },
+        {
+          "line": 107,
+          "code": "value = 1"
+        },
+        {
+          "line": 108,
+          "code": "value = 1"
+        },
+        {
+          "line": 109,
+          "code": "value = 1"
+        },
+        {
+          "line": 110,
+          "code": "value = 1"
+        },
+        {
+          "line": 111,
+          "code": "value = 1"
+        },
+        {
+          "line": 112,
+          "code": "value = 1"
+        },
+        {
+          "line": 113,
+          "code": "value = 1"
+        },
+        {
+          "line": 114,
+          "code": "value = 1"
+        },
+        {
+          "line": 115,
+          "code": "value = 1"
+        },
+        {
+          "line": 116,
+          "code": "value = 1"
+        },
+        {
+          "line": 117,
+          "code": "value = 1"
+        },
+        {
+          "line": 118,
+          "code": "value = 1"
+        },
+        {
+          "line": 119,
+          "code": "value = 1"
+        },
+        {
+          "line": 120,
+          "code": "value = 1"
+        }
+      ],
+      "truncated_lines": false
+    },
+    "timestamp": "2026-10-08T02:30:33.237727+00:00"
+  },
+  {
+    "tool": "settle_surface",
+    "arguments": "{\"surface\": \"minimal\", \"status\": \"reviewed\", \"files\": [\"a.py\"], \"reason\": \"Synthetic fixture without storage feature; mechanical coverage test only\", \"assessment\": \"feature_absent\", \"decision_ids\": [], \"absence_evidence\": [{\"file\": \"a.py\", \"line\": 1, \"symbol\": \"value\", \"evidence\": \"value = 1\"}]}",
+    "purpose": "evidence recovery required",
+    "result_summary": {
+      "status": "NEEDS_MORE_EVIDENCE",
+      "reason": "NEGATIVE_SCOPE_INCOMPLETE",
+      "surface_id": "minimal",
+      "declared_files": [
+        "a.py"
+      ],
+      "missing_files": [
+        {
+          "path": "a.py",
+          "missing_ranges": [
+            [
+              121,
+              121
+            ]
+          ],
+          "blocked_reason": null
+        }
+      ],
+      "remaining_missing_evidence": [
+        {
+          "path": "a.py",
+          "missing_ranges": [
+            [
+              121,
+              121
+            ]
+          ],
+          "blocked_reason": null
+        }
+      ],
+      "recommended_actions": [
+        {
+          "action": "use_tool",
+          "tool": "repo.read_range",
+          "arguments": {
+            "path": "a.py",
+            "start": 121,
+            "end": 121
+          }
+        }
+      ],
+      "recovery_attempts": 2,
+      "response_round": 0,
+      "max_recovery_attempts": 24,
+      "no_progress_failures": 2,
+      "fingerprint": "c6a1218135ba2539be54c306700b3d49e38da28809739fdcbd1224704f694818",
+      "last_failure": "Feature absence requires fully read declared files; partial reads cannot establish absence",
+      "notice": "Complete declared scope is required; missing source never establishes absence.",
+      "error": "Feature absence requires fully read declared files; partial reads cannot establish absence",
+      "accepted": false
+    },
+    "timestamp": "2026-10-08T02:30:33.241289+00:00"
+  },
+  {
+    "tool": "settle_surface",
+    "arguments": "{\"surface\": \"minimal\", \"status\": \"reviewed\", \"files\": [\"a.py\"], \"reason\": \"Synthetic fixture without storage feature; mechanical coverage test only\", \"assessment\": \"feature_absent\", \"decision_ids\": [], \"absence_evidence\": [{\"file\": \"a.py\", \"line\": 1, \"symbol\": \"value\", \"evidence\": \"value = 1\"}]}",
+    "purpose": "evidence recovery required",
+    "result_summary": {
+      "status": "NEEDS_MORE_EVIDENCE",
+      "reason": "NEGATIVE_SCOPE_INCOMPLETE",
+      "surface_id": "minimal",
+      "declared_files": [
+        "a.py"
+      ],
+      "missing_files": [
+        {
+          "path": "a.py",
+          "missing_ranges": [
+            [
+              121,
+              121
+            ]
+          ],
+          "blocked_reason": null
+        }
+      ],
+      "remaining_missing_evidence": [
+        {
+          "path": "a.py",
+          "missing_ranges": [
+            [
+              121,
+              121
+            ]
+          ],
+          "blocked_reason": null
+        }
+      ],
+      "recommended_actions": [
+        {
+          "action": "use_tool",
+          "tool": "repo.read_range",
+          "arguments": {
+            "path": "a.py",
+            "start": 121,
+            "end": 121
+          }
+        }
+      ],
+      "recovery_attempts": 3,
+      "response_round": 1,
+      "max_recovery_attempts": 24,
+      "no_progress_failures": 3,
+      "fingerprint": "c6a1218135ba2539be54c306700b3d49e38da28809739fdcbd1224704f694818",
+      "last_failure": "Feature absence requires fully read declared files; partial reads cannot establish absence",
+      "notice": "Complete declared scope is required; missing source never establishes absence.",
+      "error": "Feature absence requires fully read declared files; partial reads cannot establish absence",
+      "accepted": false
+    },
+    "timestamp": "2026-10-08T02:30:33.247039+00:00"
+  }
+]

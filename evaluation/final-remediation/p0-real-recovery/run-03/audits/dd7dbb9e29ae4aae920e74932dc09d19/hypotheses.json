@@ -1,0 +1,19 @@
+[
+  {
+    "id": "H1",
+    "statement": "Invoice retrieval fails to enforce authenticated same-tenant access: a caller could read an invoice belonging to another tenant or without authentication.",
+    "status": "REJECTED",
+    "evidence_for": [
+      "service.fetch_invoice returns invoice data after only a may_read check (service.py:5-7)"
+    ],
+    "evidence_against": [
+      "may_read returns False when user.get('authenticated', False) is falsy (security_config.py:85-86)",
+      "may_read returns False when user tenant_id != invoice tenant_id (security_config.py:87-88)",
+      "fetch_invoice raises PermissionError when may_read is False (service.py:5-6)",
+      "Only one may_read definition and one call site; no bypass branch"
+    ],
+    "next_actions": [
+      "Submit REJECTED decision"
+    ]
+  }
+]

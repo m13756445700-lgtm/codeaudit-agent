@@ -1,0 +1,8 @@
+{
+  "attack_surfaces": [
+    "storage in declared constants module"
+  ],
+  "next_actions": [
+    "attempt settlement and follow evidence feedback"
+  ]
+}

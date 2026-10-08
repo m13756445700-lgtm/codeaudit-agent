@@ -1,0 +1,8 @@
+{
+  "reason": "Backend survived normal restart and SIGTERM; terminate only exact stale Desktop backend and relaunch. No reset/prune or volume/data removal.",
+  "backend_pids": [
+    18899
+  ],
+  "open_exit": 0,
+  "stderr": ""
+}

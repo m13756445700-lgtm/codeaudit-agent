@@ -1,0 +1,11 @@
+{
+  "BUILD_SHA": "764e1cb48ac9289cc1abdefd501d84e17c97ca2e",
+  "BUILD": "PASS",
+  "SMOKE": "FAIL",
+  "DOCKER_BUILD": "FAIL",
+  "smoke_exit_code": 1,
+  "build_command": "docker build --no-cache --progress plain --platform linux/amd64 --build-arg BUILD_SHA=764e1cb48ac9289cc1abdefd501d84e17c97ca2e -t codeaudit-p1-5:local .",
+  "build_log": "continuation/docker-build.log",
+  "smoke_log": "continuation/docker-smoke.log",
+  "GITHUB_ACTIONS": "NOT_RUN"
+}

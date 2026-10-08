@@ -1,0 +1,17 @@
+[
+  {
+    "surface": "declared module review",
+    "status": "reviewed",
+    "files": [
+      "controller.py",
+      "service.py",
+      "security_config.py"
+    ],
+    "reason": "All three declared files read in full (controller 4/4, service 7/7, security_config 180/180 including the previously skipped 84-89 region containing may_read). Search confirmed a single may_read definition and single call site. The authenticated same-tenant access property is enforced: may_read denies unauthenticated users (line 85-86) and cross-tenant access (line 87-88); fetch_invoice raises PermissionError before the data return (service.py:5-7). No bypass path exists. Recorded as REJECTED (H1).",
+    "assessment": "decision",
+    "decision_ids": [
+      "H1"
+    ],
+    "absence_evidence": []
+  }
+]

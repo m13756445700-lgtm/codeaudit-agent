@@ -1,0 +1,56 @@
+{
+  "python": "3.9.6 (default, Dec  2 2025, 07:27:58) \n[Clang 17.0.0 (clang-1700.6.3.2)]",
+  "os_name": "posix",
+  "werkzeug": "3.0.6",
+  "urllib3": "2.2.3",
+  "paths": [
+    {
+      "input": "../outside",
+      "safe_join": null,
+      "ntpath_isabs": false,
+      "posixpath_isabs": false
+    },
+    {
+      "input": "inside/report",
+      "safe_join": "base/inside/report",
+      "ntpath_isabs": false,
+      "posixpath_isabs": false
+    },
+    {
+      "input": "/absolute",
+      "safe_join": null,
+      "ntpath_isabs": true,
+      "posixpath_isabs": true
+    },
+    {
+      "input": "folder\\..\\report",
+      "safe_join": "base/folder\\..\\report",
+      "ntpath_isabs": false,
+      "posixpath_isabs": false
+    },
+    {
+      "input": "\\\\host\\share\\report",
+      "safe_join": "base/\\\\host\\share\\report",
+      "ntpath_isabs": true,
+      "posixpath_isabs": false
+    }
+  ],
+  "urls": [
+    {
+      "input": "https://user@internal.invalid/a",
+      "host": "internal.invalid",
+      "auth": "user"
+    },
+    {
+      "input": "https://allowed.invalid@internal.invalid/a",
+      "host": "internal.invalid",
+      "auth": "allowed.invalid"
+    },
+    {
+      "input": "https://allowed.invalid.evil.invalid/a",
+      "host": "allowed.invalid.evil.invalid",
+      "auth": null
+    }
+  ],
+  "limits": "Exact tested versions and local OS only. ntpath calculations are not Windows-host execution. No inference about intervening versions or real exploitability."
+}

@@ -39,3 +39,10 @@ temp/
 local-config.*
 
 ._*
+
+# Future acceptance raw dumps stay in private artifact archives; existing tracked evidence remains.
+evaluation/**/request-*.json
+evaluation/**/response-*.json
+evaluation/**/final-context.json
+evaluation/**/conversation.json
+evaluation/**/state-transitions.jsonl
