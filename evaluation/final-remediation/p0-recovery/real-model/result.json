@@ -1,0 +1,899 @@
+{
+  "REAL_MODEL": true,
+  "REAL_MODEL_RECOVERY": "FAIL",
+  "provider": "api.deepseek.com",
+  "model": "deepseek-flash",
+  "commit_sha": "fd175be8dd4577682a9a2d26d574e911b341e0e2",
+  "audit_id": "892583c225bd4ea6a0161ca36cbbad55",
+  "protocol": "Harness seeds plan/partial read and explicitly induces first settlement attempt. Every action after seeding, including rejected settlement, is selected by actual model. No next-action sequence injected after rejection. Local transport, not OctoBus E2E.",
+  "summary": {
+    "coverage": {
+      "files_total": 1,
+      "files_read": 1,
+      "distinct_lines_read": 173,
+      "unread_files": [],
+      "scope": "tool-observed reads; not semantic audit completeness"
+    },
+    "status": "COMPLETE",
+    "audit_id": "892583c225bd4ea6a0161ca36cbbad55",
+    "model": "deepseek-flash",
+    "transport": "local-development",
+    "tool_calls": 3,
+    "elapsed_seconds": 6.53,
+    "counts": {},
+    "failure": null,
+    "completion": {
+      "summary": "Audited the sole declared file, inventory_constants.py (173 lines, sha256 80dcd4e560a658194ef93ee084700019c0f07838073d15352eb510a0117ee580). The entire module was read (lines 1-173) and consists exclusively of module-level integer constant assignments (ITEM_1 = 1 through ITEM_173 = 173). There are no imports, functions, classes, I/O, network calls, deserialization, or any user-controllable input paths. No security-relevant behavior or sink exists, so no vulnerability hypotheses were warranted and no decisions were recorded. The one planned attack surface was settled as reviewed with feature_absent based on complete file coverage.",
+      "limitations": [
+        "Scope limited to the single declared file inventory_constants.py; no other repository files were in scope or examined.",
+        "No dynamic/runtime analysis performed; conclusion rests on complete static read of the file.",
+        "No dependencies or callers exist within scope, so cross-file data flow could not be assessed (none is reachable from this constants-only module)."
+      ],
+      "surface_reviews": [
+        {
+          "surface": "storage in declared constants module",
+          "status": "reviewed",
+          "files": [
+            "inventory_constants.py"
+          ],
+          "reason": "Full file read (lines 1-173). Module contains only 173 module-level integer constant assignments; no imports, functions, I/O, network, deserialization, or user-controllable input. No security-relevant behavior or sink present.",
+          "assessment": "feature_absent",
+          "decision_ids": [],
+          "absence_evidence": [
+            {
+              "file": "inventory_constants.py",
+              "line": 1,
+              "symbol": "ITEM_1",
+              "evidence": "ITEM_1 = 1",
+              "operation": "module-level integer constant assignment"
+            },
+            {
+              "file": "inventory_constants.py",
+              "line": 173,
+              "symbol": "ITEM_173",
+              "evidence": "ITEM_173 = 173",
+              "operation": "module-level integer constant assignment"
+            }
+          ]
+        }
+      ]
+    },
+    "usage": [
+      {
+        "prompt_tokens": 7281,
+        "completion_tokens": 146,
+        "total_tokens": 7427,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 7281
+      },
+      {
+        "prompt_tokens": 8418,
+        "completion_tokens": 376,
+        "total_tokens": 8794,
+        "prompt_tokens_details": {
+          "cached_tokens": 6912
+        },
+        "prompt_cache_hit_tokens": 6912,
+        "prompt_cache_miss_tokens": 1506
+      },
+      {
+        "prompt_tokens": 8826,
+        "completion_tokens": 530,
+        "total_tokens": 9356,
+        "prompt_tokens_details": {
+          "cached_tokens": 8064
+        },
+        "prompt_cache_hit_tokens": 8064,
+        "prompt_cache_miss_tokens": 762
+      }
+    ],
+    "assessment_summary": {
+      "workflow_status": "COMPLETE",
+      "workflow_completion_is_not_safety": true,
+      "insufficient_evidence_ids": [],
+      "conditional_code_finding_ids": [],
+      "deployment_exposure_unknown_ids": [],
+      "feature_absence_scope": [
+        {
+          "surface": "storage in declared constants module",
+          "files": [
+            "inventory_constants.py"
+          ]
+        }
+      ],
+      "notice": "Reference checks and file overlap do not prove semantic relevance. Feature absence is a model claim limited to the listed files."
+    },
+    "claim_critique_calls": 0,
+    "snapshot_sha256": "674b5705b19c907d3376931600c178bac93d1005c15e3452a5805f4138e4a134"
+  },
+  "action_sequence": [
+    {
+      "tool": "submit_plan",
+      "arguments": {
+        "plan": {
+          "attack_surfaces": [
+            "storage in declared constants module"
+          ],
+          "next_actions": [
+            "attempt settlement and follow evidence feedback"
+          ]
+        }
+      },
+      "purpose": "AI audit planning",
+      "result_summary": {
+        "accepted": true
+      },
+      "timestamp": "2026-10-08T02:32:10.115100+00:00"
+    },
+    {
+      "tool": "repo.read_range",
+      "arguments": {
+        "path": "inventory_constants.py",
+        "start": 1,
+        "end": 120
+      },
+      "purpose": "Harness seeds partial read for induced rejection test",
+      "result_summary": {
+        "file": "inventory_constants.py",
+        "sha256": "80dcd4e560a658194ef93ee084700019c0f07838073d15352eb510a0117ee580",
+        "start": 1,
+        "end": 120,
+        "total_lines": 173,
+        "lines": [
+          {
+            "line": 1,
+            "code": "ITEM_1 = 1"
+          },
+          {
+            "line": 2,
+            "code": "ITEM_2 = 2"
+          },
+          {
+            "line": 3,
+            "code": "ITEM_3 = 3"
+          },
+          {
+            "line": 4,
+            "code": "ITEM_4 = 4"
+          },
+          {
+            "line": 5,
+            "code": "ITEM_5 = 5"
+          },
+          {
+            "line": 6,
+            "code": "ITEM_6 = 6"
+          },
+          {
+            "line": 7,
+            "code": "ITEM_7 = 7"
+          },
+          {
+            "line": 8,
+            "code": "ITEM_8 = 8"
+          },
+          {
+            "line": 9,
+            "code": "ITEM_9 = 9"
+          },
+          {
+            "line": 10,
+            "code": "ITEM_10 = 10"
+          },
+          {
+            "line": 11,
+            "code": "ITEM_11 = 11"
+          },
+          {
+            "line": 12,
+            "code": "ITEM_12 = 12"
+          },
+          {
+            "line": 13,
+            "code": "ITEM_13 = 13"
+          },
+          {
+            "line": 14,
+            "code": "ITEM_14 = 14"
+          },
+          {
+            "line": 15,
+            "code": "ITEM_15 = 15"
+          },
+          {
+            "line": 16,
+            "code": "ITEM_16 = 16"
+          },
+          {
+            "line": 17,
+            "code": "ITEM_17 = 17"
+          },
+          {
+            "line": 18,
+            "code": "ITEM_18 = 18"
+          },
+          {
+            "line": 19,
+            "code": "ITEM_19 = 19"
+          },
+          {
+            "line": 20,
+            "code": "ITEM_20 = 20"
+          },
+          {
+            "line": 21,
+            "code": "ITEM_21 = 21"
+          },
+          {
+            "line": 22,
+            "code": "ITEM_22 = 22"
+          },
+          {
+            "line": 23,
+            "code": "ITEM_23 = 23"
+          },
+          {
+            "line": 24,
+            "code": "ITEM_24 = 24"
+          },
+          {
+            "line": 25,
+            "code": "ITEM_25 = 25"
+          },
+          {
+            "line": 26,
+            "code": "ITEM_26 = 26"
+          },
+          {
+            "line": 27,
+            "code": "ITEM_27 = 27"
+          },
+          {
+            "line": 28,
+            "code": "ITEM_28 = 28"
+          },
+          {
+            "line": 29,
+            "code": "ITEM_29 = 29"
+          },
+          {
+            "line": 30,
+            "code": "ITEM_30 = 30"
+          },
+          {
+            "line": 31,
+            "code": "ITEM_31 = 31"
+          },
+          {
+            "line": 32,
+            "code": "ITEM_32 = 32"
+          },
+          {
+            "line": 33,
+            "code": "ITEM_33 = 33"
+          },
+          {
+            "line": 34,
+            "code": "ITEM_34 = 34"
+          },
+          {
+            "line": 35,
+            "code": "ITEM_35 = 35"
+          },
+          {
+            "line": 36,
+            "code": "ITEM_36 = 36"
+          },
+          {
+            "line": 37,
+            "code": "ITEM_37 = 37"
+          },
+          {
+            "line": 38,
+            "code": "ITEM_38 = 38"
+          },
+          {
+            "line": 39,
+            "code": "ITEM_39 = 39"
+          },
+          {
+            "line": 40,
+            "code": "ITEM_40 = 40"
+          },
+          {
+            "line": 41,
+            "code": "ITEM_41 = 41"
+          },
+          {
+            "line": 42,
+            "code": "ITEM_42 = 42"
+          },
+          {
+            "line": 43,
+            "code": "ITEM_43 = 43"
+          },
+          {
+            "line": 44,
+            "code": "ITEM_44 = 44"
+          },
+          {
+            "line": 45,
+            "code": "ITEM_45 = 45"
+          },
+          {
+            "line": 46,
+            "code": "ITEM_46 = 46"
+          },
+          {
+            "line": 47,
+            "code": "ITEM_47 = 47"
+          },
+          {
+            "line": 48,
+            "code": "ITEM_48 = 48"
+          },
+          {
+            "line": 49,
+            "code": "ITEM_49 = 49"
+          },
+          {
+            "line": 50,
+            "code": "ITEM_50 = 50"
+          },
+          {
+            "line": 51,
+            "code": "ITEM_51 = 51"
+          },
+          {
+            "line": 52,
+            "code": "ITEM_52 = 52"
+          },
+          {
+            "line": 53,
+            "code": "ITEM_53 = 53"
+          },
+          {
+            "line": 54,
+            "code": "ITEM_54 = 54"
+          },
+          {
+            "line": 55,
+            "code": "ITEM_55 = 55"
+          },
+          {
+            "line": 56,
+            "code": "ITEM_56 = 56"
+          },
+          {
+            "line": 57,
+            "code": "ITEM_57 = 57"
+          },
+          {
+            "line": 58,
+            "code": "ITEM_58 = 58"
+          },
+          {
+            "line": 59,
+            "code": "ITEM_59 = 59"
+          },
+          {
+            "line": 60,
+            "code": "ITEM_60 = 60"
+          },
+          {
+            "line": 61,
+            "code": "ITEM_61 = 61"
+          },
+          {
+            "line": 62,
+            "code": "ITEM_62 = 62"
+          },
+          {
+            "line": 63,
+            "code": "ITEM_63 = 63"
+          },
+          {
+            "line": 64,
+            "code": "ITEM_64 = 64"
+          },
+          {
+            "line": 65,
+            "code": "ITEM_65 = 65"
+          },
+          {
+            "line": 66,
+            "code": "ITEM_66 = 66"
+          },
+          {
+            "line": 67,
+            "code": "ITEM_67 = 67"
+          },
+          {
+            "line": 68,
+            "code": "ITEM_68 = 68"
+          },
+          {
+            "line": 69,
+            "code": "ITEM_69 = 69"
+          },
+          {
+            "line": 70,
+            "code": "ITEM_70 = 70"
+          },
+          {
+            "line": 71,
+            "code": "ITEM_71 = 71"
+          },
+          {
+            "line": 72,
+            "code": "ITEM_72 = 72"
+          },
+          {
+            "line": 73,
+            "code": "ITEM_73 = 73"
+          },
+          {
+            "line": 74,
+            "code": "ITEM_74 = 74"
+          },
+          {
+            "line": 75,
+            "code": "ITEM_75 = 75"
+          },
+          {
+            "line": 76,
+            "code": "ITEM_76 = 76"
+          },
+          {
+            "line": 77,
+            "code": "ITEM_77 = 77"
+          },
+          {
+            "line": 78,
+            "code": "ITEM_78 = 78"
+          },
+          {
+            "line": 79,
+            "code": "ITEM_79 = 79"
+          },
+          {
+            "line": 80,
+            "code": "ITEM_80 = 80"
+          },
+          {
+            "line": 81,
+            "code": "ITEM_81 = 81"
+          },
+          {
+            "line": 82,
+            "code": "ITEM_82 = 82"
+          },
+          {
+            "line": 83,
+            "code": "ITEM_83 = 83"
+          },
+          {
+            "line": 84,
+            "code": "ITEM_84 = 84"
+          },
+          {
+            "line": 85,
+            "code": "ITEM_85 = 85"
+          },
+          {
+            "line": 86,
+            "code": "ITEM_86 = 86"
+          },
+          {
+            "line": 87,
+            "code": "ITEM_87 = 87"
+          },
+          {
+            "line": 88,
+            "code": "ITEM_88 = 88"
+          },
+          {
+            "line": 89,
+            "code": "ITEM_89 = 89"
+          },
+          {
+            "line": 90,
+            "code": "ITEM_90 = 90"
+          },
+          {
+            "line": 91,
+            "code": "ITEM_91 = 91"
+          },
+          {
+            "line": 92,
+            "code": "ITEM_92 = 92"
+          },
+          {
+            "line": 93,
+            "code": "ITEM_93 = 93"
+          },
+          {
+            "line": 94,
+            "code": "ITEM_94 = 94"
+          },
+          {
+            "line": 95,
+            "code": "ITEM_95 = 95"
+          },
+          {
+            "line": 96,
+            "code": "ITEM_96 = 96"
+          },
+          {
+            "line": 97,
+            "code": "ITEM_97 = 97"
+          },
+          {
+            "line": 98,
+            "code": "ITEM_98 = 98"
+          },
+          {
+            "line": 99,
+            "code": "ITEM_99 = 99"
+          },
+          {
+            "line": 100,
+            "code": "ITEM_100 = 100"
+          },
+          {
+            "line": 101,
+            "code": "ITEM_101 = 101"
+          },
+          {
+            "line": 102,
+            "code": "ITEM_102 = 102"
+          },
+          {
+            "line": 103,
+            "code": "ITEM_103 = 103"
+          },
+          {
+            "line": 104,
+            "code": "ITEM_104 = 104"
+          },
+          {
+            "line": 105,
+            "code": "ITEM_105 = 105"
+          },
+          {
+            "line": 106,
+            "code": "ITEM_106 = 106"
+          },
+          {
+            "line": 107,
+            "code": "ITEM_107 = 107"
+          },
+          {
+            "line": 108,
+            "code": "ITEM_108 = 108"
+          },
+          {
+            "line": 109,
+            "code": "ITEM_109 = 109"
+          },
+          {
+            "line": 110,
+            "code": "ITEM_110 = 110"
+          },
+          {
+            "line": 111,
+            "code": "ITEM_111 = 111"
+          },
+          {
+            "line": 112,
+            "code": "ITEM_112 = 112"
+          },
+          {
+            "line": 113,
+            "code": "ITEM_113 = 113"
+          },
+          {
+            "line": 114,
+            "code": "ITEM_114 = 114"
+          },
+          {
+            "line": 115,
+            "code": "ITEM_115 = 115"
+          },
+          {
+            "line": 116,
+            "code": "ITEM_116 = 116"
+          },
+          {
+            "line": 117,
+            "code": "ITEM_117 = 117"
+          },
+          {
+            "line": 118,
+            "code": "ITEM_118 = 118"
+          },
+          {
+            "line": 119,
+            "code": "ITEM_119 = 119"
+          },
+          {
+            "line": 120,
+            "code": "ITEM_120 = 120"
+          }
+        ],
+        "truncated_lines": false
+      },
+      "timestamp": "2026-10-08T02:32:10.116603+00:00"
+    },
+    {
+      "tool": "repo.read_range",
+      "arguments": {
+        "path": "inventory_constants.py",
+        "start": 121,
+        "end": 173
+      },
+      "purpose": "Read remaining lines of the only declared file to complete coverage",
+      "result_summary": {
+        "file": "inventory_constants.py",
+        "sha256": "80dcd4e560a658194ef93ee084700019c0f07838073d15352eb510a0117ee580",
+        "start": 121,
+        "end": 173,
+        "total_lines": 173,
+        "lines": [
+          {
+            "line": 121,
+            "code": "ITEM_121 = 121"
+          },
+          {
+            "line": 122,
+            "code": "ITEM_122 = 122"
+          },
+          {
+            "line": 123,
+            "code": "ITEM_123 = 123"
+          },
+          {
+            "line": 124,
+            "code": "ITEM_124 = 124"
+          },
+          {
+            "line": 125,
+            "code": "ITEM_125 = 125"
+          },
+          {
+            "line": 126,
+            "code": "ITEM_126 = 126"
+          },
+          {
+            "line": 127,
+            "code": "ITEM_127 = 127"
+          },
+          {
+            "line": 128,
+            "code": "ITEM_128 = 128"
+          },
+          {
+            "line": 129,
+            "code": "ITEM_129 = 129"
+          },
+          {
+            "line": 130,
+            "code": "ITEM_130 = 130"
+          },
+          {
+            "line": 131,
+            "code": "ITEM_131 = 131"
+          },
+          {
+            "line": 132,
+            "code": "ITEM_132 = 132"
+          },
+          {
+            "line": 133,
+            "code": "ITEM_133 = 133"
+          },
+          {
+            "line": 134,
+            "code": "ITEM_134 = 134"
+          },
+          {
+            "line": 135,
+            "code": "ITEM_135 = 135"
+          },
+          {
+            "line": 136,
+            "code": "ITEM_136 = 136"
+          },
+          {
+            "line": 137,
+            "code": "ITEM_137 = 137"
+          },
+          {
+            "line": 138,
+            "code": "ITEM_138 = 138"
+          },
+          {
+            "line": 139,
+            "code": "ITEM_139 = 139"
+          },
+          {
+            "line": 140,
+            "code": "ITEM_140 = 140"
+          },
+          {
+            "line": 141,
+            "code": "ITEM_141 = 141"
+          },
+          {
+            "line": 142,
+            "code": "ITEM_142 = 142"
+          },
+          {
+            "line": 143,
+            "code": "ITEM_143 = 143"
+          },
+          {
+            "line": 144,
+            "code": "ITEM_144 = 144"
+          },
+          {
+            "line": 145,
+            "code": "ITEM_145 = 145"
+          },
+          {
+            "line": 146,
+            "code": "ITEM_146 = 146"
+          },
+          {
+            "line": 147,
+            "code": "ITEM_147 = 147"
+          },
+          {
+            "line": 148,
+            "code": "ITEM_148 = 148"
+          },
+          {
+            "line": 149,
+            "code": "ITEM_149 = 149"
+          },
+          {
+            "line": 150,
+            "code": "ITEM_150 = 150"
+          },
+          {
+            "line": 151,
+            "code": "ITEM_151 = 151"
+          },
+          {
+            "line": 152,
+            "code": "ITEM_152 = 152"
+          },
+          {
+            "line": 153,
+            "code": "ITEM_153 = 153"
+          },
+          {
+            "line": 154,
+            "code": "ITEM_154 = 154"
+          },
+          {
+            "line": 155,
+            "code": "ITEM_155 = 155"
+          },
+          {
+            "line": 156,
+            "code": "ITEM_156 = 156"
+          },
+          {
+            "line": 157,
+            "code": "ITEM_157 = 157"
+          },
+          {
+            "line": 158,
+            "code": "ITEM_158 = 158"
+          },
+          {
+            "line": 159,
+            "code": "ITEM_159 = 159"
+          },
+          {
+            "line": 160,
+            "code": "ITEM_160 = 160"
+          },
+          {
+            "line": 161,
+            "code": "ITEM_161 = 161"
+          },
+          {
+            "line": 162,
+            "code": "ITEM_162 = 162"
+          },
+          {
+            "line": 163,
+            "code": "ITEM_163 = 163"
+          },
+          {
+            "line": 164,
+            "code": "ITEM_164 = 164"
+          },
+          {
+            "line": 165,
+            "code": "ITEM_165 = 165"
+          },
+          {
+            "line": 166,
+            "code": "ITEM_166 = 166"
+          },
+          {
+            "line": 167,
+            "code": "ITEM_167 = 167"
+          },
+          {
+            "line": 168,
+            "code": "ITEM_168 = 168"
+          },
+          {
+            "line": 169,
+            "code": "ITEM_169 = 169"
+          },
+          {
+            "line": 170,
+            "code": "ITEM_170 = 170"
+          },
+          {
+            "line": 171,
+            "code": "ITEM_171 = 171"
+          },
+          {
+            "line": 172,
+            "code": "ITEM_172 = 172"
+          },
+          {
+            "line": 173,
+            "code": "ITEM_173 = 173"
+          }
+        ],
+        "truncated_lines": false
+      },
+      "timestamp": "2026-10-08T02:32:11.527412+00:00"
+    },
+    {
+      "tool": "settle_surface",
+      "arguments": {
+        "surface": "storage in declared constants module",
+        "status": "reviewed",
+        "files": [
+          "inventory_constants.py"
+        ],
+        "reason": "Full file read (lines 1-173, sha256 80dcd4e5...). Entire module consists of 173 module-level integer constant assignments (ITEM_1=1 ... ITEM_173=173). No imports, no functions, no classes, no I/O, no network, no deserialization, no user-controllable input, no sinks. No security-relevant behavior exists to exploit; no vulnerability surface present.",
+        "assessment": "feature_absent",
+        "decision_ids": [],
+        "absence_evidence": [
+          {
+            "file": "inventory_constants.py",
+            "line": 1,
+            "symbol": "ITEM_1",
+            "evidence": "ITEM_1 = 1",
+            "operation": "module-level integer constant assignment"
+          },
+          {
+            "file": "inventory_constants.py",
+            "line": 173,
+            "symbol": "ITEM_173",
+            "evidence": "ITEM_173 = 173",
+            "operation": "module-level integer constant assignment"
+          }
+        ]
+      },
+      "purpose": "Incremental surface settlement",
+      "result_summary": {
+        "accepted": true
+      },
+      "timestamp": "2026-10-08T02:32:13.372185+00:00"
+    }
+  ],
+  "source_sha256": "80dcd4e560a658194ef93ee084700019c0f07838073d15352eb510a0117ee580"
+}

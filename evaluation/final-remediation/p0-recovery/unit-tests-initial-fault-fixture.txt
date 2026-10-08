@@ -1,0 +1,104 @@
+.....FFF.....                                                            [100%]
+=================================== FAILURES ===================================
+______________ test_unavailable_evidence_never_complete[changed] _______________
+
+tmp_path = PosixPath('/private/var/folders/l0/h_kd4t_11vld3c55ph4kq6w40000gn/T/pytest-of-bo/pytest-102/test_unavailable_evidence_neve1')
+failure = 'changed'
+
+    @pytest.mark.parametrize('failure',['missing','changed','truncated','empty'])
+    def test_unavailable_evidence_never_complete(tmp_path,failure):
+        e=setup(tmp_path)
+        p=e.audit/'repo'/'ledger.py'
+        if failure=='missing':p.unlink()
+>       elif failure=='changed':p.write_text('changed\n')
+
+tests/test_v2_recovery.py:79: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/pathlib.py:1275: in write_text
+    with self.open(mode='w', encoding=encoding, errors=errors) as f:
+/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/pathlib.py:1242: in open
+    return io.open(self, mode, buffering, encoding, errors, newline,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/private/var/folders/l0/h_kd4t_11vld3c55ph4kq6w40000gn/T/pytest-of-bo/pytest-102/test_unavailable_evidence_neve1/audits/0a4a9f9d401d42fcbdb3b0868b949ffe/repo/ledger.py')
+name = '/private/var/folders/l0/h_kd4t_11vld3c55ph4kq6w40000gn/T/pytest-of-bo/pytest-102/test_unavailable_evidence_neve1/audits/0a4a9f9d401d42fcbdb3b0868b949ffe/repo/ledger.py'
+flags = 16778753, mode = 438
+
+    def _opener(self, name, flags, mode=0o666):
+        # A stub for the opener argument to built-in open()
+>       return self._accessor.open(self, flags, mode)
+E       PermissionError: [Errno 13] Permission denied: '/private/var/folders/l0/h_kd4t_11vld3c55ph4kq6w40000gn/T/pytest-of-bo/pytest-102/test_unavailable_evidence_neve1/audits/0a4a9f9d401d42fcbdb3b0868b949ffe/repo/ledger.py'
+
+/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/pathlib.py:1110: PermissionError
+_____________ test_unavailable_evidence_never_complete[truncated] ______________
+
+tmp_path = PosixPath('/private/var/folders/l0/h_kd4t_11vld3c55ph4kq6w40000gn/T/pytest-of-bo/pytest-102/test_unavailable_evidence_neve2')
+failure = 'truncated'
+
+    @pytest.mark.parametrize('failure',['missing','changed','truncated','empty'])
+    def test_unavailable_evidence_never_complete(tmp_path,failure):
+        e=setup(tmp_path)
+        p=e.audit/'repo'/'ledger.py'
+        if failure=='missing':p.unlink()
+        elif failure=='changed':p.write_text('changed\n')
+        elif failure=='empty':
+            p.write_text('');from agent.v2.repository import digest
+            e.metadata['files']['ledger.py']=digest(p)
+        else:
+>           p.write_text('value = 1\n'*120+'a'*2001+'\n');from agent.v2.repository import digest
+
+tests/test_v2_recovery.py:84: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/pathlib.py:1275: in write_text
+    with self.open(mode='w', encoding=encoding, errors=errors) as f:
+/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/pathlib.py:1242: in open
+    return io.open(self, mode, buffering, encoding, errors, newline,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/private/var/folders/l0/h_kd4t_11vld3c55ph4kq6w40000gn/T/pytest-of-bo/pytest-102/test_unavailable_evidence_neve2/audits/01adefb69f8d4d7d86da1b331f9acaf9/repo/ledger.py')
+name = '/private/var/folders/l0/h_kd4t_11vld3c55ph4kq6w40000gn/T/pytest-of-bo/pytest-102/test_unavailable_evidence_neve2/audits/01adefb69f8d4d7d86da1b331f9acaf9/repo/ledger.py'
+flags = 16778753, mode = 438
+
+    def _opener(self, name, flags, mode=0o666):
+        # A stub for the opener argument to built-in open()
+>       return self._accessor.open(self, flags, mode)
+E       PermissionError: [Errno 13] Permission denied: '/private/var/folders/l0/h_kd4t_11vld3c55ph4kq6w40000gn/T/pytest-of-bo/pytest-102/test_unavailable_evidence_neve2/audits/01adefb69f8d4d7d86da1b331f9acaf9/repo/ledger.py'
+
+/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/pathlib.py:1110: PermissionError
+_______________ test_unavailable_evidence_never_complete[empty] ________________
+
+tmp_path = PosixPath('/private/var/folders/l0/h_kd4t_11vld3c55ph4kq6w40000gn/T/pytest-of-bo/pytest-102/test_unavailable_evidence_neve3')
+failure = 'empty'
+
+    @pytest.mark.parametrize('failure',['missing','changed','truncated','empty'])
+    def test_unavailable_evidence_never_complete(tmp_path,failure):
+        e=setup(tmp_path)
+        p=e.audit/'repo'/'ledger.py'
+        if failure=='missing':p.unlink()
+        elif failure=='changed':p.write_text('changed\n')
+        elif failure=='empty':
+>           p.write_text('');from agent.v2.repository import digest
+
+tests/test_v2_recovery.py:81: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/pathlib.py:1275: in write_text
+    with self.open(mode='w', encoding=encoding, errors=errors) as f:
+/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/pathlib.py:1242: in open
+    return io.open(self, mode, buffering, encoding, errors, newline,
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('/private/var/folders/l0/h_kd4t_11vld3c55ph4kq6w40000gn/T/pytest-of-bo/pytest-102/test_unavailable_evidence_neve3/audits/d50e0410fc8b4e2caf3d252e76ad27df/repo/ledger.py')
+name = '/private/var/folders/l0/h_kd4t_11vld3c55ph4kq6w40000gn/T/pytest-of-bo/pytest-102/test_unavailable_evidence_neve3/audits/d50e0410fc8b4e2caf3d252e76ad27df/repo/ledger.py'
+flags = 16778753, mode = 438
+
+    def _opener(self, name, flags, mode=0o666):
+        # A stub for the opener argument to built-in open()
+>       return self._accessor.open(self, flags, mode)
+E       PermissionError: [Errno 13] Permission denied: '/private/var/folders/l0/h_kd4t_11vld3c55ph4kq6w40000gn/T/pytest-of-bo/pytest-102/test_unavailable_evidence_neve3/audits/d50e0410fc8b4e2caf3d252e76ad27df/repo/ledger.py'
+
+/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/pathlib.py:1110: PermissionError
+=========================== short test summary info ============================
+FAILED tests/test_v2_recovery.py::test_unavailable_evidence_never_complete[changed]
+FAILED tests/test_v2_recovery.py::test_unavailable_evidence_never_complete[truncated]
+FAILED tests/test_v2_recovery.py::test_unavailable_evidence_never_complete[empty]
+3 failed, 10 passed in 0.22s

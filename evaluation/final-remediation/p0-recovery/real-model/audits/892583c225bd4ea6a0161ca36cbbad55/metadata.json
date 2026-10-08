@@ -1,0 +1,11 @@
+{
+  "audit_id": "892583c225bd4ea6a0161ca36cbbad55",
+  "input_kind": "local",
+  "commit": null,
+  "files": {
+    "inventory_constants.py": "80dcd4e560a658194ef93ee084700019c0f07838073d15352eb510a0117ee580"
+  },
+  "file_count": 1,
+  "bytes": 2379,
+  "snapshot_sha256": "674b5705b19c907d3376931600c178bac93d1005c15e3452a5805f4138e4a134"
+}
