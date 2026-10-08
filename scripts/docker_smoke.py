@@ -12,7 +12,7 @@ try:
     for service in ('repo-tools','static-analysis','octobus'):
         name='codeaudit-smoke-'+uuid.uuid4().hex[:12];created.append(name)
         command=['octobus','serve'] if service=='octobus' else ['python','-m','agent.v2.capability_server',service]
-        run(['run','-d','--network','none','--name',name,'-e','OCTOBUS_ADDR=127.0.0.1:9000','-e','OCTOBUS_DATA_DIR=/tmp/octobus',image,*command])
+        run(['run','-d','--network','none','--name',name,'-e','CODEAUDIT_WORKSPACES=/tmp/codeaudit-workspaces','-e','OCTOBUS_ADDR=127.0.0.1:9000','-e','OCTOBUS_DATA_DIR=/tmp/octobus',image,*command])
         check=['octobus','status'] if service=='octobus' else ['python','-c',"import urllib.request; print(urllib.request.urlopen('http://127.0.0.1:8080/health',timeout=3).read().decode())"]
         last=None
         for attempt in range(10):
@@ -25,4 +25,6 @@ try:
     print('DOCKER_SMOKE=PASS',flush=True)
 finally:
     for name in created:
+        logs=subprocess.run(['docker','logs',name],capture_output=True,text=True,timeout=30)
+        print(json.dumps({'container':name,'logs_stdout':logs.stdout,'logs_stderr':logs.stderr}),flush=True)
         subprocess.run(['docker','rm','-f',name],timeout=30,check=False)
