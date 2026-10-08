@@ -1,0 +1,15 @@
+{
+  "scope": "all187 changed files including three complete real-model traces",
+  "high_confidence_alerts": [],
+  "keyword_occurrences": {
+    "API key": 0,
+    "Authorization": 361,
+    "Bearer": 0,
+    "SSH key": 0,
+    "password": 0,
+    "cookie": 4,
+    "token": 538,
+    "credential": 6
+  },
+  "limitation": "Pattern scan plus review of context, not a guarantee of absence; keyword matches include security discussion and token usage. No secret values emitted."
+}

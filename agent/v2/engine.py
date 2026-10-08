@@ -31,7 +31,7 @@ security_boundary, confidence_rationale, knowledge_application (specific effect 
 Counter evidence cites protections or contradictory code you actually read; empty only if none was found, explain why.
 Every decision also supplies defense_claims and environment_assumptions (arrays, empty only when none applies).
 Each defense claim has claim, references (actual implementation lines, not imports), and limitations.
-Each environment assumption has claim, state verified or unknown, references, and affects_verdict (boolean).
+Each environment assumption has claim, state verified, supported, unknown or contradicted, references, and affects_verdict (boolean). Supported means evidence is suggestive but not decisive; contradicted means read evidence refutes the claim. Cite evidence for verified/supported/contradicted. Material contradicted assumptions require revising the judgment or abstaining. Material supported assumptions remain explicit conditional preconditions, never proven deployment.
 Verified assumptions require read repository evidence; the audit host OS is not deployment evidence.
 State judgment_scope as conditional_code or deployment and deployment_exposure as unknown, evidenced, or not_evidenced. A conditional_code verdict assesses the code under explicitly listed preconditions, not whether a real deployment is vulnerable. Copy each material unknown environment claim into exploit_preconditions. Unknown deployment does not erase a demonstrated conditional code flaw; unknown implementation behavior still requires INSUFFICIENT_EVIDENCE. A deployment verdict with material unknowns requires INSUFFICIENT_EVIDENCE. Repository version is not deployment evidence.
 REJECTED requires implementation counter_evidence; an imported function name does not prove its behavior.
@@ -73,7 +73,7 @@ DECISION_FIELDS['defense_claims'] = {'type': 'array', 'items': {'type': 'object'
     'claim': STRING, 'references': {'type': 'array', 'items': REFERENCE}, 'limitations': STRING},
     'required': ['claim', 'references', 'limitations'], 'additionalProperties': False}}
 DECISION_FIELDS['environment_assumptions'] = {'type': 'array', 'items': {'type': 'object', 'properties': {
-    'claim': STRING, 'state': {'type': 'string', 'enum': ['verified', 'unknown']},
+    'claim': STRING, 'state': {'type': 'string', 'enum': ['verified', 'supported', 'unknown', 'contradicted']},
     'references': {'type': 'array', 'items': REFERENCE}, 'affects_verdict': {'type': 'boolean'}},
     'required': ['claim', 'state', 'references', 'affects_verdict'], 'additionalProperties': False}}
 DECISION_FIELDS['judgment_scope'] = {'type': 'string', 'enum': ['conditional_code', 'deployment']}

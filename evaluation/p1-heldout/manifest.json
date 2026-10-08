@@ -1,0 +1,95 @@
+{
+  "provenance": "New developer-authored cases frozen before P1 model runs; not independent blind evaluation. No case text copied from prior suites. No knowledge changes during this campaign. Expected labels stay outside source snapshots and model/critic context.",
+  "max_runs": 18,
+  "arms": [
+    "project",
+    "off",
+    "generic"
+  ],
+  "cases": [
+    {
+      "id": "r01",
+      "category": "command_injection",
+      "expected_positive": true,
+      "task": "Assess untrusted label handling in post(payload), including all delegated execution steps.",
+      "decisive_reference": {
+        "file": "runner.py",
+        "line": 4
+      },
+      "files": {
+        "controller.py": "157008710c371d84009fcd0807b072f18b06fdfffabf47341915e7130824b119",
+        "service.py": "f350722abb42e4cfd6efe00dc050eb94f4fd8814e5babcf41ae5101eb005d01b",
+        "worker.py": "2d58090989b91d0460636b4b91ffbeb91ee3e655b42bb6d6fe79f2b245c776e1",
+        "runner.py": "d0a151aa1344b65c655c6989eef3e21bb207971f2b44bc3eb24c88da68e7c611"
+      }
+    },
+    {
+      "id": "r02",
+      "category": "authz",
+      "expected_positive": true,
+      "task": "Assess change_title under this operator business policy: authenticated users may update only records whose tenant_id equals identity.tenant_id. record_key and title are untrusted. records includes multiple tenants.",
+      "decisive_reference": {
+        "file": "ledger.py",
+        "line": 3
+      },
+      "files": {
+        "api.py": "4a35d0050bc8a6b90be8fc5ab1a9844ed391109515850a2d32e64eff6c2159f2",
+        "ledger.py": "3c5a7200195adb88ca40934cedba5007b87663cf5debe59437f20cca8de8a4b9"
+      }
+    },
+    {
+      "id": "r03",
+      "category": "path_traversal",
+      "expected_positive": false,
+      "task": "Assess read_note for escaping its trusted root on a stable POSIX filesystem with no concurrent symlink changes. requested is untrusted. Do not assume callers to the separate unused_adapter.",
+      "decisive_reference": {
+        "file": "files.py",
+        "line": 6
+      },
+      "files": {
+        "files.py": "0e7af55deb9d6b1f3e91a2a6d1e6d16dc9ccc475c1965cab094dfcec47e7789d"
+      }
+    },
+    {
+      "id": "r04",
+      "category": "deserialization",
+      "expected_positive": true,
+      "task": "Assess receive(body), where an unauthenticated peer supplies body bytes. Follow transformations into object decoding.",
+      "decisive_reference": {
+        "file": "decoder.py",
+        "line": 6
+      },
+      "files": {
+        "endpoint.py": "3e0903a776f08427e87bd5219bc2d80be9e5eda5d56f94f5ab1947e336f44cd8",
+        "decoder.py": "f437b71fa96ab2085a1c71e3369216728d3ed6ea1427da3c0b20dcbc7710d3f0"
+      }
+    },
+    {
+      "id": "r05",
+      "category": "ssrf",
+      "expected_positive": false,
+      "task": "Assess preview for request-controlled URL destination. user_choice is untrusted; trusted_fetch honors allow_redirects=False, and URLS is immutable trusted configuration with operator-controlled DNS. Scope is preview; dormant_fetch has no reachable caller in this snapshot.",
+      "decisive_reference": {
+        "file": "routes.py",
+        "line": 4
+      },
+      "files": {
+        "routes.py": "dc69c1c941491c5cebb7fe88c2226fc880b2f204f8316a874dd6f38468a64ae4"
+      }
+    },
+    {
+      "id": "r06",
+      "category": "template_injection",
+      "expected_positive": false,
+      "task": "Assess welcome for server-side template source injection, distinguishing fixed template source from variable data. Only this property is in scope, not deployment exposure or unrelated configuration.",
+      "decisive_reference": {
+        "file": "page.py",
+        "line": 7
+      },
+      "files": {
+        "page.py": "4bbdb0265b7b8b99f9f62da1c03d03fa8b4aeba08aa7172f168ba5fbc89ef9b9",
+        "requirements.txt": "267e2c6c3a55cf611ef9f26a7eaee92be8667769659b6546fdfe17f40d130384"
+      }
+    }
+  ]
+}
