@@ -1,0 +1,14 @@
+{
+  "checks": {
+    "actions/setup-python": true,
+    "requirements-dev.txt": true,
+    "pytest": true,
+    "validate_schemas.py": true,
+    "docker build": true,
+    "docker_smoke.py": true,
+    "no_failure_bypass": true,
+    "no_paid_model": true
+  },
+  "status": "PASS",
+  "GITHUB_ACTIONS": "NOT_RUN"
+}

@@ -1,0 +1,51 @@
+{
+  "BUILD_SHA": "90586134ec701b4ec605c3536675f4e647b37965",
+  "steps": [
+    {
+      "name": "clone",
+      "exit_code": 0
+    },
+    {
+      "name": "checkout",
+      "exit_code": 0
+    },
+    {
+      "name": "clean_status",
+      "exit_code": 0,
+      "stdout": ""
+    },
+    {
+      "name": "venv",
+      "exit_code": 0
+    },
+    {
+      "name": "python",
+      "exit_code": 0
+    },
+    {
+      "name": "dependencies",
+      "exit_code": 0
+    },
+    {
+      "name": "semgrep",
+      "exit_code": 0
+    },
+    {
+      "name": "pytest",
+      "exit_code": 0
+    },
+    {
+      "name": "schema",
+      "exit_code": 0
+    },
+    {
+      "name": "docker_build",
+      "exit_code": 0
+    },
+    {
+      "name": "docker_smoke",
+      "exit_code": 0
+    }
+  ],
+  "GITHUB_ACTIONS": "NOT_RUN"
+}

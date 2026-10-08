@@ -1,0 +1,90 @@
+{
+  "source_sha": "90586134ec701b4ec605c3536675f4e647b37965",
+  "tracked_files": 603,
+  "tracked_bytes": 5924872,
+  "top20": [
+    {
+      "path": "evaluation/final-remediation/p1-heldout/result.json",
+      "bytes": 250551
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-03/request-11.json",
+      "bytes": 96777
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-03/request-10.json",
+      "bytes": 95429
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-03/request-09.json",
+      "bytes": 92445
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-02/request-09.json",
+      "bytes": 87611
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-02/request-08.json",
+      "bytes": 86234
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-02/request-07.json",
+      "bytes": 83130
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-03/request-08.json",
+      "bytes": 82981
+    },
+    {
+      "path": "evaluation/evidence-remediation-15/plan.json",
+      "bytes": 80053
+    },
+    {
+      "path": "evaluation/evidence-remediation-19/plan.json",
+      "bytes": 74834
+    },
+    {
+      "path": "evaluation/evidence-remediation-18/plan.json",
+      "bytes": 74598
+    },
+    {
+      "path": "evaluation/evidence-remediation-17/plan.json",
+      "bytes": 74455
+    },
+    {
+      "path": "evaluation/evidence-remediation-16/plan.json",
+      "bytes": 74329
+    },
+    {
+      "path": "evaluation/evidence-remediation-14/plan.json",
+      "bytes": 74207
+    },
+    {
+      "path": "evaluation/final-remediation/p0-real-recovery/run-02/request-06.json",
+      "bytes": 73250
+    },
+    {
+      "path": "evaluation/evidence-remediation-08/plan.json",
+      "bytes": 73203
+    },
+    {
+      "path": "evaluation/evidence-remediation-09/plan.json",
+      "bytes": 73202
+    },
+    {
+      "path": "evaluation/evidence-remediation-07/plan.json",
+      "bytes": 73011
+    },
+    {
+      "path": "evaluation/evidence-remediation-13/plan.json",
+      "bytes": 72777
+    },
+    {
+      "path": "evaluation/evidence-remediation-12/plan.json",
+      "bytes": 72724
+    }
+  ],
+  "git_count_objects": "count: 1274\nsize: 6.61 MiB\nin-pack: 218\npacks: 1\nsize-pack: 180.85 KiB\nprune-packable: 65\ngarbage: 1\nsize-garbage: 64 bytes\n",
+  "metadata_warning": "warning: garbage found: /Users/bo/codeaudit-v2-final/.git/worktrees/codeaudit-v2-final/refs\n",
+  "classification": "Largest files are retained historical JSON traces/results. No new cache/database/archive is tracked. .internal excluded."
+}

@@ -1,0 +1,18 @@
+{
+  "CI_CONFIG_VALIDATED": "PASS",
+  "GITHUB_ACTIONS": "NOT_RUN",
+  "source_sha": "764e1cb48ac9289cc1abdefd501d84e17c97ca2e",
+  "checks": {
+    "python_setup": true,
+    "dependencies": true,
+    "semgrep_pinned": true,
+    "pytest": true,
+    "schema": true,
+    "docker_build": true,
+    "docker_smoke": true,
+    "no_ignored_core_failures": true
+  },
+  "historical_evidence_diff": "",
+  "HISTORICAL_EVIDENCE_PRESERVED": true,
+  "paid_model_calls": "NONE in core workflow; no real model experiments rerun"
+}

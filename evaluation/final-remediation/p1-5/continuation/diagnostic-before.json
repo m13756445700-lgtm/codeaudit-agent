@@ -1,0 +1,70 @@
+[
+  {
+    "command": [
+      "docker",
+      "version"
+    ],
+    "exit_code": 1,
+    "stdout": "Client:\n Version:           29.8.0\n API version:       1.56\n Go version:        go1.26.8\n Git commit:        88096ef\n Built:             Thu Sep  3 21:49:43 2026\n OS/Arch:           darwin/arm64\n Context:           desktop-linux\n",
+    "stderr": "Cannot connect to the Docker daemon at unix:///Users/bo/.docker/run/docker.sock. Is the docker daemon running?\n"
+  },
+  {
+    "command": [
+      "docker",
+      "info"
+    ],
+    "exit_code": 1,
+    "stdout": "Client:\n Version:    29.8.0\n Context:    desktop-linux\n Debug Mode: false\n Plugins:\n  agent: Docker AI Agent Runner (Docker Inc.)\n    Version:  v1.140.0\n    Path:     /Users/bo/.docker/cli-plugins/docker-agent\n  ai: Docker AI Agent - Ask Gordon (Docker Inc.)\n    Version:  v1.31.0\n    Path:     /Users/bo/.docker/cli-plugins/docker-ai\n  buildx: Docker Buildx (Docker Inc.)\n    Version:  v0.37.1\n    Path:     /Users/bo/.docker/cli-plugins/docker-buildx\n  compose: Docker Compose (Docker Inc.)\n    Version:  v5.5.1\n    Path:     /Users/bo/.docker/cli-plugins/docker-compose\n  debug: Get a shell into any image or container (Docker Inc.)\n    Version:  0.0.47\n    Path:     /Users/bo/.docker/cli-plugins/docker-debug\n  desktop: Docker Desktop commands (Docker Inc.)\n    Version:  v0.4.4\n    Path:     /Users/bo/.docker/cli-plugins/docker-desktop\n  dhi: CLI for managing Docker Hardened Images (Docker Inc.)\n    Version:  v0.0.7\n    Path:     /Users/bo/.docker/cli-plugins/docker-dhi\n  extension: Manages Docker extensions (Docker Inc.)\n    Version:  v0.2.31\n    Path:     /Users/bo/.docker/cli-plugins/docker-extension\n  init: Creates Docker-related starter files for your project (Docker Inc.)\n    Version:  v1.4.0\n    Path:     /Users/bo/.docker/cli-plugins/docker-init\n  mcp: Docker MCP Plugin (Docker Inc.)\n    Version:  v0.43.3\n    Path:     /Users/bo/.docker/cli-plugins/docker-mcp\n  model: Docker Model Runner (Docker Inc.)\n    Version:  v1.2.6\n    Path:     /Users/bo/.docker/cli-plugins/docker-model\n  offload: Docker Offload (Docker Inc.)\n    Version:  v0.6.27\n    Path:     /Users/bo/.docker/cli-plugins/docker-offload\n  pass: Docker Pass Secrets Manager Plugin (beta) (Docker Inc.)\n    Version:  v0.2.2\n    Path:     /Users/bo/.docker/cli-plugins/docker-pass\n  sandbox: \"docker sandbox\" is deprecated, use Docker Sandboxes instead (Docker Inc.)\n    Version:  v0.13.0\n    Path:     /Users/bo/.docker/cli-plugins/docker-sandbox\n  scout: Docker Scout (Docker Inc.)\n    Version:  v1.24.0\n    Path:     /Users/bo/.docker/cli-plugins/docker-scout\n\nServer:\n",
+    "stderr": "Cannot connect to the Docker daemon at unix:///Users/bo/.docker/run/docker.sock. Is the docker daemon running?\n"
+  },
+  {
+    "command": [
+      "docker",
+      "context",
+      "ls"
+    ],
+    "exit_code": 0,
+    "stdout": "NAME              DESCRIPTION                               DOCKER ENDPOINT                            ERROR\ndefault           Current DOCKER_HOST based configuration   unix:///var/run/docker.sock                \ndesktop-linux *   Docker Desktop                            unix:///Users/bo/.docker/run/docker.sock   \n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "docker",
+      "compose",
+      "version"
+    ],
+    "exit_code": 0,
+    "stdout": "Docker Compose version v5.5.1\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "docker",
+      "system",
+      "df"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": "Cannot connect to the Docker daemon at unix:///Users/bo/.docker/run/docker.sock. Is the docker daemon running?\n"
+  },
+  {
+    "command": [
+      "df",
+      "-h",
+      "."
+    ],
+    "exit_code": 0,
+    "stdout": "Filesystem      Size    Used   Avail Capacity iused ifree %iused  Mounted on\n/dev/disk3s5   228Gi   140Gi    60Gi    70%    1.1M  631M    0%   /System/Volumes/Data\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "docker",
+      "desktop",
+      "status"
+    ],
+    "status": "TIMEOUT",
+    "stdout": null,
+    "stderr": null
+  }
+]

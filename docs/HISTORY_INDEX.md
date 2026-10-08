@@ -8,3 +8,5 @@
 - evaluation/final-remediation/p1-heldout/result.json:18-run ablation, including INCOMPLETE/PARTIAL and no established unique knowledge benefit.
 
 Later operator Gate decisions summarize engineering readiness; they do not relabel historical run outcomes. No history rewrite or removal performed.
+
+- evaluation/final-remediation/p1-5/: original daemon-unavailable attempt retained alongside continuation/ recovery and revalidation. Read the latest final gate for current engineering status.

@@ -11,3 +11,7 @@ All release checks refer to exact build SHA. OCI revision is supplied through BU
 P0 limitation: Deterministic post-rejection recovery is covered by automated tests, while direct real-model post-rejection recovery was not observed in the bounded three-run acceptance campaign because the tested model proactively completed missing evidence before settlement.
 
 UNIQUE_KNOWLEDGE_BENEFIT=NOT_ESTABLISHED. No release document may upgrade this without new authorized evidence.
+
+P1.5 release artifacts are allowlisted: concise diagnosis/results, complete required build/smoke/CI logs and repository-size/secret-review reports. Ignored .internal clean clones, virtual environments and scanner scripts are not acceptance evidence and never enter the release tree. No tracked historical acceptance file was removed. Repository object metadata warnings are recorded; no history cleanup or object pruning is performed.
+
+Removed from release tree: continuation/scan-review.json, a newly generated temporary scanner-review duplicate. Reason: superseded by secret-scan.json with reviewed findings; not acceptance evidence. Private scanner scripts and temporary clones remain ignored.

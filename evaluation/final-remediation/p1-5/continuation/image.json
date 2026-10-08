@@ -1,0 +1,11 @@
+{
+  "BUILD_SHA": "764e1cb48ac9289cc1abdefd501d84e17c97ca2e",
+  "IMAGE_ID": "sha256:9db16d32980a90a01801ca52a8ea24848cb287cb7363f706ae63571b149db12e",
+  "IMAGE_DIGEST": [
+    "codeaudit-p1-5@sha256:9db16d32980a90a01801ca52a8ea24848cb287cb7363f706ae63571b149db12e"
+  ],
+  "OCI_REVISION": "764e1cb48ac9289cc1abdefd501d84e17c97ca2e",
+  "architecture": "amd64",
+  "os": "linux",
+  "size_bytes": 1922412317
+}

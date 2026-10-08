@@ -1,0 +1,10 @@
+{
+  "SOURCE_SHA": "90586134ec701b4ec605c3536675f4e647b37965",
+  "CI_CONFIG_VALIDATED": "PASS",
+  "GITHUB_ACTIONS": "NOT_RUN",
+  "core_failure_masking": "NONE",
+  "paid_model_calls": "NONE",
+  "semgrep_pin": "1.99.0",
+  "workflow": ".github/workflows/ci.yml",
+  "HISTORICAL_EVIDENCE_PRESERVED": true
+}
