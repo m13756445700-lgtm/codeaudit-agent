@@ -1,0 +1,2 @@
+GitHub full PR diff retrieval failed: HTTP406, maximum300files exceeded for317changedfiles. Fallback: paginated API file list compared with complete local Git diff; same317paths, same11commits.
+Initial CI log retrieval failed: TLS handshake timeout at https://api.github.com/repos/m13756445700-lgtm/codeaudit-agent/actions/runs/37738361710?exclude_pull_requests=true. Both full logs retrieved successfully on retry; see log-download-attempts.json.

@@ -1,0 +1,57 @@
+{
+  "main": {
+    "ref": "refs/heads/main",
+    "node_id": "REF_kwDOUmtvLq9yZWZzL2hlYWRzL21haW4",
+    "url": "https://api.github.com/repos/m13756445700-lgtm/codeaudit-agent/git/refs/heads/main",
+    "object": {
+      "sha": "567a9aeed8429866c8e8cd551ddb596627bdd7ae",
+      "type": "commit",
+      "url": "https://api.github.com/repos/m13756445700-lgtm/codeaudit-agent/git/commits/567a9aeed8429866c8e8cd551ddb596627bdd7ae"
+    }
+  },
+  "v1_tag_ref": {
+    "ref": "refs/tags/v1-pre-v2-release",
+    "node_id": "REF_kwDOUmtvLrtyZWZzL3RhZ3MvdjEtcHJlLXYyLXJlbGVhc2U",
+    "url": "https://api.github.com/repos/m13756445700-lgtm/codeaudit-agent/git/refs/tags/v1-pre-v2-release",
+    "object": {
+      "sha": "c86adf7ea70c7e7ae8ee7ee440b31d318236705a",
+      "type": "tag",
+      "url": "https://api.github.com/repos/m13756445700-lgtm/codeaudit-agent/git/tags/c86adf7ea70c7e7ae8ee7ee440b31d318236705a"
+    }
+  },
+  "v1_tag_object": {
+    "node_id": "TA_kwDOUmtvLtoAKGM4NmFkZjdlYTcwYzdlN2FlOGVlN2VlNDQwYjMxZDMxODIzNjcwNWE",
+    "sha": "c86adf7ea70c7e7ae8ee7ee440b31d318236705a",
+    "url": "https://api.github.com/repos/m13756445700-lgtm/codeaudit-agent/git/tags/c86adf7ea70c7e7ae8ee7ee440b31d318236705a",
+    "tagger": {
+      "name": "XianBo.Liu",
+      "email": "m13756445700@163.com",
+      "date": "2026-10-08T07:05:44Z"
+    },
+    "object": {
+      "sha": "0733933113faee3121b2c5d692ef4ee1400d4d0d",
+      "type": "commit",
+      "url": "https://api.github.com/repos/m13756445700-lgtm/codeaudit-agent/git/commits/0733933113faee3121b2c5d692ef4ee1400d4d0d"
+    },
+    "tag": "v1-pre-v2-release",
+    "message": "Preserve V1 before CodeAudit Agent V2 release",
+    "verification": {
+      "verified": false,
+      "reason": "unsigned",
+      "signature": null,
+      "payload": null,
+      "verified_at": null
+    }
+  },
+  "main_ci": {
+    "id": 37741956460,
+    "name": "Core verification",
+    "head_sha": "567a9aeed8429866c8e8cd551ddb596627bdd7ae",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/m13756445700-lgtm/codeaudit-agent/actions/runs/37741956460",
+    "event": "push",
+    "created_at": "2026-10-08T07:11:48Z",
+    "updated_at": "2026-10-08T07:13:58Z"
+  }
+}

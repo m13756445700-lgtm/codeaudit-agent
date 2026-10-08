@@ -1,0 +1,10 @@
+{
+  "SHA": "567a9aeed8429866c8e8cd551ddb596627bdd7ae",
+  "tree": "992a882b8c14dd4b0d0bfa3f029045938ec49d82",
+  "source": "GitHub git/commits signed payload/signature; full commit object hashed to exact remote SHA; local content-addressed parent/tree objects seed NEW clean clone",
+  "computed_commit_sha": "567a9aeed8429866c8e8cd551ddb596627bdd7ae",
+  "parents": [
+    "0733933113faee3121b2c5d692ef4ee1400d4d0d",
+    "f0a15796620fb262eb152f89c00f7f0063499a91"
+  ]
+}

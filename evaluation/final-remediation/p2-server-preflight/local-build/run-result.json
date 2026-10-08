@@ -1,0 +1,30 @@
+{
+  "RELEASE_SHA": "567a9aeed8429866c8e8cd551ddb596627bdd7ae",
+  "completed_steps": 20,
+  "steps_exit_codes": {
+    "clone": 0,
+    "import_final_main": 0,
+    "checkout": 0,
+    "docker-version": 0,
+    "docker-info": 0,
+    "docker-compose-version": 0,
+    "venv": 0,
+    "python": 0,
+    "dependencies": 0,
+    "dependency-resolutions": 0,
+    "semgrep": 0,
+    "pytest": 0,
+    "schema": 0,
+    "docker-build": 0,
+    "docker-smoke": 0,
+    "image-inspect": 0,
+    "container-semgrep": 0,
+    "container-dependency-resolutions": 0,
+    "compose-config": 0,
+    "agent-compose-config": 0
+  },
+  "P2C_IMAGE_PRECHECK": "PASS",
+  "GITHUB_ACTIONS": "NOT_RUN",
+  "SERVER_DEPLOYMENT": "NOT_RUN",
+  "scope": "Local isolated main build/test only; server Gate and independently observed main CI are in ../result.json"
+}

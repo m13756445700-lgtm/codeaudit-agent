@@ -1,0 +1,57 @@
+{
+  "prepare-serverbuild": {
+    "start": "2026-10-08T09:16:08.710339+00:00",
+    "end": "2026-10-08T09:16:09.924065+00:00",
+    "exit_code": 0,
+    "stderr": ""
+  },
+  "deploy": {
+    "start": "2026-10-08T09:16:36.508384+00:00",
+    "end": "2026-10-08T09:17:17.503676+00:00",
+    "exit_code": 0,
+    "stderr": ""
+  },
+  "e2e": {
+    "start": "2026-10-08T09:18:46.776995+00:00",
+    "end": "2026-10-08T09:19:08.658988+00:00",
+    "exit_code": 0,
+    "stderr": ""
+  },
+  "evidence": {
+    "start": "2026-10-08T09:19:58.928431+00:00",
+    "end": "2026-10-08T09:20:00.261097+00:00",
+    "exit_code": 0,
+    "stderr": ""
+  },
+  "restart": {
+    "start": "2026-10-08T09:21:42.376407+00:00",
+    "end": "2026-10-08T09:21:59.154426+00:00",
+    "exit_code": 0,
+    "stderr": ""
+  },
+  "mcp-probe": {
+    "start": "2026-10-08T09:24:48.652271+00:00",
+    "end": "2026-10-08T09:24:52.590070+00:00",
+    "exit_code": 0,
+    "stderr": ""
+  },
+  "verify-final": {
+    "start": "2026-10-08T09:29:18.841198+00:00",
+    "end": "2026-10-08T09:29:23.548659+00:00",
+    "exit_code": 0,
+    "stderr": ""
+  },
+  "final-snapshot": {
+    "start": "2026-10-08T09:30:49.000996+00:00",
+    "end": "2026-10-08T09:31:17.029862+00:00",
+    "exit_code": 0,
+    "stderr": ""
+  },
+  "final_snapshot_initial_attempt": {
+    "start": "2026-10-08T09:29:51.198896+00:00",
+    "end": "2026-10-08T09:30:18.995303+00:00",
+    "exit_code": 1,
+    "stderr": "Traceback (most recent call last):\n  File \"<stdin>\", line 12, in <module>\n  File \"<stdin>\", line 12, in <dictcomp>\n  File \"/usr/lib/python3.10/pathlib.py\", line 1126, in read_bytes\n    with self.open(mode='rb') as f:\n  File \"/usr/lib/python3.10/pathlib.py\", line 1119, in open\n    return self._accessor.open(self, mode, buffering, encoding, errors,\nFileNotFoundError: [Errno 2] No such file or directory: '/opt/codeaudit-releases/main567/source/requirements.txt'\n"
+  },
+  "initial_snapshot_note": "Read-only inventory script initially referenced nonexistent requirements.txt; corrected to actual pyproject.toml and reran successfully; no production mutation by this failure."
+}

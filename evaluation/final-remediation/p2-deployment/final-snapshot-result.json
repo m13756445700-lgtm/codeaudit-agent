@@ -1,0 +1,357 @@
+{
+  "observed_at": "2026-10-08T09:30:50.343335+00:00",
+  "new_image_containers": [
+    {
+      "name": "agent-compose-05e5c8c9af73",
+      "id": "5242b9cd33c6f4cd46827f0ef2b78ba7441abb1040f7df6ed2966ae6b0f6fecb",
+      "image_id": "sha256:f140f0a72acc35b48bdc5c144a0f87b25cd77d3d14f51221f2d948007f33ec3c",
+      "running": false,
+      "status": "exited",
+      "project": null,
+      "mounts": [
+        {
+          "Type": "bind",
+          "Name": null,
+          "Source": "/var/lib/docker/volumes/codeaudit-main567-agent-data/_data/sandboxes/05e5c8c9af73b97ed090c6a7f1f4b23fe19b846817b47f17427999a726ee9f33/workspace",
+          "Destination": "/workspace",
+          "RW": true
+        },
+        {
+          "Type": "bind",
+          "Name": null,
+          "Source": "/var/lib/docker/volumes/codeaudit-main567-agent-data/_data/sandboxes/codeaudit-v2-workspaces",
+          "Destination": "/workspaces",
+          "RW": true
+        },
+        {
+          "Type": "bind",
+          "Name": null,
+          "Source": "/var/lib/docker/volumes/codeaudit-main567-agent-data/_data/sandboxes/05e5c8c9af73b97ed090c6a7f1f4b23fe19b846817b47f17427999a726ee9f33/logs",
+          "Destination": "/data/logs",
+          "RW": true
+        },
+        {
+          "Type": "bind",
+          "Name": null,
+          "Source": "/var/lib/docker/volumes/codeaudit-main567-agent-data/_data/sandboxes/05e5c8c9af73b97ed090c6a7f1f4b23fe19b846817b47f17427999a726ee9f33/runtime",
+          "Destination": "/data/runtime",
+          "RW": true
+        },
+        {
+          "Type": "bind",
+          "Name": null,
+          "Source": "/var/lib/docker/volumes/codeaudit-main567-agent-data/_data/sandboxes/05e5c8c9af73b97ed090c6a7f1f4b23fe19b846817b47f17427999a726ee9f33/state",
+          "Destination": "/data/state",
+          "RW": true
+        },
+        {
+          "Type": "bind",
+          "Name": null,
+          "Source": "/var/lib/docker/volumes/codeaudit-main567-agent-data/_data/sandboxes/05e5c8c9af73b97ed090c6a7f1f4b23fe19b846817b47f17427999a726ee9f33/home/.agents",
+          "Destination": "/root/.agents",
+          "RW": true
+        },
+        {
+          "Type": "bind",
+          "Name": null,
+          "Source": "/var/lib/docker/volumes/codeaudit-main567-agent-data/_data/sandboxes/05e5c8c9af73b97ed090c6a7f1f4b23fe19b846817b47f17427999a726ee9f33/home/.claude",
+          "Destination": "/root/.claude",
+          "RW": true
+        },
+        {
+          "Type": "bind",
+          "Name": null,
+          "Source": "/var/lib/docker/volumes/codeaudit-main567-agent-data/_data/sandboxes/05e5c8c9af73b97ed090c6a7f1f4b23fe19b846817b47f17427999a726ee9f33/home/.claude.json",
+          "Destination": "/root/.claude.json",
+          "RW": true
+        },
+        {
+          "Type": "bind",
+          "Name": null,
+          "Source": "/var/lib/docker/volumes/codeaudit-main567-agent-data/_data/sandboxes/05e5c8c9af73b97ed090c6a7f1f4b23fe19b846817b47f17427999a726ee9f33/home/.codex",
+          "Destination": "/root/.codex",
+          "RW": true
+        },
+        {
+          "Type": "bind",
+          "Name": null,
+          "Source": "/var/lib/docker/volumes/codeaudit-main567-agent-data/_data/sandboxes/05e5c8c9af73b97ed090c6a7f1f4b23fe19b846817b47f17427999a726ee9f33/home/.gemini",
+          "Destination": "/root/.gemini",
+          "RW": true
+        },
+        {
+          "Type": "bind",
+          "Name": null,
+          "Source": "/var/lib/docker/volumes/codeaudit-main567-agent-data/_data/sandboxes/05e5c8c9af73b97ed090c6a7f1f4b23fe19b846817b47f17427999a726ee9f33/home/.gitconfig",
+          "Destination": "/root/.gitconfig",
+          "RW": true
+        },
+        {
+          "Type": "bind",
+          "Name": null,
+          "Source": "/var/lib/docker/volumes/codeaudit-main567-agent-data/_data/sandboxes/05e5c8c9af73b97ed090c6a7f1f4b23fe19b846817b47f17427999a726ee9f33/home/.opencode",
+          "Destination": "/root/.opencode",
+          "RW": true
+        },
+        {
+          "Type": "bind",
+          "Name": null,
+          "Source": "/var/lib/docker/volumes/codeaudit-main567-agent-data/_data/sandboxes/05e5c8c9af73b97ed090c6a7f1f4b23fe19b846817b47f17427999a726ee9f33/home/.config/Claude",
+          "Destination": "/root/.config/Claude",
+          "RW": true
+        },
+        {
+          "Type": "bind",
+          "Name": null,
+          "Source": "/var/lib/docker/volumes/codeaudit-main567-agent-data/_data/sandboxes/05e5c8c9af73b97ed090c6a7f1f4b23fe19b846817b47f17427999a726ee9f33/home/.config/claude",
+          "Destination": "/root/.config/claude",
+          "RW": true
+        },
+        {
+          "Type": "bind",
+          "Name": null,
+          "Source": "/var/lib/docker/volumes/codeaudit-main567-agent-data/_data/sandboxes/05e5c8c9af73b97ed090c6a7f1f4b23fe19b846817b47f17427999a726ee9f33/home/.config/gemini",
+          "Destination": "/root/.config/gemini",
+          "RW": true
+        },
+        {
+          "Type": "bind",
+          "Name": null,
+          "Source": "/var/lib/docker/volumes/codeaudit-main567-agent-data/_data/sandboxes/05e5c8c9af73b97ed090c6a7f1f4b23fe19b846817b47f17427999a726ee9f33/home/.config/opencode",
+          "Destination": "/root/.config/opencode",
+          "RW": true
+        },
+        {
+          "Type": "bind",
+          "Name": null,
+          "Source": "/var/lib/docker/volumes/codeaudit-main567-agent-data/_data/sandboxes/05e5c8c9af73b97ed090c6a7f1f4b23fe19b846817b47f17427999a726ee9f33/home/.local/share/gemini",
+          "Destination": "/root/.local/share/gemini",
+          "RW": true
+        }
+      ]
+    },
+    {
+      "name": "codeaudit-main567-octobus-1",
+      "id": "69f0573959b102877bf889e9439e3a10125aaeee75fbaec972b2ad2e1f5d6d46",
+      "image_id": "sha256:f140f0a72acc35b48bdc5c144a0f87b25cd77d3d14f51221f2d948007f33ec3c",
+      "running": true,
+      "status": "running",
+      "project": "codeaudit-main567",
+      "mounts": [
+        {
+          "Type": "volume",
+          "Name": "codeaudit-main567-agent-data",
+          "Source": "/var/lib/docker/volumes/codeaudit-main567-agent-data/_data",
+          "Destination": "/workspaces",
+          "RW": true
+        },
+        {
+          "Type": "volume",
+          "Name": "codeaudit-main567_octobus-data",
+          "Source": "/var/lib/docker/volumes/codeaudit-main567_octobus-data/_data",
+          "Destination": "/var/lib/octobus",
+          "RW": true
+        }
+      ]
+    },
+    {
+      "name": "codeaudit-main567-repo-tools-1",
+      "id": "39839cd5243386b748d20a26dd7888ef9c385661b77d3675661c6cbe5cf93d33",
+      "image_id": "sha256:f140f0a72acc35b48bdc5c144a0f87b25cd77d3d14f51221f2d948007f33ec3c",
+      "running": true,
+      "status": "running",
+      "project": "codeaudit-main567",
+      "mounts": [
+        {
+          "Type": "volume",
+          "Name": "codeaudit-main567-agent-data",
+          "Source": "/var/lib/docker/volumes/codeaudit-main567-agent-data/_data",
+          "Destination": "/workspaces",
+          "RW": false
+        }
+      ]
+    },
+    {
+      "name": "codeaudit-main567-static-analysis-1",
+      "id": "067dbdd7231d633f4f2f7049e8bc5725bf29f2bdb9a1f619a8ab09e241c9b4db",
+      "image_id": "sha256:f140f0a72acc35b48bdc5c144a0f87b25cd77d3d14f51221f2d948007f33ec3c",
+      "running": true,
+      "status": "running",
+      "project": "codeaudit-main567",
+      "mounts": [
+        {
+          "Type": "volume",
+          "Name": "codeaudit-main567-agent-data",
+          "Source": "/var/lib/docker/volumes/codeaudit-main567-agent-data/_data",
+          "Destination": "/workspaces",
+          "RW": true
+        }
+      ]
+    },
+    {
+      "name": "codeaudit-main567-workspace-init-1",
+      "id": "0d9cb81347fba86d10d7b411eea1d223223d1ade3da3e1847bf23eda40e4f09b",
+      "image_id": "sha256:f140f0a72acc35b48bdc5c144a0f87b25cd77d3d14f51221f2d948007f33ec3c",
+      "running": false,
+      "status": "exited",
+      "project": "codeaudit-main567",
+      "mounts": [
+        {
+          "Type": "volume",
+          "Name": "codeaudit-main567-agent-data",
+          "Source": "/var/lib/docker/volumes/codeaudit-main567-agent-data/_data",
+          "Destination": "/data",
+          "RW": true
+        }
+      ]
+    }
+  ],
+  "old_project_containers": [
+    {
+      "name": "codeaudit-submit20-octobus-1",
+      "id": "ba658d090e21f2cbc758453786122d84fe8179066e7577817e4eb9e2e65cad16",
+      "image_id": "sha256:79185994f47847bc20a4ca55a3084fd3db80a5cdb589e76577e6fe5768841fe8",
+      "running": false
+    },
+    {
+      "name": "codeaudit-submit20-repo-tools-1",
+      "id": "3e50b8c926260e2aad54f1bb1a93d15b9213ddc52e3630172ee7a896bdda0024",
+      "image_id": "sha256:79185994f47847bc20a4ca55a3084fd3db80a5cdb589e76577e6fe5768841fe8",
+      "running": false
+    },
+    {
+      "name": "codeaudit-submit20-static-analysis-1",
+      "id": "e4ee47ce123ae5c8a683e44d383cef4c1a555680142ec26b26f63a869da19e42",
+      "image_id": "sha256:79185994f47847bc20a4ca55a3084fd3db80a5cdb589e76577e6fe5768841fe8",
+      "running": false
+    },
+    {
+      "name": "codeaudit-submit20-workspace-init-1",
+      "id": "b28831f30b3940c465c035fd73d01d0afcce3721e3d5ecfdf36bbee5e1a345be",
+      "image_id": "sha256:79185994f47847bc20a4ca55a3084fd3db80a5cdb589e76577e6fe5768841fe8",
+      "running": false
+    },
+    {
+      "name": "agent-compose-c37703f4ee66",
+      "id": "41d2dc536262e76f5166e4b848dd392445e453a71097ab9f83e95e39dcbca16b",
+      "image_id": "sha256:a56bb11d00d0763b1978e09e5c9a05fc78ebf1cf97739b61c85f885a4ede1b36",
+      "running": false
+    },
+    {
+      "name": "agent-compose-4e8875799e17",
+      "id": "1e89fb98c39398f739c67d3da98c32c022ecd1394ee5baf74f1aca3ce78fbc6b",
+      "image_id": "sha256:a56bb11d00d0763b1978e09e5c9a05fc78ebf1cf97739b61c85f885a4ede1b36",
+      "running": false
+    },
+    {
+      "name": "agent-compose-d5d1d35992e5",
+      "id": "3a025f04d3226e33e56f099cbbd28fb0a07f8c627e91a46ff14b269eb7a7ab31",
+      "image_id": "sha256:a56bb11d00d0763b1978e09e5c9a05fc78ebf1cf97739b61c85f885a4ede1b36",
+      "running": false
+    },
+    {
+      "name": "agent-compose-043c4e3708a4",
+      "id": "e68e77826e35b4cfe133c7db18b98d3b9855e65527ebb51efb2897ab3c84c381",
+      "image_id": "sha256:a56bb11d00d0763b1978e09e5c9a05fc78ebf1cf97739b61c85f885a4ede1b36",
+      "running": false
+    },
+    {
+      "name": "agent-compose-3e5a8285fbc2",
+      "id": "cb9ae565844a7b5cb2c3fd2df6ac8ddcc4a4c216fe426554d778a2e38ee8dfe5",
+      "image_id": "sha256:a56bb11d00d0763b1978e09e5c9a05fc78ebf1cf97739b61c85f885a4ede1b36",
+      "running": false
+    },
+    {
+      "name": "agent-compose-adae42a87c39",
+      "id": "3dfa5f65b963f410e6fdac69eb6c8ace2d70d6009c7c7f9c00eb478bf84ac131",
+      "image_id": "sha256:a56bb11d00d0763b1978e09e5c9a05fc78ebf1cf97739b61c85f885a4ede1b36",
+      "running": false
+    },
+    {
+      "name": "agent-compose-b8cb9faf56f4",
+      "id": "bf7fc30de5644a00a5db152d905dea35acfb6319a27f178f934a6fbe7a230737",
+      "image_id": "sha256:a56bb11d00d0763b1978e09e5c9a05fc78ebf1cf97739b61c85f885a4ede1b36",
+      "running": false
+    },
+    {
+      "name": "agent-compose-aa9677cced57",
+      "id": "7134593732d6ae44ce4d8b50bb1032ca241cd7a92d6bb97dd62b5e5854e7ebb2",
+      "image_id": "sha256:a56bb11d00d0763b1978e09e5c9a05fc78ebf1cf97739b61c85f885a4ede1b36",
+      "running": false
+    },
+    {
+      "name": "codeaudit-github-octobus-1",
+      "id": "ad1d3c6da24833e750a808d8e32cf2bf94c82567690a7e8666deb0f5a3460436",
+      "image_id": "sha256:a56bb11d00d0763b1978e09e5c9a05fc78ebf1cf97739b61c85f885a4ede1b36",
+      "running": false
+    },
+    {
+      "name": "codeaudit-github-repo-tools-1",
+      "id": "f915be4647b527920eba3b988a9a7bc1c973d3095b92ec7ed838e3d5b23abe8c",
+      "image_id": "sha256:a56bb11d00d0763b1978e09e5c9a05fc78ebf1cf97739b61c85f885a4ede1b36",
+      "running": false
+    },
+    {
+      "name": "codeaudit-github-static-analysis-1",
+      "id": "abecc154f8faa96c96207e326f8af90b9f089e46d6ceeff9a7b02b3eeb551c04",
+      "image_id": "sha256:a56bb11d00d0763b1978e09e5c9a05fc78ebf1cf97739b61c85f885a4ede1b36",
+      "running": false
+    },
+    {
+      "name": "codeaudit-github-workspace-init-1",
+      "id": "002dfe6533d422e59950f40a724252d3ad3444ff0a00295b15628f10958e2ca2",
+      "image_id": "sha256:a56bb11d00d0763b1978e09e5c9a05fc78ebf1cf97739b61c85f885a4ede1b36",
+      "running": false
+    },
+    {
+      "name": "agent-compose-e17826a3c52a",
+      "id": "3e95a8cd15cc2a29615c44ce158c43da1af7cb7092365b689aa1a2413e5291bb",
+      "image_id": "sha256:a67afba728141709686b464e123bd834a6ffe84f45420f2d517d0f45dddae9a3",
+      "running": false
+    },
+    {
+      "name": "agent-compose-6b1cf7bc652e",
+      "id": "b08795f558d24f9d5ac1e87fd0060b1839a85486902cd99cb8e12659054e290e",
+      "image_id": "sha256:613bb459c796ad4d211708e9b5273d860ec9f01fe6b90663f5c496ca42360bd2",
+      "running": false
+    },
+    {
+      "name": "agent-compose-23fece73a24a",
+      "id": "fa0b73a418b1b9a6b46ec28ef7e29cc189597b9441b669b7a879e7fa488daf9d",
+      "image_id": "sha256:a7ad2a637412283936446e6899d81bb65d6fb5f6603234e5f6909a82997ee48e",
+      "running": false
+    },
+    {
+      "name": "codeaudit-github-agent-compose-1",
+      "id": "4cb4ed19e8e3ab217f214ef1228cd4321cb5270eb894f6cbc7a11d1819f380ad",
+      "image_id": "sha256:3117226250256b03d25815bd1bb584ade5ac225b83f55d527be122b8b75a61e8",
+      "running": false
+    }
+  ],
+  "volumes": [
+    "codeaudit-consolidated-agent-data",
+    "codeaudit-consolidated_octobus-data",
+    "codeaudit-github-agent-data",
+    "codeaudit-github_octobus-data",
+    "codeaudit-main567-agent-data",
+    "codeaudit-main567_octobus-data",
+    "codeaudit-submit20-agent-data",
+    "codeaudit-submit20_octobus-data"
+  ],
+  "legacy_directory_preserved": true,
+  "runtime_alias": "/opt/codeaudit-releases/main567/runtime",
+  "source_sha": "567a9aeed8429866c8e8cd551ddb596627bdd7ae",
+  "source_status": "",
+  "dependency_freeze": "attrs==26.1.0\nboltons==21.0.0\nbracex==3.0.1\ncertifi==2026.7.22\ncharset-normalizer==3.5.2\nclick==8.5.0\nclick-option-group==0.5.9\ncodeaudit-agent==2.0.0\ncolorama==0.4.6\ndefusedxml==0.7.1\nDeprecated==1.3.1\nexceptiongroup==1.2.2\nface==26.0.1\nglom==22.1.0\ngoogleapis-common-protos==1.75.0\nidna==3.20\nimportlib_metadata==7.1.0\njavalang==0.13.0\njsonschema==4.23.0\njsonschema-specifications==2025.9.1\nmarkdown-it-py==4.2.0\nmdurl==0.1.2\nopentelemetry-api==1.25.0\nopentelemetry-exporter-otlp-proto-common==1.25.0\nopentelemetry-exporter-otlp-proto-http==1.25.0\nopentelemetry-instrumentation==0.46b0\nopentelemetry-instrumentation-requests==0.46b0\nopentelemetry-proto==1.25.0\nopentelemetry-sdk==1.25.0\nopentelemetry-semantic-conventions==0.46b0\nopentelemetry-util-http==0.46b0\npackaging==26.3\npeewee==3.19.0\nprotobuf==4.25.9\nPygments==2.21.0\nPyYAML==6.0.2\nreferencing==0.37.0\nrequests==2.34.2\nrich==13.5.3\nrpds-py==2026.9.1\nruamel.yaml==0.17.40\nruamel.yaml.clib==0.2.15\nsemgrep==1.99.0\nsix==1.17.0\ntomli==2.0.2\ntyping_extensions==4.16.0\nurllib3==2.8.0\nwcmatch==8.5.2\nwrapt==1.17.3\nzipp==4.1.1\n",
+  "semgrep_version": "1.99.0",
+  "source_file_hashes": {
+    "Dockerfile": "aa7940814e3f892c61d1ead8935ac3ca67975b7bf4b032047782aa4d29771502",
+    "docker-compose.yml": "984b0697a8ed9cdca8c319296e318a595448016e8c9dc13a4ca70a6d6ad5726b",
+    "pyproject.toml": "af1c8d57986959630dd36a1ba975f2e8614a603e495bffbcef424d3b9b9b1713",
+    "agent/v2/engine.py": "0b5112769fc9c087746071a25796c97f5eb304bee41a2945db147e080d47d023",
+    "agent/v2/model.py": "7bdd0a833e5ea4a07a104fb7e48d029ae08154d5bc1b1f6905fce0c06e1b978f",
+    "agent/v2/transport.py": "22511ada54710ca2ab49a348a8150d54123eee4e5d50d12742627f8c3a1d1fee",
+    "scripts/run-agent.py": "8b6d20ef39e5cede6ac68d79406c6856bd93395c653a1b1103151c46e3e1b4d6"
+  },
+  "report_sha256": "4cb6b870703422192fe97cac4428f394b6569b048d08aec5fde97b9225121e78"
+}

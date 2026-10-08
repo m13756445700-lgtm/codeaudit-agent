@@ -1,0 +1,326 @@
+[
+  {
+    "name": "clone",
+    "command": [
+      "git",
+      "clone",
+      "--no-hardlinks",
+      "--no-checkout",
+      "/Users/bo/codeaudit-v2-final",
+      "/Users/bo/.codex-b/worktrees/p0-evidence-recovery/codeaudit-v2-final/.internal/p2c/source"
+    ],
+    "source_sha": "567a9aeed8429866c8e8cd551ddb596627bdd7ae",
+    "started": "2026-10-08T07:24:38.457303+00:00",
+    "finished": "2026-10-08T07:24:39.081571+00:00",
+    "elapsed_seconds": 0.624,
+    "exit_code": 0,
+    "log": "evaluation/final-remediation/p2-server-preflight/local-build/clone.log"
+  },
+  {
+    "name": "import_final_main",
+    "command": [
+      "git",
+      "hash-object",
+      "-w",
+      "-t",
+      "commit",
+      "/Users/bo/.codex-b/worktrees/p0-evidence-recovery/codeaudit-v2-final/.internal/p2c/verified-main-commit.raw"
+    ],
+    "source_sha": "567a9aeed8429866c8e8cd551ddb596627bdd7ae",
+    "started": "2026-10-08T07:24:39.082024+00:00",
+    "finished": "2026-10-08T07:24:39.102469+00:00",
+    "elapsed_seconds": 0.02,
+    "exit_code": 0,
+    "log": "evaluation/final-remediation/p2-server-preflight/local-build/import_final_main.log"
+  },
+  {
+    "name": "checkout",
+    "command": [
+      "git",
+      "checkout",
+      "--detach",
+      "567a9aeed8429866c8e8cd551ddb596627bdd7ae"
+    ],
+    "source_sha": "567a9aeed8429866c8e8cd551ddb596627bdd7ae",
+    "started": "2026-10-08T07:24:39.102727+00:00",
+    "finished": "2026-10-08T07:24:39.234773+00:00",
+    "elapsed_seconds": 0.132,
+    "exit_code": 0,
+    "log": "evaluation/final-remediation/p2-server-preflight/local-build/checkout.log"
+  },
+  {
+    "name": "docker-version",
+    "command": [
+      "docker",
+      "version"
+    ],
+    "source_sha": "567a9aeed8429866c8e8cd551ddb596627bdd7ae",
+    "started": "2026-10-08T07:24:39.291661+00:00",
+    "finished": "2026-10-08T07:24:39.582615+00:00",
+    "elapsed_seconds": 0.291,
+    "exit_code": 0,
+    "log": "evaluation/final-remediation/p2-server-preflight/local-build/docker-version.log"
+  },
+  {
+    "name": "docker-info",
+    "command": [
+      "docker",
+      "info"
+    ],
+    "source_sha": "567a9aeed8429866c8e8cd551ddb596627bdd7ae",
+    "started": "2026-10-08T07:24:39.582995+00:00",
+    "finished": "2026-10-08T07:24:40.455945+00:00",
+    "elapsed_seconds": 0.873,
+    "exit_code": 0,
+    "log": "evaluation/final-remediation/p2-server-preflight/local-build/docker-info.log"
+  },
+  {
+    "name": "docker-compose-version",
+    "command": [
+      "docker",
+      "compose",
+      "version"
+    ],
+    "source_sha": "567a9aeed8429866c8e8cd551ddb596627bdd7ae",
+    "started": "2026-10-08T07:24:40.456574+00:00",
+    "finished": "2026-10-08T07:24:40.532228+00:00",
+    "elapsed_seconds": 0.076,
+    "exit_code": 0,
+    "log": "evaluation/final-remediation/p2-server-preflight/local-build/docker-compose-version.log"
+  },
+  {
+    "name": "venv",
+    "command": [
+      "/Users/bo/codeaudit-v2-final/.internal/p1-5-clean/runtime/cpython-3.11-macos-aarch64-none/bin/python3.11",
+      "-m",
+      "venv",
+      "/Users/bo/.codex-b/worktrees/p0-evidence-recovery/codeaudit-v2-final/.internal/p2c/venv"
+    ],
+    "source_sha": "567a9aeed8429866c8e8cd551ddb596627bdd7ae",
+    "started": "2026-10-08T07:24:40.532627+00:00",
+    "finished": "2026-10-08T07:24:42.511648+00:00",
+    "elapsed_seconds": 1.979,
+    "exit_code": 0,
+    "log": "evaluation/final-remediation/p2-server-preflight/local-build/venv.log"
+  },
+  {
+    "name": "python",
+    "command": [
+      "/Users/bo/.codex-b/worktrees/p0-evidence-recovery/codeaudit-v2-final/.internal/p2c/venv/bin/python",
+      "--version"
+    ],
+    "source_sha": "567a9aeed8429866c8e8cd551ddb596627bdd7ae",
+    "started": "2026-10-08T07:24:42.512116+00:00",
+    "finished": "2026-10-08T07:24:42.522772+00:00",
+    "elapsed_seconds": 0.011,
+    "exit_code": 0,
+    "log": "evaluation/final-remediation/p2-server-preflight/local-build/python.log"
+  },
+  {
+    "name": "dependencies",
+    "command": [
+      "/Users/bo/.codex-b/worktrees/p0-evidence-recovery/codeaudit-v2-final/.internal/p2c/venv/bin/python",
+      "-m",
+      "pip",
+      "install",
+      "-r",
+      "requirements-dev.txt"
+    ],
+    "source_sha": "567a9aeed8429866c8e8cd551ddb596627bdd7ae",
+    "started": "2026-10-08T07:24:42.523090+00:00",
+    "finished": "2026-10-08T07:25:25.773665+00:00",
+    "elapsed_seconds": 43.251,
+    "exit_code": 0,
+    "log": "evaluation/final-remediation/p2-server-preflight/local-build/dependencies.log"
+  },
+  {
+    "name": "dependency-resolutions",
+    "command": [
+      "/Users/bo/.codex-b/worktrees/p0-evidence-recovery/codeaudit-v2-final/.internal/p2c/venv/bin/python",
+      "-m",
+      "pip",
+      "freeze"
+    ],
+    "source_sha": "567a9aeed8429866c8e8cd551ddb596627bdd7ae",
+    "started": "2026-10-08T07:25:25.774551+00:00",
+    "finished": "2026-10-08T07:25:26.072522+00:00",
+    "elapsed_seconds": 0.298,
+    "exit_code": 0,
+    "log": "evaluation/final-remediation/p2-server-preflight/local-build/dependency-resolutions.log"
+  },
+  {
+    "name": "semgrep",
+    "command": [
+      "/Users/bo/.codex-b/worktrees/p0-evidence-recovery/codeaudit-v2-final/.internal/p2c/venv/bin/semgrep",
+      "--version"
+    ],
+    "source_sha": "567a9aeed8429866c8e8cd551ddb596627bdd7ae",
+    "started": "2026-10-08T07:25:26.073044+00:00",
+    "finished": "2026-10-08T07:25:32.249969+00:00",
+    "elapsed_seconds": 6.177,
+    "exit_code": 0,
+    "log": "evaluation/final-remediation/p2-server-preflight/local-build/semgrep.log"
+  },
+  {
+    "name": "pytest",
+    "command": [
+      "/Users/bo/.codex-b/worktrees/p0-evidence-recovery/codeaudit-v2-final/.internal/p2c/venv/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "-p",
+      "no:cacheprovider"
+    ],
+    "source_sha": "567a9aeed8429866c8e8cd551ddb596627bdd7ae",
+    "started": "2026-10-08T07:25:32.250616+00:00",
+    "finished": "2026-10-08T07:25:53.797876+00:00",
+    "elapsed_seconds": 21.547,
+    "exit_code": 0,
+    "log": "evaluation/final-remediation/p2-server-preflight/local-build/pytest.log"
+  },
+  {
+    "name": "schema",
+    "command": [
+      "/Users/bo/.codex-b/worktrees/p0-evidence-recovery/codeaudit-v2-final/.internal/p2c/venv/bin/python",
+      "scripts/validate_schemas.py"
+    ],
+    "source_sha": "567a9aeed8429866c8e8cd551ddb596627bdd7ae",
+    "started": "2026-10-08T07:25:53.798819+00:00",
+    "finished": "2026-10-08T07:25:53.931517+00:00",
+    "elapsed_seconds": 0.133,
+    "exit_code": 0,
+    "log": "evaluation/final-remediation/p2-server-preflight/local-build/schema.log"
+  },
+  {
+    "name": "docker-build",
+    "command": [
+      "docker",
+      "build",
+      "--no-cache",
+      "--progress",
+      "plain",
+      "--platform",
+      "linux/amd64",
+      "--build-arg",
+      "BUILD_SHA=567a9aeed8429866c8e8cd551ddb596627bdd7ae",
+      "-t",
+      "codeaudit-release-candidate:567a9aeed8429866c8e8cd551ddb596627bdd7ae",
+      "."
+    ],
+    "source_sha": "567a9aeed8429866c8e8cd551ddb596627bdd7ae",
+    "started": "2026-10-08T07:25:53.931980+00:00",
+    "finished": "2026-10-08T07:29:30.804541+00:00",
+    "elapsed_seconds": 216.872,
+    "exit_code": 0,
+    "log": "evaluation/final-remediation/p2-server-preflight/local-build/docker-build.log"
+  },
+  {
+    "name": "docker-smoke",
+    "command": [
+      "/Users/bo/.codex-b/worktrees/p0-evidence-recovery/codeaudit-v2-final/.internal/p2c/venv/bin/python",
+      "scripts/docker_smoke.py",
+      "codeaudit-release-candidate:567a9aeed8429866c8e8cd551ddb596627bdd7ae"
+    ],
+    "source_sha": "567a9aeed8429866c8e8cd551ddb596627bdd7ae",
+    "started": "2026-10-08T07:29:30.805604+00:00",
+    "finished": "2026-10-08T07:29:45.666624+00:00",
+    "elapsed_seconds": 14.861,
+    "exit_code": 0,
+    "log": "evaluation/final-remediation/p2-server-preflight/local-build/docker-smoke.log"
+  },
+  {
+    "name": "image-inspect",
+    "command": [
+      "docker",
+      "image",
+      "inspect",
+      "codeaudit-release-candidate:567a9aeed8429866c8e8cd551ddb596627bdd7ae"
+    ],
+    "source_sha": "567a9aeed8429866c8e8cd551ddb596627bdd7ae",
+    "started": "2026-10-08T07:29:45.668333+00:00",
+    "finished": "2026-10-08T07:29:45.736499+00:00",
+    "elapsed_seconds": 0.068,
+    "exit_code": 0,
+    "log": "evaluation/final-remediation/p2-server-preflight/local-build/image-inspect.log"
+  },
+  {
+    "name": "container-semgrep",
+    "command": [
+      "docker",
+      "run",
+      "--rm",
+      "--platform",
+      "linux/amd64",
+      "--network",
+      "none",
+      "codeaudit-release-candidate:567a9aeed8429866c8e8cd551ddb596627bdd7ae",
+      "semgrep",
+      "--version"
+    ],
+    "source_sha": "567a9aeed8429866c8e8cd551ddb596627bdd7ae",
+    "started": "2026-10-08T07:29:45.797821+00:00",
+    "finished": "2026-10-08T07:30:11.779728+00:00",
+    "elapsed_seconds": 25.982,
+    "exit_code": 0,
+    "log": "evaluation/final-remediation/p2-server-preflight/local-build/container-semgrep.log"
+  },
+  {
+    "name": "container-dependency-resolutions",
+    "command": [
+      "docker",
+      "run",
+      "--rm",
+      "--platform",
+      "linux/amd64",
+      "--network",
+      "none",
+      "codeaudit-release-candidate:567a9aeed8429866c8e8cd551ddb596627bdd7ae",
+      "python",
+      "-m",
+      "pip",
+      "freeze"
+    ],
+    "source_sha": "567a9aeed8429866c8e8cd551ddb596627bdd7ae",
+    "started": "2026-10-08T07:30:11.781291+00:00",
+    "finished": "2026-10-08T07:30:12.538242+00:00",
+    "elapsed_seconds": 0.757,
+    "exit_code": 0,
+    "log": "evaluation/final-remediation/p2-server-preflight/local-build/container-dependency-resolutions.log"
+  },
+  {
+    "name": "compose-config",
+    "command": [
+      "docker",
+      "compose",
+      "--env-file",
+      ".env",
+      "--env-file",
+      ".runtime.env",
+      "--profile",
+      "audit",
+      "config",
+      "--format",
+      "json"
+    ],
+    "source_sha": "567a9aeed8429866c8e8cd551ddb596627bdd7ae",
+    "started": "2026-10-08T07:30:12.540233+00:00",
+    "finished": "2026-10-08T07:30:12.720697+00:00",
+    "elapsed_seconds": 0.18,
+    "exit_code": 0,
+    "log": "evaluation/final-remediation/p2-server-preflight/local-build/compose-config.log"
+  },
+  {
+    "name": "agent-compose-config",
+    "command": [
+      "/Users/bo/.codex-b/worktrees/p0-evidence-recovery/codeaudit-v2-final/.internal/p2c/venv/bin/python",
+      "-c",
+      "import yaml; c=yaml.safe_load(open('agent-compose.yml')); assert c['agents']['auditor']['env']['CODEAUDIT_LLM_API_KEY']['secret'] is True; assert c['agents']['auditor']['scheduler']['enabled'] is True; print('Agent project YAML structure PASS; daemon registration NOT_RUN')"
+    ],
+    "source_sha": "567a9aeed8429866c8e8cd551ddb596627bdd7ae",
+    "started": "2026-10-08T07:30:12.721210+00:00",
+    "finished": "2026-10-08T07:30:12.851976+00:00",
+    "elapsed_seconds": 0.131,
+    "exit_code": 0,
+    "log": "evaluation/final-remediation/p2-server-preflight/local-build/agent-compose-config.log"
+  }
+]

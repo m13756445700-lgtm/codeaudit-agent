@@ -1,0 +1,870 @@
+{
+  "observed_at": "2026-10-08T08:46:47.541226+00:00",
+  "containers": [
+    {
+      "name": "codeaudit-submit20-octobus-1",
+      "id": "ba658d090e21f2cbc758453786122d84fe8179066e7577817e4eb9e2e65cad16",
+      "project": "codeaudit-submit20",
+      "service": "octobus",
+      "config_path": "/root/codeaudit-submit-20261007/acceptance22.yml",
+      "working_dir": "/root/codeaudit-submit-20261007",
+      "image": {
+        "id": "sha256:79185994f47847bc20a4ca55a3084fd3db80a5cdb589e76577e6fe5768841fe8",
+        "repo_digests": [
+          "codeaudit-submit@sha256:79185994f47847bc20a4ca55a3084fd3db80a5cdb589e76577e6fe5768841fe8"
+        ],
+        "oci_revision": "e14c4dbd5e3b0dec6178073902d67d2765390427",
+        "platform": "linux/amd64"
+      },
+      "state": {
+        "Status": "running",
+        "Running": true,
+        "StartedAt": "2026-10-08T01:59:02.791251329Z"
+      },
+      "health": "healthy",
+      "networks": {
+        "codeaudit-submit20_capabilities": {
+          "ip": "172.26.0.4",
+          "aliases": [
+            "codeaudit-submit20-octobus-1",
+            "octobus"
+          ]
+        },
+        "codeaudit-submit20_default": {
+          "ip": "172.27.0.2",
+          "aliases": [
+            "codeaudit-submit20-octobus-1",
+            "octobus"
+          ]
+        }
+      },
+      "ports": {},
+      "mounts": [
+        {
+          "Type": "volume",
+          "Name": "codeaudit-submit20-agent-data",
+          "Source": "/var/lib/docker/volumes/codeaudit-submit20-agent-data/_data",
+          "Destination": "/workspaces",
+          "RW": true
+        },
+        {
+          "Type": "volume",
+          "Name": "codeaudit-submit20_octobus-data",
+          "Source": "/var/lib/docker/volumes/codeaudit-submit20_octobus-data/_data",
+          "Destination": "/var/lib/octobus",
+          "RW": true
+        }
+      ],
+      "safe_runtime_fields": {
+        "OCTOBUS_DATA_DIR": "/var/lib/octobus"
+      },
+      "environment_names": [
+        "GOPATH",
+        "GOPROXY",
+        "HOME",
+        "NPM_CONFIG_CACHE",
+        "OCTOBUS_ADDR",
+        "OCTOBUS_DATA_DIR",
+        "OPENCODE_DISABLE_AUTOUPDATE",
+        "OPENCODE_DISABLE_MODELS_FETCH",
+        "PATH",
+        "PIP_DISABLE_PIP_VERSION_CHECK",
+        "PIP_INDEX_URL",
+        "PIP_TRUSTED_HOST",
+        "PYTHONDONTWRITEBYTECODE",
+        "PYTHONPATH"
+      ],
+      "log_path": "/var/lib/docker/containers/ba658d090e21f2cbc758453786122d84fe8179066e7577817e4eb9e2e65cad16/ba658d090e21f2cbc758453786122d84fe8179066e7577817e4eb9e2e65cad16-json.log",
+      "log_driver": "json-file",
+      "restart_policy": {
+        "Name": "no",
+        "MaximumRetryCount": 0
+      }
+    },
+    {
+      "name": "codeaudit-submit20-repo-tools-1",
+      "id": "3e50b8c926260e2aad54f1bb1a93d15b9213ddc52e3630172ee7a896bdda0024",
+      "project": "codeaudit-submit20",
+      "service": "repo-tools",
+      "config_path": "/root/codeaudit-submit-20261007/acceptance22.yml",
+      "working_dir": "/root/codeaudit-submit-20261007",
+      "image": {
+        "id": "sha256:79185994f47847bc20a4ca55a3084fd3db80a5cdb589e76577e6fe5768841fe8",
+        "repo_digests": [
+          "codeaudit-submit@sha256:79185994f47847bc20a4ca55a3084fd3db80a5cdb589e76577e6fe5768841fe8"
+        ],
+        "oci_revision": "e14c4dbd5e3b0dec6178073902d67d2765390427",
+        "platform": "linux/amd64"
+      },
+      "state": {
+        "Status": "running",
+        "Running": true,
+        "StartedAt": "2026-10-08T01:58:51.902298654Z"
+      },
+      "health": "healthy",
+      "networks": {
+        "codeaudit-submit20_capabilities": {
+          "ip": "172.26.0.2",
+          "aliases": [
+            "codeaudit-submit20-repo-tools-1",
+            "repo-tools"
+          ]
+        }
+      },
+      "ports": {},
+      "mounts": [
+        {
+          "Type": "volume",
+          "Name": "codeaudit-submit20-agent-data",
+          "Source": "/var/lib/docker/volumes/codeaudit-submit20-agent-data/_data",
+          "Destination": "/workspaces",
+          "RW": false
+        }
+      ],
+      "safe_runtime_fields": {
+        "CODEAUDIT_WORKSPACES": "/workspaces"
+      },
+      "environment_names": [
+        "CODEAUDIT_WORKSPACES",
+        "GOPATH",
+        "GOPROXY",
+        "HOME",
+        "OPENCODE_DISABLE_AUTOUPDATE",
+        "OPENCODE_DISABLE_MODELS_FETCH",
+        "PATH",
+        "PIP_DISABLE_PIP_VERSION_CHECK",
+        "PIP_INDEX_URL",
+        "PIP_TRUSTED_HOST",
+        "PYTHONDONTWRITEBYTECODE",
+        "PYTHONPATH"
+      ],
+      "log_path": "/var/lib/docker/containers/3e50b8c926260e2aad54f1bb1a93d15b9213ddc52e3630172ee7a896bdda0024/3e50b8c926260e2aad54f1bb1a93d15b9213ddc52e3630172ee7a896bdda0024-json.log",
+      "log_driver": "json-file",
+      "restart_policy": {
+        "Name": "no",
+        "MaximumRetryCount": 0
+      }
+    },
+    {
+      "name": "codeaudit-submit20-static-analysis-1",
+      "id": "e4ee47ce123ae5c8a683e44d383cef4c1a555680142ec26b26f63a869da19e42",
+      "project": "codeaudit-submit20",
+      "service": "static-analysis",
+      "config_path": "/root/codeaudit-submit-20261007/acceptance22.yml",
+      "working_dir": "/root/codeaudit-submit-20261007",
+      "image": {
+        "id": "sha256:79185994f47847bc20a4ca55a3084fd3db80a5cdb589e76577e6fe5768841fe8",
+        "repo_digests": [
+          "codeaudit-submit@sha256:79185994f47847bc20a4ca55a3084fd3db80a5cdb589e76577e6fe5768841fe8"
+        ],
+        "oci_revision": "e14c4dbd5e3b0dec6178073902d67d2765390427",
+        "platform": "linux/amd64"
+      },
+      "state": {
+        "Status": "running",
+        "Running": true,
+        "StartedAt": "2026-10-08T01:58:52.0911326Z"
+      },
+      "health": "healthy",
+      "networks": {
+        "codeaudit-submit20_capabilities": {
+          "ip": "172.26.0.3",
+          "aliases": [
+            "codeaudit-submit20-static-analysis-1",
+            "static-analysis"
+          ]
+        }
+      },
+      "ports": {},
+      "mounts": [
+        {
+          "Type": "volume",
+          "Name": "codeaudit-submit20-agent-data",
+          "Source": "/var/lib/docker/volumes/codeaudit-submit20-agent-data/_data",
+          "Destination": "/workspaces",
+          "RW": true
+        }
+      ],
+      "safe_runtime_fields": {
+        "CODEAUDIT_WORKSPACES": "/workspaces"
+      },
+      "environment_names": [
+        "CODEAUDIT_WORKSPACES",
+        "GOPATH",
+        "GOPROXY",
+        "HOME",
+        "OPENCODE_DISABLE_AUTOUPDATE",
+        "OPENCODE_DISABLE_MODELS_FETCH",
+        "PATH",
+        "PIP_DISABLE_PIP_VERSION_CHECK",
+        "PIP_INDEX_URL",
+        "PIP_TRUSTED_HOST",
+        "PYTHONDONTWRITEBYTECODE",
+        "PYTHONPATH"
+      ],
+      "log_path": "/var/lib/docker/containers/e4ee47ce123ae5c8a683e44d383cef4c1a555680142ec26b26f63a869da19e42/e4ee47ce123ae5c8a683e44d383cef4c1a555680142ec26b26f63a869da19e42-json.log",
+      "log_driver": "json-file",
+      "restart_policy": {
+        "Name": "no",
+        "MaximumRetryCount": 0
+      }
+    },
+    {
+      "name": "codeaudit-github-octobus-1",
+      "id": "ad1d3c6da24833e750a808d8e32cf2bf94c82567690a7e8666deb0f5a3460436",
+      "project": "codeaudit-github",
+      "service": "octobus",
+      "config_path": "/opt/codeaudit-v2/docker-compose.yml",
+      "working_dir": "/opt/codeaudit-v2",
+      "image": {
+        "id": "sha256:a56bb11d00d0763b1978e09e5c9a05fc78ebf1cf97739b61c85f885a4ede1b36",
+        "repo_digests": [
+          "codeaudit-final@sha256:a56bb11d00d0763b1978e09e5c9a05fc78ebf1cf97739b61c85f885a4ede1b36"
+        ],
+        "oci_revision": "e14c4dbd5e3b0dec6178073902d67d2765390427",
+        "platform": "linux/amd64"
+      },
+      "state": {
+        "Status": "running",
+        "Running": true,
+        "StartedAt": "2026-09-30T11:16:51.613882784Z"
+      },
+      "health": "healthy",
+      "networks": {
+        "codeaudit-github_capabilities": {
+          "ip": "172.24.0.4",
+          "aliases": [
+            "codeaudit-github-octobus-1",
+            "octobus"
+          ]
+        },
+        "codeaudit-github_default": {
+          "ip": "172.25.0.3",
+          "aliases": [
+            "codeaudit-github-octobus-1",
+            "octobus"
+          ]
+        }
+      },
+      "ports": {
+        "9000/tcp": [
+          {
+            "HostIp": "172.17.0.1",
+            "HostPort": "19015"
+          }
+        ]
+      },
+      "mounts": [
+        {
+          "Type": "volume",
+          "Name": "codeaudit-github-agent-data",
+          "Source": "/var/lib/docker/volumes/codeaudit-github-agent-data/_data",
+          "Destination": "/workspaces",
+          "RW": true
+        },
+        {
+          "Type": "volume",
+          "Name": "codeaudit-github_octobus-data",
+          "Source": "/var/lib/docker/volumes/codeaudit-github_octobus-data/_data",
+          "Destination": "/var/lib/octobus",
+          "RW": true
+        }
+      ],
+      "safe_runtime_fields": {
+        "OCTOBUS_DATA_DIR": "/var/lib/octobus"
+      },
+      "environment_names": [
+        "GOPATH",
+        "GOPROXY",
+        "HOME",
+        "NPM_CONFIG_CACHE",
+        "OCTOBUS_ADDR",
+        "OCTOBUS_DATA_DIR",
+        "OPENCODE_DISABLE_AUTOUPDATE",
+        "OPENCODE_DISABLE_MODELS_FETCH",
+        "PATH",
+        "PIP_DISABLE_PIP_VERSION_CHECK",
+        "PIP_INDEX_URL",
+        "PIP_TRUSTED_HOST",
+        "PYTHONDONTWRITEBYTECODE",
+        "PYTHONPATH"
+      ],
+      "log_path": "/var/lib/docker/containers/ad1d3c6da24833e750a808d8e32cf2bf94c82567690a7e8666deb0f5a3460436/ad1d3c6da24833e750a808d8e32cf2bf94c82567690a7e8666deb0f5a3460436-json.log",
+      "log_driver": "json-file",
+      "restart_policy": {
+        "Name": "unless-stopped",
+        "MaximumRetryCount": 0
+      }
+    },
+    {
+      "name": "codeaudit-github-repo-tools-1",
+      "id": "f915be4647b527920eba3b988a9a7bc1c973d3095b92ec7ed838e3d5b23abe8c",
+      "project": "codeaudit-github",
+      "service": "repo-tools",
+      "config_path": "/opt/codeaudit-v2/docker-compose.yml",
+      "working_dir": "/opt/codeaudit-v2",
+      "image": {
+        "id": "sha256:a56bb11d00d0763b1978e09e5c9a05fc78ebf1cf97739b61c85f885a4ede1b36",
+        "repo_digests": [
+          "codeaudit-final@sha256:a56bb11d00d0763b1978e09e5c9a05fc78ebf1cf97739b61c85f885a4ede1b36"
+        ],
+        "oci_revision": "e14c4dbd5e3b0dec6178073902d67d2765390427",
+        "platform": "linux/amd64"
+      },
+      "state": {
+        "Status": "running",
+        "Running": true,
+        "StartedAt": "2026-09-30T11:16:40.918296693Z"
+      },
+      "health": "healthy",
+      "networks": {
+        "codeaudit-github_capabilities": {
+          "ip": "172.24.0.3",
+          "aliases": [
+            "codeaudit-github-repo-tools-1",
+            "repo-tools"
+          ]
+        }
+      },
+      "ports": {},
+      "mounts": [
+        {
+          "Type": "volume",
+          "Name": "codeaudit-github-agent-data",
+          "Source": "/var/lib/docker/volumes/codeaudit-github-agent-data/_data",
+          "Destination": "/workspaces",
+          "RW": false
+        }
+      ],
+      "safe_runtime_fields": {
+        "CODEAUDIT_WORKSPACES": "/workspaces"
+      },
+      "environment_names": [
+        "CODEAUDIT_WORKSPACES",
+        "GOPATH",
+        "GOPROXY",
+        "HOME",
+        "OPENCODE_DISABLE_AUTOUPDATE",
+        "OPENCODE_DISABLE_MODELS_FETCH",
+        "PATH",
+        "PIP_DISABLE_PIP_VERSION_CHECK",
+        "PIP_INDEX_URL",
+        "PIP_TRUSTED_HOST",
+        "PYTHONDONTWRITEBYTECODE",
+        "PYTHONPATH"
+      ],
+      "log_path": "/var/lib/docker/containers/f915be4647b527920eba3b988a9a7bc1c973d3095b92ec7ed838e3d5b23abe8c/f915be4647b527920eba3b988a9a7bc1c973d3095b92ec7ed838e3d5b23abe8c-json.log",
+      "log_driver": "json-file",
+      "restart_policy": {
+        "Name": "unless-stopped",
+        "MaximumRetryCount": 0
+      }
+    },
+    {
+      "name": "codeaudit-github-static-analysis-1",
+      "id": "abecc154f8faa96c96207e326f8af90b9f089e46d6ceeff9a7b02b3eeb551c04",
+      "project": "codeaudit-github",
+      "service": "static-analysis",
+      "config_path": "/opt/codeaudit-v2/docker-compose.yml",
+      "working_dir": "/opt/codeaudit-v2",
+      "image": {
+        "id": "sha256:a56bb11d00d0763b1978e09e5c9a05fc78ebf1cf97739b61c85f885a4ede1b36",
+        "repo_digests": [
+          "codeaudit-final@sha256:a56bb11d00d0763b1978e09e5c9a05fc78ebf1cf97739b61c85f885a4ede1b36"
+        ],
+        "oci_revision": "e14c4dbd5e3b0dec6178073902d67d2765390427",
+        "platform": "linux/amd64"
+      },
+      "state": {
+        "Status": "running",
+        "Running": true,
+        "StartedAt": "2026-09-30T11:16:40.715425809Z"
+      },
+      "health": "healthy",
+      "networks": {
+        "codeaudit-github_capabilities": {
+          "ip": "172.24.0.2",
+          "aliases": [
+            "codeaudit-github-static-analysis-1",
+            "static-analysis"
+          ]
+        }
+      },
+      "ports": {},
+      "mounts": [
+        {
+          "Type": "volume",
+          "Name": "codeaudit-github-agent-data",
+          "Source": "/var/lib/docker/volumes/codeaudit-github-agent-data/_data",
+          "Destination": "/workspaces",
+          "RW": true
+        }
+      ],
+      "safe_runtime_fields": {
+        "CODEAUDIT_WORKSPACES": "/workspaces"
+      },
+      "environment_names": [
+        "CODEAUDIT_WORKSPACES",
+        "GOPATH",
+        "GOPROXY",
+        "HOME",
+        "OPENCODE_DISABLE_AUTOUPDATE",
+        "OPENCODE_DISABLE_MODELS_FETCH",
+        "PATH",
+        "PIP_DISABLE_PIP_VERSION_CHECK",
+        "PIP_INDEX_URL",
+        "PIP_TRUSTED_HOST",
+        "PYTHONDONTWRITEBYTECODE",
+        "PYTHONPATH"
+      ],
+      "log_path": "/var/lib/docker/containers/abecc154f8faa96c96207e326f8af90b9f089e46d6ceeff9a7b02b3eeb551c04/abecc154f8faa96c96207e326f8af90b9f089e46d6ceeff9a7b02b3eeb551c04-json.log",
+      "log_driver": "json-file",
+      "restart_policy": {
+        "Name": "unless-stopped",
+        "MaximumRetryCount": 0
+      }
+    },
+    {
+      "name": "codeaudit-github-agent-compose-1",
+      "id": "4cb4ed19e8e3ab217f214ef1228cd4321cb5270eb894f6cbc7a11d1819f380ad",
+      "project": "codeaudit-github",
+      "service": "agent-compose",
+      "config_path": "/root/codeaudit-v2-github-acceptance/docker-compose.yml",
+      "working_dir": "/root/codeaudit-v2-github-acceptance",
+      "image": {
+        "id": "sha256:3117226250256b03d25815bd1bb584ade5ac225b83f55d527be122b8b75a61e8",
+        "repo_digests": [
+          "ghcr.io/chaitin/agent-compose@sha256:3117226250256b03d25815bd1bb584ade5ac225b83f55d527be122b8b75a61e8"
+        ],
+        "oci_revision": "e14c4dbd5e3b0dec6178073902d67d2765390427",
+        "platform": "linux/amd64"
+      },
+      "state": {
+        "Status": "running",
+        "Running": true,
+        "StartedAt": "2026-09-30T02:46:29.070382886Z"
+      },
+      "health": "healthy",
+      "networks": {
+        "codeaudit-github_default": {
+          "ip": "172.25.0.2",
+          "aliases": [
+            "codeaudit-github-agent-compose-1",
+            "agent-compose"
+          ]
+        }
+      },
+      "ports": {
+        "7410/tcp": [
+          {
+            "HostIp": "172.17.0.1",
+            "HostPort": "17422"
+          }
+        ]
+      },
+      "mounts": [
+        {
+          "Type": "volume",
+          "Name": "codeaudit-github-agent-data",
+          "Source": "/var/lib/docker/volumes/codeaudit-github-agent-data/_data",
+          "Destination": "/data",
+          "RW": true
+        },
+        {
+          "Type": "bind",
+          "Name": null,
+          "Source": "/var/run/docker.sock",
+          "Destination": "/var/run/docker.sock",
+          "RW": true
+        }
+      ],
+      "safe_runtime_fields": {
+        "HTTP_LISTEN": "0.0.0.0:7410",
+        "DATA_ROOT": "/data",
+        "DOCKER_HOST_SANDBOX_ROOT": "/var/lib/docker/volumes/codeaudit-github-agent-data/_data/sandboxes",
+        "RUNTIME_DRIVER": "docker",
+        "DEFAULT_IMAGE": "codeaudit-final:2.0"
+      },
+      "environment_names": [
+        "AGENT_COMPOSE_AUTH_TOKEN",
+        "AGENT_COMPOSE_RUNTIME_BASE_URL",
+        "AGENT_TIMEOUT",
+        "BOXLITE_RUNTIME_DIR",
+        "DATA_ROOT",
+        "DEFAULT_IMAGE",
+        "DOCKER_HOST_SANDBOX_ROOT",
+        "GUEST_LOG_ROOT",
+        "GUEST_RUNTIME_ROOT",
+        "GUEST_STATE_ROOT",
+        "GUEST_WORKSPACE",
+        "HTTP_LISTEN",
+        "LD_LIBRARY_PATH",
+        "MICROSANDBOX_HOME",
+        "MICROSANDBOX_LIB_PATH",
+        "MICROSANDBOX_MSB_PATH",
+        "PATH",
+        "RUNTIME_DRIVER"
+      ],
+      "log_path": "/var/lib/docker/containers/4cb4ed19e8e3ab217f214ef1228cd4321cb5270eb894f6cbc7a11d1819f380ad/4cb4ed19e8e3ab217f214ef1228cd4321cb5270eb894f6cbc7a11d1819f380ad-json.log",
+      "log_driver": "json-file",
+      "restart_policy": {
+        "Name": "unless-stopped",
+        "MaximumRetryCount": 0
+      }
+    }
+  ],
+  "networks": [
+    {
+      "name": "codeaudit-github_capabilities",
+      "driver": "bridge",
+      "internal": true,
+      "ipam": {
+        "Driver": "default",
+        "Options": null,
+        "Config": [
+          {
+            "Subnet": "172.24.0.0/16",
+            "Gateway": "172.24.0.1"
+          }
+        ]
+      },
+      "containers": {
+        "abecc154f8faa96c96207e326f8af90b9f089e46d6ceeff9a7b02b3eeb551c04": {
+          "name": "codeaudit-github-static-analysis-1",
+          "ipv4": "172.24.0.2/16"
+        },
+        "ad1d3c6da24833e750a808d8e32cf2bf94c82567690a7e8666deb0f5a3460436": {
+          "name": "codeaudit-github-octobus-1",
+          "ipv4": "172.24.0.4/16"
+        },
+        "f915be4647b527920eba3b988a9a7bc1c973d3095b92ec7ed838e3d5b23abe8c": {
+          "name": "codeaudit-github-repo-tools-1",
+          "ipv4": "172.24.0.3/16"
+        }
+      }
+    },
+    {
+      "name": "codeaudit-github_default",
+      "driver": "bridge",
+      "internal": false,
+      "ipam": {
+        "Driver": "default",
+        "Options": null,
+        "Config": [
+          {
+            "Subnet": "172.25.0.0/16",
+            "Gateway": "172.25.0.1"
+          }
+        ]
+      },
+      "containers": {
+        "4cb4ed19e8e3ab217f214ef1228cd4321cb5270eb894f6cbc7a11d1819f380ad": {
+          "name": "codeaudit-github-agent-compose-1",
+          "ipv4": "172.25.0.2/16"
+        },
+        "ad1d3c6da24833e750a808d8e32cf2bf94c82567690a7e8666deb0f5a3460436": {
+          "name": "codeaudit-github-octobus-1",
+          "ipv4": "172.25.0.3/16"
+        }
+      }
+    },
+    {
+      "name": "codeaudit-submit20_capabilities",
+      "driver": "bridge",
+      "internal": true,
+      "ipam": {
+        "Driver": "default",
+        "Options": null,
+        "Config": [
+          {
+            "Subnet": "172.26.0.0/16",
+            "Gateway": "172.26.0.1"
+          }
+        ]
+      },
+      "containers": {
+        "3e50b8c926260e2aad54f1bb1a93d15b9213ddc52e3630172ee7a896bdda0024": {
+          "name": "codeaudit-submit20-repo-tools-1",
+          "ipv4": "172.26.0.2/16"
+        },
+        "ba658d090e21f2cbc758453786122d84fe8179066e7577817e4eb9e2e65cad16": {
+          "name": "codeaudit-submit20-octobus-1",
+          "ipv4": "172.26.0.4/16"
+        },
+        "e4ee47ce123ae5c8a683e44d383cef4c1a555680142ec26b26f63a869da19e42": {
+          "name": "codeaudit-submit20-static-analysis-1",
+          "ipv4": "172.26.0.3/16"
+        }
+      }
+    },
+    {
+      "name": "codeaudit-submit20_default",
+      "driver": "bridge",
+      "internal": false,
+      "ipam": {
+        "Driver": "default",
+        "Options": null,
+        "Config": [
+          {
+            "Subnet": "172.27.0.0/16",
+            "Gateway": "172.27.0.1"
+          }
+        ]
+      },
+      "containers": {
+        "ba658d090e21f2cbc758453786122d84fe8179066e7577817e4eb9e2e65cad16": {
+          "name": "codeaudit-submit20-octobus-1",
+          "ipv4": "172.27.0.2/16"
+        }
+      }
+    },
+    {
+      "name": "none",
+      "driver": "null",
+      "internal": false,
+      "ipam": {
+        "Driver": "default",
+        "Options": null,
+        "Config": null
+      },
+      "containers": {}
+    }
+  ],
+  "volumes": [
+    {
+      "name": "codeaudit-github-agent-data",
+      "mountpoint": "/var/lib/docker/volumes/codeaudit-github-agent-data/_data",
+      "labels": null,
+      "files_by_extension": {
+        ".db-wal": 1,
+        ".db-shm": 1,
+        ".db": 1,
+        "": 316,
+        ".env": 1,
+        ".yml": 51,
+        ".json": 1512,
+        ".txt": 698,
+        ".jsonl": 138,
+        ".toml": 64,
+        ".md": 448,
+        ".log": 69,
+        ".py": 6996,
+        ".java": 42,
+        ".xml": 60,
+        ".js": 62,
+        ".ini": 50,
+        ".rst": 2050,
+        ".yaml": 250,
+        ".in": 250,
+        ".typed": 50,
+        ".pyi": 450,
+        ".css": 400,
+        ".png": 1150,
+        ".sh": 50,
+        ".html": 2050,
+        ".http": 300,
+        ".bat": 50,
+        ".ico": 50,
+        ".go": 18
+      },
+      "database_headers": [
+        {
+          "path": "/var/lib/docker/volumes/codeaudit-github-agent-data/_data/data.db-wal",
+          "bytes": 4132392,
+          "mtime_ns": 1791421220694218366,
+          "sqlite_header": false
+        },
+        {
+          "path": "/var/lib/docker/volumes/codeaudit-github-agent-data/_data/data.db-shm",
+          "bytes": 32768,
+          "mtime_ns": 1791421220698218525,
+          "sqlite_header": false
+        },
+        {
+          "path": "/var/lib/docker/volumes/codeaudit-github-agent-data/_data/data.db",
+          "bytes": 978944,
+          "mtime_ns": 1791421220698218525,
+          "sqlite_header": true
+        }
+      ],
+      "total_file_bytes": 121854642,
+      "audit_dirs": 149,
+      "run_summaries": 148,
+      "reports": 148,
+      "top_level": [
+        "boxlite",
+        "images",
+        "logs",
+        "docker",
+        "work",
+        "state",
+        "loaders",
+        "sandboxes",
+        "data.db-wal",
+        "microsandbox",
+        "data.db-shm",
+        "data.db",
+        "runtime"
+      ],
+      "write_observation_1s": [
+        {
+          "path": "/var/lib/docker/volumes/codeaudit-github-agent-data/_data/data.db-wal",
+          "changed": false
+        },
+        {
+          "path": "/var/lib/docker/volumes/codeaudit-github-agent-data/_data/data.db-shm",
+          "changed": false
+        },
+        {
+          "path": "/var/lib/docker/volumes/codeaudit-github-agent-data/_data/data.db",
+          "changed": false
+        }
+      ]
+    },
+    {
+      "name": "codeaudit-github_octobus-data",
+      "mountpoint": "/var/lib/docker/volumes/codeaudit-github_octobus-data/_data",
+      "labels": {
+        "com.docker.compose.config-hash": "7bd94030526b73a1deff63315cd648b6d3553e6fd7efb759f9f9b28ed9c0475b",
+        "com.docker.compose.project": "codeaudit-github",
+        "com.docker.compose.version": "5.5.1",
+        "com.docker.compose.volume": "octobus-data"
+      },
+      "files_by_extension": {
+        ".db-wal": 1,
+        ".db-shm": 1,
+        ".db": 1,
+        ".log": 3,
+        ".tgz": 1,
+        ".protoset": 1,
+        ".json": 10,
+        ".js": 2,
+        ".proto": 2
+      },
+      "database_headers": [
+        {
+          "path": "/var/lib/docker/volumes/codeaudit-github_octobus-data/_data/octobus.db",
+          "bytes": 102400,
+          "mtime_ns": 1790766999539521724,
+          "sqlite_header": true
+        }
+      ],
+      "total_file_bytes": 1480251,
+      "audit_dirs": 0,
+      "run_summaries": 0,
+      "reports": 0,
+      "top_level": [
+        ".npm",
+        "octobus.db-wal",
+        "artifacts",
+        "octobus.db-shm",
+        "octobus.db",
+        "instances",
+        "access.log"
+      ],
+      "write_observation_1s": [
+        {
+          "path": "/var/lib/docker/volumes/codeaudit-github_octobus-data/_data/octobus.db",
+          "changed": false
+        }
+      ]
+    },
+    {
+      "name": "codeaudit-submit20-agent-data",
+      "mountpoint": "/var/lib/docker/volumes/codeaudit-submit20-agent-data/_data",
+      "labels": {
+        "com.docker.compose.config-hash": "eb3ddabfbfa7574e059c9ef110f8097240143a8f318fb43a016dba4ec8db279c",
+        "com.docker.compose.project": "codeaudit-submit20",
+        "com.docker.compose.version": "5.5.1",
+        "com.docker.compose.volume": "agent-data"
+      },
+      "files_by_extension": {
+        ".json": 188,
+        ".jsonl": 15,
+        ".md": 21,
+        ".py": 156,
+        ".java": 18,
+        ".xml": 6,
+        ".txt": 13,
+        ".ini": 1,
+        "": 6,
+        ".rst": 41,
+        ".yaml": 5,
+        ".toml": 1,
+        ".in": 5,
+        ".typed": 1,
+        ".pyi": 9,
+        ".css": 8,
+        ".png": 23,
+        ".js": 1,
+        ".sh": 1,
+        ".html": 41,
+        ".http": 6,
+        ".yml": 1,
+        ".bat": 1,
+        ".ico": 1
+      },
+      "database_headers": [],
+      "total_file_bytes": 4017382,
+      "audit_dirs": 15,
+      "run_summaries": 15,
+      "reports": 15,
+      "top_level": [
+        "logs",
+        "state",
+        "sandboxes",
+        "runtime"
+      ],
+      "write_observation_1s": []
+    },
+    {
+      "name": "codeaudit-submit20_octobus-data",
+      "mountpoint": "/var/lib/docker/volumes/codeaudit-submit20_octobus-data/_data",
+      "labels": {
+        "com.docker.compose.config-hash": "4772200a01417914f5aa21cc9017ba301224d2b56ae2f4ce0567240e312adcee",
+        "com.docker.compose.project": "codeaudit-submit20",
+        "com.docker.compose.version": "5.5.1",
+        "com.docker.compose.volume": "octobus-data"
+      },
+      "files_by_extension": {
+        ".db-wal": 1,
+        ".db-shm": 1,
+        ".db": 1,
+        ".log": 3,
+        ".tgz": 1,
+        ".protoset": 1,
+        ".json": 10,
+        ".js": 2,
+        ".proto": 2
+      },
+      "database_headers": [
+        {
+          "path": "/var/lib/docker/volumes/codeaudit-submit20_octobus-data/_data/octobus.db",
+          "bytes": 102400,
+          "mtime_ns": 1791424730854396303,
+          "sqlite_header": true
+        }
+      ],
+      "total_file_bytes": 358927,
+      "audit_dirs": 0,
+      "run_summaries": 0,
+      "reports": 0,
+      "top_level": [
+        ".npm",
+        "octobus.db-wal",
+        "artifacts",
+        "octobus.db-shm",
+        "octobus.db",
+        "instances",
+        "access.log"
+      ],
+      "write_observation_1s": [
+        {
+          "path": "/var/lib/docker/volumes/codeaudit-submit20_octobus-data/_data/octobus.db",
+          "changed": false
+        }
+      ]
+    }
+  ],
+  "scope": "Pre-stop snapshot. Only the seven explicitly listed CodeAudit services stopped; raw inspect/environment excluded; unused old containers/volumes preserved."
+}

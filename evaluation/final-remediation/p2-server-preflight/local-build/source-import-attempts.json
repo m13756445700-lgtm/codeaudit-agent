@@ -1,0 +1,5 @@
+{
+  "initial_attempt": "Rejected before import: reconstructed signature whitespace yielded967299034f77bf1bc925a7744aef2337aa4a77a7, not expectedSHA",
+  "final_attempt": "Original signature trailing whitespace preserved; exact567a9aeed8429866c8e8cd551ddb596627bdd7ae independently calculated and imported",
+  "unverified_source_used": false
+}

@@ -1,0 +1,150 @@
+{
+  "prepared_at": "2026-10-08T09:16:10.044688+00:00",
+  "SERVER_SOURCE_SHA": "567a9aeed8429866c8e8cd551ddb596627bdd7ae",
+  "SERVER_IMAGE_ID": "sha256:f140f0a72acc35b48bdc5c144a0f87b25cd77d3d14f51221f2d948007f33ec3c",
+  "SERVER_IMAGE_OCI_REVISION": "567a9aeed8429866c8e8cd551ddb596627bdd7ae",
+  "SERVER_IMAGE_PLATFORM": "linux/amd64",
+  "image_acquisition": "fresh no-cache build on server from exact verified main; no archive import",
+  "source_dir": "/opt/codeaudit-releases/main567/source",
+  "runtime_dir": "/opt/codeaudit-releases/main567/runtime",
+  "compose_sha256": "b50a17df6cc1e3a95071b9fd0729a87fea952eee22b1ab1014f606d9eecd2cdc",
+  "agent_config_sha256": "3be63f5ea0a9a1514d106dc5373f67365c19a3d97f65a1265d44642f3e2e6748",
+  "new_volume": "codeaudit-main567-agent-data",
+  "new_project": "codeaudit-main567",
+  "config_validation": "PASS",
+  "operations": [
+    {
+      "command": [
+        "docker",
+        "image",
+        "inspect",
+        "codeaudit-main567-serverbuild:567a9aeed8429866c8e8cd551ddb596627bdd7ae"
+      ],
+      "exit_code": 0,
+      "stdout": "[OMITTED_RAW_INSPECT]",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "clone",
+        "--no-hardlinks",
+        "--no-checkout",
+        "/opt/codeaudit-release-build/main567/source",
+        "/opt/codeaudit-releases/main567/source"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "Cloning into '/opt/codeaudit-releases/main567/source'...\ndone.\n"
+    },
+    {
+      "command": [
+        "git",
+        "checkout",
+        "--detach",
+        "567a9aeed8429866c8e8cd551ddb596627bdd7ae"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "HEAD is now at 567a9ae Merge pull request #1 from m13756445700-lgtm/codex/p0-evidence-recovery\n"
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0,
+      "stdout": "567a9aeed8429866c8e8cd551ddb596627bdd7ae\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "status",
+        "--porcelain"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "remote",
+        "set-url",
+        "origin",
+        "https://github.com/m13756445700-lgtm/codeaudit-agent"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "volume",
+        "ls",
+        "--format",
+        "{{.Name}}"
+      ],
+      "exit_code": 0,
+      "stdout": "codeaudit-consolidated-agent-data\ncodeaudit-consolidated_octobus-data\ncodeaudit-github-agent-data\ncodeaudit-github_octobus-data\ncodeaudit-submit20-agent-data\ncodeaudit-submit20_octobus-data\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "volume",
+        "create",
+        "codeaudit-main567-agent-data"
+      ],
+      "exit_code": 0,
+      "stdout": "codeaudit-main567-agent-data\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "volume",
+        "inspect",
+        "codeaudit-main567-agent-data",
+        "--format",
+        "{{.Mountpoint}}"
+      ],
+      "exit_code": 0,
+      "stdout": "/var/lib/docker/volumes/codeaudit-main567-agent-data/_data\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "network",
+        "inspect",
+        "bridge"
+      ],
+      "exit_code": 0,
+      "stdout": "[OMITTED_RAW_INSPECT]",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "compose",
+        "--env-file",
+        ".env",
+        "--env-file",
+        ".runtime.env",
+        "--profile",
+        "audit",
+        "config",
+        "--quiet"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "credentials": "reused existing model credential on server only; new isolated daemon/MCP tokens; never returned",
+  "old_services_stopped": false
+}

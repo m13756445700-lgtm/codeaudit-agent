@@ -1,0 +1,312 @@
+SOURCE_SHA=567a9aeed8429866c8e8cd551ddb596627bdd7ae
+START=2026-10-08T07:25:53.931980+00:00
+COMMAND=['docker', 'build', '--no-cache', '--progress', 'plain', '--platform', 'linux/amd64', '--build-arg', 'BUILD_SHA=567a9aeed8429866c8e8cd551ddb596627bdd7ae', '-t', 'codeaudit-release-candidate:567a9aeed8429866c8e8cd551ddb596627bdd7ae', '.']
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 1.83kB 0.0s done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/chaitin/agent-compose-guest@sha256:a99584629d9fe8c677683cdb6be88578b556a6e04e50abc5f1039424fdbefe73
+#2 DONE 2.3s
+
+#3 [internal] load metadata for ghcr.io/chaitin/octobus@sha256:377409360a3d54f8e058340a7fb4874a994f18d11d35ba8f7cae0bec23a724a6
+#3 DONE 2.3s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 279B done
+#4 DONE 0.0s
+
+#5 [octobus 1/1] FROM ghcr.io/chaitin/octobus@sha256:377409360a3d54f8e058340a7fb4874a994f18d11d35ba8f7cae0bec23a724a6
+#5 resolve ghcr.io/chaitin/octobus@sha256:377409360a3d54f8e058340a7fb4874a994f18d11d35ba8f7cae0bec23a724a6 done
+#5 CACHED
+
+#6 [stage-1  1/17] FROM ghcr.io/chaitin/agent-compose-guest@sha256:a99584629d9fe8c677683cdb6be88578b556a6e04e50abc5f1039424fdbefe73
+#6 resolve ghcr.io/chaitin/agent-compose-guest@sha256:a99584629d9fe8c677683cdb6be88578b556a6e04e50abc5f1039424fdbefe73 done
+#6 CACHED
+
+#7 [internal] load build context
+#7 transferring context: 1.89MB 0.2s done
+#7 DONE 0.2s
+
+#8 [stage-1  2/17] COPY --from=octobus /usr/local/bin/octobus /usr/local/bin/octobus
+#8 DONE 0.8s
+
+#9 [stage-1  3/17] RUN sed -i 's|http://mirrors.tuna.tsinghua.edu.cn/debian|https://deb.debian.org/debian|g' /etc/apt/sources.list.d/debian.sources && apt-get update && apt-get install -y --no-install-recommends python3.11-venv && rm -rf /var/lib/apt/lists/*
+#9 1.498 Get:1 https://deb.debian.org/debian bookworm InRelease [151 kB]
+#9 1.498 Get:2 https://deb.nodesource.com/node_22.x nodistro InRelease [12.1 kB]
+#9 2.184 Get:3 https://deb.nodesource.com/node_22.x nodistro/main amd64 Packages [12.5 kB]
+#9 2.306 Get:4 https://deb.debian.org/debian bookworm-updates InRelease [55.4 kB]
+#9 2.581 Get:5 https://deb.debian.org/debian-security bookworm-security InRelease [34.8 kB]
+#9 3.058 Get:6 https://deb.debian.org/debian bookworm/main amd64 Packages [8790 kB]
+#9 8.593 Get:7 https://deb.debian.org/debian bookworm-updates/main amd64 Packages [6924 B]
+#9 8.593 Get:8 https://deb.debian.org/debian-security bookworm-security/main amd64 Packages [349 kB]
+#9 9.631 Fetched 9412 kB in 9s (1043 kB/s)
+#9 9.631 Reading package lists...
+#9 10.18 Reading package lists...
+#9 10.64 Building dependency tree...
+#9 10.73 Reading state information...
+#9 10.83 The following additional packages will be installed:
+#9 10.83   libpython3.11-minimal libpython3.11-stdlib python3-pip-whl
+#9 10.83   python3-setuptools-whl python3.11 python3.11-minimal
+#9 10.83 Suggested packages:
+#9 10.83   python3.11-doc binfmt-support
+#9 10.92 The following NEW packages will be installed:
+#9 10.92   python3-pip-whl python3-setuptools-whl python3.11-venv
+#9 10.92 The following packages will be upgraded:
+#9 10.92   libpython3.11-minimal libpython3.11-stdlib python3.11 python3.11-minimal
+#9 11.66 4 upgraded, 3 newly installed, 0 to remove and 15 not upgraded.
+#9 11.66 Need to get 8084 kB of archives.
+#9 11.66 After this operation, 3165 kB of additional disk space will be used.
+#9 11.66 Get:1 https://deb.debian.org/debian-security bookworm-security/main amd64 python3.11 amd64 3.11.2-6+deb12u9 [575 kB]
+#9 12.96 Get:2 https://deb.debian.org/debian-security bookworm-security/main amd64 libpython3.11-stdlib amd64 3.11.2-6+deb12u9 [1798 kB]
+#9 14.72 Get:3 https://deb.debian.org/debian-security bookworm-security/main amd64 python3.11-minimal amd64 3.11.2-6+deb12u9 [2055 kB]
+#9 16.47 Get:4 https://deb.debian.org/debian-security bookworm-security/main amd64 libpython3.11-minimal amd64 3.11.2-6+deb12u9 [821 kB]
+#9 17.35 Get:5 https://deb.debian.org/debian bookworm/main amd64 python3-pip-whl all 23.0.1+dfsg-1 [1717 kB]
+#9 18.65 Get:6 https://deb.debian.org/debian bookworm/main amd64 python3-setuptools-whl all 66.1.1-1+deb12u2 [1112 kB]
+#9 19.35 Get:7 https://deb.debian.org/debian-security bookworm-security/main amd64 python3.11-venv amd64 3.11.2-6+deb12u9 [5896 B]
+#9 19.88 debconf: delaying package configuration, since apt-utils is not installed
+#9 19.97 Fetched 8084 kB in 8s (960 kB/s)
+#9 20.08 (Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 21729 files and directories currently installed.)
+#9 20.22 Preparing to unpack .../0-python3.11_3.11.2-6+deb12u9_amd64.deb ...
+#9 20.49 Unpacking python3.11 (3.11.2-6+deb12u9) over (3.11.2-6+deb12u8) ...
+#9 20.60 Preparing to unpack .../1-libpython3.11-stdlib_3.11.2-6+deb12u9_amd64.deb ...
+#9 20.76 Unpacking libpython3.11-stdlib:amd64 (3.11.2-6+deb12u9) over (3.11.2-6+deb12u8) ...
+#9 21.78 Preparing to unpack .../2-python3.11-minimal_3.11.2-6+deb12u9_amd64.deb ...
+#9 21.82 Unpacking python3.11-minimal (3.11.2-6+deb12u9) over (3.11.2-6+deb12u8) ...
+#9 22.37 Preparing to unpack .../3-libpython3.11-minimal_3.11.2-6+deb12u9_amd64.deb ...
+#9 22.60 Unpacking libpython3.11-minimal:amd64 (3.11.2-6+deb12u9) over (3.11.2-6+deb12u8) ...
+#9 23.17 Selecting previously unselected package python3-pip-whl.
+#9 23.18 Preparing to unpack .../4-python3-pip-whl_23.0.1+dfsg-1_all.deb ...
+#9 23.18 Unpacking python3-pip-whl (23.0.1+dfsg-1) ...
+#9 23.35 Selecting previously unselected package python3-setuptools-whl.
+#9 23.35 Preparing to unpack .../5-python3-setuptools-whl_66.1.1-1+deb12u2_all.deb ...
+#9 23.35 Unpacking python3-setuptools-whl (66.1.1-1+deb12u2) ...
+#9 23.50 Selecting previously unselected package python3.11-venv.
+#9 23.50 Preparing to unpack .../6-python3.11-venv_3.11.2-6+deb12u9_amd64.deb ...
+#9 23.50 Unpacking python3.11-venv (3.11.2-6+deb12u9) ...
+#9 23.60 Setting up python3-setuptools-whl (66.1.1-1+deb12u2) ...
+#9 23.61 Setting up python3-pip-whl (23.0.1+dfsg-1) ...
+#9 23.61 Setting up libpython3.11-minimal:amd64 (3.11.2-6+deb12u9) ...
+#9 23.64 Setting up python3.11-minimal (3.11.2-6+deb12u9) ...
+#9 24.43 Setting up libpython3.11-stdlib:amd64 (3.11.2-6+deb12u9) ...
+#9 24.43 Setting up python3.11 (3.11.2-6+deb12u9) ...
+#9 25.27 Setting up python3.11-venv (3.11.2-6+deb12u9) ...
+#9 DONE 25.6s
+
+#10 [stage-1  4/17] RUN python3 -m venv /opt/codeaudit-venv
+#10 DONE 3.2s
+
+#11 [stage-1  5/17] COPY pyproject.toml /opt/codeaudit/pyproject.toml
+#11 DONE 0.1s
+
+#12 [stage-1  6/17] RUN PIP_CONFIG_FILE=/dev/null PIP_INDEX_URL=https://pypi.org/simple PIP_EXTRA_INDEX_URL= /opt/codeaudit-venv/bin/pip install --no-cache-dir setuptools==75.8.0 wheel==0.45.1 jsonschema==4.23.0 PyYAML==6.0.2 javalang==0.13.0 defusedxml==0.7.1 semgrep==1.99.0 opentelemetry-instrumentation-requests==0.46b0
+#12 3.232 Collecting setuptools==75.8.0
+#12 4.809   Downloading setuptools-75.8.0-py3-none-any.whl (1.2 MB)
+#12 6.532      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.2/1.2 MB 726.9 kB/s eta 0:00:00
+#12 7.275 Collecting wheel==0.45.1
+#12 7.944   Downloading wheel-0.45.1-py3-none-any.whl (72 kB)
+#12 8.083      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 72.5/72.5 kB 495.1 kB/s eta 0:00:00
+#12 8.830 Collecting jsonschema==4.23.0
+#12 9.364   Downloading jsonschema-4.23.0-py3-none-any.whl (88 kB)
+#12 9.413      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 88.5/88.5 kB 2.2 MB/s eta 0:00:00
+#12 13.66 Collecting PyYAML==6.0.2
+#12 14.12   Downloading PyYAML-6.0.2-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (762 kB)
+#12 14.80      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 763.0/763.0 kB 1.1 MB/s eta 0:00:00
+#12 17.28 Collecting javalang==0.13.0
+#12 18.19   Downloading javalang-0.13.0-py3-none-any.whl (22 kB)
+#12 20.32 Collecting defusedxml==0.7.1
+#12 20.75   Downloading defusedxml-0.7.1-py2.py3-none-any.whl (25 kB)
+#12 23.28 Collecting semgrep==1.99.0
+#12 23.92   Downloading semgrep-1.99.0-cp38.cp39.cp310.cp311.py37.py38.py39.py310.py311-none-musllinux_1_0_x86_64.manylinux2014_x86_64.whl (28.0 MB)
+#12 35.67      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 28.0/28.0 MB 3.1 MB/s eta 0:00:00
+#12 36.97 Collecting opentelemetry-instrumentation-requests==0.46b0
+#12 38.10   Downloading opentelemetry_instrumentation_requests-0.46b0-py3-none-any.whl (12 kB)
+#12 39.56 Collecting attrs>=22.2.0
+#12 40.69   Downloading attrs-26.1.0-py3-none-any.whl (67 kB)
+#12 40.77      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 67.5/67.5 kB 89.0 MB/s eta 0:00:00
+#12 41.86 Collecting jsonschema-specifications>=2023.03.6
+#12 42.69   Downloading jsonschema_specifications-2025.9.1-py3-none-any.whl (18 kB)
+#12 43.70 Collecting referencing>=0.28.4
+#12 44.26   Downloading referencing-0.37.0-py3-none-any.whl (26 kB)
+#12 46.63 Collecting rpds-py>=0.7.1
+#12 47.21   Downloading rpds_py-2026.9.1-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (375 kB)
+#12 47.41      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 375.4/375.4 kB 2.1 MB/s eta 0:00:00
+#12 48.66 Collecting six
+#12 49.50   Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)
+#12 50.58 Collecting boltons~=21.0
+#12 51.39   Downloading boltons-21.0.0-py2.py3-none-any.whl (193 kB)
+#12 51.41      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 193.7/193.7 kB 132.4 MB/s eta 0:00:00
+#12 52.34 Collecting click-option-group~=0.5
+#12 55.97   Downloading click_option_group-0.5.9-py3-none-any.whl (11 kB)
+#12 56.69 Collecting click~=8.1
+#12 58.20   Downloading click-8.5.0-py3-none-any.whl (125 kB)
+#12 58.22      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 125.3/125.3 kB 93.7 MB/s eta 0:00:00
+#12 60.22 Collecting colorama~=0.4.0
+#12 61.86   Downloading colorama-0.4.6-py2.py3-none-any.whl (25 kB)
+#12 63.25 Collecting exceptiongroup~=1.2.0
+#12 64.76   Downloading exceptiongroup-1.2.2-py3-none-any.whl (16 kB)
+#12 65.91 Collecting glom~=22.1
+#12 67.41   Downloading glom-22.1.0-py2.py3-none-any.whl (100 kB)
+#12 67.45      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 100.7/100.7 kB 7.0 MB/s eta 0:00:00
+#12 68.41 Collecting opentelemetry-api~=1.25.0
+#12 69.68   Downloading opentelemetry_api-1.25.0-py3-none-any.whl (59 kB)
+#12 69.69      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 59.9/59.9 kB 50.7 MB/s eta 0:00:00
+#12 70.63 Collecting opentelemetry-sdk~=1.25.0
+#12 71.88   Downloading opentelemetry_sdk-1.25.0-py3-none-any.whl (107 kB)
+#12 71.89      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 107.0/107.0 kB 180.9 MB/s eta 0:00:00
+#12 72.66 Collecting opentelemetry-exporter-otlp-proto-http~=1.25.0
+#12 74.16   Downloading opentelemetry_exporter_otlp_proto_http-1.25.0-py3-none-any.whl (16 kB)
+#12 75.09 Collecting packaging>=21.0
+#12 76.49   Downloading packaging-26.3-py3-none-any.whl (129 kB)
+#12 76.54      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 130.0/130.0 kB 2.6 MB/s eta 0:00:00
+#12 77.56 Collecting peewee~=3.14
+#12 79.06   Downloading peewee-3.19.0-py3-none-any.whl (411 kB)
+#12 79.13      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 411.9/411.9 kB 6.5 MB/s eta 0:00:00
+#12 80.39 Collecting requests~=2.22
+#12 81.69   Downloading requests-2.34.2-py3-none-any.whl (73 kB)
+#12 81.70      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 73.1/73.1 kB 89.0 MB/s eta 0:00:00
+#12 83.02 Collecting rich~=13.5.2
+#12 84.39   Downloading rich-13.5.3-py3-none-any.whl (239 kB)
+#12 84.43      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 239.8/239.8 kB 11.7 MB/s eta 0:00:00
+#12 86.53 Collecting ruamel.yaml<0.18,>=0.16.0
+#12 87.94   Downloading ruamel.yaml-0.17.40-py3-none-any.whl (113 kB)
+#12 87.95      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 113.7/113.7 kB 33.0 MB/s eta 0:00:00
+#12 88.90 Collecting tomli~=2.0.1
+#12 90.60   Downloading tomli-2.0.2-py3-none-any.whl (13 kB)
+#12 91.68 Collecting typing-extensions~=4.2
+#12 93.06   Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+#12 94.61      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 45.6/45.6 kB 47.2 kB/s eta 0:00:00
+#12 96.01 Collecting urllib3~=2.0
+#12 98.07   Downloading urllib3-2.8.0-py3-none-any.whl (135 kB)
+#12 100.4      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 135.7/135.7 kB 62.9 kB/s eta 0:00:00
+#12 101.7 Collecting wcmatch~=8.3
+#12 103.4   Downloading wcmatch-8.5.2-py3-none-any.whl (39 kB)
+#12 104.8 Collecting opentelemetry-instrumentation==0.46b0
+#12 106.5   Downloading opentelemetry_instrumentation-0.46b0-py3-none-any.whl (29 kB)
+#12 107.7 Collecting opentelemetry-semantic-conventions==0.46b0
+#12 109.3   Downloading opentelemetry_semantic_conventions-0.46b0-py3-none-any.whl (130 kB)
+#12 110.0      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 130.5/130.5 kB 159.6 kB/s eta 0:00:00
+#12 111.6 Collecting opentelemetry-util-http==0.46b0
+#12 112.9   Downloading opentelemetry_util_http-0.46b0-py3-none-any.whl (6.9 kB)
+#12 116.0 Collecting wrapt<2.0.0,>=1.0.0
+#12 117.3   Downloading wrapt-1.17.3-cp311-cp311-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (82 kB)
+#12 118.2      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 82.4/82.4 kB 79.2 kB/s eta 0:00:00
+#12 119.3 Collecting deprecated>=1.2.6
+#12 120.3   Downloading deprecated-1.3.1-py2.py3-none-any.whl (11 kB)
+#12 121.1 Collecting importlib-metadata<=7.1,>=6.0
+#12 122.4   Downloading importlib_metadata-7.1.0-py3-none-any.whl (24 kB)
+#12 123.1 Collecting face>=20.1.0
+#12 124.1   Downloading face-26.0.1-py3-none-any.whl (57 kB)
+#12 124.3      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 57.6/57.6 kB 182.4 kB/s eta 0:00:00
+#12 125.2 Collecting googleapis-common-protos~=1.52
+#12 126.3   Downloading googleapis_common_protos-1.75.5-py3-none-any.whl (307 kB)
+#12 128.7      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 307.7/307.7 kB 141.9 kB/s eta 0:00:00
+#12 129.8 Collecting opentelemetry-exporter-otlp-proto-common==1.25.0
+#12 130.6   Downloading opentelemetry_exporter_otlp_proto_common-1.25.0-py3-none-any.whl (17 kB)
+#12 131.4 Collecting opentelemetry-proto==1.25.0
+#12 131.8   Downloading opentelemetry_proto-1.25.0-py3-none-any.whl (52 kB)
+#12 132.0      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 52.5/52.5 kB 358.6 kB/s eta 0:00:00
+#12 133.4 Collecting protobuf<5.0,>=3.19
+#12 134.2   Downloading protobuf-4.25.9-cp37-abi3-manylinux2014_x86_64.whl (295 kB)
+#12 135.5      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 295.2/295.2 kB 230.6 kB/s eta 0:00:00
+#12 137.7 Collecting charset_normalizer<4,>=2
+#12 138.4   Downloading charset_normalizer-3.5.2-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (269 kB)
+#12 139.3      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 270.0/270.0 kB 330.4 kB/s eta 0:00:00
+#12 143.0 Collecting idna<4,>=2.5
+#12 143.4   Downloading idna-3.20-py3-none-any.whl (69 kB)
+#12 143.6      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 69.6/69.6 kB 595.3 kB/s eta 0:00:00
+#12 145.1 Collecting certifi>=2023.5.7
+#12 145.7   Downloading certifi-2026.7.22-py3-none-any.whl (136 kB)
+#12 146.1      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 137.0/137.0 kB 391.6 kB/s eta 0:00:00
+#12 149.0 Collecting markdown-it-py>=2.2.0
+#12 149.5   Downloading markdown_it_py-4.2.0-py3-none-any.whl (91 kB)
+#12 150.4      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 91.7/91.7 kB 138.5 kB/s eta 0:00:00
+#12 152.6 Collecting pygments<3.0.0,>=2.13.0
+#12 153.3   Downloading pygments-2.21.0-py3-none-any.whl (1.3 MB)
+#12 156.2      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 430.9 kB/s eta 0:00:00
+#12 158.3 Collecting ruamel.yaml.clib>=0.2.7
+#12 159.0   Downloading ruamel_yaml_clib-0.2.15-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (777 kB)
+#12 160.2      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 777.6/777.6 kB 645.4 kB/s eta 0:00:00
+#12 161.6 Collecting bracex>=2.1.1
+#12 162.0   Downloading bracex-3.0.1-py3-none-any.whl (11 kB)
+#12 162.2 Collecting googleapis-common-protos~=1.52
+#12 162.7   Downloading googleapis_common_protos-1.75.4-py3-none-any.whl (307 kB)
+#12 163.1      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 307.7/307.7 kB 835.8 kB/s eta 0:00:00
+#12 163.7   Downloading googleapis_common_protos-1.75.3-py3-none-any.whl (306 kB)
+#12 164.1      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 307.0/307.0 kB 1.1 MB/s eta 0:00:00
+#12 164.8   Downloading googleapis_common_protos-1.75.2-py3-none-any.whl (307 kB)
+#12 165.2      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 307.0/307.0 kB 826.4 kB/s eta 0:00:00
+#12 165.9   Downloading googleapis_common_protos-1.75.1-py3-none-any.whl (300 kB)
+#12 166.2      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 300.6/300.6 kB 1.1 MB/s eta 0:00:00
+#12 167.0   Downloading googleapis_common_protos-1.75.0-py3-none-any.whl (300 kB)
+#12 167.2      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 300.6/300.6 kB 1.5 MB/s eta 0:00:00
+#12 168.2 Collecting zipp>=0.5
+#12 169.1   Downloading zipp-4.1.1-py3-none-any.whl (10 kB)
+#12 170.0 Collecting mdurl~=0.1
+#12 170.8   Downloading mdurl-0.1.2-py3-none-any.whl (10.0 kB)
+#12 171.1 Installing collected packages: peewee, boltons, zipp, wrapt, wheel, urllib3, typing-extensions, tomli, six, setuptools, ruamel.yaml.clib, rpds-py, PyYAML, pygments, protobuf, packaging, opentelemetry-util-http, mdurl, idna, face, exceptiongroup, defusedxml, colorama, click, charset_normalizer, certifi, bracex, attrs, wcmatch, ruamel.yaml, requests, referencing, opentelemetry-proto, markdown-it-py, javalang, importlib-metadata, googleapis-common-protos, glom, deprecated, click-option-group, rich, opentelemetry-exporter-otlp-proto-common, opentelemetry-api, jsonschema-specifications, opentelemetry-semantic-conventions, opentelemetry-instrumentation, jsonschema, opentelemetry-sdk, opentelemetry-instrumentation-requests, opentelemetry-exporter-otlp-proto-http, semgrep
+#12 171.5   Attempting uninstall: setuptools
+#12 171.5     Found existing installation: setuptools 66.1.1
+#12 171.6     Uninstalling setuptools-66.1.1:
+#12 171.7       Successfully uninstalled setuptools-66.1.1
+#12 175.6 Successfully installed PyYAML-6.0.2 attrs-26.1.0 boltons-21.0.0 bracex-3.0.1 certifi-2026.7.22 charset_normalizer-3.5.2 click-8.5.0 click-option-group-0.5.9 colorama-0.4.6 defusedxml-0.7.1 deprecated-1.3.1 exceptiongroup-1.2.2 face-26.0.1 glom-22.1.0 googleapis-common-protos-1.75.0 idna-3.20 importlib-metadata-7.1.0 javalang-0.13.0 jsonschema-4.23.0 jsonschema-specifications-2025.9.1 markdown-it-py-4.2.0 mdurl-0.1.2 opentelemetry-api-1.25.0 opentelemetry-exporter-otlp-proto-common-1.25.0 opentelemetry-exporter-otlp-proto-http-1.25.0 opentelemetry-instrumentation-0.46b0 opentelemetry-instrumentation-requests-0.46b0 opentelemetry-proto-1.25.0 opentelemetry-sdk-1.25.0 opentelemetry-semantic-conventions-0.46b0 opentelemetry-util-http-0.46b0 packaging-26.3 peewee-3.19.0 protobuf-4.25.9 pygments-2.21.0 referencing-0.37.0 requests-2.34.2 rich-13.5.3 rpds-py-2026.9.1 ruamel.yaml-0.17.40 ruamel.yaml.clib-0.2.15 semgrep-1.99.0 setuptools-75.8.0 six-1.17.0 tomli-2.0.2 typing-extensions-4.16.0 urllib3-2.8.0 wcmatch-8.5.2 wheel-0.45.1 wrapt-1.17.3 zipp-4.1.1
+#12 DONE 176.4s
+
+#13 [stage-1  7/17] COPY agent /opt/codeaudit/agent
+#13 DONE 0.1s
+
+#14 [stage-1  8/17] COPY schemas /opt/codeaudit/schemas
+#14 DONE 0.0s
+
+#15 [stage-1  9/17] COPY knowledge /opt/codeaudit/knowledge
+#15 DONE 0.0s
+
+#16 [stage-1 10/17] COPY rules /opt/codeaudit/rules
+#16 DONE 0.0s
+
+#17 [stage-1 11/17] RUN /opt/codeaudit-venv/bin/pip install --no-deps --no-build-isolation /opt/codeaudit
+#17 0.786 Looking in indexes: https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple
+#17 0.791 Processing /opt/codeaudit
+#17 0.795   Preparing metadata (pyproject.toml): started
+#17 1.483   Preparing metadata (pyproject.toml): finished with status 'done'
+#17 1.503 Building wheels for collected packages: codeaudit-agent
+#17 1.506   Building wheel for codeaudit-agent (pyproject.toml): started
+#17 1.878   Building wheel for codeaudit-agent (pyproject.toml): finished with status 'done'
+#17 1.880   Created wheel for codeaudit-agent: filename=codeaudit_agent-2.0.0-py3-none-any.whl size=64405 sha256=a0f85a4e0ba9ea634f93d4582433d51cc612890c189d898cdf3397ee1c87d506
+#17 1.880   Stored in directory: /tmp/pip-ephem-wheel-cache-mxvqfid3/wheels/5f/44/24/f1a2db04dfaaa0071cc2ab6ef37949585db104457203228de7
+#17 1.891 Successfully built codeaudit-agent
+#17 1.892 Installing collected packages: codeaudit-agent
+#17 1.954 Successfully installed codeaudit-agent-2.0.0
+#17 DONE 2.1s
+
+#18 [stage-1 12/17] COPY benchmark /opt/codeaudit/benchmark
+#18 DONE 0.0s
+
+#19 [stage-1 13/17] COPY evaluation /opt/codeaudit/evaluation
+#19 DONE 0.1s
+
+#20 [stage-1 14/17] COPY octobus/repo-tools /opt/codeaudit/octobus/repo-tools
+#20 DONE 0.0s
+
+#21 [stage-1 15/17] COPY scripts /opt/codeaudit/scripts
+#21 DONE 0.0s
+
+#22 [stage-1 16/17] COPY Dockerfile docker-compose.yml agent-compose.yml /opt/codeaudit/
+#22 DONE 0.0s
+
+#23 [stage-1 17/17] WORKDIR /opt/codeaudit
+#23 DONE 0.0s
+
+#24 exporting to image
+#24 exporting layers
+#24 exporting layers 5.1s done
+#24 exporting manifest sha256:f8bfd1f863efa166894cd64b28409c839320a254d88fde9ffe3849436f6765f2 done
+#24 exporting config sha256:c4f4ae8ca396c842d71249426f0da104b1d6e713ab9267b437516f39dc8e7e0b done
+#24 exporting attestation manifest sha256:1bbfdf4fd3b7227a3ec4a4ee0eb52cf172d50f37225bc6697fec91f17bb56cee done
+#24 exporting manifest list sha256:1b207430a18eac15161663504911263030cc3ece4b4690153556d954c66163e6 done
+#24 naming to docker.io/library/codeaudit-release-candidate:567a9aeed8429866c8e8cd551ddb596627bdd7ae done
+#24 DONE 5.1s
+
+EXIT_CODE=0
+END=2026-10-08T07:29:30.804372+00:00

@@ -1,0 +1,25 @@
+{
+  "started_at": "2026-10-08T09:24:49.723362+00:00",
+  "finished_at": "2026-10-08T09:24:52.711588+00:00",
+  "command": [
+    "docker",
+    "compose",
+    "--env-file",
+    ".env",
+    "--env-file",
+    ".runtime.env",
+    "run",
+    "--rm",
+    "--no-deps",
+    "--entrypoint",
+    "python",
+    "codeaudit-agent",
+    "-c",
+    "from agent.v2.transport import OctoBus;import os,json;t=OctoBus(os.environ['CODEAUDIT_MCP_URL'],os.environ['CODEAUDIT_OCTOBUS_TOKEN'],'f9766bf65b304b29b9c02f9aa4b80234');r=t.call('static.semgrep',{});print(json.dumps({'tool':'static.semgrep','signal_count':r.get('total'),'notice':r.get('notice'),'transport':'octobus-mcp','error':r.get('error')}))"
+  ],
+  "exit_code": 0,
+  "stdout": "{\"tool\": \"static.semgrep\", \"signal_count\": 0, \"notice\": \"Candidates only. No verdict. Inspect actual source, callers and defenses.\", \"transport\": \"octobus-mcp\", \"error\": null}\n",
+  "stderr": "time=\"2026-10-08T17:24:49+08:00\" level=warning msg=\"volume \\\"codeaudit-main567-agent-data\\\" already exists but was not created by Docker Compose. Use `external: true` to use an existing volume\"\n Container codeaudit-main567-codeaudit-agent-run-9dab0db1b34c Creating \n Container codeaudit-main567-codeaudit-agent-run-9dab0db1b34c Created \n",
+  "scope": "operator post-restart MCP static backend probe on controlled completed fixture; not model-selected original audit calls; does not change report, findings or tool trace",
+  "audit_id": "f9766bf65b304b29b9c02f9aa4b80234"
+}

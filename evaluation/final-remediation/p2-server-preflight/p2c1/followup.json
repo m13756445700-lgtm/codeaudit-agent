@@ -1,0 +1,429 @@
+{
+  "observed_at": "2026-10-08T07:53:21.768889+00:00",
+  "commands": [
+    {
+      "command": [
+        "docker",
+        "compose",
+        "-p",
+        "codeaudit-submit20",
+        "-f",
+        "/root/codeaudit-submit-20261007/acceptance22.yml",
+        "--profile",
+        "audit",
+        "config",
+        "--format",
+        "json"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "docker",
+        "exec",
+        "codeaudit-github-octobus-1",
+        "octobus",
+        "instance",
+        "get",
+        "codeaudit-v2-tools"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "docker",
+        "exec",
+        "codeaudit-submit20-octobus-1",
+        "octobus",
+        "instance",
+        "get",
+        "codeaudit-v2-tools"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "docker",
+        "exec",
+        "codeaudit-github-octobus-1",
+        "octobus",
+        "--help"
+      ],
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "docker",
+        "exec",
+        "codeaudit-github-agent-compose-1",
+        "agent-compose",
+        "scheduler",
+        "--help"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "explicit_project_validation": {
+    "name": "codeaudit-submit20",
+    "volumes": {
+      "agent-data": {
+        "name": "codeaudit-submit20-agent-data"
+      },
+      "octobus-data": {
+        "name": "codeaudit-submit20_octobus-data"
+      }
+    },
+    "networks": {
+      "capabilities": {
+        "name": "codeaudit-submit20_capabilities",
+        "ipam": {},
+        "internal": true
+      },
+      "default": {
+        "name": "codeaudit-submit20_default",
+        "ipam": {}
+      }
+    }
+  },
+  "octobus_instances": {
+    "codeaudit-github-octobus-1": {
+      "exit_code": 0,
+      "field_names": [
+        "ConfigJSON",
+        "ConfigSHA256",
+        "CreatedAt",
+        "Enabled",
+        "HasSecret",
+        "ID",
+        "ListenAddr",
+        "Name",
+        "NodeEntry",
+        "PID",
+        "SecretSHA256",
+        "ServiceID",
+        "Status",
+        "UpdatedAt"
+      ],
+      "instance": {
+        "ConfigJSON": {
+          "applicationRoot": "/opt/codeaudit",
+          "pythonPath": "/opt/codeaudit-venv/bin/python",
+          "repoEndpoint": "http://repo-tools:8080",
+          "staticEndpoint": "http://static-analysis:8080",
+          "workspaces": "/workspaces"
+        },
+        "ConfigSHA256": "5440746589d8bd6b5e34714c706b3827b26ee17ccb8cdf170586777c5a31268c",
+        "CreatedAt": "2026-09-29T04:15:46.120480088Z",
+        "Enabled": true,
+        "ID": "codeaudit-v2-tools",
+        "ListenAddr": "127.0.0.1:41005",
+        "Name": "codeaudit-v2-tools",
+        "NodeEntry": "src/main.js",
+        "PID": 15,
+        "ServiceID": "codeaudit-repo-tools",
+        "Status": "running",
+        "UpdatedAt": "2026-09-30T11:16:51.884999133Z"
+      }
+    },
+    "codeaudit-submit20-octobus-1": {
+      "exit_code": 0,
+      "field_names": [
+        "ConfigJSON",
+        "ConfigSHA256",
+        "CreatedAt",
+        "Enabled",
+        "HasSecret",
+        "ID",
+        "ListenAddr",
+        "Name",
+        "NodeEntry",
+        "PID",
+        "SecretSHA256",
+        "ServiceID",
+        "Status",
+        "UpdatedAt"
+      ],
+      "instance": {
+        "ConfigJSON": {
+          "applicationRoot": "/opt/codeaudit",
+          "pythonPath": "/opt/codeaudit-venv/bin/python",
+          "repoEndpoint": "http://repo-tools:8080",
+          "staticEndpoint": "http://static-analysis:8080",
+          "workspaces": "/workspaces"
+        },
+        "ConfigSHA256": "5440746589d8bd6b5e34714c706b3827b26ee17ccb8cdf170586777c5a31268c",
+        "CreatedAt": "2026-10-07T15:06:03.680108135Z",
+        "Enabled": true,
+        "ID": "codeaudit-v2-tools",
+        "ListenAddr": "127.0.0.1:45845",
+        "Name": "codeaudit-v2-tools",
+        "NodeEntry": "src/main.js",
+        "PID": 14,
+        "ServiceID": "codeaudit-repo-tools",
+        "Status": "running",
+        "UpdatedAt": "2026-10-08T01:59:03.040993439Z"
+      }
+    }
+  },
+  "cli_help": {
+    "octobus": {
+      "exit_code": 0,
+      "stdout": "Octobus daemon and administration CLI\n\nUsage:\n  octobus <commands>\n\nAvailable Commands:\n  admin-token Manage admin access tokens\n  capset      Manage capability sets\n  catalog     Show a capset protocol catalog\n  completion  Generate the autocompletion script for the specified shell\n  help        Help about any command\n  instance    Manage service instances\n  logs        Show access logs\n  serve       Run the Octobus daemon\n  service     Manage service packages\n  status      Show daemon status\n  version     Print version information\n\nFlags:\n      --addr string   daemon admin address (default \"0.0.0.0:9000\")\n  -h, --help          help for octobus\n\nUse \"octobus COMMAND --help\" for more information about a command.\n",
+      "stderr": ""
+    },
+    "scheduler": {
+      "exit_code": 0,
+      "stdout": "Run, inspect, and operate project schedulers, runs, logs, and triggers\n\nUsage:\n  agent-compose scheduler [flags]\n  agent-compose scheduler [command]\n\nAvailable Commands:\n  inspect     Inspect a scheduler, trigger, or scheduler run\n  logs        Print scheduler run logs\n  ls          List project scheduler triggers\n  run         Run a scheduler main function\n  runs        List project scheduler runs\n  stop        Stop an active scheduler run\n  trigger     Manually run a scheduler trigger\n\nFlags:\n  -h, --help   help for scheduler\n\nGlobal Flags:\n  -f, --file string           Path to agent-compose.yml\n      --host string           Daemon HTTP endpoint\n      --json                  Print machine-readable JSON\n      --project-name string   Override compose project name\n\nUse \"agent-compose scheduler [command] --help\" for more information about a command.\n",
+      "stderr": ""
+    }
+  },
+  "audit_metadata": {
+    "codeaudit-github-agent-data": [
+      {
+        "audit_id": "f8ae525c268841399ad807d80ec41cc2",
+        "mtime": 1791421220.3902063,
+        "summary_keys": [
+          "coverage",
+          "status",
+          "audit_id",
+          "model",
+          "transport",
+          "tool_calls",
+          "elapsed_seconds",
+          "counts",
+          "failure",
+          "completion",
+          "usage",
+          "snapshot_sha256"
+        ],
+        "selected_metadata": {
+          "status": "COMPLETE",
+          "tool_calls": 17
+        },
+        "report_exists": true
+      },
+      {
+        "audit_id": "d2bd044f276b4b85a16b3da5b747624c",
+        "mtime": 1791334820.6302555,
+        "summary_keys": [
+          "coverage",
+          "status",
+          "audit_id",
+          "model",
+          "transport",
+          "tool_calls",
+          "elapsed_seconds",
+          "counts",
+          "failure",
+          "completion",
+          "usage",
+          "snapshot_sha256"
+        ],
+        "selected_metadata": {
+          "status": "COMPLETE",
+          "tool_calls": 18
+        },
+        "report_exists": true
+      },
+      {
+        "audit_id": "b7b00efac44648a9b34ef68c8c1eb870",
+        "mtime": 1791248419.4297018,
+        "summary_keys": [
+          "coverage",
+          "status",
+          "audit_id",
+          "model",
+          "transport",
+          "tool_calls",
+          "elapsed_seconds",
+          "counts",
+          "failure",
+          "completion",
+          "usage",
+          "snapshot_sha256"
+        ],
+        "selected_metadata": {
+          "status": "COMPLETE",
+          "tool_calls": 20
+        },
+        "report_exists": true
+      },
+      {
+        "audit_id": "8cd89c7ef0fa4269a031a41727d133d6",
+        "mtime": 1791162018.2399478,
+        "summary_keys": [
+          "coverage",
+          "status",
+          "audit_id",
+          "model",
+          "transport",
+          "tool_calls",
+          "elapsed_seconds",
+          "counts",
+          "failure",
+          "completion",
+          "usage",
+          "snapshot_sha256"
+        ],
+        "selected_metadata": {
+          "status": "COMPLETE",
+          "tool_calls": 15
+        },
+        "report_exists": true
+      }
+    ],
+    "codeaudit-submit20-agent-data": [
+      {
+        "audit_id": "c5c670a74153476784db9901760f477f",
+        "mtime": 1791424820.9459963,
+        "summary_keys": [
+          "coverage",
+          "status",
+          "audit_id",
+          "model",
+          "transport",
+          "tool_calls",
+          "elapsed_seconds",
+          "counts",
+          "failure",
+          "completion",
+          "usage",
+          "assessment_summary",
+          "claim_critique_calls",
+          "snapshot_sha256"
+        ],
+        "selected_metadata": {
+          "status": "COMPLETE",
+          "tool_calls": 18
+        },
+        "report_exists": true
+      },
+      {
+        "audit_id": "5a9380773ad44f33a837bb87e5fa1b72",
+        "mtime": 1791424792.7488694,
+        "summary_keys": [
+          "coverage",
+          "status",
+          "audit_id",
+          "model",
+          "transport",
+          "tool_calls",
+          "elapsed_seconds",
+          "counts",
+          "failure",
+          "completion",
+          "usage",
+          "assessment_summary",
+          "claim_critique_calls",
+          "snapshot_sha256"
+        ],
+        "selected_metadata": {
+          "status": "INCOMPLETE",
+          "tool_calls": 18
+        },
+        "report_exists": true
+      },
+      {
+        "audit_id": "a5ad01b5a53146a3b3fd26a47ad9a1a5",
+        "mtime": 1791424672.940082,
+        "summary_keys": [
+          "coverage",
+          "status",
+          "audit_id",
+          "model",
+          "transport",
+          "tool_calls",
+          "elapsed_seconds",
+          "counts",
+          "failure",
+          "completion",
+          "usage",
+          "assessment_summary",
+          "claim_critique_calls",
+          "snapshot_sha256"
+        ],
+        "selected_metadata": {
+          "status": "COMPLETE",
+          "tool_calls": 42
+        },
+        "report_exists": true
+      },
+      {
+        "audit_id": "e6567665621b4563a24ad5b05240e972",
+        "mtime": 1791424597.733077,
+        "summary_keys": [
+          "coverage",
+          "status",
+          "audit_id",
+          "model",
+          "transport",
+          "tool_calls",
+          "elapsed_seconds",
+          "counts",
+          "failure",
+          "completion",
+          "usage",
+          "assessment_summary",
+          "claim_critique_calls",
+          "snapshot_sha256"
+        ],
+        "selected_metadata": {
+          "status": "COMPLETE",
+          "tool_calls": 49
+        },
+        "report_exists": true
+      }
+    ]
+  },
+  "report_read_by_existing_audit_id": {
+    "command": [
+      "runuser",
+      "-u",
+      "codeaudit-reviewer",
+      "--",
+      "sudo",
+      "-n",
+      "/usr/local/bin/codeaudit-review",
+      "report",
+      "f8ae525c268841399ad807d80ec41cc2"
+    ],
+    "audit_id": "f8ae525c268841399ad807d80ec41cc2",
+    "exit_code": 0,
+    "stdout_bytes": 17653,
+    "stdout_sha256": "f83f3ee50eb64d46a8ef3eae9879555b24aea97bd0d09cff7c307e8f63306edc"
+  },
+  "local_artifact_names": [
+    "submission22-source.tgz",
+    "candidate22",
+    "tests20.log",
+    "source",
+    "tests21.log",
+    "candidate20",
+    "staging",
+    "up22.log",
+    "build20.log",
+    "submission21-source.tgz",
+    "prepare20.py",
+    "live20.log",
+    "build-mirror.log",
+    "build22.log",
+    "bootstrap20.py",
+    "build21.log",
+    "tests22.log",
+    "acceptance20.yml",
+    "live21.log",
+    "submission20-source.tgz",
+    "export21.py",
+    "candidate21",
+    "up21.log",
+    "acceptance21.yml",
+    "tests.log",
+    "build.log",
+    "export22.py",
+    "acceptance22.yml",
+    "live22.log",
+    "export20.py",
+    "up20.log",
+    "previous-deployment.tgz"
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "files": {
+    "server-smoke.log": {
+      "bytes": 5218,
+      "sha256": "d12d1ccf452f3d89482ad9f7d438fee273defb480ca6edb919fe518cbbc3e24e"
+    },
+    "e2e-result.json": {
+      "bytes": 19128,
+      "sha256": "b53afc7cd3ac2a2b216ab527a94374833e99e51b87166b39b554606ac73239f8"
+    },
+    "restart-result.json": {
+      "bytes": 35421,
+      "sha256": "31740f5fe4fda846c3867fecfd79ba56484ddf3a5b008de6752326ce57340ea0"
+    },
+    "result.json": {
+      "bytes": 3129,
+      "sha256": "ad978805815f6bef7b006b83f2614b15dd7cad8c88043bad830b9c8466312267"
+    },
+    "runtime-verification.json": {
+      "bytes": 41426,
+      "sha256": "fd88c761b6fb8818fca5346229a5e0f0349f584f869c8710b688cda7e21d95a8"
+    },
+    "github-baseline.json": {
+      "bytes": 2210,
+      "sha256": "f290678d65360e4912431c487885f02425c30ac21a16e07f1577a6ea5750f101"
+    },
+    "server-build.log": {
+      "bytes": 24426,
+      "sha256": "73342e9778b4bb8960cd61d05b67aeb8cee3f929f426b31800c128445edb59a7"
+    },
+    "mcp-probe-result.json": {
+      "bytes": 1510,
+      "sha256": "7f876d55fefcb9fb71b2797b7f6eda8e55aa8eb5294aa182873199dc1e237372"
+    },
+    "operation-log.json": {
+      "bytes": 2111,
+      "sha256": "c06a766060846ac785f3c2dd0b66f7b80d84a758c7e047fcbb093106c4bae286"
+    },
+    "deploy-result.json": {
+      "bytes": 10215,
+      "sha256": "5fe5bdc376057083cfed8a3148eafa9163d72d09e1e11dd6a93fb17fc5dbd024"
+    },
+    "secret-scan.json": {
+      "bytes": 1131,
+      "sha256": "8382eafaa107622226c9ece88174470937fa3cdb00a45edbb3187872c9dfecd6"
+    },
+    "evidence-result.json": {
+      "bytes": 20628,
+      "sha256": "b12e9fd15bb4b2bd7e9bf32d2b35e0d00264825faa36cffe3defdf284b23be97"
+    },
+    "image-acquisition.json": {
+      "bytes": 961,
+      "sha256": "89a304746f8739eca7881cefb18b71797b04fa5b4299d1f1db7357cdb77366ee"
+    },
+    "final-snapshot-result.json": {
+      "bytes": 15814,
+      "sha256": "965ae64c9e44e2b79e5caefc1e1eb6fe4af5ad0a5672ffc9a34d3216ea56e994"
+    },
+    "old-assets.json": {
+      "bytes": 26436,
+      "sha256": "5b040e35bde2def918221e9a18b5838a01a1d439be3cbdcc9429278db351f5b6"
+    },
+    "source-file-hashes.json": {
+      "bytes": 916,
+      "sha256": "bffb9216623e603857d3e5cf27c6576e84eab7b2c5d1c82ad22b9fa7ae09952f"
+    },
+    "prepare-serverbuild-result.json": {
+      "bytes": 3936,
+      "sha256": "6f7926c93056c38727a256d977c2410d6587a909c08cc9c1352592e6b6527dfa"
+    }
+  },
+  "scope": "sanitized deployment evidence; runtime env files and credential contents excluded"
+}

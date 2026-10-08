@@ -1,0 +1,451 @@
+{
+  "observed_at": "2026-10-08T07:35:21.973676+00:00",
+  "readonly_commands": {
+    "status": {
+      "command": [
+        "runuser",
+        "-u",
+        "codeaudit-reviewer",
+        "--",
+        "sudo",
+        "-n",
+        "/usr/local/bin/codeaudit-review",
+        "status"
+      ],
+      "exit_code": 0,
+      "stdout": "NAME                                 IMAGE                                                                                                   COMMAND                  SERVICE           CREATED      STATUS                PORTS\ncodeaudit-github-agent-compose-1     ghcr.io/chaitin/agent-compose@sha256:3117226250256b03d25815bd1bb584ade5ac225b83f55d527be122b8b75a61e8   \"/usr/bin/tini -- /a…\"   agent-compose     9 days ago   Up 8 days (healthy)   172.17.0.1:17422->7410/tcp\ncodeaudit-github-octobus-1           codeaudit-final:2.0                                                                                     \"octobus serve\"          octobus           7 days ago   Up 7 days (healthy)   172.17.0.1:19015->9000/tcp\ncodeaudit-github-repo-tools-1        codeaudit-final:2.0                                                                                     \"/opt/codeaudit-venv…\"   repo-tools        7 days ago   Up 7 days (healthy)   \ncodeaudit-github-static-analysis-1   codeaudit-final:2.0                                                                                     \"/opt/codeaudit-venv…\"   static-analysis   7 days ago   Up 7 days (healthy)   \n",
+      "stderr": ""
+    },
+    "projects": {
+      "command": [
+        "runuser",
+        "-u",
+        "codeaudit-reviewer",
+        "--",
+        "sudo",
+        "-n",
+        "/usr/local/bin/codeaudit-review",
+        "projects"
+      ],
+      "exit_code": 0,
+      "stdout": "ID            NAME             CONFIG FILE                                   AGENTS  SCHEDULERS\nb4946111ed94  codeaudit-final  /data/work/codeaudit-final/agent-compose.yml  1       1\n",
+      "stderr": ""
+    },
+    "triggers": {
+      "command": [
+        "runuser",
+        "-u",
+        "codeaudit-reviewer",
+        "--",
+        "sudo",
+        "-n",
+        "/usr/local/bin/codeaudit-review",
+        "triggers"
+      ],
+      "exit_code": 0,
+      "stdout": "SCHEDULER     AGENT    TRIGGER         KIND  SOURCE  ENABLED\n64b1f7a034f3  auditor  daily-v2-audit  cron  script  true\n",
+      "stderr": ""
+    },
+    "methods": {
+      "command": [
+        "runuser",
+        "-u",
+        "codeaudit-reviewer",
+        "--",
+        "sudo",
+        "-n",
+        "/usr/local/bin/codeaudit-review",
+        "methods"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"methods\": [\n    {\n      \"CapsetInstanceID\": \"codeaudit-v2:codeaudit-v2-tools\",\n      \"CreatedAt\": \"2026-09-29T04:15:47.866492953Z\",\n      \"Enabled\": true,\n      \"ID\": \"codeaudit-v2:codeaudit-v2-tools:codeaudit.v2.RepositoryTools/ExecuteTool\",\n      \"MCPToolName\": \"codeaudit-repo-tools__codeaudit-v2-tools__execute_tool\",\n      \"MethodFullName\": \"codeaudit.v2.RepositoryTools/ExecuteTool\",\n      \"RestAlias\": \"\",\n      \"UpdatedAt\": \"2026-09-29T04:15:47.866492953Z\"\n    }\n  ]\n}\n",
+      "stderr": ""
+    },
+    "runs": {
+      "command": [
+        "runuser",
+        "-u",
+        "codeaudit-reviewer",
+        "--",
+        "sudo",
+        "-n",
+        "/usr/local/bin/codeaudit-review",
+        "runs"
+      ],
+      "exit_code": 0,
+      "stdout": "RUN ID        AGENT    TRIGGER            STATUS     SANDBOXES     STARTED                   DURATION\n292a13f84c75  auditor  daily-v2-audit     succeeded  c37703f4ee66  2026-10-08T01:00:00.002Z  20.693s\n0cd14cf9af42  auditor  daily-v2-audit     succeeded  4e8875799e17  2026-10-07T01:00:00.002Z  20.926s\n83565d36d74c  auditor  daily-v2-audit     succeeded  d5d1d35992e5  2026-10-06T01:00:00.003Z  19.734s\n6065972728c1  auditor  daily-v2-audit     succeeded  043c4e3708a4  2026-10-05T01:00:00.003Z  18.536s\n32a4b9ebe536  auditor  daily-v2-audit     succeeded  3e5a8285fbc2  2026-10-04T01:00:00.003Z  19.516s\nd548efddbcb2  auditor  daily-v2-audit     succeeded  adae42a87c39  2026-10-03T01:00:00.005Z  18.54s\n63eee1ccf8b4  auditor  daily-v2-audit     failed     b8cb9faf56f4  2026-10-02T01:00:00.004Z  1.532s\nb203e3f8439a  auditor  daily-v2-audit     failed     aa9677cced57  2026-10-01T01:00:00.007Z  1.501s\nc567740b179d  auditor  daily-v2-audit     succeeded  e17826a3c52a  2026-09-30T03:19:42.31Z   17.43s\n229e4eb95ba8  auditor  reboot-acceptance  succeeded  6b1cf7bc652e  2026-09-30T02:47:57.572Z  20.124s\n",
+      "stderr": ""
+    }
+  },
+  "historical_report_read": {
+    "command": [
+      "runuser",
+      "-u",
+      "codeaudit-reviewer",
+      "--",
+      "sudo",
+      "-n",
+      "/usr/local/bin/codeaudit-review",
+      "report"
+    ],
+    "exit_code": 0,
+    "stdout_bytes": 17653,
+    "stdout_sha256": "f83f3ee50eb64d46a8ef3eae9879555b24aea97bd0d09cff7c307e8f63306edc",
+    "stderr": ""
+  },
+  "permission_checks": {
+    "/opt/codeaudit-v2/.env": {
+      "command": [
+        "runuser",
+        "-u",
+        "codeaudit-reviewer",
+        "--",
+        "test",
+        "-r",
+        "/opt/codeaudit-v2/.env"
+      ],
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": ""
+    },
+    "/opt/codeaudit-v2/.runtime.env": {
+      "command": [
+        "runuser",
+        "-u",
+        "codeaudit-reviewer",
+        "--",
+        "test",
+        "-r",
+        "/opt/codeaudit-v2/.runtime.env"
+      ],
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": ""
+    }
+  },
+  "docker_socket_writable": {
+    "command": [
+      "runuser",
+      "-u",
+      "codeaudit-reviewer",
+      "--",
+      "test",
+      "-w",
+      "/var/run/docker.sock"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": ""
+  },
+  "wrapper_writable": {
+    "command": [
+      "runuser",
+      "-u",
+      "codeaudit-reviewer",
+      "--",
+      "test",
+      "-w",
+      "/usr/local/bin/codeaudit-review"
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": ""
+  },
+  "ssh_key_metadata": [
+    {
+      "path": "/home/codeaudit-reviewer/.ssh",
+      "uid": 1000,
+      "mode": "0o700",
+      "bytes": 4096
+    },
+    {
+      "path": "/home/codeaudit-reviewer/.ssh/authorized_keys",
+      "uid": 1000,
+      "mode": "0o600",
+      "bytes": 161
+    }
+  ],
+  "backup_logs": {
+    "/root/codeaudit-backup.log": "tar: Removing leading `/' from member names\ntar: Removing leading `/' from hard link targets\n",
+    "/root/codeaudit-bus-backup.log": "tar: Removing leading `/' from member names\ntar: Removing leading `/' from hard link targets\n"
+  },
+  "backup_search_scope": [
+    "/root",
+    "/opt",
+    "/var/backups",
+    "/data"
+  ],
+  "backup_files": [
+    {
+      "path": "/root/codeaudit-policy13.tgz",
+      "bytes": 541920,
+      "mtime": 1791381477.6632016
+    },
+    {
+      "path": "/root/codeaudit-runner-candidate.tgz",
+      "bytes": 196163,
+      "mtime": 1790917929.214495
+    },
+    {
+      "path": "/root/codeaudit-evidence-candidate.tgz",
+      "bytes": 161031,
+      "mtime": 1790916938.4388006
+    },
+    {
+      "path": "/root/codeaudit-backup.log",
+      "bytes": 93,
+      "mtime": 1790676319.002376
+    },
+    {
+      "path": "/root/codeaudit-remediation-source.tgz",
+      "bytes": 99274,
+      "mtime": 1790663271.437515
+    },
+    {
+      "path": "/root/state-fix.tgz",
+      "bytes": 11124,
+      "mtime": 1790765978.15455
+    },
+    {
+      "path": "/root/codeaudit-context16.tgz",
+      "bytes": 637166,
+      "mtime": 1791382298.0318387
+    },
+    {
+      "path": "/root/eof-fix.tgz",
+      "bytes": 10284,
+      "mtime": 1790760072.4935453
+    },
+    {
+      "path": "/root/codeaudit-runtime06.tgz",
+      "bytes": 371548,
+      "mtime": 1791300050.583533
+    },
+    {
+      "path": "/root/codeaudit-bus-backup.log",
+      "bytes": 93,
+      "mtime": 1790676764.8842874
+    },
+    {
+      "path": "/root/bounds-fix.tgz",
+      "bytes": 13456,
+      "mtime": 1790766335.9289017
+    },
+    {
+      "path": "/root/codeaudit-remediation-latest.tgz",
+      "bytes": 11238,
+      "mtime": 1790663497.6386092
+    },
+    {
+      "path": "/root/context3.tgz",
+      "bytes": 12703,
+      "mtime": 1790736791.6841426
+    },
+    {
+      "path": "/root/codeaudit-coverage14.tgz",
+      "bytes": 573712,
+      "mtime": 1791381900.91604
+    },
+    {
+      "path": "/root/evidence-memory.tgz",
+      "bytes": 11290,
+      "mtime": 1790759474.5575228
+    },
+    {
+      "path": "/root/codeaudit-roundguard07.tgz",
+      "bytes": 302496,
+      "mtime": 1791297757.408207
+    },
+    {
+      "path": "/root/codeaudit-recovery05.tgz",
+      "bytes": 267392,
+      "mtime": 1790925068.604405
+    },
+    {
+      "path": "/root/codeaudit-contract03.tgz",
+      "bytes": 231917,
+      "mtime": 1790924046.1954532
+    },
+    {
+      "path": "/root/codeaudit-memory08.tgz",
+      "bytes": 412413,
+      "mtime": 1791301640.1508617
+    },
+    {
+      "path": "/root/codeaudit-claim09.tgz",
+      "bytes": 449770,
+      "mtime": 1791336728.466319
+    },
+    {
+      "path": "/root/codeaudit-final-source.tgz",
+      "bytes": 106702,
+      "mtime": 1790738214.7330608
+    },
+    {
+      "path": "/root/codeaudit-recovery06.tgz",
+      "bytes": 269448,
+      "mtime": 1791296997.469956
+    },
+    {
+      "path": "/root/consolidated-01-audits.tgz",
+      "bytes": 11224529,
+      "mtime": 1790913735.0544744
+    },
+    {
+      "path": "/root/codeaudit-feedback18.tgz",
+      "bytes": 701292,
+      "mtime": 1791382901.1598203
+    },
+    {
+      "path": "/root/codeaudit-surface04.tgz",
+      "bytes": 234752,
+      "mtime": 1790924404.8898196
+    },
+    {
+      "path": "/root/codeaudit-critic19.tgz",
+      "bytes": 735629,
+      "mtime": 1791383494.8114197
+    },
+    {
+      "path": "/root/round4-source.tgz",
+      "bytes": 11480,
+      "mtime": 1790738009.456853
+    },
+    {
+      "path": "/root/openai-codex-0.155.1.tgz",
+      "bytes": 4904,
+      "mtime": 1789981514.755986
+    },
+    {
+      "path": "/root/transport-fix.tgz",
+      "bytes": 3165,
+      "mtime": 1790738536.7299535
+    },
+    {
+      "path": "/root/codeaudit-review-candidate.tgz",
+      "bytes": 163282,
+      "mtime": 1790917417.109978
+    },
+    {
+      "path": "/root/codeaudit-submit-20261007/submission22-source.tgz",
+      "bytes": 773408,
+      "mtime": 1791424310.837613
+    },
+    {
+      "path": "/root/codeaudit-submit-20261007/submission21-source.tgz",
+      "bytes": 772840,
+      "mtime": 1791386076.2338583
+    },
+    {
+      "path": "/root/codeaudit-submit-20261007/submission20-source.tgz",
+      "bytes": 773006,
+      "mtime": 1791385387.9344516
+    },
+    {
+      "path": "/root/codeaudit-submit-20261007/previous-deployment.tgz",
+      "bytes": 176966,
+      "mtime": 1791384509.2675126
+    },
+    {
+      "path": "/root/codeaudit-evaluation/3.0.5.tar.gz",
+      "bytes": 819837,
+      "mtime": 1790676479.9808426
+    },
+    {
+      "path": "/root/codeaudit-evaluation/3.0.6.tar.gz",
+      "bytes": 820318,
+      "mtime": 1790676481.2488935
+    },
+    {
+      "path": "/root/codeaudit-evaluation/evidence-remediation-17/audits.tgz",
+      "bytes": 908536,
+      "mtime": 1791382967.2224464
+    },
+    {
+      "path": "/root/codeaudit-evaluation/evidence-remediation-06/audits.tgz",
+      "bytes": 917704,
+      "mtime": 1791300281.656743
+    },
+    {
+      "path": "/root/codeaudit-evaluation/evidence-remediation-05/audits.tgz",
+      "bytes": 921888,
+      "mtime": 1791298187.4253304
+    },
+    {
+      "path": "/root/codeaudit-evaluation/evidence-remediation-07/audits.tgz",
+      "bytes": 891952,
+      "mtime": 1791301381.5285614
+    },
+    {
+      "path": "/root/codeaudit-evaluation/evidence-remediation-03/audits.tgz",
+      "bytes": 859450,
+      "mtime": 1790924928.398789
+    },
+    {
+      "path": "/root/codeaudit-evaluation/evidence-remediation-19/audits.tgz",
+      "bytes": 989588,
+      "mtime": 1791383910.8838654
+    },
+    {
+      "path": "/root/codeaudit-evaluation/submission-recovery-20/audits.tgz",
+      "bytes": 974358,
+      "mtime": 1791424074.3801646
+    },
+    {
+      "path": "/root/codeaudit-evaluation/evidence-remediation-02/audits.tgz",
+      "bytes": 5482042,
+      "mtime": 1790922896.385408
+    },
+    {
+      "path": "/root/codeaudit-evaluation/evidence-remediation-09/audits.tgz",
+      "bytes": 1766722,
+      "mtime": 1791340478.9559393
+    },
+    {
+      "path": "/root/codeaudit-evaluation/evidence-remediation-16/audits.tgz",
+      "bytes": 878556,
+      "mtime": 1791382551.4059167
+    },
+    {
+      "path": "/root/codeaudit-evaluation/evidence-remediation-13/audits.tgz",
+      "bytes": 929275,
+      "mtime": 1791381901.8240762
+    },
+    {
+      "path": "/root/codeaudit-evaluation/evidence-remediation-12/audits.tgz",
+      "bytes": 893772,
+      "mtime": 1791381312.9966772
+    },
+    {
+      "path": "/root/codeaudit-evaluation/submission-practice-21/audits.tgz",
+      "bytes": 213032,
+      "mtime": 1791424729.470341
+    },
+    {
+      "path": "/root/codeaudit-evaluation/evidence-remediation-04/audits.tgz",
+      "bytes": 865527,
+      "mtime": 1791297319.198762
+    },
+    {
+      "path": "/root/codeaudit-evaluation/evidence-remediation-14/audits.tgz",
+      "bytes": 956750,
+      "mtime": 1791382297.743827
+    },
+    {
+      "path": "/root/codeaudit-evaluation/evidence-remediation-18/audits.tgz",
+      "bytes": 984968,
+      "mtime": 1791383494.7114158
+    },
+    {
+      "path": "/root/codeaudit-evaluation/evidence-remediation-08/audits.tgz",
+      "bytes": 883273,
+      "mtime": 1791301905.973456
+    },
+    {
+      "path": "/root/codeaudit-evaluation/evidence-remediation-11/audits.tgz",
+      "bytes": 834170,
+      "mtime": 1791343615.3211498
+    }
+  ],
+  "old_controller_config_exists": false
+}

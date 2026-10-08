@@ -1,0 +1,46 @@
+{
+  "env_read": {
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": ""
+  },
+  "runtime_env_read": {
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": ""
+  },
+  "socket_write": {
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": ""
+  },
+  "wrapper_write": {
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": ""
+  },
+  "source_write": {
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": ""
+  },
+  "arbitrary_root_shell_policy": {
+    "exit_code": 1,
+    "stdout": "",
+    "stderr": ""
+  },
+  "wrapper_sha256": "444cd41fb50941fefe0712017685d67026da05f50cb34fed8f0788a478a8f78a",
+  "nologin_exists": false,
+  "pam_sshd_sha256": "65822d20f36db29cb50275526854b584df7a04a9efe975f3801473f81b44f521",
+  "effective_auth_recheck": {
+    "exit_code": 0,
+    "fields": [
+      "usepam yes",
+      "pubkeyauthentication yes",
+      "passwordauthentication no",
+      "forcecommand none",
+      "authenticationmethods any"
+    ],
+    "context": "current operator source IP; actual examiner source IP unknown"
+  }
+}

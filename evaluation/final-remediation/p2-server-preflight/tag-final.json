@@ -1,0 +1,10 @@
+{
+  "ref": "refs/tags/v1-pre-v2-release",
+  "node_id": "REF_kwDOUmtvLrtyZWZzL3RhZ3MvdjEtcHJlLXYyLXJlbGVhc2U",
+  "url": "https://api.github.com/repos/m13756445700-lgtm/codeaudit-agent/git/refs/tags/v1-pre-v2-release",
+  "object": {
+    "sha": "c86adf7ea70c7e7ae8ee7ee440b31d318236705a",
+    "type": "tag",
+    "url": "https://api.github.com/repos/m13756445700-lgtm/codeaudit-agent/git/tags/c86adf7ea70c7e7ae8ee7ee440b31d318236705a"
+  }
+}

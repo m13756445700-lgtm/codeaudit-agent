@@ -1,0 +1,7 @@
+SOURCE_SHA=567a9aeed8429866c8e8cd551ddb596627bdd7ae
+START=2026-10-08T07:30:12.721210+00:00
+COMMAND=['/Users/bo/.codex-b/worktrees/p0-evidence-recovery/codeaudit-v2-final/.internal/p2c/venv/bin/python', '-c', "import yaml; c=yaml.safe_load(open('agent-compose.yml')); assert c['agents']['auditor']['env']['CODEAUDIT_LLM_API_KEY']['secret'] is True; assert c['agents']['auditor']['scheduler']['enabled'] is True; print('Agent project YAML structure PASS; daemon registration NOT_RUN')"]
+Agent project YAML structure PASS; daemon registration NOT_RUN
+
+EXIT_CODE=0
+END=2026-10-08T07:30:12.851893+00:00

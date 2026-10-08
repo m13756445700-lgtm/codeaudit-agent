@@ -1,0 +1,15 @@
+{
+  "used_method": "fresh server no-cache build from approved main; not docker load",
+  "deployed_image_id": "sha256:f140f0a72acc35b48bdc5c144a0f87b25cd77d3d14f51221f2d948007f33ec3c",
+  "oci_revision": "567a9aeed8429866c8e8cd551ddb596627bdd7ae",
+  "platform": "linux/amd64",
+  "local_preflight_image_id": "sha256:1b207430a18eac15161663504911263030cc3ece4b4690153556d954c66163e6",
+  "local_archive_sha256": "fd1c4d338146ed77b21fe1fb986a450f6f08d88c6097cc48802872f6d86529e8",
+  "archive_import": "NOT_RUN",
+  "interrupted_transfers": "Two slow archive transfer attempts deliberately interrupted; incomplete archive retained as incomplete-transfer.tar and never loaded. Server build was used instead.",
+  "registry_digest": "NOT_AVAILABLE_PRE_PUSH",
+  "transfer_log_hashes": {
+    "transfer.log": "d4b3a8a807a005cae6e56a4807b578bcdc4501e205aedc74d6e77a25dfc28aa3",
+    "transfer-delta.log": "2775a00a12b1f6cd44faf5d40900fc6a582aa0dd6624edbc35df72091a7f30fb"
+  }
+}

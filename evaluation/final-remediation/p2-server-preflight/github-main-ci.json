@@ -1,0 +1,107 @@
+{
+  "conclusion": "success",
+  "headSha": "567a9aeed8429866c8e8cd551ddb596627bdd7ae",
+  "jobs": [
+    {
+      "completedAt": "2026-10-08T07:13:57Z",
+      "conclusion": "success",
+      "databaseId": 113194471362,
+      "name": "core",
+      "startedAt": "2026-10-08T07:11:51Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-10-08T07:11:53Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-10-08T07:11:52Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-08T07:11:54Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@v4",
+          "number": 2,
+          "startedAt": "2026-10-08T07:11:53Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-08T07:11:55Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-python@v5",
+          "number": 3,
+          "startedAt": "2026-10-08T07:11:54Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-08T07:12:03Z",
+          "conclusion": "success",
+          "name": "Run python -m pip install -r requirements-dev.txt",
+          "number": 4,
+          "startedAt": "2026-10-08T07:11:55Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-08T07:12:13Z",
+          "conclusion": "success",
+          "name": "Run python -m pytest -q -p no:cacheprovider",
+          "number": 5,
+          "startedAt": "2026-10-08T07:12:03Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-08T07:12:13Z",
+          "conclusion": "success",
+          "name": "Run python scripts/validate_schemas.py",
+          "number": 6,
+          "startedAt": "2026-10-08T07:12:13Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-08T07:13:44Z",
+          "conclusion": "success",
+          "name": "Run docker build --build-arg BUILD_SHA=567a9aeed8429866c8e8cd551ddb596627bdd7ae --platform linux/amd64 -t codeaudit-ci:567a9aeed8429866c8e8cd551ddb596627bdd7ae .",
+          "number": 7,
+          "startedAt": "2026-10-08T07:12:13Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-08T07:13:54Z",
+          "conclusion": "success",
+          "name": "Run python scripts/docker_smoke.py codeaudit-ci:567a9aeed8429866c8e8cd551ddb596627bdd7ae",
+          "number": 8,
+          "startedAt": "2026-10-08T07:13:44Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-08T07:13:56Z",
+          "conclusion": "success",
+          "name": "Post Run actions/setup-python@v5",
+          "number": 15,
+          "startedAt": "2026-10-08T07:13:54Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-08T07:13:56Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@v4",
+          "number": 16,
+          "startedAt": "2026-10-08T07:13:56Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-10-08T07:13:56Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 17,
+          "startedAt": "2026-10-08T07:13:56Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/m13756445700-lgtm/codeaudit-agent/actions/runs/37741956460/job/113194471362"
+    }
+  ],
+  "status": "completed",
+  "url": "https://github.com/m13756445700-lgtm/codeaudit-agent/actions/runs/37741956460"
+}
