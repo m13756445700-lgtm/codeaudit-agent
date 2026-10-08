@@ -1,5 +1,8 @@
 FROM ghcr.io/chaitin/octobus@sha256:377409360a3d54f8e058340a7fb4874a994f18d11d35ba8f7cae0bec23a724a6 AS octobus
 FROM ghcr.io/chaitin/agent-compose-guest@sha256:a99584629d9fe8c677683cdb6be88578b556a6e04e50abc5f1039424fdbefe73
+ARG BUILD_SHA=unknown
+LABEL org.opencontainers.image.revision=$BUILD_SHA \
+      org.opencontainers.image.source="https://github.com/m13756445700-lgtm/codeaudit-agent"
 USER root
 COPY --from=octobus /usr/local/bin/octobus /usr/local/bin/octobus
 RUN sed -i 's|http://mirrors.tuna.tsinghua.edu.cn/debian|https://deb.debian.org/debian|g' /etc/apt/sources.list.d/debian.sources && apt-get update && apt-get install -y --no-install-recommends python3.11-venv && rm -rf /var/lib/apt/lists/*
