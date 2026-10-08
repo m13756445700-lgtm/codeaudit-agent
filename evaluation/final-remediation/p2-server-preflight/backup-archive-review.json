@@ -1,0 +1,26 @@
+{
+  "archives": [
+    {
+      "path": "/root/consolidated-01-audits.tgz",
+      "bytes": 11224529,
+      "members": 5963,
+      "database_members": [],
+      "report_count": 110,
+      "config_members": [],
+      "sha256": "3f9ac8d9a46c50f0fe572c6243e50defdfdc1b7feb0b685ac9ae1dad4cde3dfc"
+    },
+    {
+      "path": "/root/codeaudit-submit-20261007/previous-deployment.tgz",
+      "bytes": 176966,
+      "members": 234,
+      "database_members": [],
+      "report_count": 0,
+      "config_members": [
+        "codeaudit-v2/docker-compose.yml",
+        "codeaudit-v2/agent-compose.yml"
+      ],
+      "sha256": "f7d6c64fcce5a891193d869c3eaac9482651fa060653eff5e58726df46d1e389"
+    }
+  ],
+  "scope": "/root depth <= 6; no extraction or restoration"
+}

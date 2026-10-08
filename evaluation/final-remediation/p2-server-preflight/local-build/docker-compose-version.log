@@ -1,0 +1,7 @@
+SOURCE_SHA=567a9aeed8429866c8e8cd551ddb596627bdd7ae
+START=2026-10-08T07:24:40.456574+00:00
+COMMAND=['docker', 'compose', 'version']
+Docker Compose version v5.5.1
+
+EXIT_CODE=0
+END=2026-10-08T07:24:40.532149+00:00

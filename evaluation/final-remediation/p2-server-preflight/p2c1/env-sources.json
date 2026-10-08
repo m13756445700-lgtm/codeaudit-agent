@@ -1,0 +1,85 @@
+[
+  {
+    "config": "/opt/codeaudit-v2/docker-compose.yml",
+    "exit_code": 0,
+    "env_files": {
+      "octobus": {
+        "env_file": null
+      },
+      "repo-tools": {
+        "env_file": null
+      },
+      "static-analysis": {
+        "env_file": null
+      },
+      "codeaudit-agent": {
+        "env_file": [
+          ".env",
+          ".runtime.env"
+        ]
+      },
+      "workspace-init": {
+        "env_file": null
+      },
+      "agent-compose": {
+        "env_file": null
+      }
+    },
+    "metadata": [
+      {
+        "path": "/opt/codeaudit-v2/.env",
+        "exists": true,
+        "uid": 0,
+        "mode": "0o600",
+        "bytes": 425
+      },
+      {
+        "path": "/opt/codeaudit-v2/.runtime.env",
+        "exists": true,
+        "uid": 0,
+        "mode": "0o600",
+        "bytes": 415
+      }
+    ]
+  },
+  {
+    "config": "/root/codeaudit-submit-20261007/acceptance22.yml",
+    "exit_code": 0,
+    "env_files": {
+      "octobus": {
+        "env_file": null
+      },
+      "repo-tools": {
+        "env_file": null
+      },
+      "static-analysis": {
+        "env_file": null
+      },
+      "codeaudit-agent": {
+        "env_file": [
+          "/opt/codeaudit-v2/.env",
+          "/opt/codeaudit-v2/.runtime.env"
+        ]
+      },
+      "workspace-init": {
+        "env_file": null
+      }
+    },
+    "metadata": [
+      {
+        "path": "/opt/codeaudit-v2/.env",
+        "exists": true,
+        "uid": 0,
+        "mode": "0o600",
+        "bytes": 425
+      },
+      {
+        "path": "/opt/codeaudit-v2/.runtime.env",
+        "exists": true,
+        "uid": 0,
+        "mode": "0o600",
+        "bytes": 415
+      }
+    ]
+  }
+]

@@ -1,0 +1,7 @@
+SOURCE_SHA=567a9aeed8429866c8e8cd551ddb596627bdd7ae
+START=2026-10-08T07:24:39.082024+00:00
+COMMAND=['git', 'hash-object', '-w', '-t', 'commit', '/Users/bo/.codex-b/worktrees/p0-evidence-recovery/codeaudit-v2-final/.internal/p2c/verified-main-commit.raw']
+567a9aeed8429866c8e8cd551ddb596627bdd7ae
+
+EXIT_CODE=0
+END=2026-10-08T07:24:39.102414+00:00

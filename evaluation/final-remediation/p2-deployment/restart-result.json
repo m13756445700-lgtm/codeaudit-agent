@@ -1,0 +1,577 @@
+{
+  "restart_status": "PASS",
+  "completed_at": "2026-10-08T09:21:59.259145+00:00",
+  "scope": "new codeaudit-main567 four constant services only; no host reboot",
+  "health": {
+    "agent-compose": {
+      "id": "b1c3d72416a3271c78b47c3dd48aeab9acd3ad050c430697afe332c27445e7a1",
+      "running": true,
+      "health": "healthy",
+      "started_at": "2026-10-08T09:21:44.686158502Z"
+    },
+    "octobus": {
+      "id": "69f0573959b102877bf889e9439e3a10125aaeee75fbaec972b2ad2e1f5d6d46",
+      "running": true,
+      "health": "healthy",
+      "started_at": "2026-10-08T09:21:44.813838546Z"
+    },
+    "repo-tools": {
+      "id": "39839cd5243386b748d20a26dd7888ef9c385661b77d3675661c6cbe5cf93d33",
+      "running": true,
+      "health": "healthy",
+      "started_at": "2026-10-08T09:21:44.433175105Z"
+    },
+    "static-analysis": {
+      "id": "067dbdd7231d633f4f2f7049e8bc5725bf29f2bdb9a1f619a8ab09e241c9b4db",
+      "running": true,
+      "health": "healthy",
+      "started_at": "2026-10-08T09:21:44.643898061Z"
+    }
+  },
+  "persistent_artifact_hashes_before": {
+    "f9766bf65b304b29b9c02f9aa4b80234/tool_calls.jsonl": "077009248d995a0d474eac87bc45b72b832521579ceb81cc1a2f6995dfcbabad",
+    "f9766bf65b304b29b9c02f9aa4b80234/surface_reviews.json": "3296650f6c9bf2a41bab93f9885eabf87dad1d0e74476c7c71b6fb6a50a75c01",
+    "f9766bf65b304b29b9c02f9aa4b80234/knowledge_used.json": "377d45a2622a0b830e5e9fe47dc15f0f3b3da839c533fa67e7924b07debb3424",
+    "f9766bf65b304b29b9c02f9aa4b80234/run_summary.json": "c27e5f5a8f03d2b0458d41a4ac8f81f9711ddc6e2a7833b6b4e48c6b9762c062",
+    "f9766bf65b304b29b9c02f9aa4b80234/report.md": "4cb6b870703422192fe97cac4428f394b6569b048d08aec5fde97b9225121e78",
+    "f9766bf65b304b29b9c02f9aa4b80234/findings.json": "c31168fc7df7fadb0f47a47e8561f7930c62bee425a96fd7002921ab0a7db5a2"
+  },
+  "persistent_artifact_hashes_after": {
+    "f9766bf65b304b29b9c02f9aa4b80234/tool_calls.jsonl": "077009248d995a0d474eac87bc45b72b832521579ceb81cc1a2f6995dfcbabad",
+    "f9766bf65b304b29b9c02f9aa4b80234/surface_reviews.json": "3296650f6c9bf2a41bab93f9885eabf87dad1d0e74476c7c71b6fb6a50a75c01",
+    "f9766bf65b304b29b9c02f9aa4b80234/knowledge_used.json": "377d45a2622a0b830e5e9fe47dc15f0f3b3da839c533fa67e7924b07debb3424",
+    "f9766bf65b304b29b9c02f9aa4b80234/run_summary.json": "c27e5f5a8f03d2b0458d41a4ac8f81f9711ddc6e2a7833b6b4e48c6b9762c062",
+    "f9766bf65b304b29b9c02f9aa4b80234/report.md": "4cb6b870703422192fe97cac4428f394b6569b048d08aec5fde97b9225121e78",
+    "f9766bf65b304b29b9c02f9aa4b80234/findings.json": "c31168fc7df7fadb0f47a47e8561f7930c62bee425a96fd7002921ab0a7db5a2"
+  },
+  "completed_run_record_restored": true,
+  "project_scheduler_mcp_recovered_without_bootstrap": true,
+  "report_readback": {
+    "audit_id": "f9766bf65b304b29b9c02f9aa4b80234",
+    "exit_code": 0,
+    "stdout_bytes": 21444,
+    "stdout_sha256": "ea114e12160c3a4096ed364e5570dfe17d3027e0158d3d968d6253537f6d1712"
+  },
+  "inflight_task_resume": "NOT_RUN_NO_INFLIGHT_TASK",
+  "results": {
+    "projects": "ID            NAME             CONFIG FILE                                   AGENTS  SCHEDULERS\nb4946111ed94  codeaudit-final  /data/work/codeaudit-final/agent-compose.yml  1       1\n",
+    "triggers": "SCHEDULER     AGENT    TRIGGER         KIND  SOURCE  ENABLED\n64b1f7a034f3  auditor  daily-v2-audit  cron  script  true\n",
+    "methods": "{\n  \"methods\": [\n    {\n      \"CapsetInstanceID\": \"codeaudit-v2:codeaudit-v2-tools\",\n      \"CreatedAt\": \"2026-10-08T09:17:13.673482637Z\",\n      \"Enabled\": true,\n      \"ID\": \"codeaudit-v2:codeaudit-v2-tools:codeaudit.v2.RepositoryTools/ExecuteTool\",\n      \"MCPToolName\": \"codeaudit-repo-tools__codeaudit-v2-tools__execute_tool\",\n      \"MethodFullName\": \"codeaudit.v2.RepositoryTools/ExecuteTool\",\n      \"RestAlias\": \"\",\n      \"UpdatedAt\": \"2026-10-08T09:17:13.673482637Z\"\n    }\n  ]\n}\n",
+    "runs": "RUN ID        AGENT    TRIGGER         STATUS     SANDBOXES     STARTED                   DURATION\n28250be863ed  auditor  daily-v2-audit  succeeded  05e5c8c9af73  2026-10-08T09:18:47.744Z  20.969s\n"
+  },
+  "operations": [
+    {
+      "command": [
+        "docker",
+        "volume",
+        "inspect",
+        "codeaudit-main567-agent-data",
+        "--format",
+        "{{.Mountpoint}}"
+      ],
+      "start": "2026-10-08T09:21:43.484720+00:00",
+      "exit_code": 0,
+      "stdout": "/var/lib/docker/volumes/codeaudit-main567-agent-data/_data\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "runuser",
+        "-u",
+        "codeaudit-reviewer",
+        "--",
+        "sudo",
+        "-n",
+        "/usr/local/bin/codeaudit-review",
+        "runs"
+      ],
+      "start": "2026-10-08T09:21:43.515863+00:00",
+      "exit_code": 0,
+      "stdout": "RUN ID        AGENT    TRIGGER         STATUS     SANDBOXES     STARTED                   DURATION\n28250be863ed  auditor  daily-v2-audit  succeeded  05e5c8c9af73  2026-10-08T09:18:47.744Z  20.969s\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "compose",
+        "--env-file",
+        ".env",
+        "--env-file",
+        ".runtime.env",
+        "ps",
+        "-q"
+      ],
+      "start": "2026-10-08T09:21:43.748674+00:00",
+      "exit_code": 0,
+      "stdout": "b1c3d72416a3271c78b47c3dd48aeab9acd3ad050c430697afe332c27445e7a1\n69f0573959b102877bf889e9439e3a10125aaeee75fbaec972b2ad2e1f5d6d46\n39839cd5243386b748d20a26dd7888ef9c385661b77d3675661c6cbe5cf93d33\n067dbdd7231d633f4f2f7049e8bc5725bf29f2bdb9a1f619a8ab09e241c9b4db\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "inspect",
+        "--format",
+        "{{json .State}}",
+        "b1c3d72416a3271c78b47c3dd48aeab9acd3ad050c430697afe332c27445e7a1"
+      ],
+      "start": "2026-10-08T09:21:43.863750+00:00",
+      "exit_code": 0,
+      "stdout": "{\"Status\":\"running\",\"Running\":true,\"Paused\":false,\"Restarting\":false,\"OOMKilled\":false,\"Dead\":false,\"Pid\":3810350,\"ExitCode\":0,\"Error\":\"\",\"StartedAt\":\"2026-10-08T09:16:40.769265571Z\",\"FinishedAt\":\"0001-01-01T00:00:00Z\",\"Health\":{\"Status\":\"healthy\",\"FailingStreak\":0,\"Log\":[{\"Start\":\"2026-10-08T17:21:02.435788767+08:00\",\"End\":\"2026-10-08T17:21:02.491144453+08:00\",\"ExitCode\":0,\"Output\":\"STATUS  UPTIME                         VERSION\\nOK      2026-10-08 17:21:02 CST +0800  v2607.10.0\\n\"},{\"Start\":\"2026-10-08T17:21:12.492951676+08:00\",\"End\":\"2026-10-08T17:21:12.547680436+08:00\",\"ExitCode\":0,\"Output\":\"STATUS  UPTIME                         VERSION\\nOK      2026-10-08 17:21:12 CST +0800  v2607.10.0\\n\"},{\"Start\":\"2026-10-08T17:21:22.548743119+08:00\",\"End\":\"2026-10-08T17:21:22.604691373+08:00\",\"ExitCode\":0,\"Output\":\"STATUS  UPTIME                         VERSION\\nOK      2026-10-08 17:21:22 CST +0800  v2607.10.0\\n\"},{\"Start\":\"2026-10-08T17:21:32.605908253+08:00\",\"End\":\"2026-10-08T17:21:32.660734621+08:00\",\"ExitCode\":0,\"Output\":\"STATUS  UPTIME                         VERSION\\nOK      2026-10-08 17:21:32 CST +0800  v2607.10.0\\n\"},{\"Start\":\"2026-10-08T17:21:42.661865989+08:00\",\"End\":\"2026-10-08T17:21:42.718384716+08:00\",\"ExitCode\":0,\"Output\":\"STATUS  UPTIME                         VERSION\\nOK      2026-10-08 17:21:42 CST +0800  v2607.10.0\\n\"}]}}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "compose",
+        "--env-file",
+        ".env",
+        "--env-file",
+        ".runtime.env",
+        "restart",
+        "agent-compose",
+        "octobus",
+        "repo-tools",
+        "static-analysis"
+      ],
+      "start": "2026-10-08T09:21:43.894830+00:00",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": " Container codeaudit-main567-agent-compose-1 Restarting \n Container codeaudit-main567-octobus-1 Restarting \n Container codeaudit-main567-static-analysis-1 Restarting \n Container codeaudit-main567-repo-tools-1 Restarting \n Container codeaudit-main567-repo-tools-1 Started \n Container codeaudit-main567-static-analysis-1 Started \n Container codeaudit-main567-agent-compose-1 Started \n Container codeaudit-main567-octobus-1 Started \n"
+    },
+    {
+      "command": [
+        "docker",
+        "compose",
+        "--env-file",
+        ".env",
+        "--env-file",
+        ".runtime.env",
+        "ps",
+        "-q",
+        "agent-compose"
+      ],
+      "start": "2026-10-08T09:21:45.274770+00:00",
+      "exit_code": 0,
+      "stdout": "b1c3d72416a3271c78b47c3dd48aeab9acd3ad050c430697afe332c27445e7a1\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "inspect",
+        "--format",
+        "{{json .State}}",
+        "b1c3d72416a3271c78b47c3dd48aeab9acd3ad050c430697afe332c27445e7a1"
+      ],
+      "start": "2026-10-08T09:21:45.408206+00:00",
+      "exit_code": 0,
+      "stdout": "{\"Status\":\"running\",\"Running\":true,\"Paused\":false,\"Restarting\":false,\"OOMKilled\":false,\"Dead\":false,\"Pid\":3815958,\"ExitCode\":0,\"Error\":\"\",\"StartedAt\":\"2026-10-08T09:21:44.686158502Z\",\"FinishedAt\":\"2026-10-08T09:21:44.040055348Z\",\"Health\":{\"Status\":\"starting\",\"FailingStreak\":0,\"Log\":[{\"Start\":\"2026-10-08T17:21:02.435788767+08:00\",\"End\":\"2026-10-08T17:21:02.491144453+08:00\",\"ExitCode\":0,\"Output\":\"STATUS  UPTIME                         VERSION\\nOK      2026-10-08 17:21:02 CST +0800  v2607.10.0\\n\"},{\"Start\":\"2026-10-08T17:21:12.492951676+08:00\",\"End\":\"2026-10-08T17:21:12.547680436+08:00\",\"ExitCode\":0,\"Output\":\"STATUS  UPTIME                         VERSION\\nOK      2026-10-08 17:21:12 CST +0800  v2607.10.0\\n\"},{\"Start\":\"2026-10-08T17:21:22.548743119+08:00\",\"End\":\"2026-10-08T17:21:22.604691373+08:00\",\"ExitCode\":0,\"Output\":\"STATUS  UPTIME                         VERSION\\nOK      2026-10-08 17:21:22 CST +0800  v2607.10.0\\n\"},{\"Start\":\"2026-10-08T17:21:32.605908253+08:00\",\"End\":\"2026-10-08T17:21:32.660734621+08:00\",\"ExitCode\":0,\"Output\":\"STATUS  UPTIME                         VERSION\\nOK      2026-10-08 17:21:32 CST +0800  v2607.10.0\\n\"},{\"Start\":\"2026-10-08T17:21:42.661865989+08:00\",\"End\":\"2026-10-08T17:21:42.718384716+08:00\",\"ExitCode\":0,\"Output\":\"STATUS  UPTIME                         VERSION\\nOK      2026-10-08 17:21:42 CST +0800  v2607.10.0\\n\"}]}}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "compose",
+        "--env-file",
+        ".env",
+        "--env-file",
+        ".runtime.env",
+        "ps",
+        "-q",
+        "octobus"
+      ],
+      "start": "2026-10-08T09:21:45.447216+00:00",
+      "exit_code": 0,
+      "stdout": "69f0573959b102877bf889e9439e3a10125aaeee75fbaec972b2ad2e1f5d6d46\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "inspect",
+        "--format",
+        "{{json .State}}",
+        "69f0573959b102877bf889e9439e3a10125aaeee75fbaec972b2ad2e1f5d6d46"
+      ],
+      "start": "2026-10-08T09:21:45.551129+00:00",
+      "exit_code": 0,
+      "stdout": "{\"Status\":\"running\",\"Running\":true,\"Paused\":false,\"Restarting\":false,\"OOMKilled\":false,\"Dead\":false,\"Pid\":3816038,\"ExitCode\":0,\"Error\":\"\",\"StartedAt\":\"2026-10-08T09:21:44.813838546Z\",\"FinishedAt\":\"2026-10-08T09:21:44.052322755Z\",\"Health\":{\"Status\":\"starting\",\"FailingStreak\":0,\"Log\":[{\"Start\":\"2026-10-08T17:20:58.701059848+08:00\",\"End\":\"2026-10-08T17:20:58.796250302+08:00\",\"ExitCode\":0,\"Output\":\"{\\n  \\\"services\\\": 1,\\n  \\\"status\\\": \\\"ok\\\"\\n}\\n\"},{\"Start\":\"2026-10-08T17:21:08.797790353+08:00\",\"End\":\"2026-10-08T17:21:08.861698285+08:00\",\"ExitCode\":0,\"Output\":\"{\\n  \\\"services\\\": 1,\\n  \\\"status\\\": \\\"ok\\\"\\n}\\n\"},{\"Start\":\"2026-10-08T17:21:18.863436819+08:00\",\"End\":\"2026-10-08T17:21:18.92809691+08:00\",\"ExitCode\":0,\"Output\":\"{\\n  \\\"services\\\": 1,\\n  \\\"status\\\": \\\"ok\\\"\\n}\\n\"},{\"Start\":\"2026-10-08T17:21:28.928858261+08:00\",\"End\":\"2026-10-08T17:21:28.996528167+08:00\",\"ExitCode\":0,\"Output\":\"{\\n  \\\"services\\\": 1,\\n  \\\"status\\\": \\\"ok\\\"\\n}\\n\"},{\"Start\":\"2026-10-08T17:21:38.998202659+08:00\",\"End\":\"2026-10-08T17:21:39.096526788+08:00\",\"ExitCode\":0,\"Output\":\"{\\n  \\\"services\\\": 1,\\n  \\\"status\\\": \\\"ok\\\"\\n}\\n\"}]}}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "compose",
+        "--env-file",
+        ".env",
+        "--env-file",
+        ".runtime.env",
+        "ps",
+        "-q",
+        "repo-tools"
+      ],
+      "start": "2026-10-08T09:21:45.581678+00:00",
+      "exit_code": 0,
+      "stdout": "39839cd5243386b748d20a26dd7888ef9c385661b77d3675661c6cbe5cf93d33\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "inspect",
+        "--format",
+        "{{json .State}}",
+        "39839cd5243386b748d20a26dd7888ef9c385661b77d3675661c6cbe5cf93d33"
+      ],
+      "start": "2026-10-08T09:21:45.693179+00:00",
+      "exit_code": 0,
+      "stdout": "{\"Status\":\"running\",\"Running\":true,\"Paused\":false,\"Restarting\":false,\"OOMKilled\":false,\"Dead\":false,\"Pid\":3815817,\"ExitCode\":0,\"Error\":\"\",\"StartedAt\":\"2026-10-08T09:21:44.433175105Z\",\"FinishedAt\":\"2026-10-08T09:21:44.055083465Z\",\"Health\":{\"Status\":\"starting\",\"FailingStreak\":0,\"Log\":[{\"Start\":\"2026-10-08T17:20:55.619382451+08:00\",\"End\":\"2026-10-08T17:20:55.820691484+08:00\",\"ExitCode\":0,\"Output\":\"\"},{\"Start\":\"2026-10-08T17:21:05.822261625+08:00\",\"End\":\"2026-10-08T17:21:06.019114037+08:00\",\"ExitCode\":0,\"Output\":\"\"},{\"Start\":\"2026-10-08T17:21:16.020059172+08:00\",\"End\":\"2026-10-08T17:21:16.222149791+08:00\",\"ExitCode\":0,\"Output\":\"\"},{\"Start\":\"2026-10-08T17:21:26.223261423+08:00\",\"End\":\"2026-10-08T17:21:26.417910225+08:00\",\"ExitCode\":0,\"Output\":\"\"},{\"Start\":\"2026-10-08T17:21:36.419516621+08:00\",\"End\":\"2026-10-08T17:21:36.620535083+08:00\",\"ExitCode\":0,\"Output\":\"\"}]}}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "compose",
+        "--env-file",
+        ".env",
+        "--env-file",
+        ".runtime.env",
+        "ps",
+        "-q",
+        "static-analysis"
+      ],
+      "start": "2026-10-08T09:21:45.736362+00:00",
+      "exit_code": 0,
+      "stdout": "067dbdd7231d633f4f2f7049e8bc5725bf29f2bdb9a1f619a8ab09e241c9b4db\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "inspect",
+        "--format",
+        "{{json .State}}",
+        "067dbdd7231d633f4f2f7049e8bc5725bf29f2bdb9a1f619a8ab09e241c9b4db"
+      ],
+      "start": "2026-10-08T09:21:45.842984+00:00",
+      "exit_code": 0,
+      "stdout": "{\"Status\":\"running\",\"Running\":true,\"Paused\":false,\"Restarting\":false,\"OOMKilled\":false,\"Dead\":false,\"Pid\":3815900,\"ExitCode\":0,\"Error\":\"\",\"StartedAt\":\"2026-10-08T09:21:44.643898061Z\",\"FinishedAt\":\"2026-10-08T09:21:44.033553329Z\",\"Health\":{\"Status\":\"starting\",\"FailingStreak\":0,\"Log\":[{\"Start\":\"2026-10-08T17:20:54.024346654+08:00\",\"End\":\"2026-10-08T17:20:54.165459626+08:00\",\"ExitCode\":0,\"Output\":\"\"},{\"Start\":\"2026-10-08T17:21:04.166376052+08:00\",\"End\":\"2026-10-08T17:21:04.307353196+08:00\",\"ExitCode\":0,\"Output\":\"\"},{\"Start\":\"2026-10-08T17:21:14.308151657+08:00\",\"End\":\"2026-10-08T17:21:14.449493027+08:00\",\"ExitCode\":0,\"Output\":\"\"},{\"Start\":\"2026-10-08T17:21:24.450571964+08:00\",\"End\":\"2026-10-08T17:21:24.592172265+08:00\",\"ExitCode\":0,\"Output\":\"\"},{\"Start\":\"2026-10-08T17:21:34.593100533+08:00\",\"End\":\"2026-10-08T17:21:34.733582007+08:00\",\"ExitCode\":0,\"Output\":\"\"}]}}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "compose",
+        "--env-file",
+        ".env",
+        "--env-file",
+        ".runtime.env",
+        "ps",
+        "-q",
+        "agent-compose"
+      ],
+      "start": "2026-10-08T09:21:50.873894+00:00",
+      "exit_code": 0,
+      "stdout": "b1c3d72416a3271c78b47c3dd48aeab9acd3ad050c430697afe332c27445e7a1\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "inspect",
+        "--format",
+        "{{json .State}}",
+        "b1c3d72416a3271c78b47c3dd48aeab9acd3ad050c430697afe332c27445e7a1"
+      ],
+      "start": "2026-10-08T09:21:50.988407+00:00",
+      "exit_code": 0,
+      "stdout": "{\"Status\":\"running\",\"Running\":true,\"Paused\":false,\"Restarting\":false,\"OOMKilled\":false,\"Dead\":false,\"Pid\":3815958,\"ExitCode\":0,\"Error\":\"\",\"StartedAt\":\"2026-10-08T09:21:44.686158502Z\",\"FinishedAt\":\"2026-10-08T09:21:44.040055348Z\",\"Health\":{\"Status\":\"starting\",\"FailingStreak\":0,\"Log\":[{\"Start\":\"2026-10-08T17:21:02.435788767+08:00\",\"End\":\"2026-10-08T17:21:02.491144453+08:00\",\"ExitCode\":0,\"Output\":\"STATUS  UPTIME                         VERSION\\nOK      2026-10-08 17:21:02 CST +0800  v2607.10.0\\n\"},{\"Start\":\"2026-10-08T17:21:12.492951676+08:00\",\"End\":\"2026-10-08T17:21:12.547680436+08:00\",\"ExitCode\":0,\"Output\":\"STATUS  UPTIME                         VERSION\\nOK      2026-10-08 17:21:12 CST +0800  v2607.10.0\\n\"},{\"Start\":\"2026-10-08T17:21:22.548743119+08:00\",\"End\":\"2026-10-08T17:21:22.604691373+08:00\",\"ExitCode\":0,\"Output\":\"STATUS  UPTIME                         VERSION\\nOK      2026-10-08 17:21:22 CST +0800  v2607.10.0\\n\"},{\"Start\":\"2026-10-08T17:21:32.605908253+08:00\",\"End\":\"2026-10-08T17:21:32.660734621+08:00\",\"ExitCode\":0,\"Output\":\"STATUS  UPTIME                         VERSION\\nOK      2026-10-08 17:21:32 CST +0800  v2607.10.0\\n\"},{\"Start\":\"2026-10-08T17:21:42.661865989+08:00\",\"End\":\"2026-10-08T17:21:42.718384716+08:00\",\"ExitCode\":0,\"Output\":\"STATUS  UPTIME                         VERSION\\nOK      2026-10-08 17:21:42 CST +0800  v2607.10.0\\n\"}]}}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "compose",
+        "--env-file",
+        ".env",
+        "--env-file",
+        ".runtime.env",
+        "ps",
+        "-q",
+        "octobus"
+      ],
+      "start": "2026-10-08T09:21:51.020149+00:00",
+      "exit_code": 0,
+      "stdout": "69f0573959b102877bf889e9439e3a10125aaeee75fbaec972b2ad2e1f5d6d46\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "inspect",
+        "--format",
+        "{{json .State}}",
+        "69f0573959b102877bf889e9439e3a10125aaeee75fbaec972b2ad2e1f5d6d46"
+      ],
+      "start": "2026-10-08T09:21:51.117653+00:00",
+      "exit_code": 0,
+      "stdout": "{\"Status\":\"running\",\"Running\":true,\"Paused\":false,\"Restarting\":false,\"OOMKilled\":false,\"Dead\":false,\"Pid\":3816038,\"ExitCode\":0,\"Error\":\"\",\"StartedAt\":\"2026-10-08T09:21:44.813838546Z\",\"FinishedAt\":\"2026-10-08T09:21:44.052322755Z\",\"Health\":{\"Status\":\"healthy\",\"FailingStreak\":0,\"Log\":[{\"Start\":\"2026-10-08T17:21:08.797790353+08:00\",\"End\":\"2026-10-08T17:21:08.861698285+08:00\",\"ExitCode\":0,\"Output\":\"{\\n  \\\"services\\\": 1,\\n  \\\"status\\\": \\\"ok\\\"\\n}\\n\"},{\"Start\":\"2026-10-08T17:21:18.863436819+08:00\",\"End\":\"2026-10-08T17:21:18.92809691+08:00\",\"ExitCode\":0,\"Output\":\"{\\n  \\\"services\\\": 1,\\n  \\\"status\\\": \\\"ok\\\"\\n}\\n\"},{\"Start\":\"2026-10-08T17:21:28.928858261+08:00\",\"End\":\"2026-10-08T17:21:28.996528167+08:00\",\"ExitCode\":0,\"Output\":\"{\\n  \\\"services\\\": 1,\\n  \\\"status\\\": \\\"ok\\\"\\n}\\n\"},{\"Start\":\"2026-10-08T17:21:38.998202659+08:00\",\"End\":\"2026-10-08T17:21:39.096526788+08:00\",\"ExitCode\":0,\"Output\":\"{\\n  \\\"services\\\": 1,\\n  \\\"status\\\": \\\"ok\\\"\\n}\\n\"},{\"Start\":\"2026-10-08T17:21:50.271116887+08:00\",\"End\":\"2026-10-08T17:21:50.335485938+08:00\",\"ExitCode\":0,\"Output\":\"{\\n  \\\"services\\\": 1,\\n  \\\"status\\\": \\\"ok\\\"\\n}\\n\"}]}}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "compose",
+        "--env-file",
+        ".env",
+        "--env-file",
+        ".runtime.env",
+        "ps",
+        "-q",
+        "repo-tools"
+      ],
+      "start": "2026-10-08T09:21:51.149014+00:00",
+      "exit_code": 0,
+      "stdout": "39839cd5243386b748d20a26dd7888ef9c385661b77d3675661c6cbe5cf93d33\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "inspect",
+        "--format",
+        "{{json .State}}",
+        "39839cd5243386b748d20a26dd7888ef9c385661b77d3675661c6cbe5cf93d33"
+      ],
+      "start": "2026-10-08T09:21:51.247750+00:00",
+      "exit_code": 0,
+      "stdout": "{\"Status\":\"running\",\"Running\":true,\"Paused\":false,\"Restarting\":false,\"OOMKilled\":false,\"Dead\":false,\"Pid\":3815817,\"ExitCode\":0,\"Error\":\"\",\"StartedAt\":\"2026-10-08T09:21:44.433175105Z\",\"FinishedAt\":\"2026-10-08T09:21:44.055083465Z\",\"Health\":{\"Status\":\"starting\",\"FailingStreak\":0,\"Log\":[{\"Start\":\"2026-10-08T17:20:55.619382451+08:00\",\"End\":\"2026-10-08T17:20:55.820691484+08:00\",\"ExitCode\":0,\"Output\":\"\"},{\"Start\":\"2026-10-08T17:21:05.822261625+08:00\",\"End\":\"2026-10-08T17:21:06.019114037+08:00\",\"ExitCode\":0,\"Output\":\"\"},{\"Start\":\"2026-10-08T17:21:16.020059172+08:00\",\"End\":\"2026-10-08T17:21:16.222149791+08:00\",\"ExitCode\":0,\"Output\":\"\"},{\"Start\":\"2026-10-08T17:21:26.223261423+08:00\",\"End\":\"2026-10-08T17:21:26.417910225+08:00\",\"ExitCode\":0,\"Output\":\"\"},{\"Start\":\"2026-10-08T17:21:36.419516621+08:00\",\"End\":\"2026-10-08T17:21:36.620535083+08:00\",\"ExitCode\":0,\"Output\":\"\"}]}}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "compose",
+        "--env-file",
+        ".env",
+        "--env-file",
+        ".runtime.env",
+        "ps",
+        "-q",
+        "static-analysis"
+      ],
+      "start": "2026-10-08T09:21:51.277832+00:00",
+      "exit_code": 0,
+      "stdout": "067dbdd7231d633f4f2f7049e8bc5725bf29f2bdb9a1f619a8ab09e241c9b4db\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "inspect",
+        "--format",
+        "{{json .State}}",
+        "067dbdd7231d633f4f2f7049e8bc5725bf29f2bdb9a1f619a8ab09e241c9b4db"
+      ],
+      "start": "2026-10-08T09:21:51.375379+00:00",
+      "exit_code": 0,
+      "stdout": "{\"Status\":\"running\",\"Running\":true,\"Paused\":false,\"Restarting\":false,\"OOMKilled\":false,\"Dead\":false,\"Pid\":3815900,\"ExitCode\":0,\"Error\":\"\",\"StartedAt\":\"2026-10-08T09:21:44.643898061Z\",\"FinishedAt\":\"2026-10-08T09:21:44.033553329Z\",\"Health\":{\"Status\":\"starting\",\"FailingStreak\":0,\"Log\":[{\"Start\":\"2026-10-08T17:20:54.024346654+08:00\",\"End\":\"2026-10-08T17:20:54.165459626+08:00\",\"ExitCode\":0,\"Output\":\"\"},{\"Start\":\"2026-10-08T17:21:04.166376052+08:00\",\"End\":\"2026-10-08T17:21:04.307353196+08:00\",\"ExitCode\":0,\"Output\":\"\"},{\"Start\":\"2026-10-08T17:21:14.308151657+08:00\",\"End\":\"2026-10-08T17:21:14.449493027+08:00\",\"ExitCode\":0,\"Output\":\"\"},{\"Start\":\"2026-10-08T17:21:24.450571964+08:00\",\"End\":\"2026-10-08T17:21:24.592172265+08:00\",\"ExitCode\":0,\"Output\":\"\"},{\"Start\":\"2026-10-08T17:21:34.593100533+08:00\",\"End\":\"2026-10-08T17:21:34.733582007+08:00\",\"ExitCode\":0,\"Output\":\"\"}]}}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "compose",
+        "--env-file",
+        ".env",
+        "--env-file",
+        ".runtime.env",
+        "ps",
+        "-q",
+        "agent-compose"
+      ],
+      "start": "2026-10-08T09:21:56.411945+00:00",
+      "exit_code": 0,
+      "stdout": "b1c3d72416a3271c78b47c3dd48aeab9acd3ad050c430697afe332c27445e7a1\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "inspect",
+        "--format",
+        "{{json .State}}",
+        "b1c3d72416a3271c78b47c3dd48aeab9acd3ad050c430697afe332c27445e7a1"
+      ],
+      "start": "2026-10-08T09:21:56.526385+00:00",
+      "exit_code": 0,
+      "stdout": "{\"Status\":\"running\",\"Running\":true,\"Paused\":false,\"Restarting\":false,\"OOMKilled\":false,\"Dead\":false,\"Pid\":3815958,\"ExitCode\":0,\"Error\":\"\",\"StartedAt\":\"2026-10-08T09:21:44.686158502Z\",\"FinishedAt\":\"2026-10-08T09:21:44.040055348Z\",\"Health\":{\"Status\":\"healthy\",\"FailingStreak\":0,\"Log\":[{\"Start\":\"2026-10-08T17:21:12.492951676+08:00\",\"End\":\"2026-10-08T17:21:12.547680436+08:00\",\"ExitCode\":0,\"Output\":\"STATUS  UPTIME                         VERSION\\nOK      2026-10-08 17:21:12 CST +0800  v2607.10.0\\n\"},{\"Start\":\"2026-10-08T17:21:22.548743119+08:00\",\"End\":\"2026-10-08T17:21:22.604691373+08:00\",\"ExitCode\":0,\"Output\":\"STATUS  UPTIME                         VERSION\\nOK      2026-10-08 17:21:22 CST +0800  v2607.10.0\\n\"},{\"Start\":\"2026-10-08T17:21:32.605908253+08:00\",\"End\":\"2026-10-08T17:21:32.660734621+08:00\",\"ExitCode\":0,\"Output\":\"STATUS  UPTIME                         VERSION\\nOK      2026-10-08 17:21:32 CST +0800  v2607.10.0\\n\"},{\"Start\":\"2026-10-08T17:21:42.661865989+08:00\",\"End\":\"2026-10-08T17:21:42.718384716+08:00\",\"ExitCode\":0,\"Output\":\"STATUS  UPTIME                         VERSION\\nOK      2026-10-08 17:21:42 CST +0800  v2607.10.0\\n\"},{\"Start\":\"2026-10-08T17:21:55.121648384+08:00\",\"End\":\"2026-10-08T17:21:55.180302809+08:00\",\"ExitCode\":0,\"Output\":\"STATUS  UPTIME                         VERSION\\nOK      2026-10-08 17:21:55 CST +0800  v2607.10.0\\n\"}]}}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "compose",
+        "--env-file",
+        ".env",
+        "--env-file",
+        ".runtime.env",
+        "ps",
+        "-q",
+        "octobus"
+      ],
+      "start": "2026-10-08T09:21:56.557462+00:00",
+      "exit_code": 0,
+      "stdout": "69f0573959b102877bf889e9439e3a10125aaeee75fbaec972b2ad2e1f5d6d46\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "inspect",
+        "--format",
+        "{{json .State}}",
+        "69f0573959b102877bf889e9439e3a10125aaeee75fbaec972b2ad2e1f5d6d46"
+      ],
+      "start": "2026-10-08T09:21:56.658107+00:00",
+      "exit_code": 0,
+      "stdout": "{\"Status\":\"running\",\"Running\":true,\"Paused\":false,\"Restarting\":false,\"OOMKilled\":false,\"Dead\":false,\"Pid\":3816038,\"ExitCode\":0,\"Error\":\"\",\"StartedAt\":\"2026-10-08T09:21:44.813838546Z\",\"FinishedAt\":\"2026-10-08T09:21:44.052322755Z\",\"Health\":{\"Status\":\"healthy\",\"FailingStreak\":0,\"Log\":[{\"Start\":\"2026-10-08T17:21:08.797790353+08:00\",\"End\":\"2026-10-08T17:21:08.861698285+08:00\",\"ExitCode\":0,\"Output\":\"{\\n  \\\"services\\\": 1,\\n  \\\"status\\\": \\\"ok\\\"\\n}\\n\"},{\"Start\":\"2026-10-08T17:21:18.863436819+08:00\",\"End\":\"2026-10-08T17:21:18.92809691+08:00\",\"ExitCode\":0,\"Output\":\"{\\n  \\\"services\\\": 1,\\n  \\\"status\\\": \\\"ok\\\"\\n}\\n\"},{\"Start\":\"2026-10-08T17:21:28.928858261+08:00\",\"End\":\"2026-10-08T17:21:28.996528167+08:00\",\"ExitCode\":0,\"Output\":\"{\\n  \\\"services\\\": 1,\\n  \\\"status\\\": \\\"ok\\\"\\n}\\n\"},{\"Start\":\"2026-10-08T17:21:38.998202659+08:00\",\"End\":\"2026-10-08T17:21:39.096526788+08:00\",\"ExitCode\":0,\"Output\":\"{\\n  \\\"services\\\": 1,\\n  \\\"status\\\": \\\"ok\\\"\\n}\\n\"},{\"Start\":\"2026-10-08T17:21:50.271116887+08:00\",\"End\":\"2026-10-08T17:21:50.335485938+08:00\",\"ExitCode\":0,\"Output\":\"{\\n  \\\"services\\\": 1,\\n  \\\"status\\\": \\\"ok\\\"\\n}\\n\"}]}}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "compose",
+        "--env-file",
+        ".env",
+        "--env-file",
+        ".runtime.env",
+        "ps",
+        "-q",
+        "repo-tools"
+      ],
+      "start": "2026-10-08T09:21:56.689137+00:00",
+      "exit_code": 0,
+      "stdout": "39839cd5243386b748d20a26dd7888ef9c385661b77d3675661c6cbe5cf93d33\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "inspect",
+        "--format",
+        "{{json .State}}",
+        "39839cd5243386b748d20a26dd7888ef9c385661b77d3675661c6cbe5cf93d33"
+      ],
+      "start": "2026-10-08T09:21:56.788944+00:00",
+      "exit_code": 0,
+      "stdout": "{\"Status\":\"running\",\"Running\":true,\"Paused\":false,\"Restarting\":false,\"OOMKilled\":false,\"Dead\":false,\"Pid\":3815817,\"ExitCode\":0,\"Error\":\"\",\"StartedAt\":\"2026-10-08T09:21:44.433175105Z\",\"FinishedAt\":\"2026-10-08T09:21:44.055083465Z\",\"Health\":{\"Status\":\"healthy\",\"FailingStreak\":0,\"Log\":[{\"Start\":\"2026-10-08T17:21:05.822261625+08:00\",\"End\":\"2026-10-08T17:21:06.019114037+08:00\",\"ExitCode\":0,\"Output\":\"\"},{\"Start\":\"2026-10-08T17:21:16.020059172+08:00\",\"End\":\"2026-10-08T17:21:16.222149791+08:00\",\"ExitCode\":0,\"Output\":\"\"},{\"Start\":\"2026-10-08T17:21:26.223261423+08:00\",\"End\":\"2026-10-08T17:21:26.417910225+08:00\",\"ExitCode\":0,\"Output\":\"\"},{\"Start\":\"2026-10-08T17:21:36.419516621+08:00\",\"End\":\"2026-10-08T17:21:36.620535083+08:00\",\"ExitCode\":0,\"Output\":\"\"},{\"Start\":\"2026-10-08T17:21:54.977928146+08:00\",\"End\":\"2026-10-08T17:21:55.241678778+08:00\",\"ExitCode\":0,\"Output\":\"\"}]}}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "compose",
+        "--env-file",
+        ".env",
+        "--env-file",
+        ".runtime.env",
+        "ps",
+        "-q",
+        "static-analysis"
+      ],
+      "start": "2026-10-08T09:21:56.819754+00:00",
+      "exit_code": 0,
+      "stdout": "067dbdd7231d633f4f2f7049e8bc5725bf29f2bdb9a1f619a8ab09e241c9b4db\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "inspect",
+        "--format",
+        "{{json .State}}",
+        "067dbdd7231d633f4f2f7049e8bc5725bf29f2bdb9a1f619a8ab09e241c9b4db"
+      ],
+      "start": "2026-10-08T09:21:56.917183+00:00",
+      "exit_code": 0,
+      "stdout": "{\"Status\":\"running\",\"Running\":true,\"Paused\":false,\"Restarting\":false,\"OOMKilled\":false,\"Dead\":false,\"Pid\":3815900,\"ExitCode\":0,\"Error\":\"\",\"StartedAt\":\"2026-10-08T09:21:44.643898061Z\",\"FinishedAt\":\"2026-10-08T09:21:44.033553329Z\",\"Health\":{\"Status\":\"healthy\",\"FailingStreak\":0,\"Log\":[{\"Start\":\"2026-10-08T17:21:04.166376052+08:00\",\"End\":\"2026-10-08T17:21:04.307353196+08:00\",\"ExitCode\":0,\"Output\":\"\"},{\"Start\":\"2026-10-08T17:21:14.308151657+08:00\",\"End\":\"2026-10-08T17:21:14.449493027+08:00\",\"ExitCode\":0,\"Output\":\"\"},{\"Start\":\"2026-10-08T17:21:24.450571964+08:00\",\"End\":\"2026-10-08T17:21:24.592172265+08:00\",\"ExitCode\":0,\"Output\":\"\"},{\"Start\":\"2026-10-08T17:21:34.593100533+08:00\",\"End\":\"2026-10-08T17:21:34.733582007+08:00\",\"ExitCode\":0,\"Output\":\"\"},{\"Start\":\"2026-10-08T17:21:54.990683278+08:00\",\"End\":\"2026-10-08T17:21:55.15222751+08:00\",\"ExitCode\":0,\"Output\":\"\"}]}}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python3",
+        "-c",
+        "import importlib.util,os,pathlib; s=importlib.util.spec_from_file_location('release_control','/opt/codeaudit-releases/main567/source/scripts/control.py');m=importlib.util.module_from_spec(s);s.loader.exec_module(m);m.ROOT=pathlib.Path('/opt/codeaudit-releases/main567/runtime');os.chdir(m.ROOT);m.health()"
+      ],
+      "start": "2026-10-08T09:21:56.947864+00:00",
+      "exit_code": 0,
+      "stdout": "NAME                                  IMAGE                                                                                                   COMMAND                  SERVICE           CREATED         STATUS                    PORTS\ncodeaudit-main567-agent-compose-1     ghcr.io/chaitin/agent-compose@sha256:3117226250256b03d25815bd1bb584ade5ac225b83f55d527be122b8b75a61e8   \"/usr/bin/tini -- /a…\"   agent-compose     5 minutes ago   Up 12 seconds (healthy)   172.17.0.1:17422->7410/tcp\ncodeaudit-main567-octobus-1           sha256:f140f0a72acc35b48bdc5c144a0f87b25cd77d3d14f51221f2d948007f33ec3c                                 \"octobus serve\"          octobus           5 minutes ago   Up 12 seconds (healthy)   172.17.0.1:19015->9000/tcp\ncodeaudit-main567-repo-tools-1        sha256:f140f0a72acc35b48bdc5c144a0f87b25cd77d3d14f51221f2d948007f33ec3c                                 \"/opt/codeaudit-venv…\"   repo-tools        5 minutes ago   Up 12 seconds (healthy)   \ncodeaudit-main567-static-analysis-1   sha256:f140f0a72acc35b48bdc5c144a0f87b25cd77d3d14f51221f2d948007f33ec3c                                 \"/opt/codeaudit-venv…\"   static-analysis   5 minutes ago   Up 12 seconds (healthy)   \nSTATUS  UPTIME                         VERSION\nOK      2026-10-08 17:21:57 CST +0800  v2607.10.0\nMCP registered: codeaudit-repo-tools__codeaudit-v2-tools__execute_tool\n",
+      "stderr": "time=\"2026-10-08T17:21:57+08:00\" level=warning msg=\"volume \\\"codeaudit-main567-agent-data\\\" already exists but was not created by Docker Compose. Use `external: true` to use an existing volume\"\n Container codeaudit-main567-codeaudit-agent-run-5cdb4e969bef Creating \n Container codeaudit-main567-codeaudit-agent-run-5cdb4e969bef Created \n"
+    },
+    {
+      "command": [
+        "runuser",
+        "-u",
+        "codeaudit-reviewer",
+        "--",
+        "sudo",
+        "-n",
+        "/usr/local/bin/codeaudit-review",
+        "projects"
+      ],
+      "start": "2026-10-08T09:21:58.136190+00:00",
+      "exit_code": 0,
+      "stdout": "ID            NAME             CONFIG FILE                                   AGENTS  SCHEDULERS\nb4946111ed94  codeaudit-final  /data/work/codeaudit-final/agent-compose.yml  1       1\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "runuser",
+        "-u",
+        "codeaudit-reviewer",
+        "--",
+        "sudo",
+        "-n",
+        "/usr/local/bin/codeaudit-review",
+        "triggers"
+      ],
+      "start": "2026-10-08T09:21:58.368833+00:00",
+      "exit_code": 0,
+      "stdout": "SCHEDULER     AGENT    TRIGGER         KIND  SOURCE  ENABLED\n64b1f7a034f3  auditor  daily-v2-audit  cron  script  true\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "runuser",
+        "-u",
+        "codeaudit-reviewer",
+        "--",
+        "sudo",
+        "-n",
+        "/usr/local/bin/codeaudit-review",
+        "methods"
+      ],
+      "start": "2026-10-08T09:21:58.601462+00:00",
+      "exit_code": 0,
+      "stdout": "{\n  \"methods\": [\n    {\n      \"CapsetInstanceID\": \"codeaudit-v2:codeaudit-v2-tools\",\n      \"CreatedAt\": \"2026-10-08T09:17:13.673482637Z\",\n      \"Enabled\": true,\n      \"ID\": \"codeaudit-v2:codeaudit-v2-tools:codeaudit.v2.RepositoryTools/ExecuteTool\",\n      \"MCPToolName\": \"codeaudit-repo-tools__codeaudit-v2-tools__execute_tool\",\n      \"MethodFullName\": \"codeaudit.v2.RepositoryTools/ExecuteTool\",\n      \"RestAlias\": \"\",\n      \"UpdatedAt\": \"2026-10-08T09:17:13.673482637Z\"\n    }\n  ]\n}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "runuser",
+        "-u",
+        "codeaudit-reviewer",
+        "--",
+        "sudo",
+        "-n",
+        "/usr/local/bin/codeaudit-review",
+        "runs"
+      ],
+      "start": "2026-10-08T09:21:58.833355+00:00",
+      "exit_code": 0,
+      "stdout": "RUN ID        AGENT    TRIGGER         STATUS     SANDBOXES     STARTED                   DURATION\n28250be863ed  auditor  daily-v2-audit  succeeded  05e5c8c9af73  2026-10-08T09:18:47.744Z  20.969s\n",
+      "stderr": ""
+    }
+  ]
+}

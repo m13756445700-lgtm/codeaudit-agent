@@ -1,0 +1,8 @@
+SOURCE_SHA=567a9aeed8429866c8e8cd551ddb596627bdd7ae
+START=2026-10-08T07:24:38.457303+00:00
+COMMAND=['git', 'clone', '--no-hardlinks', '--no-checkout', '/Users/bo/codeaudit-v2-final', '/Users/bo/.codex-b/worktrees/p0-evidence-recovery/codeaudit-v2-final/.internal/p2c/source']
+Cloning into '/Users/bo/.codex-b/worktrees/p0-evidence-recovery/codeaudit-v2-final/.internal/p2c/source'...
+done.
+
+EXIT_CODE=0
+END=2026-10-08T07:24:39.081500+00:00

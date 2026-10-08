@@ -1,0 +1,6 @@
+{
+  "SOURCE_SHA": "567a9aeed8429866c8e8cd551ddb596627bdd7ae",
+  "initial_status": "CLEAN",
+  "source": "NEW clean clone seeded by content-addressed Git objects; imported exact GitHub signed main commit; SHA and Git tree independently verified",
+  "path": "/Users/bo/.codex-b/worktrees/p0-evidence-recovery/codeaudit-v2-final/.internal/p2c/source"
+}

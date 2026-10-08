@@ -1,0 +1,7 @@
+{
+  "start": "2026-10-08T07:51:02.738949+00:00",
+  "finish": "2026-10-08T07:51:11.414362+00:00",
+  "exit_code": 0,
+  "stderr": "",
+  "scope": "SSH root read-only inspection; no backup, restart, database open or service mutation"
+}

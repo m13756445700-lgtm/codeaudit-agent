@@ -1,0 +1,12 @@
+{
+  "Dockerfile": "aa7940814e3f892c61d1ead8935ac3ca67975b7bf4b032047782aa4d29771502",
+  "docker-compose.yml": "984b0697a8ed9cdca8c319296e318a595448016e8c9dc13a4ca70a6d6ad5726b",
+  "agent-compose.yml": "cc5fcbca5260dcfbd6ba9c63ecefc9174420a2aa9a0b1b191319a259dfbe3f32",
+  "requirements-dev.txt": "1fcf2c65c4b921d732cf0015678870b668fc56de66e3ea95db1e5b6a2427a2b4",
+  "pyproject.toml": "af1c8d57986959630dd36a1ba975f2e8614a603e495bffbcef424d3b9b9b1713",
+  "scripts/run-agent.py": "8b6d20ef39e5cede6ac68d79406c6856bd93395c653a1b1103151c46e3e1b4d6",
+  "scripts/control.py": "aa74e7d2c98748a66d518c198b71a79cfd44861389deb6e42070bec7a9d29eb2",
+  "agent/v2/engine.py": "0b5112769fc9c087746071a25796c97f5eb304bee41a2945db147e080d47d023",
+  "agent/v2/model.py": "7bdd0a833e5ea4a07a104fb7e48d029ae08154d5bc1b1f6905fce0c06e1b978f",
+  "agent/v2/transport.py": "22511ada54710ca2ab49a348a8150d54123eee4e5d50d12742627f8c3a1d1fee"
+}

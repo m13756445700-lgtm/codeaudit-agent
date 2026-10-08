@@ -1,0 +1,22 @@
+{
+  "command": [
+    "ssh",
+    "-i",
+    "/Users/bo/Documents/alipay-lxb.pem",
+    "-o",
+    "IdentitiesOnly=yes",
+    "-o",
+    "StrictHostKeyChecking=yes",
+    "-o",
+    "BatchMode=yes",
+    "-o",
+    "ConnectTimeout=10",
+    "root@8.130.121.3",
+    "python3 -"
+  ],
+  "start": "2026-10-08T07:29:25.603036+00:00",
+  "end": "2026-10-08T07:29:29.832959+00:00",
+  "exit_code": 0,
+  "stderr": "",
+  "mode": "READ_ONLY; Docker environment values removed remotely before output"
+}

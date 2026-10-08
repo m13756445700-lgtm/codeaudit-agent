@@ -1,0 +1,55 @@
+{
+  "checked_at": "2026-10-08T08:08:48.011025+00:00",
+  "main_sha": "567a9aeed8429866c8e8cd551ddb596627bdd7ae",
+  "source_clean": true,
+  "shell_templates_syntax_only": [
+    {
+      "document": "15_P2C1_BACKUP_RESTORE_REVIEW.md",
+      "block": 1,
+      "exit_code": 0,
+      "stderr": ""
+    },
+    {
+      "document": "15_P2C1_BACKUP_RESTORE_REVIEW.md",
+      "block": 2,
+      "exit_code": 0,
+      "stderr": ""
+    },
+    {
+      "document": "15_P2C1_BACKUP_RESTORE_REVIEW.md",
+      "block": 3,
+      "exit_code": 0,
+      "stderr": ""
+    },
+    {
+      "document": "15_P2C1_BACKUP_RESTORE_REVIEW.md",
+      "block": 4,
+      "exit_code": 0,
+      "stderr": ""
+    },
+    {
+      "document": "16_P2C1_EXAMINER_ACCESS_REVIEW.md",
+      "block": 1,
+      "exit_code": 0,
+      "stderr": ""
+    },
+    {
+      "document": "16_P2C1_EXAMINER_ACCESS_REVIEW.md",
+      "block": 2,
+      "exit_code": 0,
+      "stderr": ""
+    }
+  ],
+  "no_production_commands_executed": true,
+  "scope_exclusions": [
+    "real examiner SSH: no private key",
+    "backup/restore/restart/import/deploy",
+    "paid audit/model E2E"
+  ],
+  "historical_limits_preserved": true,
+  "report_files": {
+    "docs/final-remediation/15_P2C1_BACKUP_RESTORE_REVIEW.md": "9bcf394f910cb768da75c983cfe0679078cd6f9762909c38240cf4e3c4cf10aa",
+    "docs/final-remediation/16_P2C1_EXAMINER_ACCESS_REVIEW.md": "dad6983802241a7f783be88cf10f84155e8e14d0cdd9056da1fd44e1127bba5e",
+    "evaluation/final-remediation/p2-server-preflight/p2c1-result.json": "58c754e2cd9dffc434b43f7c898a0ee3c66b89af441253d72d4f30b437311ae7"
+  }
+}

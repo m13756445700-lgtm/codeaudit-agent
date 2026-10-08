@@ -1,0 +1,189 @@
+{
+  "status": "DEPLOYED",
+  "deployed_at": "2026-10-08T09:17:17.627881+00:00",
+  "old_containers_stopped": [
+    "codeaudit-github-agent-compose-1",
+    "codeaudit-github-octobus-1",
+    "codeaudit-github-repo-tools-1",
+    "codeaudit-github-static-analysis-1",
+    "codeaudit-submit20-octobus-1",
+    "codeaudit-submit20-repo-tools-1",
+    "codeaudit-submit20-static-analysis-1"
+  ],
+  "legacy_config_path": "/opt/codeaudit-v2-legacy-before-main567",
+  "examiner_root": "/opt/codeaudit-v2",
+  "examiner_root_target": "/opt/codeaudit-releases/main567/runtime",
+  "DEPLOYED_SOURCE_SHA": "567a9aeed8429866c8e8cd551ddb596627bdd7ae",
+  "DEPLOYED_COMPOSE_SHA256": "b50a17df6cc1e3a95071b9fd0729a87fea952eee22b1ab1014f606d9eecd2cdc",
+  "operations": [
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "start": "2026-10-08T09:16:37.636924+00:00",
+      "exit_code": 0,
+      "stdout": "567a9aeed8429866c8e8cd551ddb596627bdd7ae\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "status",
+        "--porcelain"
+      ],
+      "start": "2026-10-08T09:16:37.639407+00:00",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "inspect",
+        "codeaudit-github-agent-compose-1",
+        "codeaudit-github-octobus-1",
+        "codeaudit-github-repo-tools-1",
+        "codeaudit-github-static-analysis-1",
+        "codeaudit-submit20-octobus-1",
+        "codeaudit-submit20-repo-tools-1",
+        "codeaudit-submit20-static-analysis-1"
+      ],
+      "start": "2026-10-08T09:16:37.674283+00:00",
+      "exit_code": 0,
+      "stdout": "[OMITTED_RAW_INSPECT]",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "network",
+        "inspect",
+        "codeaudit-github_default"
+      ],
+      "start": "2026-10-08T09:16:37.712119+00:00",
+      "exit_code": 0,
+      "stdout": "[OMITTED_RAW_INSPECT]",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "network",
+        "inspect",
+        "codeaudit-github_capabilities"
+      ],
+      "start": "2026-10-08T09:16:37.750271+00:00",
+      "exit_code": 0,
+      "stdout": "[OMITTED_RAW_INSPECT]",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "network",
+        "inspect",
+        "codeaudit-submit20_default"
+      ],
+      "start": "2026-10-08T09:16:37.784676+00:00",
+      "exit_code": 0,
+      "stdout": "[OMITTED_RAW_INSPECT]",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "network",
+        "inspect",
+        "codeaudit-submit20_capabilities"
+      ],
+      "start": "2026-10-08T09:16:37.818675+00:00",
+      "exit_code": 0,
+      "stdout": "[OMITTED_RAW_INSPECT]",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "ps",
+        "-q"
+      ],
+      "start": "2026-10-08T09:16:37.850990+00:00",
+      "exit_code": 0,
+      "stdout": "ba658d090e21\n3e50b8c92626\ne4ee47ce123a\nad1d3c6da248\nf915be4647b5\nabecc154f8fa\n4cb4ed19e8e3\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "inspect",
+        "ba658d090e21",
+        "3e50b8c92626",
+        "e4ee47ce123a",
+        "ad1d3c6da248",
+        "f915be4647b5",
+        "abecc154f8fa",
+        "4cb4ed19e8e3"
+      ],
+      "start": "2026-10-08T09:16:37.948791+00:00",
+      "exit_code": 0,
+      "stdout": "[OMITTED_RAW_INSPECT]",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "stop",
+        "codeaudit-github-agent-compose-1",
+        "codeaudit-github-octobus-1",
+        "codeaudit-github-repo-tools-1",
+        "codeaudit-github-static-analysis-1",
+        "codeaudit-submit20-octobus-1",
+        "codeaudit-submit20-repo-tools-1",
+        "codeaudit-submit20-static-analysis-1"
+      ],
+      "start": "2026-10-08T09:16:37.987315+00:00",
+      "exit_code": 0,
+      "stdout": "codeaudit-github-agent-compose-1\ncodeaudit-github-octobus-1\ncodeaudit-github-repo-tools-1\ncodeaudit-github-static-analysis-1\ncodeaudit-submit20-octobus-1\ncodeaudit-submit20-repo-tools-1\ncodeaudit-submit20-static-analysis-1\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "compose",
+        "--env-file",
+        ".env",
+        "--env-file",
+        ".runtime.env",
+        "up",
+        "-d",
+        "--no-build",
+        "--pull",
+        "never",
+        "--wait",
+        "--wait-timeout",
+        "180",
+        "octobus",
+        "repo-tools",
+        "static-analysis",
+        "agent-compose"
+      ],
+      "start": "2026-10-08T09:16:39.124384+00:00",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "time=\"2026-10-08T17:16:39+08:00\" level=warning msg=\"volume \\\"codeaudit-main567-agent-data\\\" already exists but was not created by Docker Compose. Use `external: true` to use an existing volume\"\n Container codeaudit-main567-workspace-init-1 Creating \n Network codeaudit-main567_default Creating \n Network codeaudit-main567_default Creating \n Volume codeaudit-main567_octobus-data Creating \n Volume codeaudit-main567_octobus-data Creating \n Network codeaudit-main567_capabilities Creating \n Network codeaudit-main567_capabilities Creating \n Volume codeaudit-main567_octobus-data Created \n Volume codeaudit-main567_octobus-data Created \n Network codeaudit-main567_capabilities Created \n Network codeaudit-main567_capabilities Created \n Network codeaudit-main567_default Created \n Network codeaudit-main567_default Created \n Container codeaudit-main567-workspace-init-1 Created \n Container codeaudit-main567-static-analysis-1 Creating \n Container codeaudit-main567-agent-compose-1 Creating \n Container codeaudit-main567-repo-tools-1 Creating \n Container codeaudit-main567-agent-compose-1 Created \n Container codeaudit-main567-static-analysis-1 Created \n Container codeaudit-main567-repo-tools-1 Created \n Container codeaudit-main567-octobus-1 Creating \n Container codeaudit-main567-octobus-1 Created \n Container codeaudit-main567-workspace-init-1 Starting \n Container codeaudit-main567-workspace-init-1 Started \n Container codeaudit-main567-workspace-init-1 Waiting \n Container codeaudit-main567-workspace-init-1 Waiting \n Container codeaudit-main567-workspace-init-1 Waiting \n Container codeaudit-main567-workspace-init-1 Exited \n Container codeaudit-main567-static-analysis-1 Starting \n Container codeaudit-main567-workspace-init-1 Exited \n Container codeaudit-main567-repo-tools-1 Starting \n Container codeaudit-main567-workspace-init-1 Exited \n Container codeaudit-main567-agent-compose-1 Starting \n Container codeaudit-main567-static-analysis-1 Started \n Container codeaudit-main567-repo-tools-1 Started \n Container codeaudit-main567-repo-tools-1 Waiting \n Container codeaudit-main567-static-analysis-1 Waiting \n Container codeaudit-main567-workspace-init-1 Waiting \n Container codeaudit-main567-agent-compose-1 Started \n Container codeaudit-main567-workspace-init-1 Exited \n Container codeaudit-main567-static-analysis-1 Healthy \n Container codeaudit-main567-repo-tools-1 Healthy \n Container codeaudit-main567-octobus-1 Starting \n Container codeaudit-main567-octobus-1 Started \n Container codeaudit-main567-octobus-1 Waiting \n Container codeaudit-main567-repo-tools-1 Waiting \n Container codeaudit-main567-static-analysis-1 Waiting \n Container codeaudit-main567-workspace-init-1 Waiting \n Container codeaudit-main567-agent-compose-1 Waiting \n Container codeaudit-main567-workspace-init-1 Exited \n Container codeaudit-main567-agent-compose-1 Healthy \n Container codeaudit-main567-static-analysis-1 Healthy \n Container codeaudit-main567-repo-tools-1 Healthy \n Container codeaudit-main567-octobus-1 Healthy \n"
+    },
+    {
+      "command": [
+        "python3",
+        "-c",
+        "import importlib.util,os,pathlib; s=importlib.util.spec_from_file_location('release_control','/opt/codeaudit-releases/main567/source/scripts/control.py'); m=importlib.util.module_from_spec(s); s.loader.exec_module(m); m.ROOT=pathlib.Path('/opt/codeaudit-releases/main567/runtime'); os.chdir(m.ROOT); m.bootstrap(); m.health()"
+      ],
+      "start": "2026-10-08T09:16:57.030990+00:00",
+      "exit_code": 0,
+      "stdout": "ID            NAME             TYPE     ACTION\nb4946111ed94  codeaudit-final  project  created\n52fe26786e8f  auditor          agent    created\n64b1f7a034f3  auditor          trigger  created\nNAME                                  IMAGE                                                                                                   COMMAND                  SERVICE           CREATED          STATUS                    PORTS\ncodeaudit-main567-agent-compose-1     ghcr.io/chaitin/agent-compose@sha256:3117226250256b03d25815bd1bb584ade5ac225b83f55d527be122b8b75a61e8   \"/usr/bin/tini -- /a…\"   agent-compose     37 seconds ago   Up 35 seconds (healthy)   172.17.0.1:17422->7410/tcp\ncodeaudit-main567-octobus-1           sha256:f140f0a72acc35b48bdc5c144a0f87b25cd77d3d14f51221f2d948007f33ec3c                                 \"octobus serve\"          octobus           37 seconds ago   Up 25 seconds (healthy)   172.17.0.1:19015->9000/tcp\ncodeaudit-main567-repo-tools-1        sha256:f140f0a72acc35b48bdc5c144a0f87b25cd77d3d14f51221f2d948007f33ec3c                                 \"/opt/codeaudit-venv…\"   repo-tools        37 seconds ago   Up 35 seconds (healthy)   \ncodeaudit-main567-static-analysis-1   sha256:f140f0a72acc35b48bdc5c144a0f87b25cd77d3d14f51221f2d948007f33ec3c                                 \"/opt/codeaudit-venv…\"   static-analysis   37 seconds ago   Up 36 seconds (healthy)   \nSTATUS  UPTIME                         VERSION\nOK      2026-10-08 17:17:16 CST +0800  v2607.10.0\nMCP registered: codeaudit-repo-tools__codeaudit-v2-tools__execute_tool\n",
+      "stderr": "time=\"2026-10-08T17:17:16+08:00\" level=warning msg=\"volume \\\"codeaudit-main567-agent-data\\\" already exists but was not created by Docker Compose. Use `external: true` to use an existing volume\"\n Container codeaudit-main567-codeaudit-agent-run-276f744f8c9b Creating \n Container codeaudit-main567-codeaudit-agent-run-276f744f8c9b Created \n"
+    }
+  ]
+}

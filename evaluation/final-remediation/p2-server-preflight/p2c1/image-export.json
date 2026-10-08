@@ -1,0 +1,86 @@
+{
+  "scope": "local artifact export only; no remote copy/import/service operation",
+  "command": [
+    "docker",
+    "image",
+    "save",
+    "-o",
+    "/Users/bo/.codex-b/worktrees/p0-evidence-recovery/codeaudit-v2-final/.internal/p2c1/final-main-image.tar",
+    "codeaudit-release-candidate:567a9aeed8429866c8e8cd551ddb596627bdd7ae"
+  ],
+  "started_at": "2026-10-08T07:55:38.435890+00:00",
+  "finished_at": "2026-10-08T07:56:05.956804+00:00",
+  "exit_code": 0,
+  "stderr": "",
+  "archive_sha256": "fd1c4d338146ed77b21fe1fb986a450f6f08d88c6097cc48802872f6d86529e8",
+  "archive_bytes": 1922452992,
+  "archive_member_count": 45,
+  "manifest.json": [
+    {
+      "Config": "blobs/sha256/c4f4ae8ca396c842d71249426f0da104b1d6e713ab9267b437516f39dc8e7e0b",
+      "RepoTags": [
+        "codeaudit-release-candidate:567a9aeed8429866c8e8cd551ddb596627bdd7ae"
+      ],
+      "Layers": [
+        "blobs/sha256/597c6c618d36213af657a6a8444a5d87801f9a219682b206ad21ccb8f3e57bbd",
+        "blobs/sha256/cbc97fb13426450c76659f6c456a10258f0b78aff9a3658416e07caec1253ba2",
+        "blobs/sha256/46c3564e3d19563e8a6cc3b037eb996e589a9c99ffd1e53ba0b68d0027d2b695",
+        "blobs/sha256/e3fcd5efe122aa6d319bb02ad5f2a0fd349ebd84d5fdaa3129195e269cf22163",
+        "blobs/sha256/da41d5a9bbd639bd571eb65d4d4a41f332b592ab4528305e71b702595537b8b0",
+        "blobs/sha256/1fae9d2a0c8375c0b0fd36346444a8435f60df2187695fc2e06c8cb1c0c491f9",
+        "blobs/sha256/9d531eb4dc1455e7f8a23998182b464bea618987f1b27a98893178e268e5dcab",
+        "blobs/sha256/e800d50093678cb7d764a3918a32799eb2f431ea5f7d5e2a3c9922e809d2d57d",
+        "blobs/sha256/f50fa907e124b3543714ba9561f6ea38edc8c67482cb46659ba6dd56c8df5766",
+        "blobs/sha256/cad55fb178807a9390948360183f4e881d92388112ac5891707fdf7b0692483c",
+        "blobs/sha256/d7872bf039319b6e3196c778b18ba0f774e050fa2cc9920d5ea4617dacccc399",
+        "blobs/sha256/aefa5ec343148c5849e843eb215ceec88b0d0c5353f53505f77a8f56b9e00f19",
+        "blobs/sha256/c76590a50c7e400d4801f10c905d3a1a9cf77167d0169a9b9524667affdfb5e3",
+        "blobs/sha256/4c1fb15db056a304f599260fa21110f360953355da1eaa06d4ee51a30a72ce5d",
+        "blobs/sha256/bc42aef8990b2c50b0e672af7248b4372de4cbe5831e54a38c6ad26c52e122eb",
+        "blobs/sha256/d513b6eeecda745ebbbbecd796410a711759987e612f6f5f5cd005427e92e0a7",
+        "blobs/sha256/b36ad60f8d5f2206e513327a4a50e74deaccf6edba4da5f9d119e23cbd7f5458",
+        "blobs/sha256/82f9c8c4dfe95a8c3de2b9764d8a7fe9885e4d739703ca3307eb0fe6e915382a",
+        "blobs/sha256/78df354d45ce0a5c05846b0058cab85723b6f8f9dfd9bf02dc118e466e21646e",
+        "blobs/sha256/049d5fd1be4a085cd6076b2e3a062cc37741eeaa2dc8fa21d62b3ad47d2c1c96",
+        "blobs/sha256/4c21f025598ec1883794b6f6361d8d766faad4972154e3f4d7341ba33a61692d",
+        "blobs/sha256/9e475363dbcad97e30770119c0dfcbbb68ab0aabac2163e17b034725e99706f8",
+        "blobs/sha256/e736df13b7e4cde06a0f2d5fe66e8c613f15456bdce3226627d359215b2f59c0",
+        "blobs/sha256/d3785a8c653c6f5ed9dcf068ae63225926b0f5f43ad349de3e57088566777140",
+        "blobs/sha256/0ec4af991252e04341beec2e0941120ba52b2343f52afa7e1d022803a7247a2a",
+        "blobs/sha256/6c41fee195d11d5fcddb7c4f8857838662a91c7e31a8f1bc43b4fee221eda53c",
+        "blobs/sha256/cbab596b065ff00fe0e4229f35d84d2797f792d11147e39c264dce8006be6fc1",
+        "blobs/sha256/14743b4d3fc44da782e531cb1dc1ae3ece867d5054b315013842e05fc12d860a",
+        "blobs/sha256/a1446492a55c9a74f63fefdb63a1b828d790d13094f0b43e2d978f88cb5cbf3e",
+        "blobs/sha256/575b6e645e346375b61f75c53deed78f2e67d85a628da5e6cfae3750cbb36baf",
+        "blobs/sha256/45ed347cf4673e670a2e072a7692e8ff38c7c79af11ba0b5059034f0559d2ff2",
+        "blobs/sha256/12c8354ba199f639359e33e03327f1d8b38e32d1452737b83b2d192484cd9e47",
+        "blobs/sha256/7528ea69435f63e628790417c320036c1241ae42ccc78d9e13d95b535f463abc",
+        "blobs/sha256/4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1"
+      ]
+    }
+  ],
+  "index.json": {
+    "schemaVersion": 2,
+    "mediaType": "application/vnd.oci.image.index.v1+json",
+    "manifests": [
+      {
+        "mediaType": "application/vnd.oci.image.index.v1+json",
+        "digest": "sha256:1b207430a18eac15161663504911263030cc3ece4b4690153556d954c66163e6",
+        "size": 856,
+        "annotations": {
+          "io.containerd.image.name": "docker.io/library/codeaudit-release-candidate:567a9aeed8429866c8e8cd551ddb596627bdd7ae",
+          "org.opencontainers.image.ref.name": "567a9aeed8429866c8e8cd551ddb596627bdd7ae"
+        }
+      }
+    ]
+  },
+  "oci-layout": {
+    "imageLayoutVersion": "1.0.0"
+  },
+  "image_config": {
+    "architecture": "amd64",
+    "os": "linux",
+    "oci_revision": "567a9aeed8429866c8e8cd551ddb596627bdd7ae"
+  },
+  "config_blob_sha256": "c4f4ae8ca396c842d71249426f0da104b1d6e713ab9267b437516f39dc8e7e0b"
+}
