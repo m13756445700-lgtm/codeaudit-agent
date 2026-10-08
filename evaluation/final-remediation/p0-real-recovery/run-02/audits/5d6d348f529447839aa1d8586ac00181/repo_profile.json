@@ -1,0 +1,23 @@
+{
+  "languages": {
+    "Python": 3
+  },
+  "frameworks": [],
+  "files": [
+    "controller.py",
+    "security_config.py",
+    "service.py"
+  ],
+  "dependencies": [],
+  "surface_hints": {
+    "authentication": [
+      "security_config.py"
+    ],
+    "authorization": [
+      "service.py"
+    ]
+  },
+  "mode": "identified",
+  "audit_priorities": null,
+  "note": "Lexical navigation hints, not security conclusions. Priorities must be supplied by AI."
+}

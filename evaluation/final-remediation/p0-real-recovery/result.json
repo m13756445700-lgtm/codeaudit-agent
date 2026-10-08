@@ -1,0 +1,246 @@
+{
+  "phase": "P0.5",
+  "P0_FINAL_GATE": "INCONCLUSIVE",
+  "P0_REAL_RECOVERY": "INCONCLUSIVE",
+  "REAL_MODEL": true,
+  "baseline_sha": "0733933113faee3121b2c5d692ef4ee1400d4d0d",
+  "tested_commit": "75996c6863c9193f3fce21b11e9faa4259b637b7",
+  "attempts": [
+    {
+      "attempt": 1,
+      "fixture": "A",
+      "audit_id": "f14017882f5b48b28fe67ca5baffa4be",
+      "provider": "api.deepseek.com",
+      "model": "deepseek-flash",
+      "commit_sha": "75996c6863c9193f3fce21b11e9faa4259b637b7",
+      "outcome": {
+        "status": "TEST_INCONCLUSIVE",
+        "reason": "NO_REJECTION_TRIGGERED",
+        "events": []
+      },
+      "workflow_status": "COMPLETE",
+      "tool_calls": 13,
+      "tokens": 132125,
+      "model_reads": [
+        {
+          "sequence": 4,
+          "arguments": {
+            "tool": "repo.read_range",
+            "arguments": {
+              "path": "catalog.py",
+              "start": 151,
+              "end": 180
+            },
+            "purpose": "Read remaining lines of declared file to complete coverage"
+          },
+          "gaps_before": [
+            {
+              "path": "catalog.py",
+              "missing_ranges": [
+                [
+                  151,
+                  180
+                ]
+              ],
+              "blocked_reason": null
+            }
+          ],
+          "gaps_after": []
+        }
+      ],
+      "settlements": [
+        {
+          "sequence": 10,
+          "arguments": {
+            "surface": "declared module review",
+            "status": "reviewed",
+            "files": [
+              "catalog.py"
+            ],
+            "reason": "catalog.py fully read (all 180 lines, sha256 28246f5c0509c48ddaca95ba7a553a0ac38b909861eee641dc0dcc782c4b6a9b). Entire content is integer constant assignments CATALOG_ENTRY_1..180 = 1..180. No imports, no function definitions, no SQL/DB/ORM/IO constructs. repo.list_files confirms catalog.py is the only repository file; repo.search for 'import' and 'def ' returned zero matches. The module does not implement SQL persistence and exposes no data-handling or injection surface.",
+            "assessment": "feature_absent",
+            "decision_ids": [],
+            "absence_evidence": [
+              {
+                "file": "catalog.py",
+                "line": 1,
+                "symbol": "CATALOG_ENTRY_1",
+                "evidence": "CATALOG_ENTRY_1 = 1",
+                "operation": "constant assignment"
+              },
+              {
+                "file": "catalog.py",
+                "line": 90,
+                "symbol": "CATALOG_ENTRY_90",
+                "evidence": "CATALOG_ENTRY_90 = 90",
+                "operation": "constant assignment"
+              },
+              {
+                "file": "catalog.py",
+                "line": 180,
+                "symbol": "CATALOG_ENTRY_180",
+                "evidence": "CATALOG_ENTRY_180 = 180",
+                "operation": "constant assignment"
+              }
+            ]
+          },
+          "result": {
+            "accepted": true,
+            "remaining": []
+          },
+          "error": null
+        }
+      ],
+      "trace_checksums_verified": true
+    },
+    {
+      "attempt": 2,
+      "fixture": "B",
+      "audit_id": "5d6d348f529447839aa1d8586ac00181",
+      "provider": "api.deepseek.com",
+      "model": "deepseek-flash",
+      "commit_sha": "75996c6863c9193f3fce21b11e9faa4259b637b7",
+      "outcome": {
+        "status": "TEST_INCONCLUSIVE",
+        "reason": "NO_REJECTION_TRIGGERED",
+        "events": []
+      },
+      "workflow_status": "COMPLETE",
+      "tool_calls": 13,
+      "tokens": 130491,
+      "model_reads": [
+        {
+          "sequence": 6,
+          "arguments": {
+            "tool": "repo.read_range",
+            "arguments": {
+              "path": "security_config.py",
+              "start": 151,
+              "end": 180
+            },
+            "purpose": "Read the remainder of security_config.py to find may_read implementation"
+          },
+          "gaps_before": [
+            {
+              "path": "security_config.py",
+              "missing_ranges": [
+                [
+                  151,
+                  180
+                ]
+              ],
+              "blocked_reason": null
+            }
+          ],
+          "gaps_after": []
+        }
+      ],
+      "settlements": [
+        {
+          "sequence": 17,
+          "arguments": {
+            "surface": "declared module review",
+            "status": "reviewed",
+            "files": [
+              "controller.py",
+              "service.py",
+              "security_config.py"
+            ],
+            "reason": "All three declared files read in full (controller.py 1-4, service.py 1-7, security_config.py 1-180). Assessed the declared property: invoice retrieval enforces authenticated same-tenant access. The sole entrypoint controller.get_invoice delegates to service.fetch_invoice, which fetches the record, calls may_read (the only call site), raises PermissionError on failure, and returns data only after the guard. may_read enforces fail-closed authentication and tenant_id equality. No bypass path exists; candidate vulnerabilities rejected as H1.",
+            "assessment": "decision",
+            "decision_ids": [
+              "H1"
+            ],
+            "absence_evidence": []
+          },
+          "result": {
+            "accepted": true,
+            "remaining": []
+          },
+          "error": null
+        }
+      ],
+      "trace_checksums_verified": true
+    },
+    {
+      "attempt": 3,
+      "fixture": "C",
+      "audit_id": "dd7dbb9e29ae4aae920e74932dc09d19",
+      "provider": "api.deepseek.com",
+      "model": "deepseek-flash",
+      "commit_sha": "75996c6863c9193f3fce21b11e9faa4259b637b7",
+      "outcome": {
+        "status": "TEST_INCONCLUSIVE",
+        "reason": "NO_REJECTION_TRIGGERED",
+        "events": []
+      },
+      "workflow_status": "COMPLETE",
+      "tool_calls": 14,
+      "tokens": 167875,
+      "model_reads": [
+        {
+          "sequence": 6,
+          "arguments": {
+            "tool": "repo.read_range",
+            "arguments": {
+              "path": "security_config.py",
+              "start": 83,
+              "end": 95
+            },
+            "purpose": "Read the skipped region where may_read is likely defined"
+          },
+          "gaps_before": [
+            {
+              "path": "security_config.py",
+              "missing_ranges": [
+                [
+                  84,
+                  89
+                ]
+              ],
+              "blocked_reason": null
+            }
+          ],
+          "gaps_after": []
+        }
+      ],
+      "settlements": [
+        {
+          "sequence": 18,
+          "arguments": {
+            "surface": "declared module review",
+            "status": "reviewed",
+            "files": [
+              "controller.py",
+              "service.py",
+              "security_config.py"
+            ],
+            "reason": "All three declared files read in full (controller 4/4, service 7/7, security_config 180/180 including the previously skipped 84-89 region containing may_read). Search confirmed a single may_read definition and single call site. The authenticated same-tenant access property is enforced: may_read denies unauthenticated users (line 85-86) and cross-tenant access (line 87-88); fetch_invoice raises PermissionError before the data return (service.py:5-7). No bypass path exists. Recorded as REJECTED (H1).",
+            "assessment": "decision",
+            "decision_ids": [
+              "H1"
+            ],
+            "absence_evidence": []
+          },
+          "result": {
+            "accepted": true,
+            "remaining": []
+          },
+          "error": null
+        }
+      ],
+      "trace_checksums_verified": true
+    }
+  ],
+  "successful_audit_id": null,
+  "total_tokens": 430491,
+  "product_code_changed_during_p05": false,
+  "fixture_specific_product_logic": false,
+  "historical_evidence_modified": false,
+  "historical_archive_sha256": "e02f2a6c2ef55364c2e2aa0816e6f5260542162b37c50edae25e5473fd3f62cb",
+  "full_pytest": {
+    "rerun_in_p05": false,
+    "reason": "Success prerequisite not met; unchanged product code. Prior P0 run225 passed0 failed0 skipped is historical, not rerun."
+  },
+  "stop_reason": "Three real-model attempts all proactively supplemented evidence; no NEEDS_MORE_EVIDENCE settlement rejection observed. No further paid attempts."
+}

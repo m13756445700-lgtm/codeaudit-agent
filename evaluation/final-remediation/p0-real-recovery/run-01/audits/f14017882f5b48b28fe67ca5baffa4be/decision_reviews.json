@@ -1,0 +1,27 @@
+[
+  {
+    "id": "H1",
+    "counterexample": "Could catalog.py contain SQL persistence hidden in a form not visible in the read lines, e.g., a string literal containing SQL, a call to an external DB helper, or a dynamically constructed query? A concrete counterexample would be a line like `QUERY = \"SELECT * FROM t WHERE id = \" + user_input` or `cursor.execute(...)`. No such line exists: all 180 lines are integer constant assignments, and repo.search for 'import' and 'def ' returned zero matches.",
+    "assessment": "The rejection rests on complete reads of the only repository file. Every line (1-180) is an integer constant assignment; there are no imports, functions, string literals, or DB API calls. The counterexample cannot be instantiated against the actual snapshot. The only residual uncertainty is out-of-scope: whether an external importer performs SQL elsewhere, which does not affect the verdict about this module.",
+    "outcome": "upheld",
+    "references": [
+      {
+        "evidence": "CATALOG_ENTRY_1 = 1",
+        "file": "catalog.py",
+        "line": 1,
+        "operation": "constant assignment",
+        "symbol": "CATALOG_ENTRY_1"
+      },
+      {
+        "evidence": "CATALOG_ENTRY_180 = 180",
+        "file": "catalog.py",
+        "line": 180,
+        "operation": "constant assignment",
+        "symbol": "CATALOG_ENTRY_180"
+      }
+    ],
+    "challenge_response": "No SQL, import, function, or string-literal construct exists in the fully read file; the counterexample cannot be constructed from the snapshot, so the REJECTED verdict stands.",
+    "decision_sha256": "d4cbe1553a428339e6beadbf03b0929a6e1cfc7937da64037c8a89f4580460b5",
+    "kind": "model_self_review"
+  }
+]

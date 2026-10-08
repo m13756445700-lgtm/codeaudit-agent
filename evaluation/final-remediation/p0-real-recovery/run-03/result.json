@@ -1,0 +1,214 @@
+{
+  "REAL_MODEL": true,
+  "fixture": "C",
+  "provider": "api.deepseek.com",
+  "model": "deepseek-flash",
+  "commit_sha": "75996c6863c9193f3fce21b11e9faa4259b637b7",
+  "audit_id": "dd7dbb9e29ae4aae920e74932dc09d19",
+  "conversation_run_id": "dd7dbb9e29ae4aae920e74932dc09d19",
+  "outcome": {
+    "status": "TEST_INCONCLUSIVE",
+    "reason": "NO_REJECTION_TRIGGERED",
+    "events": []
+  },
+  "summary": {
+    "coverage": {
+      "files_total": 3,
+      "files_read": 3,
+      "distinct_lines_read": 191,
+      "unread_files": [],
+      "scope": "tool-observed reads; not semantic audit completeness"
+    },
+    "status": "COMPLETE",
+    "audit_id": "dd7dbb9e29ae4aae920e74932dc09d19",
+    "model": "deepseek-flash",
+    "transport": "local-development",
+    "tool_calls": 14,
+    "elapsed_seconds": 39.88,
+    "counts": {
+      "REJECTED": 1
+    },
+    "failure": null,
+    "completion": {
+      "summary": "Audited the declared scope (controller.py, service.py, security_config.py) for the property: invoice retrieval enforces authenticated same-tenant access. All three files were read in full, including the previously skipped security_config.py lines 84-89 where may_read is defined. Trace: controller.get_invoice (controller.py:3-4) delegates to service.fetch_invoice; fetch_invoice looks up records[invoice_id] (service.py:4), calls may_read (service.py:5), raises PermissionError on denial (service.py:6), and only then returns amount/tenant_id (service.py:7). may_read (security_config.py:84-89) returns False for unauthenticated users (line 85-86) and for cross-tenant access via tenant_id inequality (line 87-88). Search confirmed a single may_read definition and a single call site, with no alternate path, monkeypatch, or default-allow branch. The guard dominates the sink, so the authz-bypass hypothesis H1 is REJECTED. Residual non-authz behaviors noted: KeyError on unknown invoice_id (existence oracle, denies rather than leaks) and exposure of the caller's own tenant_id.",
+      "limitations": [
+        "Scope limited to the three declared files; no other repository files were examined.",
+        "Conditional-code judgment assumes the operator-supplied user context is a trusted authenticated identity; the code does not itself authenticate the user, and real deployment identity construction was not available.",
+        "The None==None edge case (both user and invoice missing tenant_id) would pass the tenant check; this depends on operator-supplied data shape, not attacker input, and is recorded as a defense limitation.",
+        "No deployment exposure was evidenced; verdict is conditional_code with deployment_exposure=unknown."
+      ],
+      "surface_reviews": [
+        {
+          "surface": "declared module review",
+          "status": "reviewed",
+          "files": [
+            "controller.py",
+            "service.py",
+            "security_config.py"
+          ],
+          "reason": "All three declared files read in full (controller 4/4, service 7/7, security_config 180/180 including the skipped 84-89 region). Search confirmed a single may_read definition and single call site. Authenticated same-tenant access is enforced before the data return; no bypass path. Recorded as REJECTED (H1).",
+          "assessment": "decision",
+          "decision_ids": [
+            "H1"
+          ],
+          "absence_evidence": []
+        }
+      ]
+    },
+    "usage": [
+      {
+        "prompt_tokens": 9421,
+        "completion_tokens": 221,
+        "total_tokens": 9642,
+        "prompt_tokens_details": {
+          "cached_tokens": 5248
+        },
+        "prompt_cache_hit_tokens": 5248,
+        "prompt_cache_miss_tokens": 4173
+      },
+      {
+        "prompt_tokens": 10076,
+        "completion_tokens": 378,
+        "total_tokens": 10454,
+        "prompt_tokens_details": {
+          "cached_tokens": 9088
+        },
+        "prompt_cache_hit_tokens": 9088,
+        "prompt_cache_miss_tokens": 988
+      },
+      {
+        "prompt_tokens": 10861,
+        "completion_tokens": 543,
+        "total_tokens": 11404,
+        "prompt_tokens_details": {
+          "cached_tokens": 9728
+        },
+        "prompt_cache_hit_tokens": 9728,
+        "prompt_cache_miss_tokens": 1133
+      },
+      {
+        "prompt_tokens": 11440,
+        "completion_tokens": 228,
+        "total_tokens": 11668,
+        "prompt_tokens_details": {
+          "cached_tokens": 10496
+        },
+        "prompt_cache_hit_tokens": 10496,
+        "prompt_cache_miss_tokens": 944
+      },
+      {
+        "prompt_tokens": 11695,
+        "completion_tokens": 1970,
+        "total_tokens": 13665,
+        "prompt_tokens_details": {
+          "cached_tokens": 11008
+        },
+        "prompt_cache_hit_tokens": 11008,
+        "prompt_cache_miss_tokens": 687
+      },
+      {
+        "prompt_tokens": 13744,
+        "completion_tokens": 100,
+        "total_tokens": 13844,
+        "prompt_tokens_details": {
+          "cached_tokens": 11264
+        },
+        "prompt_cache_hit_tokens": 11264,
+        "prompt_cache_miss_tokens": 2480
+      },
+      {
+        "prompt_tokens": 14674,
+        "completion_tokens": 2028,
+        "total_tokens": 16702,
+        "prompt_tokens_details": {
+          "cached_tokens": 13312
+        },
+        "prompt_cache_hit_tokens": 13312,
+        "prompt_cache_miss_tokens": 1362
+      },
+      {
+        "prompt_tokens": 17132,
+        "completion_tokens": 2040,
+        "total_tokens": 19172,
+        "prompt_tokens_details": {
+          "cached_tokens": 14336
+        },
+        "prompt_cache_hit_tokens": 14336,
+        "prompt_cache_miss_tokens": 2796
+      },
+      {
+        "prompt_tokens": 19368,
+        "completion_tokens": 649,
+        "total_tokens": 20017,
+        "prompt_tokens_details": {
+          "cached_tokens": 16640
+        },
+        "prompt_cache_hit_tokens": 16640,
+        "prompt_cache_miss_tokens": 2728
+      },
+      {
+        "prompt_tokens": 20053,
+        "completion_tokens": 293,
+        "total_tokens": 20346,
+        "prompt_tokens_details": {
+          "cached_tokens": 18944
+        },
+        "prompt_cache_hit_tokens": 18944,
+        "prompt_cache_miss_tokens": 1109
+      },
+      {
+        "prompt_tokens": 20377,
+        "completion_tokens": 584,
+        "total_tokens": 20961,
+        "prompt_tokens_details": {
+          "cached_tokens": 19584
+        },
+        "prompt_cache_hit_tokens": 19584,
+        "prompt_cache_miss_tokens": 793
+      }
+    ],
+    "assessment_summary": {
+      "workflow_status": "COMPLETE",
+      "workflow_completion_is_not_safety": true,
+      "insufficient_evidence_ids": [],
+      "conditional_code_finding_ids": [],
+      "deployment_exposure_unknown_ids": [
+        "H1"
+      ],
+      "feature_absence_scope": [],
+      "notice": "Reference checks and file overlap do not prove semantic relevance. Feature absence is a model claim limited to the listed files."
+    },
+    "claim_critique_calls": 0,
+    "snapshot_sha256": "97a15eaa50bee0285811ce07a90b0cc85329ff6b89f03526b0447df2cfa0d173"
+  },
+  "final_state": {
+    "coverage": {
+      "files_total": 3,
+      "files_read": 3,
+      "distinct_lines_read": 191,
+      "unread_files": [],
+      "scope": "tool-observed reads; not semantic audit completeness"
+    },
+    "gaps": [],
+    "pending_evidence": {},
+    "surface_settlements": {
+      "declared module review": {
+        "surface": "declared module review",
+        "status": "reviewed",
+        "files": [
+          "controller.py",
+          "service.py",
+          "security_config.py"
+        ],
+        "reason": "All three declared files read in full (controller 4/4, service 7/7, security_config 180/180 including the previously skipped 84-89 region containing may_read). Search confirmed a single may_read definition and single call site. The authenticated same-tenant access property is enforced: may_read denies unauthenticated users (line 85-86) and cross-tenant access (line 87-88); fetch_invoice raises PermissionError before the data return (service.py:5-7). No bypass path exists. Recorded as REJECTED (H1).",
+        "assessment": "decision",
+        "decision_ids": [
+          "H1"
+        ],
+        "absence_evidence": []
+      }
+    }
+  },
+  "transport": "Local read-only tools; not OctoBus E2E",
+  "product_code_changed": false
+}

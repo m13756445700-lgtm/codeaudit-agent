@@ -1,0 +1,3 @@
+{
+  "task": "Assess whether invoice retrieval enforces authenticated same-tenant access across the declared controller, service and security configuration. Caller identity is an operator-supplied authenticated user context, and records is an operator-supplied invoice map; assess this conditional code scope, not unknown deployment. Investigate source and defenses and finish with evidence-based judgments and limitations."
+}

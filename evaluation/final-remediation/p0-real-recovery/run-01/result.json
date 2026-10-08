@@ -1,0 +1,227 @@
+{
+  "REAL_MODEL": true,
+  "fixture": "A",
+  "provider": "api.deepseek.com",
+  "model": "deepseek-flash",
+  "commit_sha": "75996c6863c9193f3fce21b11e9faa4259b637b7",
+  "audit_id": "f14017882f5b48b28fe67ca5baffa4be",
+  "conversation_run_id": "f14017882f5b48b28fe67ca5baffa4be",
+  "outcome": {
+    "status": "TEST_INCONCLUSIVE",
+    "reason": "NO_REJECTION_TRIGGERED",
+    "events": []
+  },
+  "summary": {
+    "coverage": {
+      "files_total": 1,
+      "files_read": 1,
+      "distinct_lines_read": 180,
+      "unread_files": [],
+      "scope": "tool-observed reads; not semantic audit completeness"
+    },
+    "status": "COMPLETE",
+    "audit_id": "f14017882f5b48b28fe67ca5baffa4be",
+    "model": "deepseek-flash",
+    "transport": "local-development",
+    "tool_calls": 13,
+    "elapsed_seconds": 25.72,
+    "counts": {
+      "REJECTED": 1
+    },
+    "failure": null,
+    "completion": {
+      "summary": "Audited the declared file scope (catalog.py, the only file in the repository). The module was fully read (all 180 lines, sha256 28246f5c0509c48ddaca95ba7a553a0ac38b909861eee641dc0dcc782c4b6a9b). Its entire content is integer constant assignments CATALOG_ENTRY_1..180 = 1..180. There are no imports, no function definitions, no SQL statements, no database/ORM/connection code, and no I/O. repo.list_files confirms catalog.py is the sole repository file; repo.search for 'import' and 'def ' returned zero matches. Conclusion: the module does NOT implement SQL persistence and exposes no injection, data-handling, or persistence attack surface. Hypothesis H1 (SQL persistence / injection surface) is REJECTED on direct implementation evidence; no other candidate sink exists, so no further false-positive rejections were required.",
+      "limitations": [
+        "Scope limited to the single declared file catalog.py; the repository contains no other files, so no cross-file callers, configuration, or deployment context could be examined.",
+        "No runtime, deployment, or dependency behavior was assessed; none is referenced by the module.",
+        "Absence of SQL persistence is established for the fully read declared file only, not for any external system that might import these constants."
+      ],
+      "surface_reviews": [
+        {
+          "surface": "declared module review",
+          "status": "reviewed",
+          "files": [
+            "catalog.py"
+          ],
+          "reason": "catalog.py fully read (all 180 lines). Entire content is integer constant assignments CATALOG_ENTRY_1..180 = 1..180. No imports, no function definitions, no SQL/DB/ORM/IO constructs. repo.list_files confirms catalog.py is the only repository file; repo.search for 'import' and 'def ' returned zero matches. The module does not implement SQL persistence and exposes no data-handling or injection surface.",
+          "assessment": "decision",
+          "decision_ids": [
+            "H1"
+          ],
+          "absence_evidence": []
+        }
+      ]
+    },
+    "usage": [
+      {
+        "prompt_tokens": 8617,
+        "completion_tokens": 180,
+        "total_tokens": 8797,
+        "prompt_tokens_details": {
+          "cached_tokens": 4608
+        },
+        "prompt_cache_hit_tokens": 4608,
+        "prompt_cache_miss_tokens": 4009
+      },
+      {
+        "prompt_tokens": 9578,
+        "completion_tokens": 224,
+        "total_tokens": 9802,
+        "prompt_tokens_details": {
+          "cached_tokens": 8192
+        },
+        "prompt_cache_hit_tokens": 8192,
+        "prompt_cache_miss_tokens": 1386
+      },
+      {
+        "prompt_tokens": 9912,
+        "completion_tokens": 255,
+        "total_tokens": 10167,
+        "prompt_tokens_details": {
+          "cached_tokens": 9216
+        },
+        "prompt_cache_hit_tokens": 9216,
+        "prompt_cache_miss_tokens": 696
+      },
+      {
+        "prompt_tokens": 10194,
+        "completion_tokens": 337,
+        "total_tokens": 10531,
+        "prompt_tokens_details": {
+          "cached_tokens": 9600
+        },
+        "prompt_cache_hit_tokens": 9600,
+        "prompt_cache_miss_tokens": 594
+      },
+      {
+        "prompt_tokens": 10566,
+        "completion_tokens": 457,
+        "total_tokens": 11023,
+        "prompt_tokens_details": {
+          "cached_tokens": 9856
+        },
+        "prompt_cache_hit_tokens": 9856,
+        "prompt_cache_miss_tokens": 710
+      },
+      {
+        "prompt_tokens": 11054,
+        "completion_tokens": 648,
+        "total_tokens": 11702,
+        "prompt_tokens_details": {
+          "cached_tokens": 10240
+        },
+        "prompt_cache_hit_tokens": 10240,
+        "prompt_cache_miss_tokens": 814
+      },
+      {
+        "prompt_tokens": 11772,
+        "completion_tokens": 936,
+        "total_tokens": 12708,
+        "prompt_tokens_details": {
+          "cached_tokens": 10624
+        },
+        "prompt_cache_hit_tokens": 10624,
+        "prompt_cache_miss_tokens": 1148
+      },
+      {
+        "prompt_tokens": 12787,
+        "completion_tokens": 103,
+        "total_tokens": 12890,
+        "prompt_tokens_details": {
+          "cached_tokens": 11392
+        },
+        "prompt_cache_hit_tokens": 11392,
+        "prompt_cache_miss_tokens": 1395
+      },
+      {
+        "prompt_tokens": 13243,
+        "completion_tokens": 966,
+        "total_tokens": 14209,
+        "prompt_tokens_details": {
+          "cached_tokens": 12416
+        },
+        "prompt_cache_hit_tokens": 12416,
+        "prompt_cache_miss_tokens": 827
+      },
+      {
+        "prompt_tokens": 14409,
+        "completion_tokens": 452,
+        "total_tokens": 14861,
+        "prompt_tokens_details": {
+          "cached_tokens": 12800
+        },
+        "prompt_cache_hit_tokens": 12800,
+        "prompt_cache_miss_tokens": 1609
+      },
+      {
+        "prompt_tokens": 14897,
+        "completion_tokens": 538,
+        "total_tokens": 15435,
+        "prompt_tokens_details": {
+          "cached_tokens": 13952
+        },
+        "prompt_cache_hit_tokens": 13952,
+        "prompt_cache_miss_tokens": 945
+      }
+    ],
+    "assessment_summary": {
+      "workflow_status": "COMPLETE",
+      "workflow_completion_is_not_safety": true,
+      "insufficient_evidence_ids": [],
+      "conditional_code_finding_ids": [],
+      "deployment_exposure_unknown_ids": [],
+      "feature_absence_scope": [],
+      "notice": "Reference checks and file overlap do not prove semantic relevance. Feature absence is a model claim limited to the listed files."
+    },
+    "claim_critique_calls": 0,
+    "snapshot_sha256": "0c5f50b14f1ab8e8042193f125c27219ae0cc8d388fe542fe30c2641ea080ac5"
+  },
+  "final_state": {
+    "coverage": {
+      "files_total": 1,
+      "files_read": 1,
+      "distinct_lines_read": 180,
+      "unread_files": [],
+      "scope": "tool-observed reads; not semantic audit completeness"
+    },
+    "gaps": [],
+    "pending_evidence": {},
+    "surface_settlements": {
+      "declared module review": {
+        "surface": "declared module review",
+        "status": "reviewed",
+        "files": [
+          "catalog.py"
+        ],
+        "reason": "catalog.py fully read (all 180 lines, sha256 28246f5c0509c48ddaca95ba7a553a0ac38b909861eee641dc0dcc782c4b6a9b). Entire content is integer constant assignments CATALOG_ENTRY_1..180 = 1..180. No imports, no function definitions, no SQL/DB/ORM/IO constructs. repo.list_files confirms catalog.py is the only repository file; repo.search for 'import' and 'def ' returned zero matches. The module does not implement SQL persistence and exposes no data-handling or injection surface.",
+        "assessment": "feature_absent",
+        "decision_ids": [],
+        "absence_evidence": [
+          {
+            "file": "catalog.py",
+            "line": 1,
+            "symbol": "CATALOG_ENTRY_1",
+            "evidence": "CATALOG_ENTRY_1 = 1",
+            "operation": "constant assignment"
+          },
+          {
+            "file": "catalog.py",
+            "line": 90,
+            "symbol": "CATALOG_ENTRY_90",
+            "evidence": "CATALOG_ENTRY_90 = 90",
+            "operation": "constant assignment"
+          },
+          {
+            "file": "catalog.py",
+            "line": 180,
+            "symbol": "CATALOG_ENTRY_180",
+            "evidence": "CATALOG_ENTRY_180 = 180",
+            "operation": "constant assignment"
+          }
+        ]
+      }
+    }
+  },
+  "transport": "Local read-only tools; not OctoBus E2E",
+  "product_code_changed": false
+}

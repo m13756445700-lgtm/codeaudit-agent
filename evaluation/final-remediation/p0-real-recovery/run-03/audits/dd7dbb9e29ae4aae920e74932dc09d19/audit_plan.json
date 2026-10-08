@@ -1,0 +1,11 @@
+{
+  "attack_surfaces": [
+    "declared module review"
+  ],
+  "next_actions": [
+    "Assess source evidence and relevant defenses"
+  ],
+  "priorities": [
+    "bounded declared file scope"
+  ]
+}

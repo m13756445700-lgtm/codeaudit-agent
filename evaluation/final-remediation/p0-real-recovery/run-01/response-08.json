@@ -1,0 +1,15 @@
+{
+  "role": "assistant",
+  "content": "I need to retrieve relevant knowledge and cite its ID before submitting the decision.",
+  "tool_calls": [
+    {
+      "index": 0,
+      "id": "call_00_Wrp6Zza9I7XQgnRvsGSs1769",
+      "type": "function",
+      "function": {
+        "name": "use_tool",
+        "arguments": "{\"tool\": \"knowledge.retrieve\", \"arguments\": {\"category\": \"sql_injection\"}, \"purpose\": \"Retrieve SQL injection knowledge to cite before judgment\"}"
+      }
+    }
+  ]
+}

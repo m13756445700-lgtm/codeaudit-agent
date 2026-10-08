@@ -1,0 +1,41 @@
+[
+  {
+    "id": "H1",
+    "counterexample": "Could a caller bypass the guard? (a) Pass user={\"authenticated\": True, \"tenant_id\": X} and invoice_id of a tenant-Y invoice: may_read line 87 compares X != Y → returns False → PermissionError. (b) Pass user without \"authenticated\": line 85 .get default False → returns False → denied. (c) Pass user={\"authenticated\": True} with no tenant_id and an invoice also lacking tenant_id: None==None passes — but in the stated model both records and user context are operator-supplied with tenant_id present, and this is a data-model assumption, not an attacker-controlled bypass. (d) records[invoice_id] KeyError for unknown id: raises before any data return, so no leak of another tenant's data.",
+    "assessment": "The guard is on the sole path to the sink and enforces both authentication and tenant equality. The only edge case (both tenant_id absent → None==None) depends on operator-supplied data shape, not attacker input, and is captured as a defense limitation. No concrete input yields cross-tenant or unauthenticated data return under the stated preconditions. Rejection upheld.",
+    "outcome": "upheld",
+    "challenge_response": "The strongest counterexample is the None==None tenant match, but it requires the operator to supply invoices and a user context both missing tenant_id, which contradicts the stated model and is not attacker-controllable. The KeyError path denies rather than leaks. Both checks (authn at line 85, tenant at line 87) precede the return at service.py:7, so the scoped property holds.",
+    "references": [
+      {
+        "evidence": "if not user.get(\"authenticated\", False):",
+        "file": "security_config.py",
+        "line": 85,
+        "operation": "authn gate",
+        "symbol": "may_read"
+      },
+      {
+        "evidence": "if user.get(\"tenant_id\") != invoice.get(\"tenant_id\"):",
+        "file": "security_config.py",
+        "line": 87,
+        "operation": "tenant gate",
+        "symbol": "may_read"
+      },
+      {
+        "evidence": "raise PermissionError(\"access denied\")",
+        "file": "service.py",
+        "line": 6,
+        "operation": "deny before return",
+        "symbol": "fetch_invoice"
+      },
+      {
+        "evidence": "return {\"amount\": invoice[\"amount\"], \"tenant_id\": invoice[\"tenant_id\"]}",
+        "file": "service.py",
+        "line": 7,
+        "operation": "sink after guard",
+        "symbol": "fetch_invoice"
+      }
+    ],
+    "decision_sha256": "9df56c9ac0fdd1e3f15adc79b662294b7dd4002ed37a029632979eef98dc4557",
+    "kind": "model_self_review"
+  }
+]
