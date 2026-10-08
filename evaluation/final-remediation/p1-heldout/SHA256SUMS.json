@@ -1,0 +1,22 @@
+{
+  "evaluation/final-remediation/p1-preflight/semgrep_version.json": "9edcf3dc961d9a680a4b4a08f1660f9ca515eb8c48fdc96b4eaa7c00f5091dd5",
+  "evaluation/final-remediation/p1-preflight/docker-daemon-diagnostic.json": "d7dd9977d1d9b39e9f36c481ff7f3f56a149f97b7fb3a33a3967fa89758b4b9f",
+  "evaluation/final-remediation/p1-preflight/critic-tests.txt": "149e983c325e1215d8fe411fd58fb9c0fa38bc5dfa119c4a6a92d44ee61e3e10",
+  "evaluation/final-remediation/p1-preflight/sensitive-scan.json": "c7841352067afaa646dd313e0649943371ba7e919960e052bbbc42ca12fec932",
+  "evaluation/final-remediation/p1-preflight/semantic-tests.txt": "a6f0138d0fc1c491d7f5a7f61bb0ea7c4ed0952ad8258217e9312ea0a82a0f66",
+  "evaluation/final-remediation/p1-preflight/diff-classification.json": "5db0a73ebcb791daa12e5ee75c3bc395694db792193dd9562b2a5632c72904b0",
+  "evaluation/final-remediation/p1-preflight/harness-tests.txt": "a00d95dfbc084b6eb22229f4a5b545b4452162a59797c0faa121535a79212580",
+  "evaluation/final-remediation/p1-preflight/p1-full-pytest-final.txt": "8f24f9ff0b35ee4da0f545f89fab363808051c81a790710ea51b2396b2b41608",
+  "evaluation/final-remediation/p1-preflight/ci-equivalent.json": "532ccb61f150794f7bfab3803b4b4846a194c1dabd156be6f0dccaf9f5f3b964",
+  "evaluation/final-remediation/p1-preflight/schema.json": "17e7daaae08df1a07122bfa6563c7a9f33c3d1c2239e9004ae1614e2da4de84a",
+  "evaluation/final-remediation/p1-preflight/semantic-tests-final.txt": "eb561b1d92ca4ac7b279d021bbdd6918af940fa565928750901067ee10fc948c",
+  "evaluation/final-remediation/p1-preflight/docker_build.json": "8de25b939db9d280e29139e5e28f8014de23392aac798908884b6d283a3b354a",
+  "evaluation/final-remediation/p1-preflight/full-pytest.txt": "38ed8e5769a2f1ad16f6325ee1d5e47971793a5cc035c00bcdd1c81edfb534fa",
+  "evaluation/final-remediation/p1-preflight/p1-full-pytest.txt": "9ebe1f0c860fa0049131fb9079bf7d3c69c74fb77ca6ab859c28bc069e2a0ff7",
+  "evaluation/final-remediation/p1-preflight/runtime-matrix/summary.json": "3aa06db2da47578a7eeab85ccf13cd42c32a690a8a081eb1edf82a1a557f7061",
+  "evaluation/final-remediation/p1-preflight/runtime-matrix/3.0.6-result.json": "9014093ec91aac5007cd82704341f5aaa96fce705c29d193bac77f06d380014f",
+  "evaluation/final-remediation/p1-preflight/runtime-matrix/3.0.6-install.txt": "a041f9f1d050f867e0f115ab4bc5e8dd8fedb5ba156b7b80f365f7f68f32f1f5",
+  "evaluation/final-remediation/p1-preflight/runtime-matrix/2.3.8-result.json": "68385814fd1000ce3852c5f9cd8f3a9000f992f07a694ab3cef90b3b57e64ecf",
+  "evaluation/final-remediation/p1-preflight/runtime-matrix/2.3.8-install.txt": "7874cb6daa84249b6b365d61f6c3fd5d7e925b93dc5edc0b48f051567efbce8d",
+  "evaluation/final-remediation/p1-heldout/result.json": "4089c4e717bbf26579eeea2551e630fb74ea5da38227c3dc5f45b43c6eb01a49"
+}

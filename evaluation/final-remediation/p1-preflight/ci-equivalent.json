@@ -1,0 +1,37 @@
+{
+  "steps": [
+    {
+      "name": "Python dependency install",
+      "status": "PASS",
+      "evidence": "P0 isolated environment installed requirements-dev.txt; pinned Semgrep version verified fresh in semgrep_version.json"
+    },
+    {
+      "name": "P0 preflight pytest",
+      "status": "PASS",
+      "evidence": "full-pytest.txt"
+    },
+    {
+      "name": "P1 full pytest",
+      "status": "PASS",
+      "evidence": "p1-full-pytest-final.txt",
+      "passed": 252,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "name": "schema validation",
+      "status": "PASS",
+      "evidence": "schema.json"
+    },
+    {
+      "name": "Docker build",
+      "status": "FAIL",
+      "reason": "Local Docker daemon did not respond in60s; no image produced",
+      "evidence": "docker_build.json"
+    }
+  ],
+  "CI": "FAIL",
+  "github_actions_run": false,
+  "ordinary_ci_calls_paid_models": false,
+  "note": "Local equivalent step evidence; hosted workflow not run because no push authorized. No continue-on-error or core-test ignore."
+}

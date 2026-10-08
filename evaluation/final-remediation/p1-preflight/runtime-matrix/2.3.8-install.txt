@@ -1,0 +1,12 @@
+Collecting Werkzeug==2.3.8
+  Downloading werkzeug-2.3.8-py3-none-any.whl (242 kB)
+Collecting urllib3==1.26.20
+  Downloading urllib3-1.26.20-py2.py3-none-any.whl (144 kB)
+Collecting MarkupSafe>=2.1.1
+  Downloading markupsafe-3.0.4-cp39-cp39-macosx_11_0_arm64.whl (12 kB)
+Installing collected packages: MarkupSafe, Werkzeug, urllib3
+Successfully installed MarkupSafe-3.0.4 Werkzeug-2.3.8 urllib3-1.26.20
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+semgrep 1.99.0 requires urllib3~=2.0, but you have urllib3 1.26.20 which is incompatible.
+WARNING: You are using pip version 21.2.4; however, version 26.0.1 is available.
+You should consider upgrading via the '/Users/bo/codeaudit-v2-final/.internal/p0-test-venv/bin/python -m pip install --upgrade pip' command.

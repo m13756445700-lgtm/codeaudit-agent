@@ -57,3 +57,25 @@ def test_guard_reference_scenarios(placement,blocked):
         if placement=='after_sink':guard(input_value)
     except ValueError:pass
     assert (not events)==blocked
+
+def test_cross_file_controller_service_worker_sink_and_broken_path(tmp_path,monkeypatch):
+    # Execute only our trusted miniature fixture with the effectful sink replaced.
+    # No audited third-party repository execution is used by the Agent.
+    import importlib.util,sys
+    from pathlib import Path
+    src=Path('evaluation/p1-heldout/r01/source')
+    emitted=[]
+    class Sink:
+        @staticmethod
+        def run(command,**kwargs):emitted.append((command,kwargs));return 'recorded'
+    loaded={}
+    for name in ('runner','worker','service','controller'):
+        spec=importlib.util.spec_from_file_location(name,src/(name+'.py'));module=importlib.util.module_from_spec(spec)
+        monkeypatch.setitem(sys.modules,name,module);spec.loader.exec_module(module);loaded[name]=module
+    monkeypatch.setattr(loaded['runner'],'subprocess',Sink)
+    assert loaded['controller'].post({'label':'monthly'})=='recorded'
+    assert emitted==[('printf report-monthly',{'shell':True,'capture_output':True})]
+    # Source and sink both exist, but the changed route does not call the service.
+    monkeypatch.setattr(loaded['controller'],'schedule',lambda label:label.upper())
+    emitted.clear();assert loaded['controller'].post({'label':'monthly'})=='MONTHLY'
+    assert emitted==[]
