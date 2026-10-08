@@ -1,6 +1,8 @@
 # CodeAudit Agent V2
 
-本仓库为最新版 V2 作业提交候选。[考官提交入口](docs/SUBMISSION.md)汇总 GitHub、服务器与阅读顺序；[验收状态](docs/SUBMISSION_STATUS.md)列明已验证项和未通过项。发布不等于全面验收通过，当前源码与服务器历史验证版本的区别已明确记录。
+本仓库为 CodeAudit Agent V2 作业提交入口。最终应用发布源码 `567a9aeed8429866c8e8cd551ddb596627bdd7ae` 已部署到服务器，镜像 OCI revision 与其一致。文档合并后的 GitHub main Head 与应用发布 SHA 分开记录。[考官指南](docs/EXAMINER_GUIDE.md)直接提供 SSH 和审计命令；[提交入口](docs/SUBMISSION.md)、[交付状态](docs/SUBMISSION_STATUS.md)及[发布清单](RELEASE_MANIFEST.md)统一当前版本与验收范围。
+
+2026-10-08 冻结应用源码252项测试、Schema、Docker构建/Smoke通过；服务器真实模型审计、MCP/Agent编排、报告读取及完成任务的容器重启恢复通过。考官真实SSH为交付后待验收（POST_SUBMISSION_ACCEPTANCE=NOT_RUN），不阻断本次GitHub提交；运行中任务续跑及宿主机重启未验证。永久限制：P0_REAL_POST_REJECTION=INCONCLUSIVE；UNIQUE_KNOWLEDGE_BENEFIT=NOT_ESTABLISHED。
 
 Evidence-driven Agentic Code Security Audit System：从 Git、ZIP 或本地代码快照出发，由模型理解攻击面、制定计划、动态调用工具、调查假设并作出有证据的安全判断。它帮助审计人员把可疑代码追溯到输入、传播、保护条件和安全边界，而不是仅对扫描器结果生成摘要。
 
@@ -22,10 +24,10 @@ flowchart LR
 
 公开仓库：[CodeAudit Agent V2](https://github.com/m13756445700-lgtm/codeaudit-agent)，提交分支 `main`。
 
-服务器：`8.130.121.3`；用户名：`codeaudit-reviewer`；SSH 端口：`22`。考官提供的公钥已安装在该账户的 `authorized_keys`，请使用对应私钥登录：
+服务器：`8.130.121.3`；用户名：`codeaudit-reviewer`；SSH 端口：`22`。已有授权公钥已配置，请由原私钥持有人按[考官指南](docs/EXAMINER_GUIDE.md)登录；维护人员尚未实测考官远程SSH：
 
 ```bash
-ssh -p 22 -i /path/to/examiner_private_key codeaudit-reviewer@8.130.121.3
+ssh -p 22 -i /path/to/existing-authorized-reviewer-private-key -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes codeaudit-reviewer@8.130.121.3
 ```
 
 私钥由考官自行保管，不需要上传到 GitHub 或服务器。模型密钥与内部服务令牌仅留在服务器私密配置中。登录后使用以下受限入口，无需 root 或 Docker 权限：
@@ -103,7 +105,7 @@ make private-git-test     # 临时 SSH Git 容器；主机 Python 可直接运�
 
 公平消融保留原有 Java/MyBatis 确定性分析、Evidence Gate 和修复建议，只用快照哈希适配原 Git/framework 预检。静态侧不被人为置零。生产 Engine 不导入静态 baseline；这些模块保留是为了可复核的评估，不提供旧服务/旧审计 CLI。
 
-历史 REV 的固定 20 例结果为 TP10/FP0/FN0，9 个正例无静态候选；静态结果为 3 个 NEEDS_REVIEW、0 VERIFIED。它们只描述该固定小样本，不代表任意项目准确率。清理后的最新验证见 [交付与验证清单](RELEASE_MANIFEST.md)。
+历史 REV 的固定 20 例结果为 TP10/FP0/FN0，9 个正例无静态候选；静态结果为 3 个 NEEDS_REVIEW、0 VERIFIED。它们只描述该固定小样本，不代表任意项目准确率。当前应用发布验收与历史轮次见 [交付与验证清单](RELEASE_MANIFEST.md)。
 
 ## Demo 与工程目录
 

@@ -1,5 +1,6 @@
 # P2-D 考官访问与验收记录
 
+> 2026-10-08最终提交策略补充：本报告保留P2-D阶段结论和原始验收范围；考官真实SSH仍NOT_RUN，现列为交付后验收，不阻断本次GitHub提交。当前提交状态见[SUBMISSION_STATUS](../SUBMISSION_STATUS.md)。未改写任何原始执行证据。
 版本：1.0｜日期：2026-10-08｜对象：codeaudit-reviewer@8.130.121.3。
 
 ## 1. 结论

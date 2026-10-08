@@ -64,6 +64,6 @@ wrapper也支持 `sudo codeaudit-review audit HTTPS_URL`；仅在明确授权审
 
 ## 6. 交付验收标准
 
-真实 SSH 成功后，独立确认五个查询命令、报告/trace读取和受控任务触发的实际结果，记录时间、退出码、Run/Audit ID和必要脱敏输出。当前交付 `P2D_GATE=CONDITIONAL`，原因是尚未进行真实考官SSH登录。入口、权限或模型失败时保留真实错误，不用Mock替代。
+真实 SSH 成功后，独立确认五个查询命令、报告/trace读取和受控任务触发的实际结果，记录时间、退出码、Run/Audit ID和必要脱敏输出。P2-D阶段交付记录为 `P2D_GATE=CONDITIONAL`，其原始证据不改写。本次GitHub作业提交与交付后认证验收分开：`POST_SUBMISSION_ACCEPTANCE=NOT_RUN`，考官真实SSH待验收，不阻断GitHub提交。入口、权限或模型失败时保留真实错误，不用Mock替代。
 
-源码和评审入口：[提交说明](SUBMISSION.md)、[历史证据](EVIDENCE_INDEX.md)、[工程 Gate](final-remediation/09_P1_FINAL_GATE.md)、[本轮考官验收](final-remediation/18_P2D_EXAMINER_ACCEPTANCE.md)。完成上述人工登录验证后进入最终 Gate Review。
+源码和评审入口：[提交说明](SUBMISSION.md)、[历史证据](EVIDENCE_INDEX.md)、[工程 Gate](final-remediation/09_P1_FINAL_GATE.md)、[本轮考官验收](final-remediation/18_P2D_EXAMINER_ACCEPTANCE.md)。GitHub提交以文档PR合并、新main CI及分支收敛的实际检查为准；人工SSH验收留作交付后执行。
