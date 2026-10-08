@@ -1,0 +1,28 @@
+{
+  "RELEASE_SHA": "d26c64e0f1d53060e80da39a9ebc37413727ce38",
+  "completed_steps": 19,
+  "steps_exit_codes": {
+    "clone": 0,
+    "checkout": 0,
+    "docker-version": 0,
+    "docker-info": 0,
+    "docker-compose-version": 0,
+    "venv": 0,
+    "python": 0,
+    "dependencies": 0,
+    "dependency-resolutions": 0,
+    "semgrep": 0,
+    "pytest": 0,
+    "schema": 0,
+    "docker-build": 0,
+    "docker-smoke": 0,
+    "image-inspect": 0,
+    "container-semgrep": 0,
+    "container-dependency-resolutions": 0,
+    "compose-config": 0,
+    "agent-compose-config": 0
+  },
+  "P2_PREFLIGHT": "PENDING_SECRET_AND_MANIFEST_REVIEW",
+  "GITHUB_ACTIONS": "NOT_RUN",
+  "SERVER_DEPLOYMENT": "NOT_RUN"
+}

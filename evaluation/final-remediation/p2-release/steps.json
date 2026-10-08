@@ -1,0 +1,309 @@
+[
+  {
+    "name": "clone",
+    "command": [
+      "git",
+      "clone",
+      "--no-hardlinks",
+      "--no-checkout",
+      "/Users/bo/codeaudit-v2-final",
+      "/Users/bo/.codex-b/worktrees/p0-evidence-recovery/codeaudit-v2-final/.internal/p2-release/source"
+    ],
+    "source_sha": "d26c64e0f1d53060e80da39a9ebc37413727ce38",
+    "started": "2026-10-08T06:20:58.400700+00:00",
+    "finished": "2026-10-08T06:20:58.914852+00:00",
+    "elapsed_seconds": 0.513,
+    "exit_code": 0,
+    "log": "evaluation/final-remediation/p2-release/clone.log"
+  },
+  {
+    "name": "checkout",
+    "command": [
+      "git",
+      "checkout",
+      "--detach",
+      "d26c64e0f1d53060e80da39a9ebc37413727ce38"
+    ],
+    "source_sha": "d26c64e0f1d53060e80da39a9ebc37413727ce38",
+    "started": "2026-10-08T06:20:58.915177+00:00",
+    "finished": "2026-10-08T06:20:59.047662+00:00",
+    "elapsed_seconds": 0.132,
+    "exit_code": 0,
+    "log": "evaluation/final-remediation/p2-release/checkout.log"
+  },
+  {
+    "name": "docker-version",
+    "command": [
+      "docker",
+      "version"
+    ],
+    "source_sha": "d26c64e0f1d53060e80da39a9ebc37413727ce38",
+    "started": "2026-10-08T06:20:59.083998+00:00",
+    "finished": "2026-10-08T06:20:59.315885+00:00",
+    "elapsed_seconds": 0.232,
+    "exit_code": 0,
+    "log": "evaluation/final-remediation/p2-release/docker-version.log"
+  },
+  {
+    "name": "docker-info",
+    "command": [
+      "docker",
+      "info"
+    ],
+    "source_sha": "d26c64e0f1d53060e80da39a9ebc37413727ce38",
+    "started": "2026-10-08T06:20:59.316556+00:00",
+    "finished": "2026-10-08T06:21:00.396286+00:00",
+    "elapsed_seconds": 1.08,
+    "exit_code": 0,
+    "log": "evaluation/final-remediation/p2-release/docker-info.log"
+  },
+  {
+    "name": "docker-compose-version",
+    "command": [
+      "docker",
+      "compose",
+      "version"
+    ],
+    "source_sha": "d26c64e0f1d53060e80da39a9ebc37413727ce38",
+    "started": "2026-10-08T06:21:00.396757+00:00",
+    "finished": "2026-10-08T06:21:00.472350+00:00",
+    "elapsed_seconds": 0.076,
+    "exit_code": 0,
+    "log": "evaluation/final-remediation/p2-release/docker-compose-version.log"
+  },
+  {
+    "name": "venv",
+    "command": [
+      "/Users/bo/codeaudit-v2-final/.internal/p1-5-clean/runtime/cpython-3.11-macos-aarch64-none/bin/python3.11",
+      "-m",
+      "venv",
+      "/Users/bo/.codex-b/worktrees/p0-evidence-recovery/codeaudit-v2-final/.internal/p2-release/venv"
+    ],
+    "source_sha": "d26c64e0f1d53060e80da39a9ebc37413727ce38",
+    "started": "2026-10-08T06:21:00.472702+00:00",
+    "finished": "2026-10-08T06:21:02.513728+00:00",
+    "elapsed_seconds": 2.041,
+    "exit_code": 0,
+    "log": "evaluation/final-remediation/p2-release/venv.log"
+  },
+  {
+    "name": "python",
+    "command": [
+      "/Users/bo/.codex-b/worktrees/p0-evidence-recovery/codeaudit-v2-final/.internal/p2-release/venv/bin/python",
+      "--version"
+    ],
+    "source_sha": "d26c64e0f1d53060e80da39a9ebc37413727ce38",
+    "started": "2026-10-08T06:21:02.514265+00:00",
+    "finished": "2026-10-08T06:21:02.524896+00:00",
+    "elapsed_seconds": 0.011,
+    "exit_code": 0,
+    "log": "evaluation/final-remediation/p2-release/python.log"
+  },
+  {
+    "name": "dependencies",
+    "command": [
+      "/Users/bo/.codex-b/worktrees/p0-evidence-recovery/codeaudit-v2-final/.internal/p2-release/venv/bin/python",
+      "-m",
+      "pip",
+      "install",
+      "-r",
+      "requirements-dev.txt"
+    ],
+    "source_sha": "d26c64e0f1d53060e80da39a9ebc37413727ce38",
+    "started": "2026-10-08T06:21:02.525224+00:00",
+    "finished": "2026-10-08T06:21:17.998192+00:00",
+    "elapsed_seconds": 15.473,
+    "exit_code": 0,
+    "log": "evaluation/final-remediation/p2-release/dependencies.log"
+  },
+  {
+    "name": "dependency-resolutions",
+    "command": [
+      "/Users/bo/.codex-b/worktrees/p0-evidence-recovery/codeaudit-v2-final/.internal/p2-release/venv/bin/python",
+      "-m",
+      "pip",
+      "freeze"
+    ],
+    "source_sha": "d26c64e0f1d53060e80da39a9ebc37413727ce38",
+    "started": "2026-10-08T06:21:17.998918+00:00",
+    "finished": "2026-10-08T06:21:18.293702+00:00",
+    "elapsed_seconds": 0.295,
+    "exit_code": 0,
+    "log": "evaluation/final-remediation/p2-release/dependency-resolutions.log"
+  },
+  {
+    "name": "semgrep",
+    "command": [
+      "/Users/bo/.codex-b/worktrees/p0-evidence-recovery/codeaudit-v2-final/.internal/p2-release/venv/bin/semgrep",
+      "--version"
+    ],
+    "source_sha": "d26c64e0f1d53060e80da39a9ebc37413727ce38",
+    "started": "2026-10-08T06:21:18.294212+00:00",
+    "finished": "2026-10-08T06:21:23.551343+00:00",
+    "elapsed_seconds": 5.257,
+    "exit_code": 0,
+    "log": "evaluation/final-remediation/p2-release/semgrep.log"
+  },
+  {
+    "name": "pytest",
+    "command": [
+      "/Users/bo/.codex-b/worktrees/p0-evidence-recovery/codeaudit-v2-final/.internal/p2-release/venv/bin/python",
+      "-m",
+      "pytest",
+      "-q",
+      "-p",
+      "no:cacheprovider"
+    ],
+    "source_sha": "d26c64e0f1d53060e80da39a9ebc37413727ce38",
+    "started": "2026-10-08T06:21:23.551954+00:00",
+    "finished": "2026-10-08T06:21:44.866442+00:00",
+    "elapsed_seconds": 21.314,
+    "exit_code": 0,
+    "log": "evaluation/final-remediation/p2-release/pytest.log"
+  },
+  {
+    "name": "schema",
+    "command": [
+      "/Users/bo/.codex-b/worktrees/p0-evidence-recovery/codeaudit-v2-final/.internal/p2-release/venv/bin/python",
+      "scripts/validate_schemas.py"
+    ],
+    "source_sha": "d26c64e0f1d53060e80da39a9ebc37413727ce38",
+    "started": "2026-10-08T06:21:44.867263+00:00",
+    "finished": "2026-10-08T06:21:44.987870+00:00",
+    "elapsed_seconds": 0.121,
+    "exit_code": 0,
+    "log": "evaluation/final-remediation/p2-release/schema.log"
+  },
+  {
+    "name": "docker-build",
+    "command": [
+      "docker",
+      "build",
+      "--no-cache",
+      "--progress",
+      "plain",
+      "--platform",
+      "linux/amd64",
+      "--build-arg",
+      "BUILD_SHA=d26c64e0f1d53060e80da39a9ebc37413727ce38",
+      "-t",
+      "codeaudit-p2:d26c64e0f1d53060e80da39a9ebc37413727ce38",
+      "."
+    ],
+    "source_sha": "d26c64e0f1d53060e80da39a9ebc37413727ce38",
+    "started": "2026-10-08T06:21:44.988298+00:00",
+    "finished": "2026-10-08T06:23:13.463605+00:00",
+    "elapsed_seconds": 88.475,
+    "exit_code": 0,
+    "log": "evaluation/final-remediation/p2-release/docker-build.log"
+  },
+  {
+    "name": "docker-smoke",
+    "command": [
+      "/Users/bo/.codex-b/worktrees/p0-evidence-recovery/codeaudit-v2-final/.internal/p2-release/venv/bin/python",
+      "scripts/docker_smoke.py",
+      "codeaudit-p2:d26c64e0f1d53060e80da39a9ebc37413727ce38"
+    ],
+    "source_sha": "d26c64e0f1d53060e80da39a9ebc37413727ce38",
+    "started": "2026-10-08T06:23:13.464626+00:00",
+    "finished": "2026-10-08T06:23:27.980143+00:00",
+    "elapsed_seconds": 14.515,
+    "exit_code": 0,
+    "log": "evaluation/final-remediation/p2-release/docker-smoke.log"
+  },
+  {
+    "name": "image-inspect",
+    "command": [
+      "docker",
+      "image",
+      "inspect",
+      "codeaudit-p2:d26c64e0f1d53060e80da39a9ebc37413727ce38"
+    ],
+    "source_sha": "d26c64e0f1d53060e80da39a9ebc37413727ce38",
+    "started": "2026-10-08T06:23:27.981518+00:00",
+    "finished": "2026-10-08T06:23:28.052726+00:00",
+    "elapsed_seconds": 0.071,
+    "exit_code": 0,
+    "log": "evaluation/final-remediation/p2-release/image-inspect.log"
+  },
+  {
+    "name": "container-semgrep",
+    "command": [
+      "docker",
+      "run",
+      "--rm",
+      "--platform",
+      "linux/amd64",
+      "--network",
+      "none",
+      "codeaudit-p2:d26c64e0f1d53060e80da39a9ebc37413727ce38",
+      "semgrep",
+      "--version"
+    ],
+    "source_sha": "d26c64e0f1d53060e80da39a9ebc37413727ce38",
+    "started": "2026-10-08T06:23:28.106838+00:00",
+    "finished": "2026-10-08T06:23:53.633780+00:00",
+    "elapsed_seconds": 25.527,
+    "exit_code": 0,
+    "log": "evaluation/final-remediation/p2-release/container-semgrep.log"
+  },
+  {
+    "name": "container-dependency-resolutions",
+    "command": [
+      "docker",
+      "run",
+      "--rm",
+      "--platform",
+      "linux/amd64",
+      "--network",
+      "none",
+      "codeaudit-p2:d26c64e0f1d53060e80da39a9ebc37413727ce38",
+      "python",
+      "-m",
+      "pip",
+      "freeze"
+    ],
+    "source_sha": "d26c64e0f1d53060e80da39a9ebc37413727ce38",
+    "started": "2026-10-08T06:23:53.635477+00:00",
+    "finished": "2026-10-08T06:23:54.347336+00:00",
+    "elapsed_seconds": 0.712,
+    "exit_code": 0,
+    "log": "evaluation/final-remediation/p2-release/container-dependency-resolutions.log"
+  },
+  {
+    "name": "compose-config",
+    "command": [
+      "docker",
+      "compose",
+      "--env-file",
+      ".env",
+      "--env-file",
+      ".runtime.env",
+      "--profile",
+      "audit",
+      "config",
+      "--format",
+      "json"
+    ],
+    "source_sha": "d26c64e0f1d53060e80da39a9ebc37413727ce38",
+    "started": "2026-10-08T06:23:54.350645+00:00",
+    "finished": "2026-10-08T06:23:54.589709+00:00",
+    "elapsed_seconds": 0.239,
+    "exit_code": 0,
+    "log": "evaluation/final-remediation/p2-release/compose-config.log"
+  },
+  {
+    "name": "agent-compose-config",
+    "command": [
+      "/Users/bo/.codex-b/worktrees/p0-evidence-recovery/codeaudit-v2-final/.internal/p2-release/venv/bin/python",
+      "-c",
+      "import yaml; c=yaml.safe_load(open('agent-compose.yml')); assert c['agents']['auditor']['env']['CODEAUDIT_LLM_API_KEY']['secret'] is True; assert c['agents']['auditor']['scheduler']['enabled'] is True; print('Agent project YAML structure PASS; daemon registration NOT_RUN')"
+    ],
+    "source_sha": "d26c64e0f1d53060e80da39a9ebc37413727ce38",
+    "started": "2026-10-08T06:23:54.590299+00:00",
+    "finished": "2026-10-08T06:23:54.680406+00:00",
+    "elapsed_seconds": 0.09,
+    "exit_code": 0,
+    "log": "evaluation/final-remediation/p2-release/agent-compose-config.log"
+  }
+]

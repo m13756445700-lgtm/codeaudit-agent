@@ -1,0 +1,13 @@
+{
+  "command": [
+    "git",
+    "ls-remote",
+    "origin",
+    "refs/heads/main"
+  ],
+  "result": "TIMEOUT",
+  "timeout_seconds": 90,
+  "release_sha": "d26c64e0f1d53060e80da39a9ebc37413727ce38",
+  "recorded": "2026-10-08T06:23:50.808605+00:00",
+  "limits": "Initial remote read succeeded and returned baseline SHA; retry required to reconfirm before Checkpoint A."
+}

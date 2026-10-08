@@ -1,0 +1,5 @@
+SOURCE_SHA=d26c64e0f1d53060e80da39a9ebc37413727ce38
+COMMAND=git status --short
+?? docs/final-remediation/10_P2_RELEASE_PREFLIGHT.md
+?? evaluation/final-remediation/p2-release/
+EXIT_CODE=0

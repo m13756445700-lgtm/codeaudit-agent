@@ -1,0 +1,40 @@
+
+COMMAND=['git', 'status', '--short']
+START=2026-10-08T06:21:38.118119+00:00
+?? evaluation/final-remediation/p2-release/
+
+EXIT_CODE=0
+
+COMMAND=['git', 'branch', '--show-current']
+START=2026-10-08T06:21:38.146660+00:00
+codex/p0-evidence-recovery
+
+EXIT_CODE=0
+
+COMMAND=['git', 'rev-parse', 'HEAD']
+START=2026-10-08T06:21:38.156650+00:00
+d26c64e0f1d53060e80da39a9ebc37413727ce38
+
+EXIT_CODE=0
+
+COMMAND=['git', 'remote', '-v']
+START=2026-10-08T06:21:38.170570+00:00
+origin	https://github.com/m13756445700-lgtm/codeaudit-agent.git (fetch)
+origin	https://github.com/m13756445700-lgtm/codeaudit-agent.git (push)
+
+EXIT_CODE=0
+
+COMMAND=['git', 'log', '-10', '--oneline']
+START=2026-10-08T06:21:38.182522+00:00
+d26c64e chore(release): prepare examiner release candidate
+9058613 fix(ci): configure workspace for container smoke services
+764e1cb chore(release): add image provenance smoke checks and evidence policy
+66e04e5 test(agent): record bounded P1 results and Docker CI blocker
+4a8aefc feat(agent): constrain semantic assumptions and add bounded P1 evaluation
+a7cf6e4 test(agent): preserve three inconclusive real recovery acceptance attempts
+75996c6 test(agent): add natural-scope real-model recovery acceptance harness
+393a6e0 docs: preserve P0 recovery evidence and unmet real-model gate
+fd175be test(agent): cover evidence recovery and progress-aware retry
+98ffdc2 fix(agent): recover from incomplete evidence settlement
+
+EXIT_CODE=0

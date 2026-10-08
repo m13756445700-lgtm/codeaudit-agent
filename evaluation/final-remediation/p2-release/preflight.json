@@ -1,0 +1,66 @@
+{
+  "RELEASE_CANDIDATE_SHA": "d26c64e0f1d53060e80da39a9ebc37413727ce38",
+  "GITHUB_MAIN_SHA": "0733933113faee3121b2c5d692ef4ee1400d4d0d",
+  "GITHUB_MAIN_STATUS": "UNCHANGED",
+  "main_is_ancestor": true,
+  "merge_conflicts": "NONE for current fast-forward ancestry",
+  "HISTORICAL_EVIDENCE_STATUS": "PRESERVED",
+  "forbidden_tracked_artifacts": [],
+  "initial_freeze_clean": "confirmed before P2 evidence generation",
+  "product_changes_in_P2": "NONE",
+  "workflow_core_failure_masking": "NONE",
+  "workflow_paid_model_calls": "NONE",
+  "network_retry": "One main-check timeout retained; successful retry exit 0 confirmed same baseline main",
+  "reviewed_risks": [
+    "Controller Docker socket: trusted operator only; examiner account privileges deferred to P2-C",
+    "Default start helper rebuild lacks BUILD_SHA: future deployment must use validated immutable image, not unlabelled default rebuild",
+    "Compose mutable tag must be resolved to validated immutable identity before P2-B deployment",
+    "Direct dependency pins exist; full resolved versions archived; transitives are not a frozen lockfile"
+  ],
+  "commands": [
+    {
+      "command": [
+        "git",
+        "branch",
+        "--show-current"
+      ],
+      "started": "2026-10-08T06:25:05.364428+00:00",
+      "finished": "2026-10-08T06:25:05.381714+00:00",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "started": "2026-10-08T06:25:05.381740+00:00",
+      "finished": "2026-10-08T06:25:05.391195+00:00",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "git",
+        "merge-base",
+        "--is-ancestor",
+        "0733933113faee3121b2c5d692ef4ee1400d4d0d",
+        "HEAD"
+      ],
+      "started": "2026-10-08T06:25:05.391218+00:00",
+      "finished": "2026-10-08T06:25:05.405569+00:00",
+      "exit_code": 0
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "0733933113faee3121b2c5d692ef4ee1400d4d0d..HEAD",
+        "--stat"
+      ],
+      "started": "2026-10-08T06:25:05.405592+00:00",
+      "finished": "2026-10-08T06:25:05.515523+00:00",
+      "exit_code": 0
+    }
+  ],
+  "verified_at": "2026-10-08T06:25:05.539582+00:00"
+}
