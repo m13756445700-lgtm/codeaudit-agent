@@ -1,140 +1,129 @@
-# CodeAudit Agent V2
+# CodeAudit Agent
 
-本仓库为 CodeAudit Agent V2 作业提交入口。最终应用发布源码 `567a9aeed8429866c8e8cd551ddb596627bdd7ae` 已部署到服务器，镜像 OCI revision 与其一致。文档合并后的 GitHub main Head 与应用发布 SHA 分开记录。[考官指南](docs/EXAMINER_GUIDE.md)直接提供 SSH 和审计命令；[提交入口](docs/SUBMISSION.md)、[交付状态](docs/SUBMISSION_STATUS.md)及[发布清单](RELEASE_MANIFEST.md)统一当前版本与验收范围。
+**基于大模型、MCP 工具调用与证据校验的代码安全审计个人作品。**
 
-2026-10-08 冻结应用源码252项测试、Schema、Docker构建/Smoke通过；服务器真实模型审计、MCP/Agent编排、报告读取及完成任务的容器重启恢复通过。考官真实SSH为交付后待验收（POST_SUBMISSION_ACCEPTANCE=NOT_RUN），不阻断本次GitHub提交；运行中任务续跑及宿主机重启未验证。永久限制：P0_REAL_POST_REJECTION=INCONCLUSIVE；UNIQUE_KNOWLEDGE_BENEFIT=NOT_ESTABLISHED。
+输入 Git 仓库、本地目录或 ZIP，Agent 自主制定调查计划，读取代码、追踪跨文件数据流、检查保护条件，并输出带源码引用的发现、覆盖范围和修复建议。适合研究 Agent 审计流程、复现安全分析案例，以及辅助人工代码审查。
 
-Evidence-driven Agentic Code Security Audit System：从 Git、ZIP 或本地代码快照出发，由模型理解攻击面、制定计划、动态调用工具、调查假设并作出有证据的安全判断。它帮助审计人员把可疑代码追溯到输入、传播、保护条件和安全边界，而不是仅对扫描器结果生成摘要。
+## 作品设计
+
+- **自主调查**：模型围绕攻击面建立假设、选择工具、补充证据和形成判断。
+- **证据校验**：Evidence Gate 核对文件哈希、行号、字面引用及实际读取记录，拒绝或降级证据不充分的结论。
+- **能力分工**：agent-compose 管理运行沙箱，OctoBus 通过 MCP 路由代码检索、知识查询和 Semgrep 静态扫描。
+- **可追溯结果**：保留计划、工具调用、发现、未读文件与未知条件，便于人工复核。
 
 ```mermaid
 flowchart LR
-  R[Repository] --> I[安全快照与导航摘要]
-  I --> A[agent-compose 沙箱\n模型计划与调查循环]
-  A <-->|真实 MCP| O[OctoBus]
-  O --> T[repo-tools\n读取 / 检索 / 知识]
-  O --> S[static-analysis\nSemgrep 候选]
-  A --> J[模型安全判断]
-  J --> G[Evidence Gate\n核对引用和实际读取]
-  G --> F[报告 / 覆盖 / Trace]
+  R[Git / 本地目录 / ZIP] --> I[快照与导航]
+  I --> A[Agent 调查循环]
+  A <-->|MCP| O[OctoBus]
+  O --> T[代码读取 / 检索 / 知识]
+  O --> S[Semgrep 静态扫描]
+  A --> G[Evidence Gate]
+  G --> F[报告 / 发现 / 覆盖 / Trace]
 ```
 
-模型负责调查方向和安全语义；确定性工具负责获取事实和校验。即使 Semgrep 无候选，模型也可提出跨文件假设；工具不会替模型确认漏洞。Gate 只能拒绝或降级证据不完整的判断，不能把未知提升为确认。CLI 自复核另调用一次独立上下文的模型反证检查（每次审计最多24次），记录反对意见及主审响应；这不是独立人工评审，不自动修改判定。
+## 快速开始
 
-## 考官连接与提交信息
-
-公开仓库：[CodeAudit Agent V2](https://github.com/m13756445700-lgtm/codeaudit-agent)，提交分支 `main`。
-
-服务器：`8.130.121.3`；用户名：`codeaudit-reviewer`；SSH 端口：`22`。已有授权公钥已配置，请由原私钥持有人按[考官指南](docs/EXAMINER_GUIDE.md)登录；维护人员尚未实测考官远程SSH：
+需要 Docker Engine/Desktop、Docker Compose v2（支持 `volume.subpath`）、Python 3.9+、Git，以及支持 tools/function calling 的 OpenAI-compatible Chat Completions 模型。建议准备 4 CPU、8 GiB 内存和 15 GiB Docker 可用空间。首次构建需访问 GHCR、Debian、PyPI 和 npm。
 
 ```bash
-ssh -p 22 -i /path/to/existing-authorized-reviewer-private-key -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes codeaudit-reviewer@8.130.121.3
-```
-
-私钥由考官自行保管，不需要上传到 GitHub 或服务器。模型密钥与内部服务令牌仅留在服务器私密配置中。登录后使用以下受限入口，无需 root 或 Docker 权限：
-
-```bash
-sudo codeaudit-review status
-sudo codeaudit-review projects
-sudo codeaudit-review triggers
-sudo codeaudit-review methods
-sudo codeaudit-review runs
-sudo codeaudit-review report
-sudo codeaudit-review trigger
-# 也可审计新的公开仓库
-sudo codeaudit-review audit https://github.com/OWNER/REPO.git
-```
-
-`trigger` 启动同一个 V2 Engine；每日北京时间 09:00 的定时任务审计随镜像固定的跨文件回归仓库。报告含真实 MCP 调用、模型判断、覆盖与限制；没有完成记录时明确报错。`report AUDIT_ID` 可选取历史记录，`trace AUDIT_ID` 查看工具与知识记录（输出有长度上限）。服务器当前部署目录 `/opt/codeaudit-v2`；私密配置不可供考官读取。
-
-## Quick Start
-
-需要 Docker Engine/Desktop、Docker Compose v2（支持 `volume.subpath`）、Python 3.9+、Git，以及支持 tools/function calling 的 OpenAI-compatible Chat Completions 模型。建议 4 CPU、8 GiB RAM，预留 15 GiB Docker 磁盘空间；首次构建需要访问 GHCR、Debian、PyPI 和 npm。
-
-```bash
+git clone https://github.com/m13756445700-lgtm/codeaudit-agent.git
+cd codeaudit-agent
 cp .env.example .env
-# 编辑 .env：LLM_API_ENDPOINT、LLM_MODEL、LLM_API_KEY
+# 编辑 .env，填写 LLM_API_ENDPOINT、LLM_MODEL、LLM_API_KEY
 ./scripts/start.sh
 ./scripts/healthcheck.sh
 ./scripts/demo.sh c
 ```
 
-`start.sh` 从固定 digest 的公开镜像构建，创建本项目独立 daemon/数据卷，生成私密鉴权配置，启动三个能力服务，注册 OctoBus，再配置 agent-compose。无需预装另一套 agent-compose 或准备旧数据卷。首次下载可能较慢。[Ubuntu 部署、端口和恢复](docs/DEPLOYMENT.md)。
+启动脚本构建镜像、创建独立数据卷、生成本地鉴权配置并注册 MCP 能力。真实审计需要模型 API 配额，调用会产生相应费用。环境配置和生成的运行结果默认不提交 Git。
 
-## CLI 与输入
+审计其他公开仓库：
 
 ```bash
-# 容器作业：真实 OctoBus，直接给 Repository
-# 启动脚本已生成 .runtime.env；两个 env 文件均只留本地。
-docker compose --env-file .env --env-file .runtime.env run --rm codeaudit-agent \
-  https://github.com/miguelgrinberg/flask-video-streaming.git --keep-source
+./scripts/demo.sh https://github.com/OWNER/REPO.git
+```
 
-# 完整 agent-compose 沙箱链路；参数 a/b/c/d 或任意 Git URL
-./scripts/demo.sh https://github.com/miguelgrinberg/flask-video-streaming.git
+审计本地目录（先完成启动）：
 
-# 本地源码或 ZIP：显式挂载后输入容器内路径
+```bash
 docker compose --env-file .env --env-file .runtime.env run --rm \
   -v "$PWD/benchmark:/input:ro" codeaudit-agent /input/cross-file-flow --keep-source
 ```
 
-包入口是 `codeaudit <repository>`，也接受 `codeaudit audit <repository>`。支持 Git HTTPS/SSH、本地目录、ZIP；每次生成独立 UUID 快照。私有 Git 需显式提供容器内凭据/known_hosts；不自动复制主机私钥。目标代码不执行，拒绝路径穿越和符号链接，限制 50 MiB、5,000 文件、单文件 1 MiB、Git 获取 90 秒。
+ZIP 也需显式只读挂载后使用容器内路径。完整部署、端口、停止与恢复说明见 [部署指南](docs/DEPLOYMENT.md)。
 
-直接安装开发入口可用 `pip install -e .`（Semgrep 1.99.0 另装）；正式演示使用上述容器链路。`--local-tools` 是显式开发适配器，不算 OctoBus 验收。模型配置缺失或 MCP 失效不会静态兜底伪装成功。
+## 示例与输出
 
-## Audit Loop 与职责
+| 示例 | 命令 | 观察重点 |
+|---|---|---|
+| SQL 拼接 | `./scripts/demo.sh a` | 输入到 SQL 执行点的证据链 |
+| 固定映射 | `./scripts/demo.sh b` | 保护条件与误报排查 |
+| 跨文件命令链 | `./scripts/demo.sh c` | 多文件数据传播与调用关系 |
+| 公共仓库 | `./scripts/demo.sh d` | 真实仓库调查与覆盖边界 |
 
-1. Intake 生成快照、哈希及词法导航摘要。
-2. 模型提交攻击面/计划，自行选择读取、搜索、知识或静态扫描动作。
-3. 模型建立假设，追踪 Source → Dataflow → Sink，调查保护逻辑和反证。
-4. AI Judge 提交控制范围、安全边界、可达性、攻击条件、严重度、置信依据、未知事实和修复建议。
-5. Gate 核对实际读记录、文件哈希、行号和字面证据；模型继续补证或完成调查。
-6. 输出 `report.md`、`findings.json`、`coverage.json`、计划、模型调用及工具 Trace。
+每次审计生成独立目录，主要结果包括：
 
-`COMPLETE` 仅表示计划攻击面已逐项结算的有界调查结束；明确延期的攻击面产生 `PARTIAL`，预算或执行失败产生 `INCOMPLETE`。必须同时查看未读文件和未知事实，不能解释成整个仓库安全。
+| 文件 | 用途 |
+|---|---|
+| `report.md` | 阅读发现、风险和建议 |
+| `findings.json` | 检查判断、引用、反证及未知条件 |
+| `coverage.json` | 核对已读与未读范围 |
+| `audit_plan.json` | 查看调查计划 |
+| `tool_calls.jsonl` | 追溯工具调用 |
 
-agent-compose 真正创建 Docker 沙箱并执行 Python Engine；`provider: codex` 是运行配置，不意味着另一个 Codex 模型替 Engine 裁决。Engine 使用 `.env` 中指定的模型。OctoBus 通过真实 MCP 鉴权/能力路由调用两个内部 HTTP worker；不是空配置或截图占位。[架构详解](docs/ARCHITECTURE.md)。
+`COMPLETE` 仅表示本次计划范围内的有界调查完成；延期产生 `PARTIAL`，执行失败或预算耗尽产生 `INCOMPLETE`。这些状态均不能解释为整个仓库安全。导出和复核步骤见 [使用示例](docs/DEMO.md)。
 
-## Test 与 AI Ablation
+## 测试与复现
+
+无需模型密钥的离线检查：
 
 ```bash
-make docker-test          # Linux 离线单元/集成契约/工具/证据/输入/基线回归
-make integration-test     # 真实模型 + OctoBus，需 API 配额
-make ablation-test        # 同一快照的完整静态分析 vs 真实 AI
-make benchmark           # 全部 20 例；重新调用模型，需更多配额
-make private-git-test     # 临时 SSH Git 容器；主机 Python 可直接运行
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements-dev.txt
+make test
+python scripts/validate_schemas.py
 ```
 
-公平消融保留原有 Java/MyBatis 确定性分析、Evidence Gate 和修复建议，只用快照哈希适配原 Git/framework 预检。静态侧不被人为置零。生产 Engine 不导入静态 baseline；这些模块保留是为了可复核的评估，不提供旧服务/旧审计 CLI。
+完整启动后，可按需执行：
 
-历史 REV 的固定 20 例结果为 TP10/FP0/FN0，9 个正例无静态候选；静态结果为 3 个 NEEDS_REVIEW、0 VERIFIED。它们只描述该固定小样本，不代表任意项目准确率。当前应用发布验收与历史轮次见 [交付与验证清单](RELEASE_MANIFEST.md)。
+```bash
+make docker-test       # 容器内离线回归
+make integration-test  # 真实模型与 MCP 集成，会调用模型
+make ablation-test     # 同一快照的静态分析与 Agent 对照，会调用模型
+make benchmark        # 固定 20 个样例，会调用模型
+```
 
-## Demo 与工程目录
+`benchmark/` 提供固定标注样例，`evaluation/` 保留业务场景及知识对照输入。样例用于验证具体行为，不代表真实项目上的普遍准确率。模型结果存在随机性，应结合原始证据复核。
 
-`./scripts/demo.sh a`：直接 SQL 注入；`b`：固定映射安全案例；`c`：三文件命令链；`d`：非基准公共仓库。默认运行 C，所有演示走真实 agent-compose。D 没有完整人工真值，不计算 Recall；也可现场换一个未接触的 Git URL。[现场步骤及证据导出](docs/DEMO.md)。
+## 项目结构
 
 ```text
-agent/v2/             模型循环、输入、证据、工具与 MCP
-agent/scanner/        受限 Semgrep
-agent/*.py            保留的确定性评估依赖（analysis/report 等）
-knowledge/ rules/     判断知识与静态规则
-benchmark/ fixtures/  20 例真值与基线测试夹具
-scripts/ tests/       部署、演示、验收与回归
-octobus/repo-tools/   真实 SDK 能力桥
-Dockerfile            单一可独立构建镜像
-docker-compose.yml    本项目服务及 daemon
-agent-compose.yml     审计沙箱定义
-docs/                 架构、部署、演示、安全
+agent/               审计引擎、输入处理、证据校验和静态分析
+benchmark/           固定安全分析样例与标注
+evaluation/          可复现的评估输入
+knowledge/           安全判断知识
+rules/               Semgrep 规则
+schemas/             结构化结果与工具契约
+octobus/repo-tools/  MCP 能力桥接
+scripts/             启动、演示和评估工具
+tests/               单元、契约与回归测试
+docs/                架构、部署、使用与安全说明
 ```
 
-## Known Limitations
+## 使用边界
 
-默认预算为 48 轮、100 次工具调用、1,200 秒。CLI 可用 `--max-iterations`、`--max-calls`、`--timeout` 显式调整；提高预算会增加模型用量，不保证覆盖完整。
+- 面向可信单操作者，agent-compose 使用 Docker socket；daemon 和 MCP 不应对公网开放。
+- 目标代码作为数据读取，不执行其构建、依赖安装或漏洞利用。仅审计你拥有或获授权的代码。
+- 被选中的源码片段会发送到配置的模型服务，使用前需确认代码保密要求。
+- Python 导航结合 AST，其他语言主要使用词法线索；不等于完整调用图或全面语言支持。
+- 模型可能误判或漏判，Evidence Gate 校验引用完整性，不能证明漏洞语义必然正确。
+- 默认预算为 48 轮、100 次工具调用、1,200 秒；可通过 CLI 参数调整，增加预算不保证完整覆盖。
+- 报告、Trace、快照可能包含私有源码，应按敏感数据保存，不应直接公开上传。
 
-权限审计可用 `--policy-file /path/to/policy.txt` 提供 UTF-8 业务政策（最多8000字符）；政策保留至审计结束并写入私有审计目录的 `operator_context.json`，不是源码或部署证据。请仅提供必要政策，不放入凭据。
+进一步阅读：[架构设计](docs/ARCHITECTURE.md) · [部署指南](docs/DEPLOYMENT.md) · [使用示例](docs/DEMO.md) · [安全边界](docs/SECURITY.md) · [评估说明](evaluation/README.md)。
 
-大型仓库可用 `--focus '要审查的业务边界或模块'` 明确本次调查范围。报告只适用于该范围，定向调查结果不能替代全库审计。真实仓库失败记录、知识开关及通用文本对照见 [evaluation](evaluation/)。
+## 许可证
 
-这是可信单操作者的辅助审计系统，不是多租户平台。多语言词法导航不等于完整调用图；模型可误判、漏判，部署和第三方依赖事实可能未知。固定规则主要覆盖 Java/Spring/MyBatis 及有限模式；Python/JS/Go 的样例通过不等于完整语言语义支持。20 个人工样例、单次知识 ON/OFF 和公共示例不足以证明普遍准确率。超限可能失败或 `INCOMPLETE`；不执行漏洞利用。报告和原始证据可能包含私有源码，应按敏感数据保存。[安全边界](docs/SECURITY.md)。
-
-整改过程、实际遇到的问题与验证边界见 [提交整改记录](docs/REMEDIATION.md)。
-
-集中开发后的测试、知识对照与统一发版步骤见 [集中验收流程](docs/CONSOLIDATED_ACCEPTANCE.md)。默认准备命令不调用模型；真实调用必须显式开启，开发阶段不自动发布。
+本项目采用 [MIT 许可证](LICENSE)。第三方组件及依赖遵循各自的许可证。建议先完成本地离线测试，再配置模型运行示例 C，检查报告与证据后用于自己的审计场景。

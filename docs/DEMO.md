@@ -1,4 +1,4 @@
-# 现场演示
+# 使用示例
 
 先按部署文档启动，然后运行 `./scripts/healthcheck.sh`。四组 Demo 共用真实 agent-compose → Engine → 模型 → OctoBus → worker 链路，不需手工切换配置。
 
@@ -9,7 +9,7 @@
 | `./scripts/demo.sh c` | 三文件命令链 | Semgrep无候选时自主调查跨文件数据流 |
 | `./scripts/demo.sh d` | 公共flask-video-streaming Git | 非基准任意Git获取、覆盖与未知事实 |
 
-D 不是完整标注的准确率基准，也已经用于验收，不能再声称永久盲测。现场可替换为考官指定的新 URL：`./scripts/demo.sh https://github.com/OWNER/REPO.git`。任意本地路径必须先显式挂载到容器，不自动把主机全盘暴露给沙箱。
+D 未提供完整人工标注，不能据此计算准确率。可替换为你有权审计的仓库 URL：`./scripts/demo.sh https://github.com/OWNER/REPO.git`。任意本地路径必须先显式挂载到容器，不自动把主机全盘暴露给沙箱。
 
 观察 stderr 进度事件：repository_intake、understanding、模型动作及判断。输出 audit_id 后导出该次完整工件（替换 AUDIT_ID）：
 

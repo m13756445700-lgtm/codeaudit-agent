@@ -7,7 +7,7 @@ USER root
 COPY --from=octobus /usr/local/bin/octobus /usr/local/bin/octobus
 RUN sed -i 's|http://mirrors.tuna.tsinghua.edu.cn/debian|https://deb.debian.org/debian|g' /etc/apt/sources.list.d/debian.sources && apt-get update && apt-get install -y --no-install-recommends python3.11-venv && rm -rf /var/lib/apt/lists/*
 RUN python3 -m venv /opt/codeaudit-venv
-COPY pyproject.toml /opt/codeaudit/pyproject.toml
+COPY pyproject.toml README.md LICENSE /opt/codeaudit/
 ARG CODEAUDIT_PIP_INDEX_URL=https://pypi.org/simple
 RUN PIP_CONFIG_FILE=/dev/null PIP_INDEX_URL=${CODEAUDIT_PIP_INDEX_URL} PIP_EXTRA_INDEX_URL= /opt/codeaudit-venv/bin/pip install --no-cache-dir setuptools==75.8.0 wheel==0.45.1 jsonschema==4.23.0 PyYAML==6.0.2 javalang==0.13.0 defusedxml==0.7.1 semgrep==1.99.0 opentelemetry-instrumentation-requests==0.46b0
 COPY agent /opt/codeaudit/agent

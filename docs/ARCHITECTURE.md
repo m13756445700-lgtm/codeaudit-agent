@@ -22,11 +22,9 @@ Python 导航解析 AST 和导入别名，区分定义、调用者及被调用�
 
 独立 daemon 创建 Docker 沙箱，执行 scripts/run-agent.py → 同一 Engine。daemon 会设置 provider 模型代理环境，因此操作员模型凭据用 CODEAUDIT_LLM_* 传给 launcher，再显式映射；不让运行框架的代理配置意外替换审计模型。provider 字段不是安全判定实现。
 
-## 静态对照为何仍保留旧模块
+## 静态分析对照
 
-`agent/v2/static_baseline.py` 仅由验收脚本/测试导入，调用已验证的 analysis + report + validator 及四种语义分析器。preflight、evidence、knowledge 是它的传递依赖。评估适配器以完整快照哈希替代原 Git/framework inventory，分析器和 Gate 保持原样，结果包括 VERIFIED/REJECTED/NEEDS_REVIEW 及建议。
-
-这些模块是正式公平对照，不是生产 fallback。旧 agent.service、配置/日志服务、workflow、旧提示词、旧 OctoBus 包和旧部署已退出发布。模块保留原路径是为了避免发布期改变稳定语义。
+`agent/v2/static_baseline.py` 由评估脚本和测试使用，调用 `analysis`、`report`、`validator` 及语义分析器，对同一快照生成静态对照结果。相关模块保留用于复现比较，生产 Engine 不将其作为模型或 MCP 失败时的替代路径。
 
 ## 审查证据
 
