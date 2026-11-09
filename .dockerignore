@@ -16,5 +16,5 @@ reports
 
 **/._*
 
-# Historical model traces are not runtime image inputs.
-evaluation/final-remediation
+# Local audit exports are not runtime image inputs.
+audit-output
